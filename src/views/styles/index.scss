@@ -1,3 +1,12 @@
-@import 'fonts';
-@import 'layouts';
+@import 'variables', 'mixins';
+
+// Importing dependencies and helpers
+
+// Importing project settings
+@import 'base', 'icons';
+
+// Importing layouts and modules
+@import 'layouts/*', 'modules/*';
+
+// Global states
 @import 'state';
