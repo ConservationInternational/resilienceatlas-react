@@ -1,4 +1,4 @@
-$backgrounds-about: 'bg-about1','bg-about2';
+$backgrounds-about: 'bg-about1', 'bg-about2';
 
 .m-home-about {
   ul {
@@ -7,13 +7,19 @@ $backgrounds-about: 'bg-about1','bg-about2';
       position: relative;
       min-height: rem(510px);
       @for $i from 1 through length($backgrounds-about) {
-        &.#{nth($backgrounds-about, $i)}{
-          background: image-url('home/#{nth($backgrounds-about, $i)}.jpg') center;
+        &.#{nth($backgrounds-about, $i)} {
+          background: url('/images/home/#{nth($backgrounds-about, $i)}.jpg')
+            center;
           background-size: cover;
 
           &:before {
-            background-image: linear-gradient(0deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.30) 50%, rgba(0,0,0,0.15) 100%);
-            content: "";
+            background-image: linear-gradient(
+              0deg,
+              rgba(0, 0, 0, 0.15) 0%,
+              rgba(0, 0, 0, 0.3) 50%,
+              rgba(0, 0, 0, 0.15) 100%
+            );
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
@@ -21,7 +27,6 @@ $backgrounds-about: 'bg-about1','bg-about2';
             height: 100%;
           }
         }
-
       }
     }
   }

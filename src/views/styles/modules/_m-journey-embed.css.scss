@@ -1,5 +1,4 @@
 %m-journey-embed {
-
   .embebed-map {
     position: absolute;
     top: 0;
@@ -26,7 +25,7 @@
     overflow-y: auto;
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: rem(102px);
       left: 0;
@@ -35,7 +34,7 @@
     }
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       top: rem(20px);
       left: 0;
@@ -50,11 +49,11 @@
 
     a {
       color: $font-color-1;
-      word-wrap: break-word;;
+      word-wrap: break-word;
     }
 
     section {
-      border-top: 1px solid rgba($font-color-1, .1);
+      border-top: 1px solid rgba($font-color-1, 0.1);
     }
 
     header {
@@ -72,12 +71,11 @@
       margin: 0;
       font-size: rem(56px);
       font-family: $font-face-2;
-      line-height: .8em;
+      line-height: 0.8em;
       text-transform: uppercase;
     }
 
     @media screen and (max-width: 1120px) {
-
       h2 {
         font-size: rem(50px);
       }
@@ -134,17 +132,17 @@
       display: block;
       position: relative;
       padding-top: rem(20px);
-      border-bottom: 1px solid rgba($font-color-1, .1);
+      border-bottom: 1px solid rgba($font-color-1, 0.1);
 
       &:after {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         right: 0;
         bottom: 0;
         width: rem(16px);
         height: rem(20px);
-        background-image: image-url('cigrp-simply-logo.png');
+        background-image: url('/images/cigrp-simply-logo.png');
         background-size: 100%;
         background-repeat: no-repeat;
       }
@@ -174,5 +172,4 @@
   .side-bar {
     color: $font-color-1;
   }
-
 }

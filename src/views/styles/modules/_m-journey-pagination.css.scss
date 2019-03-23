@@ -1,4 +1,5 @@
-$backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thumb-5';
+$backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4',
+  'thumb-5';
 
 // SLIDER JOURNEYS INDEX
 .m-journey__paginationlist {
@@ -6,21 +7,27 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
 
   margin: 0 auto;
 
-  @media screen and (min-width: 470px){ width: rem(470px); padding: rem(40px); }
-  @media screen and (min-width: 850px){ width: rem(850px); }
-  @media screen and (min-width: 1230px){ width: rem(1230px); }
-
+  @media screen and (min-width: 470px) {
+    width: rem(470px);
+    padding: rem(40px);
+  }
+  @media screen and (min-width: 850px) {
+    width: rem(850px);
+  }
+  @media screen and (min-width: 1230px) {
+    width: rem(1230px);
+  }
 
   z-index: 1;
   visibility: hidden;
   opacity: 0;
-  transform: translate(0,-100%);
+  transform: translate(0, -100%);
   transition: opacity 0.12s linear;
 
   &.is-active {
     visibility: visible;
     opacity: 1;
-    transform: translate(0,0%);
+    transform: translate(0, 0%);
   }
 
   .m-journey__pagination {
@@ -30,7 +37,7 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
     // What's this below? It makes the height more than 100% - Clément
     // height: calc((100vw - 20px) / 2);
     width: calc(100vw - 20px);
-    @media screen and (min-width: 470px){
+    @media screen and (min-width: 470px) {
       width: rem(360px);
       // What's this below? It makes the height more than 100% - Clément
       // height: rem(180px);
@@ -43,8 +50,8 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
     background-position: center;
 
     @for $i from 1 through length($backgrounds-thumb) {
-      &.#{nth($backgrounds-thumb, $i)}{
-        background-image: image-url('home/#{nth($backgrounds-thumb, $i)}.jpg');
+      &.#{nth($backgrounds-thumb, $i)} {
+        background-image: url('/images/home/#{nth($backgrounds-thumb, $i)}.jpg');
       }
     }
 
@@ -57,16 +64,15 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
       right: 0;
       z-index: 2;
 
-
-      -webkit-box-shadow: 14px 24px 56px 4px rgba(0,0,0,0.2);
-         -moz-box-shadow: 14px 24px 56px 4px rgba(0,0,0,0.2);
-              box-shadow: 14px 24px 56px 4px rgba(0,0,0,0.2);
+      -webkit-box-shadow: 14px 24px 56px 4px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 14px 24px 56px 4px rgba(0, 0, 0, 0.2);
+      box-shadow: 14px 24px 56px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:before {
-      content: "";
+      content: '';
       @extend %center;
-      transform: translate(-50%,0%);
+      transform: translate(-50%, 0%);
       z-index: 2;
       border-top: 22px solid $font-color-3;
       border-left: 14px solid transparent;
@@ -77,26 +83,24 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
     }
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       z-index: 1;
       width: 100%;
       height: 100%;
-      background: $bg-color-5;;
-      opacity: .4;
+      background: $bg-color-5;
+      opacity: 0.4;
       transition: all 0.12s linear;
     }
 
-
-    &:hover, &.is-active {
+    &:hover,
+    &.is-active {
       &:after {
-        opacity: .5;
+        opacity: 0.5;
       }
-
     }
-
 
     &.is-active {
       .title {
@@ -107,7 +111,7 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
       &:before {
         opacity: 1;
         visibility: visible;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -152,7 +156,7 @@ $backgrounds-thumb: 'thumb-0', 'thumb-1', 'thumb-2', 'thumb-3', 'thumb-4', 'thum
     }
 
     .is-discoverlink h3 {
-       font-size: rem(14px);
+      font-size: rem(14px);
     }
   }
 }

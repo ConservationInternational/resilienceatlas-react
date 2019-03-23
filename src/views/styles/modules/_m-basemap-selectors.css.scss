@@ -26,20 +26,19 @@
     background-size: 58px;
 
     &.icon-satellite {
-      background-image: image-url('satellite_map.jpg');
+      background-image: url('/images/satellite_map.jpg');
     }
 
     &.icon-topographic {
-      background-image: image-url('topographic_map.jpg');
+      background-image: url('/images/topographic_map.jpg');
     }
 
     &.icon-dark {
-      background-image: image-url('dark_map.jpg');
+      background-image: url('/images/dark_map.jpg');
     }
 
     &.icon-default {
-      background-image: image-url('default_map.jpg');
+      background-image: url('/images/default_map.jpg');
     }
-
   }
 }

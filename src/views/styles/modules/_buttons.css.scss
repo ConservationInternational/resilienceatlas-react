@@ -2,7 +2,9 @@
   @extend %clean-button-or-input;
   border-radius: 50px;
   font-weight: 700;
-  padding: rem(12px) rem(50px) rem(8px);
+  // Old sizes -> strange uncentered by vertical ?
+  // padding: rem(12px) rem(50px) rem(8px);
+  padding: rem(12px) rem(50px);
   display: inline-block;
 
   &:hover {
@@ -11,10 +13,10 @@
 
   &.btn-primary {
     background: $bg-color-1;
-    color: $font-color-2;
+    color: var(--theme-color, $font-color-2);
 
     &:hover {
-      background: darken($bg-color-1,5%);
+      background: darken($bg-color-1, 5%);
     }
   }
 
@@ -23,7 +25,7 @@
     background: $font-color-2;
 
     &:hover {
-      background: darken($bg-color-2,5%);
+      background: darken($bg-color-2, 5%);
     }
   }
 }
@@ -39,7 +41,7 @@
   background-color: $bg-color-1;
   font-size: rem(16px);
   font-weight: 300;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .3);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   color: $font-color-1;
 }
 
@@ -52,7 +54,7 @@
   &:before {
     @extend %centery;
     @include arrow(15px, $font-color-1, 1px, -45deg);
-    content: "";
+    content: '';
     left: rem(10px);
     transform: translate(50%, -50%) rotate(-45deg);
   }
@@ -68,7 +70,7 @@
   &:before {
     @extend %centery;
     @include arrow(15px, $font-color-1, 1px, 135deg);
-    content: "";
+    content: '';
     right: rem(10px);
     transform: translate(-50%, -50%) rotate(135deg);
   }
@@ -135,11 +137,7 @@
   margin-top: 50px;
 
   &.-disabled {
-    opacity: .5;
+    opacity: 0.5;
     pointer-events: none;
   }
 }
-
-
-
-

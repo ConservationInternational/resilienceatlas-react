@@ -15,13 +15,13 @@ $sidebar-analysis-width: 490px;
 /*
   Fonts and typography
  */
-@include font-face("Franklin", "ITCFranklinGothicStd-Demi", 700);
-@include font-face("Franklin", "ITCFranklinGothicStd-Med", 500);
-@include font-face("Franklin", "ITCFranklinGothicStd-Book", 400);
-@include font-face("FranklinCD", "ITCFranklinGothicStd-DmCp", 400);
+@include font-face('Franklin', 'ITCFranklinGothicStd-Demi', 700);
+@include font-face('Franklin', 'ITCFranklinGothicStd-Med', 500);
+@include font-face('Franklin', 'ITCFranklinGothicStd-Book', 400);
+@include font-face('FranklinCD', 'ITCFranklinGothicStd-DmCp', 400);
 
-$font-face-1: "Franklin";
-$font-face-2: "FranklinCD";
+$font-face-1: 'Franklin';
+$font-face-2: 'FranklinCD';
 
 // Since the typical default browser font-size is 16px, that makes the calculation for grid size.
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
@@ -45,9 +45,9 @@ $theme-color-default: #ddd;
 $gray: #555;
 $gray-medium: #979797;
 $gray-light: #f9f9f9;
-$gray-5: #F6F6F6;
-$gray-6: #E9E9E9;
-$gray-7: #D1D1D1;
+$gray-5: #f6f6f6;
+$gray-6: #e9e9e9;
+$gray-7: #d1d1d1;
 $gray-70: #555555;
 
 /*
@@ -60,22 +60,20 @@ $bg-color-4: $gray-medium;
 $bg-color-5: $black;
 $bg-color-6: $white-medium;
 
-
 $font-color-1: $gray;
 $font-color-2: $theme-color-default;
 $font-color-3: $white;
 $font-color-4: $black-charcoal;
 
-
 /*
   Animations --> provisonal aquí para poder probarlas.
  */
 // Sine
-$easeInSine:  cubic-bezier(0.470, 0.000, 0.745, 0.715);
-$easeOutSine:  cubic-bezier(0.390, 0.575, 0.565, 1.000);
-$easeInOutSine:  cubic-bezier(0.445, 0.050, 0.550, 0.950);
+$easeInSine: cubic-bezier(0.47, 0, 0.745, 0.715);
+$easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$easeInOutSine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
 // Cubic
-$easeInCubic:  cubic-bezier(0.550, 0.055, 0.675, 0.190);
-$easeOutCubic:  cubic-bezier(0.215, 0.610, 0.355, 1.000);
-$easeInOutCubic :  cubic-bezier(0.645, 0.045, 0.355, 1.000);
+$easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);

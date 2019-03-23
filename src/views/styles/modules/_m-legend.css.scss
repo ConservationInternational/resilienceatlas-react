@@ -9,7 +9,7 @@ $side-bar-width: 360px;
   width: rem($legend-width);
   //Padding right to allow scroll bar in content.
   padding: rem(15px) rem(5px) rem(15px) rem(10px);
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
   background-color: $bg-color-1;
 
   .wrapper {
@@ -20,7 +20,7 @@ $side-bar-width: 360px;
   }
 
   &.is-changing {
-    background-color: rgba($bg-color-1, .5);
+    background-color: rgba($bg-color-1, 0.5);
   }
 
   .is-embed-page.is-journey-map & {
@@ -70,7 +70,7 @@ $side-bar-width: 360px;
 
     &.is-minimize {
       .btn-minimize {
-        transform: translate(0,-50%) rotate(-90deg);
+        transform: translate(0, -50%) rotate(-90deg);
       }
     }
 
@@ -89,7 +89,7 @@ $side-bar-width: 360px;
       right: rem(10px);
       width: rem(22px);
       height: rem(22px);
-      transform: translate(0,-50%) rotate(90deg);
+      transform: translate(0, -50%) rotate(90deg);
 
       display: flex;
       display: -ms-box;
@@ -98,15 +98,13 @@ $side-bar-width: 360px;
 
       cursor: pointer;
 
-
       &:after {
-        content: "";
+        content: '';
         display: block;
         border-left: 7px solid $font-color-1;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
       }
-
     }
   }
 
@@ -221,7 +219,7 @@ $side-bar-width: 360px;
 
     .ui-sortable-helper {
       background-color: $bg-color-1;
-      box-shadow: 0 1px 4px 0 rgba(0,0,0, .2);
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
       cursor: grabbing;
     }
   }
@@ -324,7 +322,7 @@ $side-bar-width: 360px;
     }
   }
 
-  .m-legend__border  {
+  .m-legend__border {
     .item {
       span {
         border: 2px solid #fff;
@@ -351,7 +349,8 @@ $side-bar-width: 360px;
       justify-content: center;
       margin-bottom: 10px;
 
-      .min, .max {
+      .min,
+      .max {
         font-size: 10px;
         text-transform: uppercase;
         font-weight: 300;
@@ -433,12 +432,11 @@ $side-bar-width: 360px;
 }
 
 .ui-sortable-placeholder {
-  background-color: rgba($bg-color-1, .5) !important;
+  background-color: rgba($bg-color-1, 0.5) !important;
 }
 
-li[data-id="38"] .item span {
-  border: 1px solid #6E3600;
+li[data-id='38'] .item span {
+  border: 1px solid #6e3600;
   background-color: transparent !important;
-  background-image: image-url('pastoralPattern.png') !important;
+  background-image: url('/images/pastoralPattern.png') !important;
 }
-

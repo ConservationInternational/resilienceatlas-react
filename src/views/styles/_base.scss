@@ -1,5 +1,7 @@
 // Must be 100% for off canvas to work
-html, body {
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -12,7 +14,8 @@ html, body {
 
 // Default global styles
 html,
-body {
+body,
+#root {
   font-size: $base-font-size;
   background-color: $white;
 
@@ -58,4 +61,14 @@ input:focus {
 //makes some svg items seams cut in Firefox...
 svg:not(:root) {
   overflow: visible !important;
+}
+
+// Provide theme colors from backend through css variables
+
+.theme-color {
+  color: var(--theme-color) !important;
+}
+
+.theme-bg-color {
+  background-color: var(--theme-color) !important;
 }

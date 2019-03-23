@@ -2,11 +2,11 @@
   position: relative;
   height: rem(565px);
 
-  background-position:  center;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 
-  background-image: image-url('home/bg-welcome.jpg');
+  background-image: url('/images/home/bg-welcome.jpg');
 
   header {
     @extend %center;
@@ -32,5 +32,4 @@
       font-family: $font-face-1;
     }
   }
-
 }

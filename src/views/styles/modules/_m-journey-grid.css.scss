@@ -1,4 +1,5 @@
-$backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3', 'thumb-big-4', 'thumb-big-5';
+$backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3',
+  'thumb-big-4', 'thumb-big-5';
 
 .m-journey__grid {
   @extend %clean-lists;
@@ -38,7 +39,7 @@ $backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3', 
       // background image: set depending on parent class
     }
 
-    &:nth-child(even){
+    &:nth-child(even) {
       .text {
         order: 2;
       }
@@ -47,9 +48,9 @@ $backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3', 
       }
     }
 
-    @for $i from 1 through length($backgrounds-thumb){
+    @for $i from 1 through length($backgrounds-thumb) {
       &.#{nth($backgrounds-thumb, $i)} > .pic {
-        background-image: image-url('journeys/#{nth($backgrounds-thumb, $i)}.jpg');
+        background-image: url('/images/journeys/#{nth($backgrounds-thumb, $i)}.jpg');
       }
     }
 
@@ -74,7 +75,7 @@ $backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3', 
     p {
       width: 375px;
       color: $font-color-4;
-      opacity: .8;
+      opacity: 0.8;
 
       font-family: $font-face-1;
       font-size: rem(20px);
@@ -82,6 +83,5 @@ $backgrounds-thumb: 'thumb-big-0', 'thumb-big-1', 'thumb-big-2', 'thumb-big-3', 
       line-height: 20px;
       letter-spacing: 0.3px;
     }
-
   }
 }

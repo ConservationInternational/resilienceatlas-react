@@ -8,14 +8,22 @@ module.exports = {
       test: /\.scss$/,
       use: [
         // 'style-loader',
-        MiniCssExtractPlugin.loader,
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: process.env.PUBLIC_URL,
+          },
+        },
         'css-loader',
         {
           loader: require.resolve('sass-loader'),
           options: {
             importer: globImporter(),
             data: '@import "mixins", "variables";',
-            includePaths: [path.resolve(__dirname, 'src/views/styles')],
+            includePaths: [
+              path.resolve(__dirname, 'node_modules'),
+              path.resolve(__dirname, 'src/views/styles'),
+            ],
           },
         },
       ],
