@@ -39,8 +39,8 @@ const WelcomePage = () => (
             >
               <NavLink to={`/journeys/${i + 1}`} className={j.linkClassName}>
                 <div className="title">
-                  <h3>{j.title.main}</h3>
-                  <h2>{j.title.subject}</h2>
+                  <h3>{j.title}</h3>
+                  <h2>{j.subtitle}</h2>
                 </div>
                 <span className="journey-link__helper" />
               </NavLink>

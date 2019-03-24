@@ -63,9 +63,18 @@ svg:not(:root) {
   overflow: visible !important;
 }
 
+img {
+  max-width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
 // Provide theme colors from backend through css variables
 
-.theme-color {
+.theme-color,
+.m-static-page a {
   color: var(--theme-color) !important;
 }
 

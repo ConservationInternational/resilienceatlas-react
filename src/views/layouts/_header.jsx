@@ -77,6 +77,7 @@ const Header = ({ isAuthorized }) => (
         )}
       </ul>
     </nav>
+    <ul className="m-journey__paginationlist" />
   </header>
 );
 

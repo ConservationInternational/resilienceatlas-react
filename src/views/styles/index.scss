@@ -6,8 +6,13 @@
 
 @import '~foundation-sites/scss/foundation';
 
-@include foundation-flex-classes;
-@include foundation-flex-grid;
+// @include foundation-flex-classes;
+// @include foundation-flex-grid;
+
+@include foundation-grid;
+
+$xy-grid: false;
+$global-flexbox: false;
 
 // Importing project settings
 @import 'base', 'icons';
