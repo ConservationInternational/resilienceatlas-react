@@ -8,6 +8,10 @@
   "rules": {
     "arrow-parens": [2, "as-needed"],
     "camelcase": 0,
+    "import/no-unresolved": [
+      "error",
+      { "ignore": ["^@components", "^@modules", "^@utilities"] }
+    ],
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": [0, "never"],
     "jsx-a11y/href-no-hash": "off",
@@ -41,6 +45,13 @@
     "ecmaFeatures": {
       "experimentalDecorators": true,
       "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./config-overrides.js"
+      }
     }
   },
   "parser": "babel-eslint",

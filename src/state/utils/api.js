@@ -10,7 +10,7 @@ const defaultConfig = {
   headers: {
     Accept: 'application/json, text/javascript, */*; q=0.01',
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'access-control-allow-origin',
+    'Access-Control-Allow-Origin': '*',
   },
 };
 
@@ -31,10 +31,19 @@ export const createApiAction = (name = '') => {
 };
 
 export const makeRequest = (method, url, options = {}) => {
-  const { data, params } = options;
+  const { data, params, options: overrides } = options;
   const headers = { ...axiosInstance.defaults.headers, ...options.headers };
 
-  return axiosInstance({ method, url, data, params, headers }).catch(error =>
+  console.log(url);
+
+  return axiosInstance({
+    method,
+    url,
+    data,
+    params,
+    headers,
+    ...overrides,
+  }).catch(error =>
     error.response
       ? Promise.reject({
           error: true,

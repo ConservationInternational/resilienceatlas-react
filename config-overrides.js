@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   webpack(config, env) {
+    // Loaders
     config.module.rules.push({
       test: /\.scss$/,
       use: [
@@ -30,12 +31,21 @@ module.exports = {
       // include: path.join(__dirname, 'src/views/styles'),
     });
 
+    // Plugins
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
     );
+
+    // Aliases
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@modules': path.resolve(__dirname, 'src/state/modules/'),
+      '@components': path.resolve(__dirname, 'src/views/components/'),
+      '@utilities': path.resolve(__dirname, 'src/utilities/'),
+    };
 
     return config;
   },
