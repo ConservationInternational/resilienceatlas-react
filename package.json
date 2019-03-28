@@ -25,10 +25,15 @@
   "dependencies": {
     "axios": "^0.18.0",
     "foundation-sites": "^6.5.3",
+    "layer-manager": "^1.15.2",
+    "leaflet": "^1.4.0",
+    "normalizr": "^3.3.0",
+    "qs": "^6.7.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-foundation": "^0.9.6",
     "react-helmet": "^5.2.0",
+    "react-leaflet": "^2.2.1",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
@@ -36,7 +41,10 @@
     "react-slick": "^0.23.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "vega": "^5.3.2",
+    "vega-lib": "^4.4.0",
+    "vizzuality-components": "^1.1.1"
   },
   "devDependencies": {
     "babel-eslint": "9.0.0",

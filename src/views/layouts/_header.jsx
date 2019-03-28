@@ -1,20 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ isAuthorized }) => (
+const Header = ({ isAuthorized, site: { link_text, link_url } }) => (
   <header className="l-header--fullscreen">
     <nav className="l-header-nav">
       <ul className="brand-area">
         <li>
-          <NavLink
-            to="/"
-            style={{
-              backgroundImage:
-                'url("https://resilienceatlas-assets.s3.amazonaws.com/logo_CI.png")',
-            }}
-          >
-            Resilience Atlas
-          </NavLink>
+          <NavLink to="/">Resilience Atlas</NavLink>
         </li>
       </ul>
 
@@ -76,9 +69,25 @@ const Header = ({ isAuthorized }) => (
           </>
         )}
       </ul>
+
+      <ul className="nav-area -vital-sign">
+        <li>
+          <a
+            href={link_url || 'http://vitalsigns.org/'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="theme-color link-back"
+          >
+            {link_text || 'Go back to vital signs'}
+          </a>
+        </li>
+      </ul>
     </nav>
     <ul className="m-journey__paginationlist" />
   </header>
 );
 
-export default Header;
+export default connect(state => ({
+  isAuthorized: state.user.logged,
+  site: state.site,
+}))(Header);

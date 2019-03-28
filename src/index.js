@@ -9,7 +9,6 @@ import history from './history';
 import * as serviceWorker from './serviceWorker';
 
 import './views/styles/index.scss';
-// import 'foundation-sites/scss/grid/';
 
 import { load as loadSite } from './state/modules/site';
 

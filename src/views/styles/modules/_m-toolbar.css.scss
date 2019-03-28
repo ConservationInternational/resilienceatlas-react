@@ -1,13 +1,13 @@
 .m-toolbar {
-  position: absolute;
-  top: rem($header-height);
-  margin-top: rem(10px);
-  right: rem(10px);
+  // position: absolute;
+  // top: rem($header-height);
+  // margin-top: rem(10px);
+  // right: rem(10px);
   z-index: 1;
 
   ul {
     @extend %clean-lists;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   }
 
   li {
@@ -16,6 +16,10 @@
     height: rem(30px);
     background-color: $bg-color-1;
     border-bottom: 1px solid rgba(151, 151, 151, 0.3);
+
+    &:not(.search):hover {
+      background-color: darken($bg-color-1, 5%);
+    }
 
     &:last-child {
       border-bottom: 0;
@@ -32,7 +36,6 @@
   }
 
   .search {
-
     .m-search-map {
       position: absolute;
       top: 0;
@@ -42,7 +45,7 @@
       padding-left: 10px;
       border: none;
       opacity: 0;
-      transition: width .3s $easeInSine;
+      transition: width 0.3s $easeInSine;
       background-color: $bg-color-1;
     }
 
@@ -51,7 +54,7 @@
       border: none;
       height: rem(24px);
       width: 0;
-      transition: width .3s $easeInSine;
+      transition: width 0.3s $easeInSine;
 
       @include placeholder() {
         font-size: rem(14px);
