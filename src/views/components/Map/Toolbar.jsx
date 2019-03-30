@@ -1,5 +1,5 @@
 import React from 'react';
-import { PORT } from '../../../../state/utils/api';
+import { PORT } from '../../../state/utils/api';
 
 const downloadURL = `${PORT}/webshot?filename=export-map-${new Date().getTime()}.pdf&url=${
   window.location.href

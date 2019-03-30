@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import qs from 'qs';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 
 import { setRouterParam } from '@utilities';
-import Toolbar from './Controls/Toolbar';
+import Toolbar from './Toolbar';
 
 const basemaps = {
   defaultmap: {
@@ -35,6 +35,8 @@ const basemaps = {
 };
 
 const MapView = ({
+  loadLayers,
+  loadLayerGroups,
   location,
   site,
   options,
@@ -43,6 +45,11 @@ const MapView = ({
   embed,
   journeyMap,
 }) => {
+  useEffect(() => {
+    loadLayers();
+    loadLayerGroups();
+  }, []);
+
   const getCenter = useCallback(() => {
     if (site.lat) {
       return { lat: site.lat, lng: site.lng };
