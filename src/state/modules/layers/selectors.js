@@ -18,13 +18,19 @@ export const getPublished = createSelector(
   (byId, all) => all.map(id => byId[id]).filter(i => i.published),
 );
 
+export const getActives = () =>
+  createSelector(
+    [getPublished],
+    published => published.filter(l => l.active),
+  );
+
 export const getGrouped = () =>
   createSelector(
     [getPublished, getGroups, getCategories, getSubCategories, getSubGroups],
     (published, groups, g_categories, g_subcategories, g_subgroups) => {
       if (!groups.length || !g_categories.length) {
         console.info('There aren`t groups setted.');
-        return published;
+        return groups;
       }
       return groups.sort(sortBy('order')).map(g => {
         const groupLayers = published.filter(l => l.group === g.id);
@@ -43,6 +49,8 @@ export const getGrouped = () =>
           categories: categories.map(c => {
             const layers = published.filter(l => l.group === c.id);
 
+            // console.log(layers);
+
             layers.map(layer => ({
               ...layer,
               opacity_text: layer.opacity * 100,
@@ -55,6 +63,7 @@ export const getGrouped = () =>
             return {
               ...c,
               active: layers.some(layer => layer.active),
+              layers: layers.sort(sortBy('dashboard_order')),
               subcategory: subcategories.map(sc => {
                 const layers = published.filter(l => l.group === sc.id);
 
@@ -68,20 +77,15 @@ export const getGrouped = () =>
                 return {
                   ...sc,
                   active: layers.some(layer => layer.active),
+                  layers: layers.sort(sortBy('dashboard_order')),
                   subgroup: subgroups.map(sg => ({
                     ...sg,
-                    layers: published.reduce((acc, layer) => {
-                      if (layer.group === sg.id)
-                        return {
-                          ...layer,
-                          opacity_text: layer.opacity * 100,
-                        };
-                    }, []),
+                    layers: published
+                      .filter(layer => layer.group === sg.id)
+                      .map(l => ({ ...l, opacity_text: l.opacity * 100 })),
                   })),
-                  layers: layers.sort(sortBy('dashboard_order')),
                 };
               }),
-              layers: layers.sort(sortBy('dashboard_order')),
             };
           }),
         };

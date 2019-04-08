@@ -1,5 +1,5 @@
 import { createReducer } from '../../utils';
-import { LOAD } from './actions';
+import { LOAD, SET_ACTIVES, TOGGLE } from './actions';
 
 const initialState = {
   byId: {
@@ -31,5 +31,33 @@ export default createReducer(initialState)({
     ...state,
     loading: false,
     error: true,
+  }),
+
+  [SET_ACTIVES]: (state, { ids }) => ({
+    ...state,
+    byId: {
+      ...state.byId,
+      ...ids.reduce(
+        (acc, id) => ({
+          ...acc,
+          [id]: {
+            ...state.byId[id],
+            active: true,
+          },
+        }),
+        {},
+      ),
+    },
+  }),
+
+  [TOGGLE]: (state, { id }) => ({
+    ...state,
+    byId: {
+      ...state.byId,
+      [id]: {
+        ...state.byId[id],
+        active: !state.byId[id].active,
+      },
+    },
   }),
 });

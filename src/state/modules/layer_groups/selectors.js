@@ -8,10 +8,9 @@ export const getAll = state => state.layer_groups.all;
 
 export const getPublished = createSelector(
   [getById, getAll],
-  (layer_groups, all) =>
-    denormalize(all, [layer_group], { layer_groups }).filter(
-      lg => lg.published,
-    ),
+  (layer_groups, all) => denormalize(all, [layer_group], { layer_groups }),
+  // TODO: add published column to layers groups
+  // .filter(lg => lg.published),
 );
 
 export const getGroups = createSelector(

@@ -30,7 +30,7 @@ export const layer = new schema.Entity(
         sql: l.attributes.query,
         color: l.attributes.color,
         opacity: l.attributes.opacity,
-        no_opacity: l.attributes.opacity == 0,
+        no_opacity: l.attributes.opacity === 0,
         order: l.attributes.order || null,
         maxZoom: l.attributes.zoom_max || 100,
         minZoom: l.attributes.zoom_min || 0,

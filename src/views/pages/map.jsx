@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import MapView, { Sidebar } from '@components/Map';
+import MapView from '@components/Map';
+import Sidebar from '@components/Sidebar';
 
 const MapPage = () => (
   <>

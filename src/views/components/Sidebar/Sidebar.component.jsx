@@ -2,8 +2,9 @@ import React, { useCallback } from 'react';
 import qs from 'qs';
 import cx from 'classnames';
 import { setRouterParam } from '@utilities';
-import LinkButton from '../../../shared/LinkButton';
-import Tabs from '../../../shared/Tabs';
+import LinkButton from '../../shared/LinkButton';
+import Tabs from '../../shared/Tabs';
+import LayersList from '../LayersList';
 
 const TABS = {
   LAYERS: 'layers',
@@ -69,7 +70,7 @@ const Sidebar = ({ location: { search } }) => {
               className="m-layers-list content"
               name={TABS.LAYERS}
             >
-              Lol tab one
+              <LayersList />
             </Tabs.Pane>
             <Tabs.Pane
               id="modelContent"

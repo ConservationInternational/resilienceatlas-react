@@ -35,20 +35,45 @@ const basemaps = {
 };
 
 const MapView = ({
+  // actions
   loadLayers,
   loadLayerGroups,
+  setActives,
+  // data
+  layers: { loaded: layersLoaded },
+  layer_groups: { loaded: layerGroupsLoaded },
+  activeLayers,
   location,
   site,
   options,
-  layers = [],
+  grouped = [],
   basemap = 'defaultmap',
   embed,
   journeyMap,
 }) => {
+  const query = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+    parseArrays: true,
+  });
+
   useEffect(() => {
     loadLayers();
     loadLayerGroups();
   }, []);
+
+  // Actualize redux store regarding url params
+  useEffect(() => {
+    // if initial fetch finished
+    if (layersLoaded && layerGroupsLoaded) {
+      // if any layers in url present
+      if (query.layers && query.layers.length) {
+        console.log(query.layers);
+        const queryLayersIds = JSON.parse(query.layers).map(l => l.id);
+
+        setActives(queryLayersIds);
+      }
+    }
+  }, [layersLoaded, layerGroupsLoaded]);
 
   const getCenter = useCallback(() => {
     if (site.lat) {
@@ -56,10 +81,6 @@ const MapView = ({
     }
     return { lat: 3.86, lng: 47.28 };
   }, [site.lat]);
-
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
 
   return (
     <Maps
@@ -85,7 +106,7 @@ const MapView = ({
       {map => (
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
-            {layers.map((l, i) => (
+            {[].map((l, i) => (
               <Layer key={l.id} {...l} zIndex={100 - i} />
             ))}
           </LayerManager>
