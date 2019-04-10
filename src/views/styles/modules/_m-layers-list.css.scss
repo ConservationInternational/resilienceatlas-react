@@ -134,6 +134,7 @@
 
   .layer {
     padding: 0 0 10px 25px;
+    @extend %clearfix;
   }
 
   .panel-item-title {
@@ -164,7 +165,8 @@
 
   .panel-item-switch {
     float: left;
-    margin-top: rem(1px);
+    margin-top: rem(3px);
+    margin-bottom: 0;
   }
 }
 

@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { Switch } from 'react-foundation';
+
 import { toggle } from '@modules/layers';
 
 const Layer = ({
@@ -54,6 +56,14 @@ const Layer = ({
       />
       <label htmlFor={`layer_${id}`} />
     </div>
+    {/* 
+    <Switch
+      data-name={name}
+      className="panel-input-switch"
+      id={`layer_${id}`}
+      checked={active}
+      onChange={toggleLayer}
+    /> */}
 
     <div className="panel-item-title">{name}</div>
 
