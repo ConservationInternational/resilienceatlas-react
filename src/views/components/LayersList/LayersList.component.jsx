@@ -9,12 +9,14 @@ const Subgroup = ({ id, name, active, layers }) => {
 
   return (
     <li className="subgroup">
-      <div className={cx('m-layers-list-header', { 'is-active': !!isActive })}>
+      <div
+        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
+        {...clickable(toggleActive)}
+      >
         <div className="header-title ">{name}</div>
         <div
           id={`categoryHeader_${id}`}
           className="header-switch m-form-input--switch"
-          {...clickable(toggleActive)}
         />
       </div>
       <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
@@ -66,10 +68,11 @@ const Subcategory = ({ id, name, active, layers, subgroup }) => {
 
   return (
     <li className="subcategory">
-      <div className={cx('m-layers-list-header', { 'is-active': !!isActive })}>
-        <div className="header-title" {...clickable(toggleActive)}>
-          {name}
-        </div>
+      <div
+        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
+        {...clickable(toggleActive)}
+      >
+        <div className="header-title">{name}</div>
         <div
           id={`categoryHeader_${id}`}
           className="header-switch m-form-input--switch"
@@ -93,7 +96,7 @@ const Group = ({ id, slug, name, active, layers, categories }) => {
   return (
     <li key={id} className="group" data-slug={slug}>
       <div
-        className={cx('m-layers-list-header', { active: !!isActive })}
+        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
         {...clickable(toggleActive)}
       >
         <div className="header-title theme-color">{name}</div>
