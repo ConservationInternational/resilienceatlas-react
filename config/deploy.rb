@@ -23,10 +23,11 @@ set :deploy_to, '/home/ubuntu/resilienceatlas-react'
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
-set :linked_files, %w{.env}
+set :linked_files, %w{.env ecosystem.config.js}
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+set :linked_dirs, %w{node_modules}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -43,3 +44,16 @@ set :linked_files, %w{.env}
 # RVM
 set :rvm_ruby_version, '2.2.1'
 set :rvm_custom_path, '/usr/share/rvm'
+
+set :pm2_app_command, 'ecosystem.config.js'
+set :pm2_app_name, 'resilienceatlasreact'
+
+namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+    invoke 'pm2:restart'
+  end
+
+  after :publishing, :restart
+end
