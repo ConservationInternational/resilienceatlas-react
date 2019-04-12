@@ -17,6 +17,14 @@
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
     "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
     "no-param-reassign": "warn",
     "no-bitwise": ["error", { "allow": ["^"] }],
     "no-shadow": "warn",

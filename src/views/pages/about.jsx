@@ -400,7 +400,7 @@ const About = () => (
         </article>
         <article id="sponsors">
           <Row>
-            <Column small="12" medium="12">
+            <Column small={12} medium={12}>
               <h2>Sponsors</h2>
               <section>
                 <img
@@ -434,7 +434,7 @@ const About = () => (
         </article>
         <article id="data_policy">
           <Row>
-            <Column small="12" medium="12">
+            <Column small={12} medium={12}>
               <h2>Data policy</h2>
               <p>
                 Unless indicated otherwise on this Website, the materials

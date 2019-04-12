@@ -34,8 +34,6 @@ export const makeRequest = (method, url, options = {}) => {
   const { data, params, options: overrides } = options;
   const headers = { ...axiosInstance.defaults.headers, ...options.headers };
 
-  console.log(url);
-
   return axiosInstance({
     method,
     url,
