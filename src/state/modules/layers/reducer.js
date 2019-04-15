@@ -1,5 +1,6 @@
 import { createReducer } from '../../utils';
-import { LOAD, SET_ACTIVES, TOGGLE, SET_OPACITY } from './actions';
+import { LOAD, SET_ACTIVES, TOGGLE, SET_OPACITY, REORDER } from './actions';
+import { getPersistedLayers } from './utils';
 
 const initialState = {
   byId: {
@@ -8,6 +9,7 @@ const initialState = {
   all: [
     /* layerId */
   ],
+  actives: getPersistedLayers(),
   loading: false,
   loaded: false,
   error: null,
@@ -19,6 +21,7 @@ export default createReducer(initialState)({
     loading: true,
     error: null,
   }),
+
   [LOAD.SUCCESS]: (state, { payload }) => ({
     ...state,
     byId: payload.entities.layers,
@@ -50,16 +53,28 @@ export default createReducer(initialState)({
     },
   }),
 
-  [TOGGLE]: (state, { id }) => ({
-    ...state,
-    byId: {
-      ...state.byId,
-      [id]: {
-        ...state.byId[id],
-        active: !state.byId[id].active,
-      },
-    },
-  }),
+  [TOGGLE]: (state, { id }) => {
+    const actives = new Set(state.actives);
+
+    if (actives.has(id)) actives.delete(id);
+    else actives.add(id);
+
+    return {
+      ...state,
+      actives: [...actives],
+    };
+  },
+
+  [REORDER]: (state, { startIndex, endIndex }) => {
+    const actives = [...state.actives];
+    const [removed] = actives.splice(startIndex, 1);
+    actives.splice(endIndex, 0, removed);
+
+    return {
+      ...state,
+      actives,
+    };
+  },
 
   [SET_OPACITY]: (state, { id, opacity }) => ({
     ...state,

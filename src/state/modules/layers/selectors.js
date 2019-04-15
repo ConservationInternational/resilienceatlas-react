@@ -1,30 +1,37 @@
 import { createSelector } from 'reselect';
 import { sortBy } from '@utilities';
 
-import { getById as getSources } from '../sources';
+import { denormalize } from 'normalizr';
 import {
   getGroups,
   getCategories,
   getSubCategories,
   getSubGroups,
 } from '../layer_groups';
+import { layer } from '../../schema';
 
 const byDashboardOrder = sortBy('dashboard_order');
 const getOpacityText = v => parseInt(v * 100, 10);
 
+export const getLoaded = state => state.layers.loaded;
+
 export const getById = state => state.layers.byId;
 
-export const getAll = state => state.layers.all;
+export const getAllIds = state => state.layers.all;
+
+export const getActiveIds = state => state.layers.actives;
 
 export const getPublished = createSelector(
-  [getById, getAll],
-  (byId, all) => all.map(id => byId[id]).filter(i => i.published),
+  [getAllIds, getById],
+  (all, layers) =>
+    denormalize(all, [layer], { layers }).filter(i => i.published),
 );
 
 export const getActives = () =>
   createSelector(
-    [getPublished],
-    published => published.filter(l => l.active),
+    [getActiveIds, getById, getLoaded],
+    (ids, layers, loaded) =>
+      loaded ? denormalize(ids, [layer], { layers }) : [],
   );
 
 export const getGrouped = () =>
@@ -87,4 +94,10 @@ export const getGrouped = () =>
         };
       });
     },
+  );
+
+export const getLayerActive = id =>
+  createSelector(
+    getActiveIds,
+    ids => new Set(ids).has(id),
   );

@@ -8,6 +8,7 @@ export const LOAD = createApiAction('layers/LOAD');
 export const TOGGLE = 'layers / TOGGLE';
 export const SET_ACTIVES = 'layers / SET_ACTIVES';
 export const SET_OPACITY = 'layers / SET_OPACITY';
+export const REORDER = 'layers / REORDER';
 
 export const load = () =>
   api(LOAD, ({ get }) => get(URL_LAYERS), {
@@ -23,6 +24,12 @@ export const setActives = ids => ({
 export const toggle = id => ({
   type: TOGGLE,
   id,
+});
+
+export const reorder = (startIndex, endIndex) => ({
+  type: REORDER,
+  startIndex,
+  endIndex,
 });
 
 export const setOpacity = (id, opacity) => ({

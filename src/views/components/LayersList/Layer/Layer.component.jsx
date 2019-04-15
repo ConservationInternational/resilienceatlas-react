@@ -17,7 +17,7 @@ const Layer = ({
   setOpacity,
   id,
   name,
-  active,
+  isActive,
   opacity_text,
   info,
   download,
@@ -40,23 +40,6 @@ const Layer = ({
     setOpacity(id, validateOpacity(v / 100));
   });
 
-  // const toggleLayer = useCallback(() => {
-  // const { layers = [], ...query } = qs.parse(search, {
-  //   ignoreQueryPrefix: true,
-  //   parseArrays: true,
-  // });
-  // const i = layers.findIndex(l => +l.id === id);
-  // if (i > -1) {
-  //   layers.splice(i, 1);
-  // } else {
-  //   layers.push({ id, opacity });
-  // }
-  // history.push({
-  //   pathname,
-  //   search: qs.stringify({ ...query, layers }),
-  // });
-  // }, [active]);
-
   return (
     <li
       className={cx('layer', {
@@ -71,7 +54,7 @@ const Layer = ({
           data-name={name}
           className="panel-input-switch"
           id={`layer_${id}`}
-          checked={active}
+          checked={isActive}
           onChange={toggleLayer}
         />
         <label htmlFor={`layer_${id}`} />

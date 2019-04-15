@@ -1,5 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
+import Loader from '@shared/Loader';
+
 import { useToggle, clickable } from '@utilities';
 import Layer from './Layer';
 
@@ -123,56 +125,60 @@ const Group = ({ id, slug, name, active, layers, categories }) => {
   );
 };
 
-const LayersList = ({ groups }) => (
-  <ul>
-    {groups.map(group => (
-      <Group key={group.id} {...group} />
-    ))}
+const LayersList = ({ groups, loading }) => (
+  <>
+    <Loader loading={loading} />
 
-    <li>
-      <div className="m-layers-list-header">
-        <div className="header-title theme-color">basemap</div>
-      </div>
-      <ul className="m-basemap-selectors">
-        <li>
-          <button
-            type="button"
-            className="btn-basemap-handler"
-            data-basemap="satellite"
-          >
-            <span className="icon-satellite">Satellite</span>
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="btn-basemap-handler"
-            data-basemap="topographic"
-          >
-            <span className="icon-topographic">Topographic</span>
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="btn-basemap-handler"
-            data-basemap="dark"
-          >
-            <span className="icon-dark">Dark</span>
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            data-basemap="defaultmap"
-            className="is-active btn-basemap-handler"
-          >
-            <span className="icon-default">Default</span>
-          </button>
-        </li>
-      </ul>
-    </li>
-  </ul>
+    <ul>
+      {groups.map(group => (
+        <Group key={group.id} {...group} />
+      ))}
+
+      <li>
+        <div className="m-layers-list-header">
+          <div className="header-title theme-color">basemap</div>
+        </div>
+        <ul className="m-basemap-selectors">
+          <li>
+            <button
+              type="button"
+              className="btn-basemap-handler"
+              data-basemap="satellite"
+            >
+              <span className="icon-satellite">Satellite</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn-basemap-handler"
+              data-basemap="topographic"
+            >
+              <span className="icon-topographic">Topographic</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn-basemap-handler"
+              data-basemap="dark"
+            >
+              <span className="icon-dark">Dark</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-basemap="defaultmap"
+              className="is-active btn-basemap-handler"
+            >
+              <span className="icon-default">Default</span>
+            </button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </>
 );
 
 export default LayersList;

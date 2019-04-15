@@ -4,6 +4,8 @@ import MapView from '@components/Map';
 import Sidebar from '@components/Sidebar';
 import Legend from '@components/Legend';
 
+import Loader from '@shared/Loader';
+
 const MapPage = () => (
   <>
     <Helmet title="Map" />
@@ -21,9 +23,7 @@ const MapPage = () => (
         }}
       />
 
-      <div className="m-loader" id="loader">
-        loading
-      </div>
+      <Loader />
 
       <Legend />
     </div>

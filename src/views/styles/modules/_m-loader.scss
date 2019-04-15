@@ -15,7 +15,7 @@
 
   &.is-loading {
     opacity: 1;
-    @include spinner (20px, 3px, $bg-color-2);
+    @include spinner(20px, 3px, $bg-color-2);
 
     &:after {
       left: rem(9px);
