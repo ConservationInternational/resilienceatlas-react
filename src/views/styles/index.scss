@@ -1,6 +1,8 @@
 @import 'variables', 'mixins';
 
 // Importing dependencies and helpers
+@import '~normalize.css';
+
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
 

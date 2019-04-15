@@ -7,6 +7,7 @@ const URL_LAYERS = `/layers?lang=${window.currentLocation || 'en'}`;
 export const LOAD = createApiAction('layers/LOAD');
 export const TOGGLE = 'layers / TOGGLE';
 export const SET_ACTIVES = 'layers / SET_ACTIVES';
+export const SET_OPACITY = 'layers / SET_OPACITY';
 
 export const load = () =>
   api(LOAD, ({ get }) => get(URL_LAYERS), {
@@ -22,4 +23,10 @@ export const setActives = ids => ({
 export const toggle = id => ({
   type: TOGGLE,
   id,
+});
+
+export const setOpacity = (id, opacity) => ({
+  type: SET_OPACITY,
+  id,
+  opacity,
 });

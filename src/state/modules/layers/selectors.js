@@ -9,6 +9,9 @@ import {
   getSubGroups,
 } from '../layer_groups';
 
+const byDashboardOrder = sortBy('dashboard_order');
+const getOpacityText = v => parseInt(v * 100, 10);
+
 export const getById = state => state.layers.byId;
 
 export const getAll = state => state.layers.all;
@@ -35,26 +38,16 @@ export const getGrouped = () =>
       return groups.sort(sortBy('order')).map(g => {
         const groupLayers = published.filter(l => l.group === g.id);
 
-        groupLayers.map(layer => ({
-          ...layer,
-          opacity_text: layer.opacity * 100,
-        }));
-
         const categories = g_categories.filter(c => c.father === g.id);
 
         return {
           ...g,
           active: groupLayers.some(layer => layer.active),
-          layers: groupLayers.sort(sortBy('dashboard_order')),
+          layers: groupLayers
+            .sort(byDashboardOrder)
+            .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
           categories: categories.map(c => {
             const layers = published.filter(l => l.group === c.id);
-
-            // console.log(layers);
-
-            layers.map(layer => ({
-              ...layer,
-              opacity_text: layer.opacity * 100,
-            }));
 
             const subcategories = g_subcategories.filter(
               s => s.father === c.id,
@@ -63,26 +56,29 @@ export const getGrouped = () =>
             return {
               ...c,
               active: layers.some(layer => layer.active),
-              layers: layers.sort(sortBy('dashboard_order')),
+              layers: layers
+                .sort(byDashboardOrder)
+                .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
               subcategory: subcategories.map(sc => {
                 const layers = published.filter(l => l.group === sc.id);
-
-                layers.map(layer => ({
-                  ...layer,
-                  opacity_text: layer.opacity * 100,
-                }));
 
                 const subgroups = g_subgroups.filter(sg => sg.father === sc.id);
 
                 return {
                   ...sc,
                   active: layers.some(layer => layer.active),
-                  layers: layers.sort(sortBy('dashboard_order')),
+                  layers: layers.sort(byDashboardOrder).map(l => ({
+                    ...l,
+                    opacity_text: getOpacityText(l.opacity),
+                  })),
                   subgroup: subgroups.map(sg => ({
                     ...sg,
                     layers: published
                       .filter(layer => layer.group === sg.id)
-                      .map(l => ({ ...l, opacity_text: l.opacity * 100 })),
+                      .map(l => ({
+                        ...l,
+                        opacity_text: getOpacityText(l.opacity),
+                      })),
                   })),
                 };
               }),

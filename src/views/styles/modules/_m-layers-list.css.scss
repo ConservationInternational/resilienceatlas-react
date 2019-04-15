@@ -200,10 +200,14 @@
     //   fill: $bg-color-2;
     // }
 
+    path {
+      fill: $bg-color-1;
+    }
+
     .is-open &,
     .is-modified & {
       path {
-        fill: $bg-color-2;
+        fill: var(--theme-color, $bg-color-2);
         stroke: $bg-color-2;
       }
     }

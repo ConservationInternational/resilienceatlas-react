@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import MapView from '@components/Map';
 import Sidebar from '@components/Sidebar';
+import Legend from '@components/Legend';
 
 const MapPage = () => (
   <>
@@ -24,7 +25,7 @@ const MapPage = () => (
         loading
       </div>
 
-      <div className="m-legend" id="legendView" />
+      <Legend />
     </div>
   </>
 );

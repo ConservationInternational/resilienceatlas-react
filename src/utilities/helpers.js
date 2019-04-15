@@ -45,10 +45,13 @@ export const useRouterParams = () => {
 
   return [get, set];
 };
-
-export const sortBy = key => (a, b) => {
-  if (a[key] > b[key]) return 1;
-  if (a[key] < b[key]) return -1;
+/**
+ * @param  {} key key to sort on
+ * @param  {} desc=false to sort in descending order
+ */
+export const sortBy = (key, desc = false) => (a, b) => {
+  if (a[key] > b[key]) return desc ? -1 : 1;
+  if (a[key] < b[key]) return desc ? 1 : -1;
   return 0;
 };
 

@@ -19,11 +19,14 @@ const Subgroup = ({ id, name, active, layers }) => {
           className="header-switch m-form-input--switch"
         />
       </div>
-      <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
-        {layers.map(layer => (
-          <Layer key={layer.id} {...layer} />
-        ))}
-      </ul>
+
+      {isActive && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+          {layers.map(layer => (
+            <Layer key={layer.id} {...layer} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
@@ -46,19 +49,21 @@ const Category = ({ id, name, active, layers, subcategory }) => {
         />
       </div>
 
-      <ul
-        className={cx('m-layers-list-panel', {
-          'is-active': !!isActive,
-        })}
-      >
-        {layers.map(layer => (
-          <Layer key={layer.id} {...layer} />
-        ))}
+      {isActive && (
+        <ul
+          className={cx('m-layers-list-panel', {
+            'is-active': !!isActive,
+          })}
+        >
+          {layers.map(layer => (
+            <Layer key={layer.id} {...layer} />
+          ))}
 
-        {subcategory.map(subcat => (
-          <Subcategory key={subcat.id} {...subcat} />
-        ))}
-      </ul>
+          {subcategory.map(subcat => (
+            <Subcategory key={subcat.id} {...subcat} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
@@ -78,14 +83,17 @@ const Subcategory = ({ id, name, active, layers, subgroup }) => {
           className="header-switch m-form-input--switch"
         />
       </div>
-      <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
-        {layers.map(layer => (
-          <Layer key={layer.id} {...layer} withDashboardOrder />
-        ))}
-        {subgroup.map(s_group => (
-          <Subgroup key={s_group.id} {...s_group} />
-        ))}
-      </ul>
+
+      {isActive && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+          {layers.map(layer => (
+            <Layer key={layer.id} {...layer} withDashboardOrder />
+          ))}
+          {subgroup.map(s_group => (
+            <Subgroup key={s_group.id} {...s_group} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
@@ -101,16 +109,17 @@ const Group = ({ id, slug, name, active, layers, categories }) => {
       >
         <div className="header-title theme-color">{name}</div>
       </div>
+      {isActive && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+          {layers.map(({ dashboard_order, ...layer }) => (
+            <Layer key={layer.id} {...layer} withDashboardOrder />
+          ))}
 
-      <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
-        {layers.map(({ dashboard_order, ...layer }) => (
-          <Layer key={layer.id} {...layer} withDashboardOrder />
-        ))}
-
-        {categories.map(cat => (
-          <Category key={cat.id} {...cat} />
-        ))}
-      </ul>
+          {categories.map(cat => (
+            <Category key={cat.id} {...cat} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
