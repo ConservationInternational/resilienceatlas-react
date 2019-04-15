@@ -4,7 +4,7 @@ import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 
-import { setRouterParam } from 'utilities';
+import { setRouterParam } from '@utilities';
 import Toolbar from './Toolbar';
 
 const basemaps = {

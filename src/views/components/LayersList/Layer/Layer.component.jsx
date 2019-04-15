@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import cx from 'classnames';
 
-import { useToggle } from '@utilities';
-import { useUpdaterInput } from '../../../../utilities/hooks';
+import { useToggle, useUpdaterInput } from '@utilities';
 
 const validateOpacity = value => {
   if (Number.isNaN(value)) return 1;

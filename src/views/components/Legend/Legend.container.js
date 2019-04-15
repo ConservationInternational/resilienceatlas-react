@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getActives } from 'state/modules/layers';
+import { getActives } from '@modules/layers';
 import Legend from './Legend.component';
 
 const mapStateToProps = state => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { useToggle, clickable } from 'utilities';
+import { useToggle, clickable } from '@utilities';
 import Layer from './Layer';
 
 const Subgroup = ({ id, name, active, layers }) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import LegendItem from './LegendItem';
 import { sortBy } from '@utilities';
+import LegendItem from './LegendItem';
 
 const byOrder = sortBy('order');
 
