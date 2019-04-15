@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react';
 import qs from 'qs';
 import cx from 'classnames';
-import { setRouterParam } from '@utilities';
+
 import LinkButton from '@shared/LinkButton';
 import Tabs from '@shared/Tabs';
 import LayersList from '../LayersList';
+
+import { setRouterParam, useToggle } from '@utilities';
 
 const TABS = {
   LAYERS: 'layers',
@@ -12,6 +14,7 @@ const TABS = {
 };
 
 const Sidebar = ({ location: { search } }) => {
+  const [opened, toggleOpen] = useToggle(true);
   const { tab = TABS.LAYERS } = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
@@ -28,7 +31,7 @@ const Sidebar = ({ location: { search } }) => {
   );
 
   return (
-    <div className="l-sidebar--fullscreen">
+    <div className={cx('l-sidebar--fullscreen', { 'is-collapsed': !opened })}>
       <div className="l-sidebar-content">
         <div className="m-sidebar analysis-panel" id="analysisPanelView">
           <div className="title">
@@ -108,6 +111,7 @@ const Sidebar = ({ location: { search } }) => {
         <button
           className="btn-sidebar-toggle"
           type="button"
+          onClick={toggleOpen}
           aria-label="Toggle sidebar"
         />
         <button
