@@ -10,7 +10,7 @@
     "camelcase": 0,
     "import/no-unresolved": [
       "error",
-      { "ignore": ["^@components", "^@modules", "^@utilities"] }
+      { "ignore": ["^views", "^state", "^utilities"] }
     ],
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": [0, "never"],

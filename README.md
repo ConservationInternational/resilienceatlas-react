@@ -34,6 +34,14 @@ and then you can use your prodiction build locally:
     npm i -g serve
     serve -s build
 
+## Deploy (Capistrano)
+
+You need ruby version 2.2.1, then you have to install gems using `bundle install`. To deploy to staging you have to run:
+
+```
+    cap staging deploy
+```
+
 ## Contributing
 
 1. Fork it!
