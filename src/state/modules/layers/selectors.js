@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sortBy } from '@utilities';
+import { sortBy } from 'utilities';
 
 import { getById as getSources } from '../sources';
 import {

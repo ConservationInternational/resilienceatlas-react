@@ -50,10 +50,20 @@ set :pm2_app_name, 'resilienceatlasreact'
 
 namespace :deploy do
 
+  desc 'Build'
+  task :build_app do
+    on roles(:app) do
+      within release_path do
+        execute :npm, 'run', 'build'
+      end
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     invoke 'pm2:restart'
   end
 
+  after :updated, :build_app
   after :publishing, :restart
 end

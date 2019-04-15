@@ -7,8 +7,8 @@ import {
   setActives,
   getGrouped,
   getActives,
-} from '@modules/layers';
-import { load as loadLayerGroups } from '@modules/layer_groups';
+} from 'state/modules/layers';
+import { load as loadLayerGroups } from 'state/modules/layer_groups';
 
 import MapView from './Map.component';
 
