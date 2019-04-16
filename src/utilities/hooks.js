@@ -14,9 +14,16 @@ export const useInput = (name, initialValue) => {
   const [value, setValue] = useState(initialValue);
   const onChange = e => setValue(e.target.value);
 
+  useEffect(() => setValue(initialValue), [initialValue]);
+
   return { name, value, onChange };
 };
 
+/**
+ * @param  {string} name
+ * @param  {any} initialValue
+ * @param  {function} updater function to be called on blur/enter key pressed
+ */
 export const useUpdaterInput = (name, initialValue, updater) => {
   // setting up a input
   const [value, setValue] = useState(initialValue);
@@ -40,4 +47,12 @@ export const useUpdaterInput = (name, initialValue, updater) => {
   }, [initialValue]);
 
   return { name, value, onChange, onKeyPress, onBlur };
+};
+
+export const useDebounce = (effect, delay, deps) => {
+  useEffect(() => {
+    const timeout = setTimeout(effect, delay);
+
+    return () => clearTimeout(timeout);
+  }, deps);
 };
