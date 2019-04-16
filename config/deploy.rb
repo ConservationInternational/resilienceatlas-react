@@ -45,9 +45,16 @@ set :linked_files, %w{.env ecosystem.config.js}
 set :rvm_ruby_version, '2.2.1'
 set :rvm_custom_path, '/usr/share/rvm'
 
+# PM2
 set :pm2_app_command, 'ecosystem.config.js'
 set :pm2_app_name, 'resilienceatlasreact'
 set :pm2_start_params, '--env production'
+
+# Yarn
+# set :yarn_target_path, -> { release_path.join('subdir') } # default not set
+# set :yarn_flags, '--production --silent --no-progress'    # default
+# set :yarn_roles, :all                                     # default
+# set :yarn_env_variables, {}                               # default
 
 namespace :deploy do
 
@@ -55,7 +62,7 @@ namespace :deploy do
   task :build_app do
     on roles(:app) do
       within release_path do
-        execute :npm, 'run', 'build'
+        execute :yarn, 'build'
       end
     end
   end
