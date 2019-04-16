@@ -2,6 +2,8 @@
 @import 'variables';
 
 // Importing dependencies and helpers
+@import '~normalize.css';
+
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
 
@@ -12,14 +14,6 @@
 
 // Grid
 @include foundation-grid;
-
-// Switch TODO: fix node-sass throws "base level rules cannot contain parent-selector-referencing"
-// @include switch-container;
-// @include switch-input;
-// @include switch-paddle;
-
-$xy-grid: false;
-$global-flexbox: false;
 
 // Importing project settings
 @import 'base';

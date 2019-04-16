@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loadPageIndex as loadJourneys } from 'state/modules/journeys';
+import { loadPageIndex as loadJourneys } from '@modules/journeys';
 
 import JourneysIntrolist from './JourneysIntrolist.component';
 

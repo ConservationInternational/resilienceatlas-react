@@ -1,7 +1,7 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { getGrouped } from 'state/modules/layers';
+import { getGrouped } from '@modules/layers';
 import LayerList from './LayersList.component';
 
 const mapStateToProps = state => {
