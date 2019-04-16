@@ -77,3 +77,14 @@ $easeInOutSine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 $easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 $easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+/*
+  Override Foundation variables
+*/
+// Grid
+$xy-grid: false;
+$global-flexbox: false;
+
+// Switch
+$switch-radius: rem(5px);
+$switch-paddle-radius: rem(5px);

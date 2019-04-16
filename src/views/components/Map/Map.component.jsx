@@ -4,7 +4,7 @@ import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 
-import { setRouterParam } from 'utilities';
+import { setRouterParam } from '@utilities';
 import Toolbar from './Toolbar';
 
 const basemaps = {
@@ -38,15 +38,12 @@ const MapView = ({
   // actions
   loadLayers,
   loadLayerGroups,
-  setActives,
   // data
   layers: { loaded: layersLoaded },
-  layer_groups: { loaded: layerGroupsLoaded },
   activeLayers,
   location,
   site,
   options,
-  grouped = [],
   basemap = 'defaultmap',
   embed,
   journeyMap,
@@ -61,19 +58,17 @@ const MapView = ({
     loadLayerGroups();
   }, []);
 
-  // Actualize redux store regarding url params
   useEffect(() => {
-    // if initial fetch finished
-    if (layersLoaded && layerGroupsLoaded) {
-      // if any layers in url present
-      if (query.layers && query.layers.length) {
-        console.log(query.layers);
-        const queryLayersIds = JSON.parse(query.layers).map(l => l.id);
+    const hash = activeLayers.map(({ id, opacity }, order) => ({
+      id,
+      opacity,
+      order,
+    }));
 
-        setActives(queryLayersIds);
-      }
+    if (layersLoaded) {
+      setRouterParam('layers', JSON.stringify(hash));
     }
-  }, [layersLoaded, layerGroupsLoaded]);
+  }, [activeLayers]);
 
   const getCenter = useCallback(() => {
     if (site.lat) {

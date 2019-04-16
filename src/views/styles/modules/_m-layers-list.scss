@@ -39,6 +39,7 @@
   position: relative;
   padding: rem(15px) rem(15px) rem(15px) rem(30px);
   color: $font-color-2;
+  outline: none;
 
   &:last-child {
     border-bottom: 0;
@@ -134,6 +135,7 @@
 
   .layer {
     padding: 0 0 10px 25px;
+    @extend %clearfix;
   }
 
   .panel-item-title {
@@ -164,7 +166,8 @@
 
   .panel-item-switch {
     float: left;
-    margin-top: rem(1px);
+    margin-top: rem(3px);
+    margin-bottom: 0;
   }
 }
 
@@ -197,10 +200,14 @@
     //   fill: $bg-color-2;
     // }
 
+    path {
+      fill: $bg-color-1;
+    }
+
     .is-open &,
     .is-modified & {
       path {
-        fill: $bg-color-2;
+        fill: var(--theme-color, $bg-color-2);
         stroke: $bg-color-2;
       }
     }

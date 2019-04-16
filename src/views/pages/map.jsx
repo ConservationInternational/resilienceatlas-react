@@ -1,7 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import MapView from 'views/components/Map';
-import Sidebar from 'views/components/Sidebar';
+import MapView from '@components/Map';
+import Sidebar from '@components/Sidebar';
+import Legend from '@components/Legend';
+
+import Loader from '@shared/Loader';
 
 const MapPage = () => (
   <>
@@ -20,11 +23,9 @@ const MapPage = () => (
         }}
       />
 
-      <div className="m-loader" id="loader">
-        loading
-      </div>
+      <Loader />
 
-      <div className="m-legend" id="legendView" />
+      <Legend />
     </div>
   </>
 );
