@@ -47,6 +47,7 @@ set :rvm_custom_path, '/usr/share/rvm'
 
 set :pm2_app_command, 'ecosystem.config.js'
 set :pm2_app_name, 'resilienceatlasreact'
+set :pm2_start_params, '--env production'
 
 namespace :deploy do
 
