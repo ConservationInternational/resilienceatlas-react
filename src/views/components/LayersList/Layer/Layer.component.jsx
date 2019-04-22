@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import cx from 'classnames';
 
-import { useToggle, useUpdaterInput } from '@utilities';
+import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 
 const validateOpacity = value => {
   if (Number.isNaN(value)) return 1;
@@ -26,19 +26,16 @@ const Layer = ({
   withDashboardOrder,
 }) => {
   const [isOpen, toggleOpen] = useToggle(false);
-
-  const toggleLayer = useCallback(() => toggle(id), [id]);
-  const updateOpacity = useCallback(
-    e => {
-      const currentVal = e.target.value / 100;
-      setOpacity(id, validateOpacity(currentVal));
-    },
-    [id],
-  );
-
+  const slider = useInput('opacity_slider', opacity_text);
   const opacityInput = useUpdaterInput(id, opacity_text, v => {
     setOpacity(id, validateOpacity(v / 100));
   });
+
+  const toggleLayer = useCallback(() => toggle(id), [id]);
+
+  useDebounce(() => setOpacity(id, validateOpacity(slider.value / 100)), 300, [
+    slider.value,
+  ]);
 
   return (
     <li
@@ -138,14 +135,13 @@ const Layer = ({
               data-id={id}
               id="fader"
               className="opacity-range"
+              {...slider}
               type="range"
-              value={opacity_text}
-              onChange={updateOpacity}
               min="0"
               max="100"
               step="1"
             />
-            <span className="opacity" style={{ width: `${opacity_text}%` }} />
+            <span className="opacity" style={{ width: `${slider.value}%` }} />
           </div>
           <div className="value">
             <input
