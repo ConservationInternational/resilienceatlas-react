@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { getRouterParam } from '@utilities';
 
 export const getPersistedLayers = () => {

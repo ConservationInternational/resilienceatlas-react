@@ -11,8 +11,6 @@ const validateOpacity = value => {
 };
 
 const Layer = ({
-  // location: { search, pathname },
-  // history,
   toggle,
   setOpacity,
   id,

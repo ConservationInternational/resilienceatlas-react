@@ -1,5 +1,5 @@
 import { createReducer } from '../../utils';
-import { LOAD } from './actions';
+import { LOAD, OPEN_BATCH } from './actions';
 
 const initialState = {
   byId: {
@@ -31,5 +31,22 @@ export default createReducer(initialState)({
     ...state,
     loading: false,
     error: true,
+  }),
+
+  [OPEN_BATCH]: (state, { ids }) => ({
+    ...state,
+    byId: {
+      ...state.byId,
+      ...ids.reduce(
+        (acc, id) => ({
+          ...acc,
+          [id]: {
+            ...state.byId[id],
+            active: true,
+          },
+        }),
+        {},
+      ),
+    },
   }),
 });

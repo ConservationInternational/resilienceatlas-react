@@ -7,6 +7,8 @@ export const useToggle = (initial = false) => {
     setToggle(!toggled);
   }, [toggled]);
 
+  useEffect(() => setToggle(initial), [initial]);
+
   return [toggled, toggle];
 };
 

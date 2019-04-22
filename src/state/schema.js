@@ -36,7 +36,7 @@ export const layer = new schema.Entity(
         minZoom: l.attributes.zoom_min || 0,
         legend: l.attributes.legend,
         group: group ? parseInt(group.id, 10) : null,
-        active: l.attributes.active,
+        // active: l.attributes.active,
         published: l.attributes.published,
         info: l.attributes.info,
         dashboard_order: l.attributes.dashboard_order,
@@ -64,7 +64,7 @@ export const layer_group = new schema.Entity(
         name: lg.attributes.name,
         father: superGroupId ? parseInt(superGroupId, 10) : null,
         order: lg.attributes.order,
-        active: lg.attributes.active,
+        // active: lg.attributes.active,
         group_type: lg.attributes.layer_group_type,
       };
     },
