@@ -7,6 +7,7 @@ import {
   getCategories,
   getSubCategories,
   getSubGroups,
+  makeDefaultActives,
 } from '../layer_groups';
 import { layer } from '../../schema';
 
@@ -34,10 +35,26 @@ export const getActives = () =>
       loaded ? denormalize(ids, [layer], { layers }) : [],
   );
 
-export const getGrouped = () =>
-  createSelector(
-    [getPublished, getGroups, getCategories, getSubCategories, getSubGroups],
-    (published, groups, g_categories, g_subcategories, g_subgroups) => {
+export const getGrouped = () => {
+  const getDefaultActives = makeDefaultActives();
+
+  return createSelector(
+    [
+      getPublished,
+      getGroups,
+      getCategories,
+      getSubCategories,
+      getSubGroups,
+      getDefaultActives,
+    ],
+    (
+      published,
+      groups,
+      g_categories,
+      g_subcategories,
+      g_subgroups,
+      g_defaultActive,
+    ) => {
       if (!groups.length || !g_categories.length) {
         console.info('There aren`t groups setted.');
         return groups;
@@ -49,7 +66,7 @@ export const getGrouped = () =>
 
         return {
           ...g,
-          active: groupLayers.some(layer => layer.active),
+          active: g.active || g_defaultActive.some(id => id === g.id),
           layers: groupLayers
             .sort(byDashboardOrder)
             .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
@@ -62,7 +79,7 @@ export const getGrouped = () =>
 
             return {
               ...c,
-              active: layers.some(layer => layer.active),
+              active: c.active || g_defaultActive.some(id => id === c.id),
               layers: layers
                 .sort(byDashboardOrder)
                 .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
@@ -73,7 +90,7 @@ export const getGrouped = () =>
 
                 return {
                   ...sc,
-                  active: layers.some(layer => layer.active),
+                  active: sc.active || g_defaultActive.some(id => id === sc.id),
                   layers: layers.sort(byDashboardOrder).map(l => ({
                     ...l,
                     opacity_text: getOpacityText(l.opacity),
@@ -95,6 +112,7 @@ export const getGrouped = () =>
       });
     },
   );
+};
 
 export const getLayerActive = id =>
   createSelector(

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import qs from 'qs';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
-import { PluginLeaflet } from 'layer-manager';
+import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 
 import { setRouterParam } from '@utilities';
@@ -40,12 +40,15 @@ const MapView = ({
   loadLayerGroups,
   // data
   layers: { loaded: layersLoaded },
+  layer_groups: { loaded: layerGroupsLoaded },
   activeLayers,
+  defaultActiveGroups,
   location,
   site,
   options,
   basemap = 'defaultmap',
   embed,
+  openBatch,
   journeyMap,
 }) => {
   const query = qs.parse(location.search, {
@@ -57,6 +60,12 @@ const MapView = ({
     loadLayers();
     loadLayerGroups();
   }, []);
+
+  useEffect(() => {
+    if (layersLoaded && layerGroupsLoaded && defaultActiveGroups.length) {
+      openBatch(defaultActiveGroups);
+    }
+  }, [layersLoaded, layerGroupsLoaded]);
 
   useEffect(() => {
     const hash = activeLayers.map(({ id, opacity }, order) => ({
