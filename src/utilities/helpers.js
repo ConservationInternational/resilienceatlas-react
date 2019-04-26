@@ -53,7 +53,16 @@ export const useRouterParams = () => {
     });
   };
 
-  return { getParam, setParam };
+  const removeParam = param => {
+    params.delete(param);
+
+    history.replace({
+      pathname,
+      search: params.toString(),
+    });
+  };
+
+  return { getParam, setParam, removeParam };
 };
 /**
  * @param  {string} key key to sort on

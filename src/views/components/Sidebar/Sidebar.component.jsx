@@ -2,9 +2,11 @@ import React, { useCallback } from 'react';
 import qs from 'qs';
 import cx from 'classnames';
 
+import AnalysisPanel from '@components/AnalysisPanel';
+import LayersList from '@components/LayersList';
+
 import LinkButton from '@shared/LinkButton';
 import Tabs from '@shared/Tabs';
-import LayersList from '../LayersList';
 
 import { setRouterParam, useToggle } from '@utilities';
 
@@ -15,6 +17,8 @@ const TABS = {
 
 const Sidebar = ({ location: { search } }) => {
   const [opened, toggleOpen] = useToggle(true);
+  const [analysisOpened, toggleAnalysis] = useToggle();
+
   const { tab = TABS.LAYERS } = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
@@ -31,23 +35,15 @@ const Sidebar = ({ location: { search } }) => {
   );
 
   return (
-    <div className={cx('l-sidebar--fullscreen', { 'is-collapsed': !opened })}>
+    <div
+      className={cx('l-sidebar--fullscreen', {
+        'is-collapsed': !opened,
+        analyzing: analysisOpened,
+      })}
+    >
       <div className="l-sidebar-content">
-        <div className="m-sidebar analysis-panel" id="analysisPanelView">
-          <div className="title">
-            <button
-              className="btn-analysis-panel-contract"
-              type="button"
-              aria-label="Contract analysis panel"
-            >
-              Analysis
-            </button>
-          </div>
-          <div className="content">
-            <div id="analysisSelectorsView" className="m-analysis-selectors" />
-            <div id="analysisView" className="m-analysis" />
-          </div>
-        </div>
+        <AnalysisPanel toggle={toggleAnalysis} />
+
         <div className="m-sidebar" id="sidebarView">
           <ul
             id="sidebarTabs"
@@ -117,6 +113,7 @@ const Sidebar = ({ location: { search } }) => {
         <button
           className="btn-analysis-panel-expand"
           type="button"
+          onClick={toggleAnalysis}
           aria-label="Expand analysis panel"
         >
           Analysis
