@@ -5,9 +5,15 @@ const URL_LAYER_GROUPS = '/layer-groups';
 
 // Action constants
 export const LOAD = createApiAction('layer_groups/LOAD');
+export const TOGGLE = 'layer_groups / TOGGLE';
 export const OPEN_BATCH = 'layer_groups / OPEN_BATCH';
 
 // Actions
+export const toggle = id => ({
+  type: TOGGLE,
+  id,
+});
+
 export const openBatch = (ids = []) => ({
   type: OPEN_BATCH,
   ids,

@@ -1,17 +1,25 @@
 import React from 'react';
 import cx from 'classnames';
+import { connect } from 'react-redux';
 import Loader from '@shared/Loader';
 
-import { useToggle, clickable } from '@utilities';
+import { clickable } from '@utilities';
+import { toggle as toggleGroup } from '@modules/layer_groups';
+
 import Layer from './Layer';
 
-const Subgroup = ({ id, name, active, layers }) => {
-  const [isActive, toggleActive] = useToggle(active);
+const enhance = connect(
+  null,
+  (dispatch, ownProps) => ({
+    toggleActive: () => dispatch(toggleGroup(ownProps.id)),
+  }),
+);
 
+let Subgroup = ({ toggleActive, id, name, active, layers }) => {
   return (
     <li className="subgroup">
       <div
-        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
+        className={cx('m-layers-list-header', { 'is-active': !!active })}
         {...clickable(toggleActive)}
       >
         <div className="header-title ">{name}</div>
@@ -21,8 +29,8 @@ const Subgroup = ({ id, name, active, layers }) => {
         />
       </div>
 
-      {isActive && (
-        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+      {active && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
           {layers.map(layer => (
             <Layer key={layer.id} {...layer} />
           ))}
@@ -32,14 +40,14 @@ const Subgroup = ({ id, name, active, layers }) => {
   );
 };
 
-const Category = ({ id, name, active, layers, subcategory }) => {
-  const [isActive, toggleActive] = useToggle(active);
+Subgroup = enhance(Subgroup);
 
+let Category = ({ toggleActive, id, name, active, layers, subcategory }) => {
   return (
     <li key={id} className="category">
       <div
         className={cx('m-layers-list-header', {
-          'is-active': !!isActive,
+          'is-active': !!active,
         })}
         {...clickable(toggleActive)}
       >
@@ -50,10 +58,10 @@ const Category = ({ id, name, active, layers, subcategory }) => {
         />
       </div>
 
-      {isActive && (
+      {active && (
         <ul
           className={cx('m-layers-list-panel', {
-            'is-active': !!isActive,
+            'is-active': !!active,
           })}
         >
           {layers.map(layer => (
@@ -69,13 +77,13 @@ const Category = ({ id, name, active, layers, subcategory }) => {
   );
 };
 
-const Subcategory = ({ id, name, active, layers, subgroup }) => {
-  const [isActive, toggleActive] = useToggle(active);
+Category = enhance(Category);
 
+let Subcategory = ({ toggleActive, id, name, active, layers, subgroup }) => {
   return (
     <li className="subcategory">
       <div
-        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
+        className={cx('m-layers-list-header', { 'is-active': !!active })}
         {...clickable(toggleActive)}
       >
         <div className="header-title">{name}</div>
@@ -85,8 +93,8 @@ const Subcategory = ({ id, name, active, layers, subgroup }) => {
         />
       </div>
 
-      {isActive && (
-        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+      {active && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
           {layers.map(layer => (
             <Layer key={layer.id} {...layer} withDashboardOrder />
           ))}
@@ -99,19 +107,19 @@ const Subcategory = ({ id, name, active, layers, subgroup }) => {
   );
 };
 
-const Group = ({ id, slug, name, active, layers, categories }) => {
-  const [isActive, toggleActive] = useToggle(active);
+Subcategory = enhance(Subcategory);
 
+let Group = ({ toggleActive, id, slug, name, active, layers, categories }) => {
   return (
     <li key={id} className="group" data-slug={slug}>
       <div
-        className={cx('m-layers-list-header', { 'is-active': !!isActive })}
+        className={cx('m-layers-list-header', { 'is-active': !!active })}
         {...clickable(toggleActive)}
       >
         <div className="header-title theme-color">{name}</div>
       </div>
-      {isActive && (
-        <ul className={cx('m-layers-list-panel', { 'is-active': !!isActive })}>
+      {active && (
+        <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
           {layers.map(({ dashboard_order, ...layer }) => (
             <Layer key={layer.id} {...layer} withDashboardOrder />
           ))}
@@ -124,6 +132,8 @@ const Group = ({ id, slug, name, active, layers, categories }) => {
     </li>
   );
 };
+
+Group = enhance(Group);
 
 const LayersList = ({ groups, loading }) => (
   <>
