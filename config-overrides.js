@@ -12,7 +12,7 @@ module.exports = {
     };
 
     config.externals = Object.assign(config.externals || {}, {
-      L: 'leaflet',
+      leaflet: 'L',
     });
 
     return config;

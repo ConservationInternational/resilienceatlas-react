@@ -112,7 +112,11 @@ const MapView = ({
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
             {activeLayers.map(l => (
-              <Layer key={l.id} {...l} />
+              <Layer
+                key={l.id}
+                {...l}
+                decodeParams={{ chartLimit: l.chartLimit || 100 }}
+              />
             ))}
           </LayerManager>
 
