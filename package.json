@@ -23,6 +23,7 @@
     "foundation-sites": "^6.5.3",
     "layer-manager": "https://github.com/Vizzuality/layer-manager.git#version/resilience",
     "leaflet": "^1.4.0",
+    "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "normalizr": "^3.3.0",
     "qs": "^6.7.0",

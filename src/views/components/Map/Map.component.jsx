@@ -68,10 +68,11 @@ const MapView = ({
   }, [layersLoaded, layerGroupsLoaded]);
 
   useEffect(() => {
-    const hash = activeLayers.map(({ id, opacity }, order) => ({
+    const hash = activeLayers.map(({ id, opacity, chartLimit }, order) => ({
       id,
       opacity,
       order,
+      chartLimit,
     }));
 
     if (layersLoaded) {
@@ -111,7 +112,11 @@ const MapView = ({
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
             {activeLayers.map(l => (
-              <Layer key={l.id} {...l} />
+              <Layer
+                key={l.id}
+                {...l}
+                decodeParams={{ chartLimit: l.chartLimit || 100 }}
+              />
             ))}
           </LayerManager>
 

@@ -45,82 +45,82 @@ const Legend = ({
                   ref={innerRef}
                   className="m-legend__list"
                 >
-                  {activeLayers
-                    .sort(byOrder)
-                    .map(
-                      (
-                        { id, name, notAvailableByZoom, opacity, legend },
-                        index,
-                      ) => {
-                        const layerVisible = opacity > 0;
+                  {activeLayers.sort(byOrder).map((layer, index) => {
+                    const {
+                      id,
+                      name,
+                      notAvailableByZoom,
+                      opacity,
+                      legend,
+                    } = layer;
+                    const layerVisible = opacity > 0;
 
-                        return (
-                          <Draggable key={id} draggableId={id} index={index}>
-                            {({
-                              draggableProps,
-                              dragHandleProps,
-                              innerRef: dragRef,
-                            }) => (
-                              <li
-                                className={cx('drag-items', {
-                                  'is-not-available-by-zoom': notAvailableByZoom,
-                                })}
-                                data-id={id}
-                                ref={dragRef}
-                                {...draggableProps}
-                                {...dragHandleProps}
-                              >
-                                <header>
-                                  <span className="draggable-icon">
-                                    <svg>
-                                      <use xlinkHref="#icon-drag" />
+                    return (
+                      <Draggable key={id} draggableId={id} index={index}>
+                        {({
+                          draggableProps,
+                          dragHandleProps,
+                          innerRef: dragRef,
+                        }) => (
+                          <li
+                            className={cx('drag-items', {
+                              'is-not-available-by-zoom': notAvailableByZoom,
+                            })}
+                            data-id={id}
+                            ref={dragRef}
+                            {...draggableProps}
+                            {...dragHandleProps}
+                          >
+                            <header>
+                              <span className="draggable-icon">
+                                <svg>
+                                  <use xlinkHref="#icon-drag" />
+                                </svg>
+                              </span>
+
+                              <h3>{name}</h3>
+
+                              {id !== -1 && (
+                                <div className="actions">
+                                  <button
+                                    type="button"
+                                    className="btn-remove"
+                                    {...clickable(() => toggleLayer(id))}
+                                    data-layer-id={id}
+                                  >
+                                    <svg className="icon">
+                                      <use xlinkHref="#icon-remove" />
                                     </svg>
-                                  </span>
+                                  </button>
 
-                                  <h3>{name}</h3>
-
-                                  {id !== -1 && (
-                                    <div className="actions">
-                                      <button
-                                        type="button"
-                                        className="btn-remove"
-                                        {...clickable(() => toggleLayer(id))}
-                                        data-layer-id={id}
-                                      >
-                                        <svg className="icon">
-                                          <use xlinkHref="#icon-remove" />
-                                        </svg>
-                                      </button>
-
-                                      <button
-                                        type="button"
-                                        className={cx(
-                                          'btn-action',
-                                          'btn-visibility',
-                                        )}
-                                        {...clickable(() =>
-                                          setOpacity(id, layerVisible ? 0 : 1),
-                                        )}
-                                        data-id={id}
-                                      >
-                                        <svg>
-                                          <use
-                                            xlinkHref={`#icon-visibility${
-                                              layerVisible ? 'on' : 'off'
-                                            }`}
-                                          />
-                                        </svg>
-                                      </button>
-                                    </div>
-                                  )}
-                                </header>
-                                <LegendItem legend={legend} />
-                              </li>
-                            )}
-                          </Draggable>
-                        );
-                      },
-                    )}
+                                  <button
+                                    type="button"
+                                    className={cx(
+                                      'btn-action',
+                                      'btn-visibility',
+                                    )}
+                                    {...clickable(() =>
+                                      setOpacity(id, layerVisible ? 0 : 1),
+                                    )}
+                                    data-id={id}
+                                  >
+                                    <svg>
+                                      <use
+                                        xlinkHref={`#icon-visibility${
+                                          layerVisible ? 'on' : 'off'
+                                        }`}
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              )}
+                            </header>
+                            <LegendItem legend={legend} layer={layer} />
+                          </li>
+                        )}
+                      </Draggable>
+                    );
+                  })}
                   {placeholder}
                 </ul>
               </div>
