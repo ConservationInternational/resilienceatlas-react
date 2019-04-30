@@ -24,6 +24,7 @@ const mapStateToProps = state => {
   return {
     site: state.site,
     layers: state.layers,
+    drawing: state.map.drawing,
     layer_groups: state.layer_groups,
     activeLayers: activeLayers(state),
     defaultActiveGroups: defaultActives(state),

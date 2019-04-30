@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import qs from 'qs';
+import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
-import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
+import { Map, FeatureGroup, TileLayer } from 'react-leaflet';
+import { EditControl } from 'react-leaflet-draw';
 
 import { setRouterParam } from '@utilities';
 import Toolbar from './Toolbar';
@@ -41,6 +43,7 @@ const MapView = ({
   // data
   layers: { loaded: layersLoaded },
   layer_groups: { loaded: layerGroupsLoaded },
+  drawing,
   activeLayers,
   defaultActiveGroups,
   location,
@@ -97,6 +100,7 @@ const MapView = ({
         zoom: query.zoom || 5,
         center: query.center ? qs.parse(query.center) : getCenter(),
         scrollWheelZoom: !embed,
+        drawControl: true,
       }}
       events={{
         click: () => {},
@@ -114,6 +118,15 @@ const MapView = ({
               <Layer key={l.id} {...l} zIndex={100 - i} />
             ))}
           </LayerManager>
+
+          <FeatureGroup>
+            <EditControl
+              position="topright"
+              draw={{
+                polyline: true,
+              }}
+            />
+          </FeatureGroup>
 
           <MapControls customClass="c-map-controls">
             <Toolbar />

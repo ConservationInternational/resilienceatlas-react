@@ -8,7 +8,12 @@ import { setRouterParam } from '@utilities';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
-export const AnalysisPanel = ({ location: { search }, toggle, drawing }) => {
+export const AnalysisPanel = ({
+  location: { search },
+  setDrawing,
+  toggle,
+  drawing,
+}) => {
   const { geojson, iso } = qs.parse(search, {
     ignoreQueryPrefix: true,
     parseArrays: true,
@@ -25,6 +30,10 @@ export const AnalysisPanel = ({ location: { search }, toggle, drawing }) => {
     },
     [tab],
   );
+
+  const toggleDrawing = useCallback(() => {
+    setDrawing(!drawing);
+  }, [drawing]);
 
   const onDrop = useCallback(([file]) => {
     const regex = new RegExp(`((${ACCEPTED_EXTENSIONS.join('|')}))$`);
@@ -61,8 +70,8 @@ export const AnalysisPanel = ({ location: { search }, toggle, drawing }) => {
         }
 
         setRouterParam('geojson', JSON.stringify(json));
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        console.error(err);
         window.alert(
           "The file can't be read. Make sure it's the GeoJSON is valid.",
         );
@@ -133,6 +142,7 @@ export const AnalysisPanel = ({ location: { search }, toggle, drawing }) => {
                     <button
                       type="button"
                       className="btn -primary js-toggle-draw"
+                      onClick={toggleDrawing}
                     >
                       {drawing ? 'Cancel' : 'Start drawing'}
                     </button>
