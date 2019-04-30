@@ -1,5 +1,12 @@
 import { createReducer } from '../../utils';
-import { LOAD, SET_ACTIVES, TOGGLE, SET_OPACITY, REORDER } from './actions';
+import {
+  LOAD,
+  SET_ACTIVES,
+  TOGGLE,
+  SET_OPACITY,
+  REORDER,
+  SET_CHART_LIMIT,
+} from './actions';
 import { getPersistedLayers } from './utils';
 
 const initialState = {
@@ -83,6 +90,17 @@ export default createReducer(initialState)({
       [id]: {
         ...state.byId[id],
         opacity,
+      },
+    },
+  }),
+
+  [SET_CHART_LIMIT]: (state, { id, chartLimit }) => ({
+    ...state,
+    byId: {
+      ...state.byId,
+      [id]: {
+        ...state.byId[id],
+        chartLimit,
       },
     },
   }),
