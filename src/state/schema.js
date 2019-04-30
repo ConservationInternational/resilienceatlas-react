@@ -1,6 +1,13 @@
 import { schema } from 'normalizr';
 import decoders from './utils/decoders';
 
+const provider = {
+  cartodb: 'carto',
+  raster: 'carto',
+  'xyz tileset': 'leaflet',
+  gee: 'leaflet',
+};
+
 export const site_scopes = new schema.Entity(
   'site_scopes',
   {},
@@ -19,12 +26,6 @@ export const layer = new schema.Entity(
     processStrategy: l => {
       const group = l.relationships.layer_group.data;
       const source = l.relationships.sources.data;
-      const provider = {
-        cartodb: 'carto',
-        raster: 'carto',
-        'xyz tileset': 'leaflet',
-        gee: 'leaflet',
-      };
       const layerConfig = JSON.parse(l.attributes.layer_config || '{}');
       const config = {
         cartodb: {
@@ -71,13 +72,10 @@ export const layer = new schema.Entity(
             url: l.attributes.query,
           },
         },
-        gee: Object.assign(
-          {},
-          {
-            decodeFunction: decoders[layerConfig.decoder],
-          },
-          layerConfig,
-        ),
+        gee: {
+          ...layerConfig,
+          decodeFunction: decoders[layerConfig.decoder],
+        },
       };
 
       return {
