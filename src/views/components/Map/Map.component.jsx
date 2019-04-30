@@ -110,8 +110,8 @@ const MapView = ({
       {map => (
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
-            {[].map((l, i) => (
-              <Layer key={l.id} {...l} zIndex={100 - i} />
+            {activeLayers.map(l => (
+              <Layer key={l.id} {...l} />
             ))}
           </LayerManager>
 

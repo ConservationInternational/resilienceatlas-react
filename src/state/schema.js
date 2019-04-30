@@ -1,4 +1,5 @@
 import { schema } from 'normalizr';
+import decoders from './utils/decoders';
 
 export const site_scopes = new schema.Entity(
   'site_scopes',
@@ -18,6 +19,66 @@ export const layer = new schema.Entity(
     processStrategy: l => {
       const group = l.relationships.layer_group.data;
       const source = l.relationships.sources.data;
+      const provider = {
+        cartodb: 'carto',
+        raster: 'carto',
+        'xyz tileset': 'leaflet',
+        gee: 'leaflet',
+      };
+      const layerConfig = JSON.parse(l.attributes.layer_config || '{}');
+      const config = {
+        cartodb: {
+          body: {
+            layers: [
+              {
+                options: {
+                  cartocss: l.attributes.css,
+                  cartocss_version: '2.1.0',
+                  sql: l.attributes.query,
+                },
+                type: 'mapnik',
+              },
+            ],
+            minzoom: l.attributes.zoom_min,
+            maxzoom: l.attributes.zoom_max,
+          },
+          account: 'cdb',
+        },
+        raster: {
+          body: {
+            layers: [
+              {
+                options: {
+                  cartocss: l.attributes.css,
+                  cartocss_version: '2.3.0',
+                  sql: l.attributes.query,
+                  raster: true,
+                  raster_band: 1,
+                  geom_column: 'the_raster_webmercator',
+                  geom_type: 'raster',
+                },
+                type: 'cartodb',
+              },
+            ],
+            minzoom: l.attributes.zoom_min,
+            maxzoom: l.attributes.zoom_max,
+          },
+          account: 'cdb',
+        },
+        'xyz tileset': {
+          type: 'tileLayer',
+          body: {
+            url: l.attributes.query,
+          },
+        },
+        gee: Object.assign(
+          {},
+          {
+            decodeFunction: decoders[layerConfig.decoder],
+          },
+          layerConfig,
+        ),
+      };
 
       return {
         id: parseInt(l.id, 10),
@@ -47,6 +108,18 @@ export const layer = new schema.Entity(
         analysisSuitable: l.attributes.analysis_suitable,
         analysisQuery: l.attributes.analysis_query,
         layerProvider: l.attributes.layer_provider,
+        // Layer manager params
+        provider: provider[l.attributes.layer_provider],
+        layerConfig: config[l.attributes.layer_provider],
+        decodeParams:
+          l.attributes.layer_provider === 'gee'
+            ? config.gee.decodeParams
+            : null,
+        decodeFunction:
+          l.attributes.layer_provider === 'gee'
+            ? config.gee.decodeFunction
+            : null,
+        params: l.attributes.layer_provider === 'gee' ? config.gee.params : {},
       };
     },
   },
