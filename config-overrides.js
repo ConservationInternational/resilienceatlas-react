@@ -11,6 +11,10 @@ module.exports = {
       '@utilities': path.resolve(__dirname, 'src/utilities/'),
     };
 
+    config.externals = Object.assign(config.externals || {}, {
+      leaflet: 'L',
+    });
+
     return config;
   },
 };

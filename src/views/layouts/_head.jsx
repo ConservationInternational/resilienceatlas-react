@@ -17,7 +17,6 @@ const Head = ({
         --header-color: ${header_color};
       };
     `}</style>
-
     <body
       className={cx(
         `is-${subdomain}`,
