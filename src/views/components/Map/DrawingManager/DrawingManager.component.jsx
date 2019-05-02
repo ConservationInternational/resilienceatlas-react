@@ -1,7 +1,5 @@
 import { FC, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
 
-import { setGeojson, setDrawing } from '@modules/map';
 import { useRouterParams } from '@utilities';
 
 interface P {
@@ -11,7 +9,13 @@ interface P {
   geojson: L.GeoJSON;
 }
 
-const DrawingManager: FC<P> = ({ setGeojson, map, drawing, geojson }) => {
+export const DrawingManager: FC<P> = ({
+  setGeojson,
+  setDrawing,
+  map,
+  drawing,
+  geojson,
+}) => {
   const { setParam, removeParam } = useRouterParams();
   const layer = useRef(null);
 
@@ -60,17 +64,3 @@ const DrawingManager: FC<P> = ({ setGeojson, map, drawing, geojson }) => {
 
   return null;
 };
-
-const mapStateToProps = state => ({
-  drawing: state.map.drawing,
-  geojson: state.map.geojson,
-});
-
-const mapDispatchToProps = {
-  setGeojson,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DrawingManager);

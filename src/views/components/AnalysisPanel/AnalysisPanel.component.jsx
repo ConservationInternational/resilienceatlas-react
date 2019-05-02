@@ -26,6 +26,7 @@ export const AnalysisPanel: FC<P> = ({
 
       if (tab !== newTab) {
         setTab(newTab);
+        setGeojson(null);
       }
     },
     [tab],
