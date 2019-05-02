@@ -15,7 +15,7 @@ const shared = auth(SHARED);
 const logged = auth(LOGGED);
 const unlogged = auth(UNLOGGED);
 
-const L = {
+const LT = {
   Welcome: mainLayout(Welcome),
   About: mainLayout(About),
   Journeys: mainLayout(Journeys),
@@ -23,10 +23,10 @@ const L = {
 };
 
 const Auth = {
-  Welcome: shared(L.Welcome),
-  About: shared(L.About),
-  Journeys: shared(L.Journeys),
-  Map: shared(L.Map),
+  Welcome: shared(LT.Welcome),
+  About: shared(LT.About),
+  Journeys: shared(LT.Journeys),
+  Map: shared(LT.Map),
 };
 
 const App = () => (

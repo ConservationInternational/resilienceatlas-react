@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import qs from 'qs';
 import cx from 'classnames';
 
@@ -15,9 +16,13 @@ const TABS = {
   MODELS: 'models',
 };
 
-const Sidebar = ({ location: { search } }) => {
+interface P extends RouteComponentProps {
+  geojson: L.GeoJSON;
+}
+
+const Sidebar: FC<P> = ({ location: { search }, geojson }) => {
   const [opened, toggleOpen] = useToggle(true);
-  const [analysisOpened, toggleAnalysis] = useToggle();
+  const [analysisOpened, toggleAnalysis] = useToggle(!!geojson);
 
   const { tab = TABS.LAYERS } = qs.parse(search, {
     ignoreQueryPrefix: true,

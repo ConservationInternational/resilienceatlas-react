@@ -1,24 +1,24 @@
-import React, { useState, useCallback } from 'react';
-import qs from 'qs';
+import React, { FC, useState, useCallback } from 'react';
 import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
-import { setRouterParam } from '@utilities';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
-export const AnalysisPanel = ({
-  location: { search },
+interface P {
+  drawing: Boolean;
+  geojson: L.GeoJSON;
+}
+
+export const AnalysisPanel: FC<P> = ({
   setDrawing,
+  setGeojson,
   toggle,
   drawing,
+  geojson,
+  iso,
 }) => {
-  const { geojson, iso } = qs.parse(search, {
-    ignoreQueryPrefix: true,
-    parseArrays: true,
-  });
-
   const [tab, setTab] = useState(geojson && !iso ? 'shape' : 'region');
   const switchTab = useCallback(
     e => {
@@ -34,6 +34,10 @@ export const AnalysisPanel = ({
   const toggleDrawing = useCallback(() => {
     setDrawing(!drawing);
   }, [drawing]);
+
+  const resetAnalytics = useCallback(() => {
+    setGeojson(null);
+  }, []);
 
   const onDrop = useCallback(([file]) => {
     const regex = new RegExp(`((${ACCEPTED_EXTENSIONS.join('|')}))$`);
@@ -69,7 +73,7 @@ export const AnalysisPanel = ({
           );
         }
 
-        setRouterParam('geojson', JSON.stringify(json));
+        setGeojson(json);
       } catch (err) {
         console.error(err);
         window.alert(
@@ -173,7 +177,11 @@ export const AnalysisPanel = ({
                   <a className="btn -primary js-download-report">
                     Download PDF report
                   </a>
-                  <button type="button" className="btn -secondary js-reset">
+                  <button
+                    type="button"
+                    className="btn -secondary"
+                    onClick={resetAnalytics}
+                  >
                     Reset the analysis
                   </button>
                 </div>

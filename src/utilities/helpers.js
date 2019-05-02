@@ -21,13 +21,16 @@ export const setRouterParam = (param, value) => {
   });
 };
 
-export const getRouterParam = param => {
+export const getRouterParam = (param, parser) => {
   const {
     location: { search },
   } = history;
 
   const params = new URLSearchParams(search.slice(1));
-  return params.get(param);
+  const result = params.get(param);
+
+  if (parser) return parser(result);
+  return result;
 };
 
 export const useRouterParams = () => {
@@ -64,9 +67,12 @@ export const useRouterParams = () => {
 
   return { getParam, setParam, removeParam };
 };
+
 /**
  * @param  {string} key key to sort on
  * @param  {boolean} desc=false to sort in descending order
+ *
+ * @returns {function} to be inserted in .sort method
  */
 export const sortBy = (key, desc = false) => (a, b) => {
   if (a[key] > b[key]) return desc ? -1 : 1;

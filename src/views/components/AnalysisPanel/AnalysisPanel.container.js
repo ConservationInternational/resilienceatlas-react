@@ -1,25 +1,20 @@
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import { setDrawing } from '@modules/map';
+import { setDrawing, setGeojson } from '@modules/map';
 
 import { AnalysisPanel } from './AnalysisPanel.component';
 
-const mapStateToProps = state => {
-  return {
-    drawing: state.map.drawing,
-  };
-};
+const mapStateToProps = state => ({
+  drawing: state.map.drawing,
+  geojson: state.map.geojson,
+});
 
 const mapDispatchToProps = {
   setDrawing,
+  setGeojson,
 };
 
-export default compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(AnalysisPanel);

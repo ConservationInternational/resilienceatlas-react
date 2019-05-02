@@ -1013,6 +1013,60 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
+"@turf/area@6.x":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@turf/area/-/area-6.0.1.tgz#50ed63c70ef2bdb72952384f1594319d94f3b051"
+  integrity sha512-Zv+3N1ep9P5JvR0YOYagLANyapGWQBh8atdeR3bKpWcigVXFsEKNUw03U/5xnh+cKzm7yozHD6MFJkqQv55y0g==
+  dependencies:
+    "@turf/helpers" "6.x"
+    "@turf/meta" "6.x"
+
+"@turf/difference@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@turf/difference/-/difference-6.0.2.tgz#dd20c0e2301ba6c22019e38a36eea3975205a77f"
+  integrity sha512-WtXkvFgOyHqsG3xtYG/m5Su+gkvyCUTbdW0XOuc3Ha2u9UeeBSGwEzTc2y9THDLDhHqR+DlTl1MMEBihXcy3fg==
+  dependencies:
+    "@turf/area" "6.x"
+    "@turf/helpers" "6.x"
+    "@turf/invariant" "6.x"
+    "@turf/meta" "6.x"
+    martinez-polygon-clipping "^0.4.3"
+
+"@turf/helpers@6.x":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.1.4.tgz#d6fd7ebe6782dd9c87dca5559bda5c48ae4c3836"
+  integrity sha512-vJvrdOZy1ngC7r3MDA7zIGSoIgyrkWcGnNIEaqn/APmw+bVLF2gAW7HIsdTxd12s5wQMqEpqIQrmrbRRZ0xC7g==
+
+"@turf/intersect@^6.1.3":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@turf/intersect/-/intersect-6.1.3.tgz#c6574a2f00a38df6f81fc08d8103ad5295b7b6bc"
+  integrity sha512-SeAJG/zPRRTeyK2OifkPoyLq60q8tv8prpPIH3R8ZhyF4MdLOnMv5MURaQ6kQd+3UTDrL+pYm6rqbPvln1zqIw==
+  dependencies:
+    "@turf/helpers" "6.x"
+    "@turf/invariant" "6.x"
+    martinez-polygon-clipping "^0.4.3"
+
+"@turf/invariant@6.x":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@turf/invariant/-/invariant-6.1.2.tgz#6013ed6219f9ac2edada9b31e1dfa5918eb0a2f7"
+  integrity sha512-WU08Ph8j0J2jVGlQCKChXoCtI50BB3yEH21V++V0T4cR1T27HKCxkehV2sYMwTierfMBgjwSwDIsxnR4/2mWXg==
+  dependencies:
+    "@turf/helpers" "6.x"
+
+"@turf/kinks@6.x":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@turf/kinks/-/kinks-6.0.0.tgz#dde4f10f6e1ec18dc25a5d2d5dbe09aa994e9904"
+  integrity sha512-X2xk3+Sr9aeu51t1vBa7Iwowvjxcbl5fePLIo/dDOU4j5WeFoqGCto+DdEHQcC3y8HVUin4i8GaHVaM9sVTphg==
+  dependencies:
+    "@turf/helpers" "6.x"
+
+"@turf/meta@6.x":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-6.0.2.tgz#eb92951126d24a613ac1b7b99d733fcc20fd30cf"
+  integrity sha512-VA7HJkx7qF1l3+GNGkDVn2oXy4+QoLP6LktXAaZKjuT1JI0YESat7quUkbCMy4zP9lAUuvS4YMslLyTtr919FA==
+  dependencies:
+    "@turf/helpers" "6.x"
+
 "@types/geojson@*":
   version "7946.0.7"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
@@ -1047,6 +1101,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
   integrity sha512-eqz8c/0kwNi/OEHQfvIuJVLTst3in0e7uTKeuY+WL/zfKn0xVujOTp42bS/vUUokhK5P2BppLd9JXMOMHcgbjA==
 
+"@types/react-dom@^16.8.4":
+  version "16.8.4"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.4.tgz#7fb7ba368857c7aa0f4e4511c4710ca2c5a12a88"
+  integrity sha512-eIRpEW73DCzPIMaNBDP5pPIpK1KXyZwNgfxiVagb5iGiz6da+9A5hslSX6GAQKdO7SayVCS/Fr2kjqprgAvkfA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-leaflet@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@types/react-leaflet/-/react-leaflet-2.2.1.tgz#21ec6c0995c0da9089c2ec2f257c1fd50eee646a"
@@ -1055,7 +1116,7 @@
     "@types/leaflet" "*"
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^16.8.15":
   version "16.8.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.15.tgz#a76515fed5aa3e996603056f54427fec5f2a5122"
   integrity sha512-dMhzw1rWK+wwJWvPp5Pk12ksSrm/z/C/+lOQbMZ7YfDQYnJ02bc0wtg4EJD9qrFhuxFrf/ywNgwTboucobJqQg==
@@ -6621,10 +6682,15 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-leaflet-draw@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/leaflet-draw/-/leaflet-draw-1.0.4.tgz#45be92f378ed253e7202fdeda1fcc71885198d46"
-  integrity sha512-rsQ6saQO5ST5Aj6XRFylr5zvarWgzWnrg46zQ1MEOEIHsppdC/8hnN8qMoFvACsPvTioAuysya/TVtog15tyAQ==
+leaflet.pm@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/leaflet.pm/-/leaflet.pm-2.0.3.tgz#8fcadf67f0903d9aea105c5a59f5b77acd61a8bf"
+  integrity sha512-oWZ35upd/fQ41QIV443RkgqKkGAj2edcCA6YQiJ215d1AR0A4Gi+xmNPVDK0w8mjclKWiS7ZK1XEA4ski2hutQ==
+  dependencies:
+    "@turf/difference" "^6.0.2"
+    "@turf/intersect" "^6.1.3"
+    "@turf/kinks" "6.x"
+    lodash "^4.17.11"
 
 leaflet@^1.4.0:
   version "1.4.0"
@@ -6997,6 +7063,14 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+martinez-polygon-clipping@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/martinez-polygon-clipping/-/martinez-polygon-clipping-0.4.3.tgz#a3971ddf1da147104b5d0fbbf68f728bb62885c1"
+  integrity sha512-3ZNS0ksKhWTLsmCUkNf+/UimndZ5U2cVOS0I+IjiwF+M23E77TmeOZSmbRJbfCoQUog/vcQ42s3DXrhgOhgPqw==
+  dependencies:
+    splaytree "^0.1.4"
+    tinyqueue "^1.2.0"
 
 matcher@^1.0.0:
   version "1.1.1"
@@ -10475,6 +10549,11 @@ spdy@^4.0.0:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
+splaytree@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/splaytree/-/splaytree-0.1.4.tgz#fc35475248edcc29d4938c9b67e43c6b7e55a659"
+  integrity sha512-D50hKrjZgBzqD3FT2Ek53f2dcDLAQT8SSGrzj3vidNH5ISRgceeGVJ2dQIthKOuayqFXfFjXheHNo4bbt9LhRQ==
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -10925,6 +11004,11 @@ tiny-invariant@^1.0.3, tiny-invariant@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.4.tgz#346b5415fd93cb696b0c4e8a96697ff590f92463"
   integrity sha512-lMhRd/djQJ3MoaHEBrw8e2/uM4rs9YMNk0iOr8rHQ0QdbM7D4l0gFl3szKdeixrlyfm9Zqi4dxHCM2qVG8ND5g==
+
+tinyqueue@^1.2.0:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/tinyqueue/-/tinyqueue-1.2.3.tgz#b6a61de23060584da29f82362e45df1ec7353f3d"
+  integrity sha512-Qz9RgWuO9l8lT+Y9xvbzhPT2efIUIFd69N7eF7tJ9lnQl0iLj1M7peK7IoUGZL9DJHw9XftqLreccfxcQgYLxA==
 
 tmp@^0.0.33:
   version "0.0.33"

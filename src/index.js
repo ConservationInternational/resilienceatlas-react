@@ -10,6 +10,10 @@ import * as serviceWorker from './serviceWorker';
 
 import './views/styles/index.scss';
 
+import 'leaflet';
+import 'leaflet.pm';
+import 'leaflet.pm/dist/leaflet.pm.css';
+
 import { load as loadSite } from './state/modules/site';
 
 store.dispatch(loadSite());
