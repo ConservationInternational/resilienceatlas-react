@@ -1,7 +1,11 @@
+import { normalize } from 'normalizr';
+
 import { getRouterParam } from '@utilities';
 
-export const getPersistedLayers = () => {
-  const persistedLayers = getRouterParam('layers');
+import { persisted_layer } from '../../schema';
 
-  return persistedLayers ? JSON.parse(persistedLayers).map(l => l.id) : [];
+export const getPersistedLayers = () => {
+  const persistedLayers = getRouterParam('layers', JSON.parse);
+
+  return normalize(persistedLayers || {}, [persisted_layer]);
 };

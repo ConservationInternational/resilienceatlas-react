@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
+import WidgetBarCharts from './WidgetBarCharts';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
@@ -12,9 +13,11 @@ interface P {
 }
 
 export const AnalysisPanel: FC<P> = ({
+  // actions
   setDrawing,
   setGeojson,
   toggle,
+  // data
   drawing,
   geojson,
   iso,
@@ -173,7 +176,7 @@ export const AnalysisPanel: FC<P> = ({
               </Tabs>
             ) : (
               <>
-                <div className="analysis-content js-analysis-content" />
+                <WidgetBarCharts />
                 <div className="buttons">
                   <a className="btn -primary js-download-report">
                     Download PDF report

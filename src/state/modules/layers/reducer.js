@@ -8,15 +8,19 @@ import {
   SET_CHART_LIMIT,
 } from './actions';
 import { getPersistedLayers } from './utils';
+import { merge } from '@utilities';
+
+const persistedLayers = getPersistedLayers();
 
 const initialState = {
   byId: {
     /* [layerId]: { layer } */
+    ...persistedLayers.entities.persisted_layers,
   },
   all: [
     /* layerId */
   ],
-  actives: getPersistedLayers(),
+  actives: [...persistedLayers.result],
   loading: false,
   loaded: false,
   error: null,
@@ -31,7 +35,7 @@ export default createReducer(initialState)({
 
   [LOAD.SUCCESS]: (state, { payload }) => ({
     ...state,
-    byId: payload.entities.layers,
+    byId: merge(payload.entities.layers, state.byId),
     all: payload.result,
     loading: false,
     loaded: true,
