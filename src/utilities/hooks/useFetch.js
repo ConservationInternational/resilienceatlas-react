@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from 'react';
+import Axios from 'axios';
 import createReducer from '../../state/utils/createReducer';
 import { createApiAction, get } from '../../state/utils/api';
 
@@ -33,13 +34,13 @@ const fetchReducer = createReducer(initialState)({
   }),
 });
 
-export const useFetch = (url, body, deps = []) => {
+export const useFetch = (url, params, deps = []) => {
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   useEffect(() => {
     dispatch({ type: FETCH.REQUEST });
 
-    get(url, { data: body })
+    get(url, { params })
       .then(data => dispatch({ type: FETCH.SUCCESS, data }))
       .catch(error => dispatch({ type: FETCH.FAIL, error }));
   }, deps);
