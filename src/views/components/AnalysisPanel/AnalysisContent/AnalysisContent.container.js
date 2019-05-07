@@ -8,6 +8,7 @@ const mapStateToProps = state => {
 
   return {
     activeLayers: actives(state),
+    geojson: state.map.geojson,
   };
 };
 

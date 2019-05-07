@@ -9,3 +9,6 @@ export const getPersistedLayers = () => {
 
   return normalize(persistedLayers || {}, [persisted_layer]);
 };
+
+export const getActiveFromDefaults = defaults => g =>
+  typeof g.active === 'undefined' ? defaults.some(id => id === g.id) : g.active;

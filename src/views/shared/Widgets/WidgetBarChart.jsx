@@ -1,15 +1,16 @@
 import React, { FC, useCallback } from 'react';
+import { BarChart, XAxis, YAxis, CartesianGrid, Bar, Tooltip } from 'recharts';
+
 import { useWidget } from '@utilities/hooks';
+import { CustomTooltip } from './CustomTooltip';
 
 interface P {
   name: string;
   slug: string;
   query: string;
   meta_short: string;
-  hasLine: boolean;
   metadata: string;
-  xAxisTickFormatter: any;
-  verticalLabels: boolean;
+  geojson: L.GeoJSON;
 }
 
 export const WidgetBarChart: FC<P> = ({
@@ -18,30 +19,11 @@ export const WidgetBarChart: FC<P> = ({
   query,
   meta_short,
   metadata,
-  hasLine,
-  verticalLabels,
-  xAxisTickFormatter,
-  unit,
-  unitZ,
+  geojson,
 }) => {
-  const parseData = useCallback(
-    ({ rows }) =>
-      rows.map(value => ({
-        x: value.min,
-        y: value.count,
-        value: value.y,
-        color: value.y < 0 ? '#D8D8D8' : '#0089CC',
-        ...(hasLine
-          ? {
-              color: '#D8D8D8',
-              lineColor: '#0089CC',
-            }
-          : {}),
-      })),
-    [hasLine],
-  );
+  const parseData = useCallback(({ rows }) => rows, []);
   const { rootWidgetProps, data, noData } = useWidget(
-    { name, slug },
+    { slug, geojson },
     query,
     parseData,
   );
@@ -54,21 +36,37 @@ export const WidgetBarChart: FC<P> = ({
           <h3>NO DATA AVAILABLE</h3>
         </div>
       ) : (
-        // <Bars
-        //   id={`widget-${slug}-graph`}
-        //   className="widget-bar-chart graph bar-chart"
-        //   data={data}
-        //   barWidth={22}
-        //   barSeparation={13}
-        //   hover
-        //   interpolate="basis"
-        //   unit={unit}
-        //   unitZ={unitZ}
-        //   hasLine={hasLine}
-        //   xAxisTickFormatter={xAxisTickFormatter}
-        //   verticalLabels={verticalLabels}
-        // />
-        <div />
+        <BarChart
+          data={data}
+          width={400}
+          height={240}
+          margin={{ top: 40, bottom: 50 }}
+        >
+          <CartesianGrid vertical={false} strokeDasharray="2 2" />
+          <XAxis
+            dataKey="min"
+            interval={0}
+            tick={{
+              angle: -90,
+              fill: '#999',
+              dx: -6,
+            }}
+            tickFormatter={v => v.toFixed(3)}
+            textAnchor="end"
+            tickLine={false}
+          />
+          <YAxis
+            allowDataOverflow
+            axisLine={false}
+            tickLine={false}
+            tickCount={10}
+            tick={{ fill: '#999' }}
+            padding={{ right: 20 }}
+          />
+
+          <Tooltip content={CustomTooltip} />
+          <Bar dataKey="count" fill="#0089CC" />
+        </BarChart>
       )}
 
       {meta_short && (

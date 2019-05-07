@@ -3,9 +3,10 @@ import { WidgetBarChart } from '@shared/Widgets/WidgetBarChart';
 
 interface P {
   activeLayers: Object[];
+  geojson: L.GeoJSON;
 }
 
-export const BarChartsList: FC<P> = ({ activeLayers }) => {
+export const BarChartsList: FC<P> = ({ activeLayers, geojson }) => {
   const analyzable = activeLayers.filter(l => l.analysisSuitable);
 
   if (!activeLayers.length) {
@@ -24,11 +25,9 @@ export const BarChartsList: FC<P> = ({ activeLayers }) => {
           slug={l.slug}
           query={l.analysisQuery}
           name={l.name}
-          hasLine={false}
           meta_short={l.name}
           metadata={JSON.parse(l.info)}
-          // xAxisTickFormatter={d3.format('.3f')}
-          verticalLabels
+          geojson={geojson}
         />
       ))}
 

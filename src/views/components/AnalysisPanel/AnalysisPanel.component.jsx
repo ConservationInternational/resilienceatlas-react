@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
-import WidgetBarCharts from './AnalysisContent';
+import AnalysisContent from './AnalysisContent';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
@@ -176,7 +176,7 @@ export const AnalysisPanel: FC<P> = ({
               </Tabs>
             ) : (
               <>
-                <WidgetBarCharts />
+                <AnalysisContent />
                 <div className="buttons">
                   <a className="btn -primary js-download-report">
                     Download PDF report

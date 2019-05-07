@@ -3,13 +3,14 @@ import { sortBy } from '@utilities';
 
 import { denormalize } from 'normalizr';
 import {
+  getById as getGroupsById,
   getGroups,
   getCategories,
   getSubCategories,
   getSubGroups,
-  makeDefaultActives,
 } from '../layer_groups';
 import { layer } from '../../schema';
+import { getActiveFromDefaults } from './utils';
 
 const byDashboardOrder = sortBy('dashboard_order');
 const getOpacityText = v => parseInt(v * 100, 10);
@@ -35,6 +36,29 @@ export const getActives = () =>
       loaded ? denormalize(ids, [layer], { layers }) : [],
   );
 
+export const makeDefaultActives = () => {
+  const makeActiveLayers = getActives();
+
+  return createSelector(
+    [makeActiveLayers, getGroupsById],
+    (activeLayers, byId) => {
+      const result = new Set();
+      const collectIds = (id, entities) => {
+        result.add(id);
+
+        const { father } = entities[id] || {};
+        if (father) collectIds(father, entities);
+      };
+
+      if (activeLayers.length > 0) {
+        activeLayers.map(l => collectIds(l.group, byId));
+      }
+
+      return [...result];
+    },
+  );
+};
+
 export const getGrouped = () => {
   const getDefaultActives = makeDefaultActives();
 
@@ -55,6 +79,7 @@ export const getGrouped = () => {
       g_subgroups,
       g_defaultActive,
     ) => {
+      const isActive = getActiveFromDefaults(g_defaultActive);
       if (!groups.length || !g_categories.length) {
         console.info('There aren`t groups setted.');
         return groups;
@@ -66,7 +91,7 @@ export const getGrouped = () => {
 
         return {
           ...g,
-          active: g.active || g_defaultActive.some(id => id === g.id),
+          active: isActive(g),
           layers: groupLayers
             .sort(byDashboardOrder)
             .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
@@ -79,7 +104,7 @@ export const getGrouped = () => {
 
             return {
               ...c,
-              active: c.active || g_defaultActive.some(id => id === c.id),
+              active: isActive(c),
               layers: layers
                 .sort(byDashboardOrder)
                 .map(l => ({ ...l, opacity_text: getOpacityText(l.opacity) })),
@@ -90,7 +115,7 @@ export const getGrouped = () => {
 
                 return {
                   ...sc,
-                  active: sc.active || g_defaultActive.some(id => id === sc.id),
+                  active: isActive(sc),
                   layers: layers.sort(byDashboardOrder).map(l => ({
                     ...l,
                     opacity_text: getOpacityText(l.opacity),

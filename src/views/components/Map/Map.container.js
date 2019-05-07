@@ -7,12 +7,9 @@ import {
   setActives,
   getGrouped,
   getActives,
-} from '@modules/layers';
-import {
-  load as loadLayerGroups,
-  openBatch,
   makeDefaultActives,
-} from '@modules/layer_groups';
+} from '@modules/layers';
+import { load as loadLayerGroups, openBatch } from '@modules/layer_groups';
 
 import MapView from './Map.component';
 
@@ -25,6 +22,7 @@ const mapStateToProps = state => {
     site: state.site,
     layers: state.layers,
     drawing: state.map.drawing,
+    geojson: state.map.geojson,
     layer_groups: state.layer_groups,
     activeLayers: activeLayers(state),
     defaultActiveGroups: defaultActives(state),
