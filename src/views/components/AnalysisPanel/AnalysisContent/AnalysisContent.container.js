@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getActives } from '@modules/layers';
 
-import { WidgetBarCharts } from './WidgetBarCharts.component';
+import { BarChartsList } from './AnalysisContent.component';
 
 const mapStateToProps = state => {
   const actives = getActives();
@@ -11,4 +11,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(WidgetBarCharts);
+export default connect(mapStateToProps)(BarChartsList);

@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
-import WidgetBarCharts from './WidgetBarCharts';
+import WidgetBarCharts from './AnalysisContent';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
