@@ -91,7 +91,11 @@ const MapView = ({
               <Layer
                 key={l.id}
                 {...l}
-                decodeParams={{ chartLimit: l.chartLimit || 100 }}
+                decodeParams={
+                  l.decodeParams
+                    ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
+                    : null
+                }
               />
             ))}
           </LayerManager>
