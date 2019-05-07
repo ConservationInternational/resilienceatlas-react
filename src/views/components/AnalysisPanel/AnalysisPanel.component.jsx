@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
+import { useDownloadableReport } from '@utilities/hooks/downloadableReport';
 import AnalysisContent from './AnalysisContent';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
@@ -89,6 +90,7 @@ export const AnalysisPanel: FC<P> = ({
     reader.readAsText(file);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const downloadableReport = useDownloadableReport();
 
   return (
     <div className="m-sidebar analysis-panel" id="analysisPanelView">
@@ -178,7 +180,7 @@ export const AnalysisPanel: FC<P> = ({
               <>
                 <AnalysisContent />
                 <div className="buttons">
-                  <a className="btn -primary js-download-report">
+                  <a className="btn -primary" {...downloadableReport}>
                     Download PDF report
                   </a>
                   <button

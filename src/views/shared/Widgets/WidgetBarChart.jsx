@@ -4,6 +4,8 @@ import { BarChart, XAxis, YAxis, CartesianGrid, Bar, Tooltip } from 'recharts';
 import { useWidget } from '@utilities/hooks';
 import { CustomTooltip } from './CustomTooltip';
 
+const tickOptions = { fill: '#999', fontSize: 14 };
+
 interface P {
   name: string;
   slug: string;
@@ -48,8 +50,8 @@ export const WidgetBarChart: FC<P> = ({
               dataKey="min"
               interval={0}
               tick={{
+                ...tickOptions,
                 angle: -90,
-                fill: '#999',
                 dx: -6,
               }}
               tickFormatter={v => v.toFixed(3)}
@@ -61,7 +63,7 @@ export const WidgetBarChart: FC<P> = ({
               axisLine={false}
               tickLine={false}
               tickCount={10}
-              tick={{ fill: '#999' }}
+              tick={{ ...tickOptions }}
               padding={{ right: 20 }}
             />
 
