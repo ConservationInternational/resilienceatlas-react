@@ -45,11 +45,13 @@ export const useWidget = (
     [loading],
   );
 
-  const noData = !loaded || (!data || !data.length);
+  const noData = !data || !data.length;
 
   return {
-    data,
     rootWidgetProps,
+    loaded,
+    loading,
+    data,
     noData,
   };
 };

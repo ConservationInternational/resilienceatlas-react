@@ -22,7 +22,7 @@ export const WidgetBarChart: FC<P> = ({
   geojson,
 }) => {
   const parseData = useCallback(({ rows }) => rows, []);
-  const { rootWidgetProps, data, noData } = useWidget(
+  const { rootWidgetProps, loaded, data, noData } = useWidget(
     { slug, geojson },
     query,
     parseData,
@@ -31,43 +31,44 @@ export const WidgetBarChart: FC<P> = ({
   return (
     <div {...rootWidgetProps()}>
       <div className="name">{name}</div>
-      {noData ? (
-        <div className="widget-no-data">
-          <h3>NO DATA AVAILABLE</h3>
-        </div>
-      ) : (
-        <BarChart
-          data={data}
-          width={400}
-          height={240}
-          margin={{ top: 40, bottom: 50 }}
-        >
-          <CartesianGrid vertical={false} strokeDasharray="2 2" />
-          <XAxis
-            dataKey="min"
-            interval={0}
-            tick={{
-              angle: -90,
-              fill: '#999',
-              dx: -6,
-            }}
-            tickFormatter={v => v.toFixed(3)}
-            textAnchor="end"
-            tickLine={false}
-          />
-          <YAxis
-            allowDataOverflow
-            axisLine={false}
-            tickLine={false}
-            tickCount={10}
-            tick={{ fill: '#999' }}
-            padding={{ right: 20 }}
-          />
+      {loaded &&
+        (noData ? (
+          <div className="widget-no-data">
+            <h3>NO DATA AVAILABLE</h3>
+          </div>
+        ) : (
+          <BarChart
+            data={data}
+            width={400}
+            height={240}
+            margin={{ top: 40, bottom: 50 }}
+          >
+            <CartesianGrid vertical={false} strokeDasharray="2 2" />
+            <XAxis
+              dataKey="min"
+              interval={0}
+              tick={{
+                angle: -90,
+                fill: '#999',
+                dx: -6,
+              }}
+              tickFormatter={v => v.toFixed(3)}
+              textAnchor="end"
+              tickLine={false}
+            />
+            <YAxis
+              allowDataOverflow
+              axisLine={false}
+              tickLine={false}
+              tickCount={10}
+              tick={{ fill: '#999' }}
+              padding={{ right: 20 }}
+            />
 
-          <Tooltip content={CustomTooltip} />
-          <Bar dataKey="count" fill="#0089CC" />
-        </BarChart>
-      )}
+            <Tooltip content={CustomTooltip} />
+            <Bar dataKey="count" fill="#0089CC" />
+          </BarChart>
+        ))}
 
       {meta_short && (
         <div className="meta-short">
