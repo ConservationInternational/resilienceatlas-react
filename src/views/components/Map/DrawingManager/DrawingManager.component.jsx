@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 
-import { useRouterParams } from '@utilities';
+import { useRouterParams, usePrevious } from '@utilities';
 
 interface P {
   setGeojson: (value: L.GeoJSON) => void;
@@ -51,14 +51,21 @@ export const DrawingManager: FC<P> = ({
 
   // clear drawing if deleted from redux
   useEffect(() => {
-    if (!geojson) {
-      if (layer.current) {
-        layer.current.remove();
-      }
+    if (layer.current) {
+      // clear if geojson exists and was updated
+      layer.current.remove();
+      map.removeLayer(layer.current);
+    }
 
-      removeParam('geojson');
-    } else {
+    if (geojson) {
+      layer.current = L.geoJSON(geojson);
+      layer.current.addTo(map);
+
+      map.fitBounds(layer.current.getBounds());
+
       setParam('geojson', JSON.stringify(geojson));
+    } else {
+      removeParam('geojson');
     }
   }, [geojson]);
 

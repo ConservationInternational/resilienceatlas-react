@@ -9,6 +9,7 @@ import { BASEMAPS } from '@views/utils';
 
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
+import MapOffset from './MapOffset';
 
 const MapView = ({
   // actions
@@ -22,6 +23,8 @@ const MapView = ({
   defaultActiveGroups,
   location,
   site,
+  sidebarOpened,
+  analysisOpened,
   options,
   basemap = 'defaultmap',
   embed,
@@ -101,6 +104,8 @@ const MapView = ({
           </LayerManager>
 
           <DrawingManager map={map} />
+
+          <MapOffset map={map} />
 
           <MapControls customClass="c-map-controls">
             <Toolbar />

@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import { ThunkAction } from 'redux-thunk';
 
 export const PORT =
   process.env.NODE_ENV === 'production' || process.env.API_PROD === true
@@ -19,7 +20,13 @@ export const updateApi = config => {
   axiosInstance = axios.create({ ...defaultConfig, ...config });
 };
 
-export const createApiAction = (name = '') => {
+type ApiAction = {
+  REQUEST: String,
+  SUCCESS: String,
+  FAIL: String,
+};
+
+export const createApiAction = (name = ''): ApiAction => {
   const prefix = name.split('/').join(' / ');
 
   return {
@@ -29,17 +36,18 @@ export const createApiAction = (name = '') => {
   };
 };
 
-export const makeRequest = (method, url, options = {}) => {
-  const { data, params, options: overrides } = options;
+export const makeRequest = (
+  method: string,
+  url: string,
+  options: AxiosRequestConfig = {},
+) => {
   const headers = { ...axiosInstance.defaults.headers, ...options.headers };
 
   return axiosInstance({
+    ...options,
     method,
     url,
-    data,
-    params,
     headers,
-    ...overrides,
   }).catch(error =>
     error.response
       ? Promise.reject({
@@ -50,38 +58,65 @@ export const makeRequest = (method, url, options = {}) => {
   );
 };
 
-export const get = (url, config) => makeRequest('get', url, config);
-export const post = (url, config) => makeRequest('post', url, config);
-export const put = (url, config) => makeRequest('put', url, config);
-export const patch = (url, config) => makeRequest('patch', url, config);
-export const del = (url, config) => makeRequest('delete', url, config);
-export const requestHandlers = { get, post, put, patch, del };
+type Handler = (url: String, config: AxiosRequestConfig) => Promise<any>;
+type Handlers = {
+  get: Handler,
+  post: Handler,
+  put: Handler,
+  patch: Handler,
+  del: Handler,
+};
+
+export const get: Handler = (url, config) => makeRequest('get', url, config);
+export const post: Handler = (url, config) => makeRequest('post', url, config);
+export const put: Handler = (url, config) => makeRequest('put', url, config);
+export const patch: Handler = (url, config) =>
+  makeRequest('patch', url, config);
+export const del: Handler = (url, config) => makeRequest('delete', url, config);
+export const requestHandlers: Handlers = { get, post, put, patch, del };
+
+type Callback = (requestHandlers: Handlers) => Promise<any>;
+
+type ApiMeta = {
+  schema?: any,
+};
 
 /**
  * Redux API helper for request -> success/fail flow
- * @param apiAction - can be created using `createApiAction`
- * @param cb - callback which executes requests
- * @returns {function(*, *)}
+ * @param {ApiAction} apiAction - can be created using `createApiAction`
+ * @param {Callback} cb - callback which executes requests
+ *
+ * @returns {ThunkAction} thunk, which executes provided promise and binds three dispatches for request, success and fail phase
  */
-export default (apiAction, cb, meta) => dispatch => {
-  dispatch({ type: apiAction.REQUEST, meta });
+export default function api(
+  apiAction: ApiAction,
+  cb: Callback,
+  meta: ApiMeta,
+): ThunkAction {
+  return dispatch => {
+    dispatch({ type: apiAction.REQUEST, meta });
 
-  return cb(requestHandlers)
-    .then(({ data, status, headers }) => {
-      dispatch({
-        type: apiAction.SUCCESS,
-        payload: { ...data, status, headers },
-        meta,
-      });
-    })
-    .catch(error => {
-      if (error.error) {
+    return cb(requestHandlers)
+      .then(({ data, status, headers }) => {
         dispatch({
-          type: apiAction.FAIL,
+          type: apiAction.SUCCESS,
+          payload: {
+            ...(data.data ? data : { data }),
+            status,
+            headers,
+          },
           meta,
         });
-      } else {
-        console.error(error);
-      }
-    });
-};
+      })
+      .catch(error => {
+        if (error.error) {
+          dispatch({
+            type: apiAction.FAIL,
+            meta,
+          });
+        } else {
+          console.error(error);
+        }
+      });
+  };
+}

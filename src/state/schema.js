@@ -154,3 +154,9 @@ export const source = new schema.Entity(
     }),
   },
 );
+
+export const country = new schema.Entity(
+  'countries',
+  {},
+  { idAttribute: 'iso' },
+);

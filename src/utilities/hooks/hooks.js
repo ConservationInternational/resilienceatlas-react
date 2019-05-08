@@ -16,7 +16,11 @@ export const useInput = (name, initialValue) => {
 
   useEffect(() => setValue(initialValue), [initialValue]);
 
-  return { name, value, onChange };
+  const input = { name, value, onChange, setValue };
+
+  Object.defineProperty(input, 'setValue', { enumerable: false });
+
+  return input;
 };
 
 /**

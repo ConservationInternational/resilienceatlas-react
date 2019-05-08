@@ -1,5 +1,5 @@
-import { useReducer, useEffect } from 'react';
-import { AxiosRequestConfig } from 'axios';
+import { useReducer, useEffect, useRef } from 'react';
+import axios, { AxiosRequestConfig } from 'axios';
 import createReducer from '../../state/utils/createReducer';
 import { createApiAction, get } from '../../state/utils/api';
 
@@ -48,12 +48,13 @@ export const useFetch = (
   deps = [],
   parseData: Function,
 ): FetchResult => {
+  const source = useRef(axios.CancelToken.source());
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   useEffect(() => {
     dispatch({ type: FETCH.REQUEST });
 
-    get(url, config)
+    get(url, { ...config, cancelToken: source.current.token })
       .then(({ data }) =>
         dispatch({
           type: FETCH.SUCCESS,
@@ -61,6 +62,14 @@ export const useFetch = (
         }),
       )
       .catch(error => dispatch({ type: FETCH.FAIL, error }));
+
+    return () => {
+      if (state.loading) {
+        source.current.cancel(
+          'Operation canceled because tagret component was unmounted.',
+        );
+      }
+    };
   }, deps);
 
   return [state.data, state.loading, state.loaded, state.error];

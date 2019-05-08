@@ -18,12 +18,17 @@ const TABS = {
 
 interface P extends RouteComponentProps {
   geojson: L.GeoJSON;
+  opened: Boolean;
+  analysisOpened: Boolean;
 }
 
-const Sidebar: FC<P> = ({ location: { search }, geojson }) => {
-  const [opened, toggleOpen] = useToggle(true);
-  const [analysisOpened, toggleAnalysis] = useToggle(!!geojson);
-
+const Sidebar: FC<P> = ({
+  location: { search },
+  opened,
+  analysisOpened,
+  toggleOpen,
+  toggleAnalysis,
+}) => {
   const { tab = TABS.LAYERS } = qs.parse(search, {
     ignoreQueryPrefix: true,
   });

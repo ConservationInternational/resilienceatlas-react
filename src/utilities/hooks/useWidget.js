@@ -27,9 +27,7 @@ export const useWidget = (
   }, [geojson]);
   const [data, loading, loaded, error] = useFetch(
     sqlApi,
-    {
-      params: { q },
-    },
+    { params: { q } },
     [],
     parseData,
   );

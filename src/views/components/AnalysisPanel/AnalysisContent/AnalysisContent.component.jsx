@@ -10,11 +10,11 @@ export const BarChartsList: FC<P> = ({ activeLayers, geojson }) => {
   const analyzable = activeLayers.filter(l => l.analysisSuitable);
 
   if (!activeLayers.length) {
-    return 'Please toggle some layers on to analyze them.';
+    return <center>Please toggle some layers on to analyze them.</center>;
   }
 
   if (!analyzable.length) {
-    return 'None of the active layers can be analyzed.';
+    return <center>None of the active layers can be analyzed.</center>;
   }
 
   return (

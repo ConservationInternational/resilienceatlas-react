@@ -12,6 +12,8 @@ import './views/styles/index.scss';
 
 import 'leaflet';
 import 'leaflet.pm';
+import 'leaflet-active-area';
+
 import 'leaflet.pm/dist/leaflet.pm.css';
 
 import { load as loadSite } from './state/modules/site';

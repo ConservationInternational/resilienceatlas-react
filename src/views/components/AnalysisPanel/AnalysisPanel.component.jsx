@@ -1,10 +1,11 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
 import { useDownloadableReport } from '@utilities/hooks/downloadableReport';
 import AnalysisContent from './AnalysisContent';
+import { useSearch } from '@utilities';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
@@ -15,14 +16,20 @@ interface P {
 
 export const AnalysisPanel: FC<P> = ({
   // actions
+  loadCountries,
   setDrawing,
   setGeojson,
   toggle,
   // data
   drawing,
+  countries,
   geojson,
   iso,
 }) => {
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
   const [tab, setTab] = useState(geojson && !iso ? 'shape' : 'region');
   const switchTab = useCallback(
     e => {
@@ -90,6 +97,10 @@ export const AnalysisPanel: FC<P> = ({
     reader.readAsText(file);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { searchInput, result, noResults } = useSearch('search', countries, {
+    valueKey: 'name',
+    onSelect: ({ bbox }) => setGeojson(JSON.parse(bbox)),
+  });
   const downloadableReport = useDownloadableReport();
 
   return (
@@ -140,8 +151,42 @@ export const AnalysisPanel: FC<P> = ({
                       className="searchAnalysis"
                       placeholder="Type country"
                       type="search"
+                      {...searchInput}
                     />
-                    <div className="analysisSearchContent search-box" />
+                    <div className="analysisSearchContent search-box visible">
+                      <div className="search-content searching">
+                        <div className="search-suggestions">
+                          <ul>
+                            {result.map((item, key) => {
+                              const {
+                                label,
+                                name,
+                                iso,
+                                selected,
+                                optionProps,
+                              } = item;
+
+                              const isSelected =
+                                selected % result.length === key;
+
+                              return (
+                                <li
+                                  key={iso}
+                                  className={cx('search-area', {
+                                    selected: isSelected,
+                                  })}
+                                  title={name}
+                                  {...optionProps}
+                                >
+                                  <span className="name">{label}</span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </div>
+                      {noResults && <div>No results</div>}
+                    </div>
                   </div>
                 </Tabs.Pane>
                 <Tabs.Pane name="shape">
