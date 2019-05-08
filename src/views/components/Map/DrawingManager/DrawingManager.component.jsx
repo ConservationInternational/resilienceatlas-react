@@ -20,12 +20,6 @@ export const DrawingManager: FC<P> = ({
   const layer = useRef(null);
 
   useEffect(() => {
-    // persist from URL
-    if (geojson) {
-      layer.current = L.geoJSON(geojson);
-      layer.current.addTo(map);
-    }
-
     // bind pm events
     map.on('pm:drawstart', () => {
       if (layer.current) {
@@ -59,6 +53,7 @@ export const DrawingManager: FC<P> = ({
 
     if (geojson) {
       layer.current = L.geoJSON(geojson);
+      layer.current.setZIndex(2000);
       layer.current.addTo(map);
 
       map.fitBounds(layer.current.getBounds());
