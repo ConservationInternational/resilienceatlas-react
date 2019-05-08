@@ -75,6 +75,7 @@ export const layer = new schema.Entity(
         gee: {
           ...layerConfig,
           decodeFunction: decoders[layerConfig.decoder],
+          canvas: true,
         },
       };
 
