@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useRef } from 'react';
 import axios, { AxiosRequestConfig } from 'axios';
 import createReducer from '../../state/utils/createReducer';
-import { createApiAction, get } from '../../state/utils/api';
+import { createApiAction } from '../../state/utils/api';
 
 type FetchResult = [any, boolean, boolean, any];
 
@@ -36,17 +36,16 @@ const fetchReducer = createReducer(initialState)({
   }),
 });
 /**
- * @param  {string} url
  * @param  {AxiosRequestConfig} config
  * @param  {array} deps=[] React useEffect dependencies to execute fetch on
+ * @param  {Function} ParseData data parser function
  *
  * @returns {array} [data, loading, lodaed, error]
  */
-export const useFetch = (
-  url: string,
+export const useAxios = (
   config: AxiosRequestConfig,
-  deps = [],
-  parseData: Function,
+  deps?: any[],
+  parseData?: Function,
 ): FetchResult => {
   const source = useRef(axios.CancelToken.source());
   const [state, dispatch] = useReducer(fetchReducer, initialState);
@@ -54,7 +53,7 @@ export const useFetch = (
   useEffect(() => {
     dispatch({ type: FETCH.REQUEST });
 
-    get(url, { ...config, cancelToken: source.current.token })
+    axios(config)
       .then(({ data }) =>
         dispatch({
           type: FETCH.SUCCESS,

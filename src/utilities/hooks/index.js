@@ -1,4 +1,4 @@
-export { useFetch } from './useFetch';
+export { useAxios } from './useAxios';
 export { useWidget } from './useWidget';
 export { useSearch } from './useSearch';
 export { usePrevious } from './usePrevious';

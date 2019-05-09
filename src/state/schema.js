@@ -106,6 +106,7 @@ export const layer = new schema.Entity(
         attributions: source ? parseInt(source.id, 10) : null,
         analysisSuitable: l.attributes.analysis_suitable,
         analysisQuery: l.attributes.analysis_query,
+        analysisBody: l.attributes.analysis_body,
         layerProvider: l.attributes.layer_provider,
         // Layer manager params
         provider: provider[l.attributes.layer_provider],
