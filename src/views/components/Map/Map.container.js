@@ -15,7 +15,6 @@ import MapView from './Map.component';
 
 const makeMapStateToProps = () => {
   const groupedLayers = getGrouped();
-  const activeLayers = getActives();
   const defaultActives = makeDefaultActives();
 
   const mapStateToProps = state => ({
@@ -24,7 +23,7 @@ const makeMapStateToProps = () => {
     drawing: state.map.drawing,
     geojson: state.map.geojson,
     layer_groups: state.layer_groups,
-    activeLayers: activeLayers(state),
+    activeLayers: getActives(state),
     defaultActiveGroups: defaultActives(state),
     grouped: groupedLayers(state),
   });

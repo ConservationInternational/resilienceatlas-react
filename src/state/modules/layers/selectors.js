@@ -29,18 +29,15 @@ export const getPublished = createSelector(
     denormalize(all, [layer], { layers }).filter(i => i.published),
 );
 
-export const getActives = () =>
+export const getActives = createSelector(
+  [getActiveIds, getById, getLoaded],
+  (ids, layers, loaded) =>
+    loaded ? denormalize(ids, [layer], { layers }) : [],
+);
+
+export const makeDefaultActives = () =>
   createSelector(
-    [getActiveIds, getById, getLoaded],
-    (ids, layers, loaded) =>
-      loaded ? denormalize(ids, [layer], { layers }) : [],
-  );
-
-export const makeDefaultActives = () => {
-  const makeActiveLayers = getActives();
-
-  return createSelector(
-    [makeActiveLayers, getGroupsById],
+    [getActives, getGroupsById],
     (activeLayers, byId) => {
       const result = new Set();
       const collectIds = (id, entities) => {
@@ -57,7 +54,6 @@ export const makeDefaultActives = () => {
       return [...result];
     },
   );
-};
 
 export const getGrouped = () => {
   const getDefaultActives = makeDefaultActives();

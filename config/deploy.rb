@@ -70,7 +70,12 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    invoke 'pm2:restart'
+    on roles(:app) do
+      within release_path do
+        invoke 'pm2:delete'
+        invoke 'pm2:start'
+      end
+    end
   end
 
   after :updated, :build_app

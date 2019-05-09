@@ -8,14 +8,10 @@ import {
 } from '@modules/layers';
 import Legend from './Legend.component';
 
-const mapStateToProps = state => {
-  const activeLayers = getActives();
-
-  return {
-    activeLayers: activeLayers(state),
-    loading: state.layers.actives.length > 0 && state.layers.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activeLayers: getActives(state),
+  loading: state.layers.actives.length > 0 && state.layers.loading,
+});
 
 const mapDispatchToProps = {
   reorder,
