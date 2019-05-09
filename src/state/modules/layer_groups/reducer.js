@@ -1,5 +1,5 @@
 import { createReducer } from '../../utils';
-import { LOAD, OPEN_BATCH } from './actions';
+import { LOAD, OPEN_BATCH, TOGGLE } from './actions';
 
 const initialState = {
   byId: {
@@ -32,6 +32,21 @@ export default createReducer(initialState)({
     loading: false,
     error: true,
   }),
+
+  [TOGGLE]: (state, { id }) => {
+    const group = state.byId[id];
+
+    return {
+      ...state,
+      byId: {
+        ...state.byId,
+        [id]: {
+          ...group,
+          active: !group.active,
+        },
+      },
+    };
+  },
 
   [OPEN_BATCH]: (state, { ids }) => ({
     ...state,

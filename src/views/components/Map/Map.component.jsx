@@ -1,43 +1,21 @@
 import React, { useCallback, useEffect } from 'react';
 import qs from 'qs';
+import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
-import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 
 import { setRouterParam } from '@utilities';
-import Toolbar from './Toolbar';
+import { BASEMAPS } from '@views/utils';
 
-const basemaps = {
-  defaultmap: {
-    url:
-      'https://api.mapbox.com/styles/v1/cigrp/cixkh6jb000582smx8pfdeu23/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-    labelsUrl:
-      'https://api.mapbox.com/styles/v1/cigrp/ciztvip04005h2sup0z42fqip/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-  },
-  satellite: {
-    url:
-      'https://api.mapbox.com/styles/v1/cigrp/cizsz6pv700422ro73xdhzi1g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-    labelsUrl:
-      'https://api.mapbox.com/styles/v1/cigrp/cixteb1kq00112snx1acem71e/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-  },
-  topographic: {
-    url:
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
-    labelsUrl:
-      'https://api.mapbox.com/styles/v1/cigrp/ciztvip04005h2sup0z42fqip/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-  },
-  dark: {
-    url:
-      'https://api.mapbox.com/styles/v1/cigrp/cixtef50400162rla1jtwtoyi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-    labelsUrl:
-      'https://api.mapbox.com/styles/v1/cigrp/cixtein9t001j2rnr4b9uzugr/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2lncnAiLCJhIjoiYTQ5YzVmYTk4YzM0ZWM4OTU1ZjQxMWI5ZDNiNTQ5M2IifQ.SBgo9jJftBDx4c5gX4wm3g',
-  },
-};
+import Toolbar from './Toolbar';
+import DrawingManager from './DrawingManager';
+import MapOffset from './MapOffset';
 
 const MapView = ({
   // actions
   loadLayers,
   loadLayerGroups,
+  openBatch,
   // data
   layers: { loaded: layersLoaded },
   layer_groups: { loaded: layerGroupsLoaded },
@@ -45,11 +23,11 @@ const MapView = ({
   defaultActiveGroups,
   location,
   site,
+  sidebarOpened,
+  analysisOpened,
   options,
   basemap = 'defaultmap',
   embed,
-  openBatch,
-  journeyMap,
 }) => {
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -91,13 +69,14 @@ const MapView = ({
     <Maps
       customClass="m-map"
       basemap={{
-        url: basemaps[basemap].url,
+        url: BASEMAPS[basemap].url,
       }}
       mapOptions={{
         ...options.map,
         zoom: query.zoom || 5,
         center: query.center ? qs.parse(query.center) : getCenter(),
         scrollWheelZoom: !embed,
+        drawControl: true,
       }}
       events={{
         click: () => {},
@@ -123,6 +102,10 @@ const MapView = ({
               />
             ))}
           </LayerManager>
+
+          <DrawingManager map={map} />
+
+          <MapOffset map={map} />
 
           <MapControls customClass="c-map-controls">
             <Toolbar />

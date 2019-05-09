@@ -124,6 +124,8 @@ export const layer = new schema.Entity(
   },
 );
 
+export const persisted_layer = new schema.Entity('persisted_layers');
+
 export const layer_group = new schema.Entity(
   'layer_groups',
   {},
@@ -152,4 +154,10 @@ export const source = new schema.Entity(
       ...s.attributes,
     }),
   },
+);
+
+export const country = new schema.Entity(
+  'countries',
+  {},
+  { idAttribute: 'iso' },
 );

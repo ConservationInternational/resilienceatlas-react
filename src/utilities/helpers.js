@@ -1,63 +1,8 @@
-import qs from 'qs';
-import history from '../history';
-
-/**
- * @param  {string} param name of query param you want to set
- * @param  {string} value value to set
- *
- * @returns  {void}
- */
-export const setRouterParam = (param, value) => {
-  const {
-    location: { pathname, search },
-  } = history;
-
-  const params = new URLSearchParams(search.slice(1));
-  params.set(param, value);
-
-  history.replace({
-    pathname,
-    search: params.toString(),
-  });
-};
-
-export const getRouterParam = param => {
-  const {
-    location: { search },
-  } = history;
-
-  const params = new URLSearchParams(search.slice(1));
-  return params.get(param);
-};
-
-export const useRouterParams = () => {
-  const {
-    location: { pathname, search },
-  } = history;
-
-  const params = new URLSearchParams(search.slice(1));
-
-  const getParam = (param, parser) => {
-    const result = params.get(param);
-
-    if (parser) return parser(result);
-    return result;
-  };
-
-  const setParam = (param, value) => {
-    params.set(param, value);
-
-    history.replace({
-      pathname,
-      search: params.toString(),
-    });
-  };
-
-  return { getParam, setParam };
-};
 /**
  * @param  {string} key key to sort on
  * @param  {boolean} desc=false to sort in descending order
+ *
+ * @returns {function} to be inserted in .sort method
  */
 export const sortBy = (key, desc = false) => (a, b) => {
   if (a[key] > b[key]) return desc ? -1 : 1;
@@ -83,3 +28,29 @@ export const clickable = onClick => ({
  * @returns  {array} array of only unique values
  */
 export const uniq = array => Array.from(new Set(array));
+
+/**
+ * Deep merges two objets.
+ * @param  {Object} object destination object
+ * @param  {Object} source source obejct
+ *
+ * @returns {Object} new object
+ */
+export const merge = (object, source) => {
+  if (object === source) return object;
+
+  const newValue = {
+    ...object,
+    ...source,
+  };
+
+  Object.entries(source).forEach(([key, value]) => {
+    if (object[key] && typeof object[key] === 'object') {
+      newValue[key] = merge(object[key], value);
+    } else {
+      newValue[key] = value;
+    }
+  });
+
+  return newValue;
+};

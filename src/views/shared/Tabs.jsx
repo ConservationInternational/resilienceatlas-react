@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import * as CustomTypes from '@utilities/propTypes';
 
 export const Pane = ({ children, className, name, activeTab, ...props }) => (
   <div className={cx(className, { active: activeTab === name })} {...props}>
@@ -21,39 +22,29 @@ Pane.defaultProps = {
   activeTab: '',
 };
 
-const Tabs = ({ children, activeTab, ...props }) => (
+const Tabs = ({ children, activeTab, renderActiveOnly, ...props }) => (
   <div {...props}>
-    {React.Children.map(children, Tab =>
-      React.cloneElement(Tab, { key: Tab.props.name, activeTab }),
-    )}
+    {React.Children.map(children, Tab => {
+      const key = Tab.props.name;
+
+      if (!renderActiveOnly || key === activeTab) {
+        return React.cloneElement(Tab, { key, activeTab });
+      }
+
+      return null;
+    })}
   </div>
 );
 
 Tabs.propTypes = {
   activeTab: PropTypes.string.isRequired,
-  children(props, propName, componentName) {
-    const prop = props[propName];
-
-    let error = null;
-    if (React.Children.count(prop) === 0) {
-      error = new Error(
-        `\`${componentName}\` should have at least one \`Tab.Pane\` inside.`,
-      );
-    }
-
-    React.Children.forEach(prop, child => {
-      if (child.type !== Pane) {
-        error = new Error(
-          `\`${componentName}\` children should be of type \`Pane\`.`,
-        );
-      }
-    });
-    return error;
-  },
+  renderActiveOnly: PropTypes.bool,
+  children: CustomTypes.componentType(Pane).isRequired,
 };
 
 Tabs.defaultProps = {
-  children: null,
+  // children: null,
+  renderActiveOnly: false,
 };
 
 Tabs.Pane = Pane;

@@ -31,9 +31,15 @@ const Layer = ({
 
   const toggleLayer = useCallback(() => toggle(id), [id]);
 
-  useDebounce(() => setOpacity(id, validateOpacity(slider.value / 100)), 300, [
-    slider.value,
-  ]);
+  useDebounce(
+    () => {
+      if (slider.value !== opacity_text) {
+        setOpacity(id, validateOpacity(slider.value / 100));
+      }
+    },
+    300,
+    [slider.value],
+  );
 
   return (
     <li
