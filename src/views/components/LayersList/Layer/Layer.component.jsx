@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import cx from 'classnames';
 
+import InfoWindow from '@components/InfoWindow';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 
 const validateOpacity = value => {
@@ -40,6 +41,11 @@ const Layer = ({
     300,
     [slider.value],
   );
+
+  const showInfo = useCallback((e: MouseEvent) => {
+    const { name, info } = e.currentTarget.dataset;
+    InfoWindow.show(name, JSON.parse(info));
+  }, []);
 
   return (
     <li
@@ -113,6 +119,7 @@ const Layer = ({
           className="btn-info icon-container"
           data-info={info}
           data-name={name}
+          onClick={showInfo}
         >
           <svg className="icon icon-info">
             <use xlinkHref="#icon-info" />

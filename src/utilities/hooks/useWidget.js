@@ -21,7 +21,7 @@ export const useWidget = (
   const q = useMemo(() => {
     const geometry = geojson.features
       ? geojson.features[0].geometry
-      : geojson.geometry;
+      : geojson.geometry || geojson;
 
     return query.replace(/{{geometry}}/g, JSON.stringify(geometry));
   }, [geojson]);

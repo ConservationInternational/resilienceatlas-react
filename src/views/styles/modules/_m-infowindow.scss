@@ -6,11 +6,12 @@
   right: 0;
   left: 0;
 
-  h1, h2 {
+  h1,
+  h2 {
     font-weight: 400;
     font-size: 36px;
     margin-top: 0;
-    line-height: .9em;
+    line-height: 0.9em;
   }
 
   h4 {
@@ -64,7 +65,7 @@
   z-index: 10;
 
   background: #000;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .modal-wrapper {
@@ -78,7 +79,7 @@
   height: 400px;
   max-width: 90%;
   background-color: $bg-color-1;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0, .2);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .modal-container {
@@ -86,7 +87,7 @@
   padding-right: 10px; //Margen para el scroll de windows
   padding: rem(50px);
   overflow-y: scroll;
-  // @extend %clear-scroll-bars;
+  @extend %clear-scroll-bars;
   background-color: #fff;
 }
 
@@ -102,7 +103,7 @@
   color: $font-color-1;
   font-size: 18px;
   font-weight: 700;
-  line-height: .5em;
+  line-height: 0.5em;
 }
 
 //TODO responsive
