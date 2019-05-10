@@ -43,7 +43,7 @@ export const useSearch = (
 
               selected: selectedIndex,
               optionProps: {
-                ...clickable(onSelect),
+                ...clickable(onSelect.bind(this, data[selectedIndex])),
               },
             };
           }
