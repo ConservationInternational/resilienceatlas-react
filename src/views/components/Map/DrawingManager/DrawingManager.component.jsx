@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef } from 'react';
+import qs from 'qs';
 
-import { useRouterParams, usePrevious } from '@utilities';
+import { useRouterParams } from '@utilities';
 
 interface P {
   setGeojson: (value: L.GeoJSON) => void;
@@ -16,7 +17,7 @@ export const DrawingManager: FC<P> = ({
   drawing,
   geojson,
 }) => {
-  const { setParam, removeParam } = useRouterParams();
+  const { getParam, setParam, removeParam } = useRouterParams();
   const layer = useRef(null);
 
   useEffect(() => {
@@ -56,7 +57,12 @@ export const DrawingManager: FC<P> = ({
       layer.current.setZIndex(2000);
       layer.current.addTo(map);
 
-      map.fitBounds(layer.current.getBounds(), { animate: true });
+      const layerBounds = layer.current.getBounds();
+      map.fitBounds(layerBounds, { animate: true });
+
+      if (!getParam('center')) {
+        setParam('center', qs.stringify(layerBounds.getCenter()));
+      }
 
       setParam('geojson', JSON.stringify(geojson));
     } else {
