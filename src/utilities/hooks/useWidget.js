@@ -1,6 +1,8 @@
 import cx from 'classnames';
+import { AxiosRequestConfig } from 'axios';
 import { useMemo, useCallback } from 'react';
-import { useFetch } from './useFetch';
+import { useAxios } from './useAxios';
+import { swapLatLng } from '../helpers';
 
 const sqlApi = 'https://cdb-cdn.resilienceatlas.org/user/ra/api/v2/sql';
 
@@ -15,22 +17,42 @@ interface WidgetOptions {
  */
 export const useWidget = (
   { slug, geojson }: WidgetOptions,
-  query,
-  parseData,
+  {
+    analysisQuery,
+    analysisBody,
+  }: { analysisQuery: string, analysisBody: string },
+  parseData: Function,
 ) => {
-  const q = useMemo(() => {
+  const query = useMemo((): AxiosRequestConfig => {
+    if (analysisBody) {
+      const { assetId } = JSON.parse(analysisBody);
+
+      return {
+        method: 'post',
+        url: `/${analysisQuery}`,
+        baseURL: 'https://cors-anywhere.herokuapp.com',
+        data: {
+          assetId,
+          geometry: swapLatLng(geojson),
+        },
+      };
+    }
+
     const geometry = geojson.features
       ? geojson.features[0].geometry
-      : geojson.geometry;
+      : geojson.geometry || geojson;
 
-    return query.replace(/{{geometry}}/g, JSON.stringify(geometry));
+    const q = analysisQuery.replace(/{{geometry}}/g, JSON.stringify(geometry));
+
+    return {
+      method: 'get',
+      url: sqlApi,
+      params: {
+        q,
+      },
+    };
   }, [geojson]);
-  const [data, loading, loaded, error] = useFetch(
-    sqlApi,
-    { params: { q } },
-    [],
-    parseData,
-  );
+  const [data, loading, loaded, error] = useAxios(query, [], parseData);
 
   const rootWidgetProps = useCallback(
     () => ({

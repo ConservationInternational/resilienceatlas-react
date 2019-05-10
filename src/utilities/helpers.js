@@ -1,3 +1,5 @@
+import L from 'leaflet';
+
 /**
  * @param  {string} key key to sort on
  * @param  {boolean} desc=false to sort in descending order
@@ -54,3 +56,8 @@ export const merge = (object, source) => {
 
   return newValue;
 };
+
+export const swapLatLng = geojson =>
+  L.geoJSON(geojson, {
+    coordsToLatLng: coords => new L.LatLng(coords[0], coords[1], coords[2]),
+  }).toGeoJSON();

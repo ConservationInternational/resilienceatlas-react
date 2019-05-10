@@ -23,10 +23,12 @@ export const BarChartsList: FC<P> = ({ activeLayers, geojson }) => {
         <WidgetBarChart
           key={l.slug}
           slug={l.slug}
-          query={l.analysisQuery}
+          type={l.type}
+          analysisQuery={l.analysisQuery}
+          analysisBody={l.analysisBody}
           name={l.name}
           meta_short={l.name}
-          metadata={JSON.parse(l.info)}
+          metadata={JSON.parse(l.info || 'null')}
           geojson={geojson}
         />
       ))}

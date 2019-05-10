@@ -18,7 +18,8 @@ interface P {
 export const WidgetBarChart: FC<P> = ({
   name,
   slug,
-  query,
+  analysisQuery,
+  analysisBody,
   meta_short,
   metadata,
   geojson,
@@ -26,7 +27,7 @@ export const WidgetBarChart: FC<P> = ({
   const parseData = useCallback(({ rows }) => rows, []);
   const { rootWidgetProps, loaded, data, noData } = useWidget(
     { slug, geojson },
-    query,
+    { analysisQuery, analysisBody },
     parseData,
   );
 
