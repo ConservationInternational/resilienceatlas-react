@@ -1,6 +1,8 @@
 import React, { FC, useCallback } from 'react';
 import { BarChart, XAxis, YAxis, CartesianGrid, Bar, Tooltip } from 'recharts';
 
+import InfoWindow from '@components/InfoWindow';
+
 import { useWidget } from '@utilities/hooks';
 import { CustomTooltip } from './CustomTooltip';
 
@@ -81,6 +83,7 @@ export const WidgetBarChart: FC<P> = ({
             className="btn-analysis-info"
             data-info={metadata}
             data-name={name}
+            onClick={() => InfoWindow.show(name, metadata)}
           >
             <svg className="icon icon-info">
               <use xlinkHref="#icon-info" />
