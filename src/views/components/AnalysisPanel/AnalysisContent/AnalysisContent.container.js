@@ -5,6 +5,7 @@ import { BarChartsList } from './AnalysisContent.component';
 
 const mapStateToProps = state => ({
   activeLayers: getActives(state),
+  layers: state.layers,
   geojson: state.map.geojson,
 });
 

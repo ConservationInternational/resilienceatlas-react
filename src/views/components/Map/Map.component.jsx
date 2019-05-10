@@ -23,8 +23,7 @@ const MapView = ({
   defaultActiveGroups,
   location,
   site,
-  sidebarOpened,
-  analysisOpened,
+  page,
   options,
   basemap = 'defaultmap',
   embed,
@@ -83,8 +82,9 @@ const MapView = ({
         zoomend: (e, map) => {
           setRouterParam('zoom', map.getZoom());
         },
-        dragend: (e, map) =>
-          setRouterParam('center', qs.stringify(map.getCenter())),
+        dragend: (e, map) => {
+          setRouterParam('center', qs.stringify(map.getCenter()));
+        },
       }}
     >
       {map => (
@@ -105,12 +105,14 @@ const MapView = ({
 
           <DrawingManager map={map} />
 
-          <MapOffset map={map} />
+          {page !== 'report' && <MapOffset map={map} />}
 
-          <MapControls customClass="c-map-controls">
-            <Toolbar />
-            <ZoomControl map={map} />
-          </MapControls>
+          {page !== 'report' && (
+            <MapControls customClass="c-map-controls">
+              <Toolbar />
+              <ZoomControl map={map} />
+            </MapControls>
+          )}
         </>
       )}
     </Maps>

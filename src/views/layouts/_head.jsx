@@ -8,6 +8,7 @@ const bare = false;
 
 const Head = ({
   site: { color, subdomain, header_theme, header_color, logo_url },
+  page,
 }) => (
   <Helmet defaultTitle="Resilience Atlas" titleTemplate="Resilience Atlas | %s">
     <style type="text/css">{`
@@ -23,7 +24,7 @@ const Head = ({
         `is-${header_theme}`,
         `is-${bare ? '' : 'not-'}bare`,
         `${subdomain === 'atlas' ? 'has' : 'no'}-sidebar-logo`,
-        { 'is-indicators': !!subdomain },
+        { 'is-indicators': !!subdomain, [`is-${page}-page`]: page },
       )}
     />
   </Helmet>
