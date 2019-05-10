@@ -21,7 +21,7 @@
     "axios": "^0.18.0",
     "customize-cra": "^0.2.12",
     "foundation-sites": "^6.5.3",
-    "layer-manager": "https://github.com/Vizzuality/layer-manager.git#version/resilience",
+    "layer-manager": "https://github.com/Vizzuality/layer-manager.git#resilience-0.1.0",
     "leaflet": "^1.4.0",
     "leaflet-active-area": "^1.1.0",
     "leaflet.pm": "^2.0.3",

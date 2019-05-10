@@ -14,7 +14,7 @@ import {
 import { setChartLimit } from '@modules/layers';
 
 class LegendChart extends React.PureComponent {
-  state = { isReady: false };
+  state = { isReady: false, activeCoordinate: null };
 
   componentDidMount() {
     // Ok, I'm not very proud of this, but it works... WHY?!!!!
@@ -23,6 +23,12 @@ class LegendChart extends React.PureComponent {
     }, 100);
   }
 
+  changeReferenceArea = p => {
+    const { changeLimit } = this.props;
+    this.setState({ activeCoordinate: p.activePayload[0].payload });
+    changeLimit(p);
+  };
+
   render() {
     const { changeLimit, limit = 100, data } = this.props;
     const len = data.length;
@@ -30,7 +36,7 @@ class LegendChart extends React.PureComponent {
     const mid = data[Math.round(len / 2) - 1];
     const max = data[len - 1];
 
-    const { isReady } = this.state;
+    const { activeCoordinate, isReady } = this.state;
 
     return (
       <div className="m-legend__chart">
@@ -39,7 +45,7 @@ class LegendChart extends React.PureComponent {
             <AreaChart
               data={data}
               margin={{ top: 30, right: 5, left: 10, bottom: 10 }}
-              onClick={changeLimit}
+              onClick={this.changeReferenceArea}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
@@ -82,7 +88,7 @@ class LegendChart extends React.PureComponent {
                 x1={min.x}
                 x2={limit}
                 y1={min.y}
-                y2={max.y}
+                y2={activeCoordinate ? activeCoordinate.y : max.y}
                 stroke="red"
                 strokeOpacity={0.3}
               />
