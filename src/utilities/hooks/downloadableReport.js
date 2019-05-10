@@ -4,12 +4,12 @@ export const useDownloadableReport = () => {
   const [href, setHref] = useState('');
 
   const onClick = useCallback(() => {
-    const { search, origin } = window.location;
-    const reportUrl = `${origin}/report${search}`;
+    const { search } = window.location;
+    const reportUrl = `${process.env.REACT_APP_API_HOST}/report${search}`;
     const webshotUrl = 'http://resilienceatlas.org/webshot';
 
     setHref(
-      `${webshotUrl}?filename=analysis-report&mediatype=screen&backgrounds=true&url=${encodeURIComponent(
+      `${webshotUrl}?filename=analysis-report&mediatype=screen&backgrounds=true&waitFor=20000&url=${encodeURIComponent(
         reportUrl,
       )}`,
     );

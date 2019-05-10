@@ -56,7 +56,7 @@ export const DrawingManager: FC<P> = ({
       layer.current.setZIndex(2000);
       layer.current.addTo(map);
 
-      map.fitBounds(layer.current.getBounds());
+      map.fitBounds(layer.current.getBounds(), { animate: true });
 
       setParam('geojson', JSON.stringify(geojson));
     } else {

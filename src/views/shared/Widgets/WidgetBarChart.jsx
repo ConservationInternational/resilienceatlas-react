@@ -1,5 +1,13 @@
 import React, { FC, useCallback } from 'react';
-import { BarChart, XAxis, YAxis, CartesianGrid, Bar, Tooltip } from 'recharts';
+import {
+  ResponsiveContainer,
+  BarChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Bar,
+  Tooltip,
+} from 'recharts';
 
 import InfoWindow from '@components/InfoWindow';
 
@@ -18,6 +26,7 @@ interface P {
 }
 
 export const WidgetBarChart: FC<P> = ({
+  responsive,
   name,
   slug,
   analysisQuery,
@@ -42,37 +51,41 @@ export const WidgetBarChart: FC<P> = ({
             <h3>NO DATA AVAILABLE</h3>
           </div>
         ) : (
-          <BarChart
-            data={data}
-            width={400}
-            height={240}
-            margin={{ top: 40, bottom: 50 }}
+          <ResponsiveContainer
+            width={responsive ? 670 : 400}
+            height={responsive ? 300 : 240}
           >
-            <CartesianGrid vertical={false} strokeDasharray="2 2" />
-            <XAxis
-              dataKey="min"
-              interval={0}
-              tick={{
-                ...tickOptions,
-                angle: -90,
-                dx: -6,
-              }}
-              tickFormatter={v => v.toFixed(3)}
-              textAnchor="end"
-              tickLine={false}
-            />
-            <YAxis
-              allowDataOverflow
-              axisLine={false}
-              tickLine={false}
-              tickCount={10}
-              tick={{ ...tickOptions }}
-              padding={{ right: 20 }}
-            />
+            <BarChart data={data} margin={{ top: 40, bottom: 50 }}>
+              <CartesianGrid vertical={false} strokeDasharray="2 2" />
+              <XAxis
+                dataKey="min"
+                interval={0}
+                tick={{
+                  ...tickOptions,
+                  angle: -90,
+                  dx: -6,
+                }}
+                tickFormatter={v => v.toFixed(3)}
+                textAnchor="end"
+                tickLine={false}
+              />
+              <YAxis
+                allowDataOverflow
+                axisLine={false}
+                tickLine={false}
+                tickCount={10}
+                tick={{ ...tickOptions }}
+                padding={{ right: 20 }}
+              />
 
-            <Tooltip content={CustomTooltip} />
-            <Bar dataKey="count" fill="#0089CC" />
-          </BarChart>
+              <Tooltip content={CustomTooltip} />
+              <Bar
+                barSize={responsive ? 18 : 12}
+                dataKey="count"
+                fill="#0089CC"
+              />
+            </BarChart>
+          </ResponsiveContainer>
         ))}
 
       {meta_short && (

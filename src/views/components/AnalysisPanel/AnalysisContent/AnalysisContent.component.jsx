@@ -6,7 +6,15 @@ interface P {
   geojson: L.GeoJSON;
 }
 
-export const BarChartsList: FC<P> = ({ activeLayers, geojson }) => {
+export const BarChartsList: FC<P> = ({
+  responsiveCharts,
+  activeLayers,
+  layers: { actives, loaded },
+  geojson,
+}) => {
+  if (actives.length && !loaded)
+    return <center>Waiting until layers loaded...</center>;
+
   const analyzable = activeLayers.filter(l => l.analysisSuitable);
 
   if (!activeLayers.length) {
@@ -22,6 +30,7 @@ export const BarChartsList: FC<P> = ({ activeLayers, geojson }) => {
       {analyzable.map(l => (
         <WidgetBarChart
           key={l.slug}
+          responsive={responsiveCharts}
           slug={l.slug}
           type={l.type}
           analysisQuery={l.analysisQuery}
