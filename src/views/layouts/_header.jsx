@@ -23,14 +23,14 @@ const Header = ({ isAuthorized, site: { link_text, link_url } }) => (
             Map
           </NavLink>
 
-          <ul>
+          {/* <ul>
             <li>
               Lol
               <ul>
                 <li>Lul</li>
               </ul>
             </li>
-          </ul>
+          </ul> */}
         </li>
 
         <li>

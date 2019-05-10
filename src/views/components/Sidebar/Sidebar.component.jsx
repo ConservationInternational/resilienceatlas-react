@@ -85,9 +85,7 @@ const Sidebar: FC<P> = ({
               id="modelContent"
               className="m-model-content content"
               name={TABS.MODELS}
-            >
-              Haha tab two
-            </Tabs.Pane>
+            />
           </Tabs>
 
           <div className="sidebar-logo">
