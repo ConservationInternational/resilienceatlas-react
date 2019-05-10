@@ -9,7 +9,7 @@ export const useDownloadableReport = () => {
     const webshotUrl = 'http://resilienceatlas.org/webshot';
 
     setHref(
-      `${webshotUrl}?filename=analysis-report&mediatype=screen&backgrounds=true&waitFor=20000&url=${encodeURIComponent(
+      `${webshotUrl}?filename=analysis-report&mediatype=screen&backgrounds=true&waitFor=70000&url=${encodeURIComponent(
         reportUrl,
       )}`,
     );
