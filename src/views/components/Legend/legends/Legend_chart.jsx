@@ -7,6 +7,7 @@ import {
   Label,
   ReferenceArea,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -30,7 +31,7 @@ class LegendChart extends React.PureComponent {
   };
 
   render() {
-    const { changeLimit, limit = 100, data } = this.props;
+    const { limit = 100, data } = this.props;
     const len = data.length;
     const min = data[0];
     const mid = data[Math.round(len / 2) - 1];
@@ -84,6 +85,7 @@ class LegendChart extends React.PureComponent {
                 fillOpacity={1}
                 activeDot={{ r: 3, stroke: '#8884d8' }}
               />
+              <Tooltip />
               <ReferenceArea
                 x1={min.x}
                 x2={limit}
@@ -91,7 +93,18 @@ class LegendChart extends React.PureComponent {
                 y2={activeCoordinate ? activeCoordinate.y : max.y}
                 stroke="red"
                 strokeOpacity={0.3}
-              />
+              >
+                <Label
+                  value={activeCoordinate ? activeCoordinate.y : max.y}
+                  style={{ fontSize: 10 }}
+                  position="insideTop"
+                />
+                <Label
+                  value={limit}
+                  style={{ fontSize: 10 }}
+                  position="insideRight"
+                />
+              </ReferenceArea>
             </AreaChart>
           </ResponsiveContainer>
         )}
