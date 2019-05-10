@@ -4,7 +4,8 @@ export const useDownloadableReport = () => {
   const [href, setHref] = useState('');
 
   const onClick = useCallback(() => {
-    const { search, origin } = window.location;
+    const { search } = window.location;
+    const origin = 'https://www.resilienceatlas.org';
     const reportUrl = `${origin}/report${search}`;
     const webshotUrl = 'http://resilienceatlas.org/webshot';
 
