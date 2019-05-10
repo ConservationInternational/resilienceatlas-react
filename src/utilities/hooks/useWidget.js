@@ -2,6 +2,7 @@ import cx from 'classnames';
 import { AxiosRequestConfig } from 'axios';
 import { useMemo, useCallback } from 'react';
 import { useAxios } from './useAxios';
+import { swapLatLng } from '../helpers';
 
 const sqlApi = 'https://cdb-cdn.resilienceatlas.org/user/ra/api/v2/sql';
 
@@ -23,22 +24,23 @@ export const useWidget = (
   parseData: Function,
 ) => {
   const query = useMemo((): AxiosRequestConfig => {
-    const geometry = geojson.features
-      ? geojson.features[0].geometry
-      : geojson.geometry;
-
     if (analysisBody) {
       const { assetId } = JSON.parse(analysisBody);
 
       return {
         method: 'post',
-        url: analysisQuery,
+        url: `/${analysisQuery}`,
+        baseURL: 'https://cors-anywhere.herokuapp.com',
         data: {
           assetId,
-          geometry,
+          geometry: swapLatLng(geojson),
         },
       };
     }
+
+    const geometry = geojson.features
+      ? geojson.features[0].geometry
+      : geojson.geometry || geojson;
 
     const q = analysisQuery.replace(/{{geometry}}/g, JSON.stringify(geometry));
 
