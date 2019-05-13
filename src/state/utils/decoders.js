@@ -12,7 +12,7 @@ export const birds = (data, w, h, z, params) => {
       const pixelPos = (j * w + i) * bands;
       const d = imgData[pixelPos];
 
-      if (d > 0 && d <= (255 * chartLimit) / 100) {
+      if (d >= 1 && d <= chartLimit + 1) {
         imgData[pixelPos] = 106;
         imgData[pixelPos + 1] = 196;
         imgData[pixelPos + 2] = 220;
