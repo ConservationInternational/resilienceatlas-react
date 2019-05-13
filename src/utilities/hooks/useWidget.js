@@ -32,7 +32,7 @@ export const useWidget = (
         baseURL: 'https://cors-anywhere.herokuapp.com',
         data: {
           assetId,
-          geometry: geojson,
+          geometry: L.geoJSON(geojson).toGeoJSON(),
         },
       };
     }
