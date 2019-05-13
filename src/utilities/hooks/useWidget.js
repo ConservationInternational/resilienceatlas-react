@@ -2,7 +2,6 @@ import cx from 'classnames';
 import { AxiosRequestConfig } from 'axios';
 import { useMemo, useCallback } from 'react';
 import { useAxios } from './useAxios';
-import { swapLatLng } from '../helpers';
 
 const sqlApi = 'https://cdb-cdn.resilienceatlas.org/user/ra/api/v2/sql';
 
@@ -33,7 +32,7 @@ export const useWidget = (
         baseURL: 'https://cors-anywhere.herokuapp.com',
         data: {
           assetId,
-          geometry: swapLatLng(geojson),
+          geometry: geojson,
         },
       };
     }
