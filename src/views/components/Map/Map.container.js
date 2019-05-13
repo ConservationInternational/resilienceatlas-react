@@ -22,6 +22,7 @@ const makeMapStateToProps = () => {
     layers: state.layers,
     drawing: state.map.drawing,
     geojson: state.map.geojson,
+    basemap: state.map.basemap,
     layer_groups: state.layer_groups,
     activeLayers: getActives(state),
     defaultActiveGroups: defaultActives(state),
