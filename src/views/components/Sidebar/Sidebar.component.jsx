@@ -5,11 +5,12 @@ import cx from 'classnames';
 
 import AnalysisPanel from '@components/AnalysisPanel';
 import LayersList from '@components/LayersList';
+import PredictiveModels from '@components/PredictiveModels';
 
 import LinkButton from '@shared/LinkButton';
 import Tabs from '@shared/Tabs';
 
-import { setRouterParam, useToggle } from '@utilities';
+import { setRouterParam } from '@utilities';
 
 const TABS = {
   LAYERS: 'layers',
@@ -85,7 +86,9 @@ const Sidebar: FC<P> = ({
               id="modelContent"
               className="m-model-content content"
               name={TABS.MODELS}
-            />
+            >
+              <PredictiveModels />
+            </Tabs.Pane>
           </Tabs>
 
           <div className="sidebar-logo">
