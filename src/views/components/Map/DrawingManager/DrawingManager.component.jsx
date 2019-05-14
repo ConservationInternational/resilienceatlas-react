@@ -17,7 +17,7 @@ export const DrawingManager: FC<P> = ({
   drawing,
   geojson,
 }) => {
-  const { getParam, setParam, removeParam } = useRouterParams();
+  const { setParam, removeParam } = useRouterParams();
   const layer = useRef(null);
 
   useEffect(() => {
@@ -58,12 +58,12 @@ export const DrawingManager: FC<P> = ({
       layer.current.addTo(map);
 
       const layerBounds = layer.current.getBounds();
+      map.invalidateSize();
+
       map.fitBounds(layerBounds, { animate: true });
 
-      if (!getParam('center')) {
-        setParam('center', qs.stringify(layerBounds.getCenter()));
-      }
-
+      setParam('zoom', map.getZoom());
+      setParam('center', qs.stringify(layerBounds.getCenter()));
       setParam('geojson', JSON.stringify(geojson));
     } else {
       removeParam('geojson');

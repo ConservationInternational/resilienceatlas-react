@@ -43,7 +43,7 @@ export const useSearch = (
 
               selected: selectedIndex,
               optionProps: {
-                ...clickable(onSelect.bind(this, data[selectedIndex])),
+                ...clickable(onSelect.bind(this, d)),
               },
             };
           }
@@ -75,10 +75,12 @@ export const useSearch = (
         // Enter pressed
         case 13: {
           e.preventDefault();
-          onSelect(result[selectedIndex]);
-          // temporary cleanup -> while analysis panel tabs not separated to another component
-          searchInput.setValue('');
-          setSelectedIndex(0);
+          if (result.length) {
+            onSelect(result[selectedIndex]);
+            // temporary cleanup -> while analysis panel tabs not separated to another component
+            searchInput.setValue('');
+            setSelectedIndex(0);
+          }
           break;
         }
         // Arrow up pressed
@@ -101,8 +103,15 @@ export const useSearch = (
     [selectedIndex, result.length],
   );
 
+  useEffect(() => {
+    if (selectedIndex > result.length) {
+      console.log(selectedIndex, result.length);
+      setSelectedIndex(result.length);
+    }
+  }, [result.length]);
+
   return {
-    searchInput: { ...searchInput, onKeyDown },
+    searchInput: { ...searchInput, onKeyDown, autoComplete: 'off' },
     result,
     noResults: !!searchInput.value.length && !result.length,
   };

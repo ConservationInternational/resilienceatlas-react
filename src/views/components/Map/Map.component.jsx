@@ -10,6 +10,7 @@ import { BASEMAPS } from '@views/utils';
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
 import MapOffset from './MapOffset';
+import { getRouterParam } from '../../../utilities/routeParams';
 
 const MapView = ({
   // actions
