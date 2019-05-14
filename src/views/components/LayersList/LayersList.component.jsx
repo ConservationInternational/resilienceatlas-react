@@ -7,6 +7,7 @@ import { clickable } from '@utilities';
 import { toggle as toggleGroup } from '@modules/layer_groups';
 
 import Layer from './Layer';
+import Basemaps from './Basemaps';
 
 const enhance = connect(
   null,
@@ -136,49 +137,7 @@ const LayersList = ({ groups, loading }) => (
         <Group key={group.id} {...group} />
       ))}
 
-      <li>
-        <div className="m-layers-list-header">
-          <div className="header-title theme-color">basemap</div>
-        </div>
-        <ul className="m-basemap-selectors">
-          <li>
-            <button
-              type="button"
-              className="btn-basemap-handler"
-              data-basemap="satellite"
-            >
-              <span className="icon-satellite">Satellite</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn-basemap-handler"
-              data-basemap="topographic"
-            >
-              <span className="icon-topographic">Topographic</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn-basemap-handler"
-              data-basemap="dark"
-            >
-              <span className="icon-dark">Dark</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              data-basemap="defaultmap"
-              className="is-active btn-basemap-handler"
-            >
-              <span className="icon-default">Default</span>
-            </button>
-          </li>
-        </ul>
-      </li>
+      <Basemaps />
     </ul>
   </>
 );

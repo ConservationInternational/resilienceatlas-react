@@ -1,4 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
+import cx from 'classnames';
+import { setRouterParam } from '../routeParams';
 
 export const useToggle = (initial = false) => {
   const [toggled, setToggle] = useState(initial);
@@ -59,4 +61,29 @@ export const useDebounce = (effect, delay, deps) => {
 
     return () => clearTimeout(timeout);
   }, deps);
+};
+
+export const useRouterValue = (name, value) => {
+  useEffect(() => {
+    setRouterParam(name, value);
+  }, [value]);
+};
+
+export const useTogglerButton = (
+  current,
+  setter,
+  { activeClassName = 'is-active' } = {},
+) => {
+  const getTogglerProps = value => {
+    const onClick = useCallback(() => setter(value), [value]);
+
+    return {
+      onClick,
+      className: cx({ [activeClassName]: current === value }),
+    };
+  };
+
+  return {
+    getTogglerProps,
+  };
 };

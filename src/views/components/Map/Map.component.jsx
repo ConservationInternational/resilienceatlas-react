@@ -26,7 +26,7 @@ const MapView = ({
   site,
   page,
   options,
-  basemap = 'defaultmap',
+  basemap,
   embed,
 }) => {
   const query = qs.parse(location.search, {
