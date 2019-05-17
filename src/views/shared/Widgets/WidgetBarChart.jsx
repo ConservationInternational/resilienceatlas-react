@@ -11,7 +11,7 @@ import {
 
 import InfoWindow from '@components/InfoWindow';
 
-import { useWidget } from '@utilities/hooks';
+import { useWidget, formatNumber } from '@utilities';
 import { CustomTooltip } from './CustomTooltip';
 
 const tickOptions = { fill: '#999', fontSize: 14 };
@@ -65,7 +65,13 @@ export const WidgetBarChart: FC<P> = ({
                   angle: -90,
                   dx: -6,
                 }}
-                tickFormatter={v => v.toFixed(3)}
+                tickFormatter={value =>
+                  formatNumber({
+                    value,
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1,
+                  })
+                }
                 textAnchor="end"
                 tickLine={false}
               />
@@ -74,6 +80,13 @@ export const WidgetBarChart: FC<P> = ({
                 axisLine={false}
                 tickLine={false}
                 tickCount={10}
+                tickFormatter={value =>
+                  formatNumber({
+                    value,
+                    formatFrom: 1e3,
+                    maximumFractionDigits: 0,
+                  })
+                }
                 tick={{ ...tickOptions }}
                 padding={{ right: 20 }}
               />

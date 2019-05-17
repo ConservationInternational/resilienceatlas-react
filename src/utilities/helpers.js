@@ -61,3 +61,34 @@ export const swapLatLng = geojson =>
   L.geoJSON(geojson, {
     coordsToLatLng: coords => new L.LatLng(coords[0], coords[1], coords[2]),
   }).toGeoJSON();
+
+export const formatNumber = ({
+  value,
+  locale = 'en',
+  formatFrom = 10000,
+  ...rest
+}) => {
+  if (value < formatFrom) {
+    return new Intl.NumberFormat(locale, rest).format(value);
+  }
+
+  const intl = new Intl.NumberFormat(locale, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1,
+    ...rest,
+  });
+
+  if (value >= 1e9) {
+    return `${intl.format(value / 1e9)}B`;
+  }
+
+  if (value >= 1e6) {
+    return `${intl.format(value / 1e6)}M`;
+  }
+
+  if (value >= 1e3) {
+    return `${intl.format(value / 1e3)}K`;
+  }
+
+  return 0;
+};
