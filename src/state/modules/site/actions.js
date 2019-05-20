@@ -1,5 +1,6 @@
 import api, { createApiAction } from '../../utils/api';
-import { site_scopes } from '../../schema';
+import { site_scope } from '../../schema';
+import { getSubdomain } from '../../../utilities/helpers';
 
 const URL_SITE = '/site';
 
@@ -7,4 +8,9 @@ const URL_SITE = '/site';
 export const LOAD = createApiAction('site/LOAD');
 
 export const load = () =>
-  api(LOAD, ({ get }) => get(URL_SITE), { schema: site_scopes });
+  api(
+    LOAD,
+    ({ get }) =>
+      get(URL_SITE, { params: { site_scope: getSubdomain() || undefined } }),
+    { schema: site_scope },
+  );

@@ -8,7 +8,7 @@ const provider = {
   gee: 'leaflet',
 };
 
-export const site_scopes = new schema.Entity(
+export const site_scope = new schema.Entity(
   'site_scopes',
   {},
   {

@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 
+export const isProd = process.env.NODE_ENV === 'production';
+
 export const PORT =
-  process.env.NODE_ENV === 'production' || process.env.API_PROD === true
+  isProd || process.env.API_PROD === true
     ? process.env.REACT_APP_API_PROD
     : process.env.REACT_APP_API_HOST;
 
