@@ -15,6 +15,10 @@ import {
 import { setChartLimit } from '@modules/layers';
 
 class LegendChart extends React.PureComponent {
+  static defaultProps = {
+    bucket: [],
+  };
+
   state = { isReady: false, activeCoordinate: null };
 
   componentDidMount() {
@@ -31,7 +35,7 @@ class LegendChart extends React.PureComponent {
   };
 
   render() {
-    const { limit = 100, data } = this.props;
+    const { limit = 100, data, bucket } = this.props;
     const len = data.length;
     const min = data[0];
     const mid = data[Math.round(len / 2) - 1];
@@ -48,6 +52,17 @@ class LegendChart extends React.PureComponent {
               margin={{ top: 30, right: 5, left: 10, bottom: 10 }}
               onClick={this.changeReferenceArea}
             >
+              <defs>
+                <linearGradient id="colorX" x1="0" y1="0" x2="0" y2="1">
+                  {bucket.map((color, i) => (
+                    <stop
+                      offset={`${(100 / bucket.length) * i}%`}
+                      stopColor={color}
+                      stopOpacity={1}
+                    />
+                  ))}
+                </linearGradient>
+              </defs>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="x"
@@ -81,7 +96,7 @@ class LegendChart extends React.PureComponent {
                 type="monotone"
                 dataKey="y"
                 stroke="#8884d8"
-                fill="#8884d8"
+                fill="url(#colorX)"
                 fillOpacity={1}
                 activeDot={{ r: 3, stroke: '#8884d8' }}
               />
