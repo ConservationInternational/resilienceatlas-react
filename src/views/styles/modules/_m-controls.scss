@@ -10,10 +10,9 @@
   right: 0;
   padding: 0 rem(40px);
 
-  .m-journey--landing & {
+  &.is-first {
     width: 100%;
     z-index: 2;
-
     justify-content: flex-end;
   }
 }
