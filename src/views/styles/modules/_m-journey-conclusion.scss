@@ -30,6 +30,7 @@
     max-height: 60vh;
     color: $font-color-3;
     transition: .7s cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: rgb(74, 61, 53);
     //No overflow hidden, it hidde action buttons.
     // overflow: hidden;
 
@@ -58,6 +59,7 @@
       right: 0;
       left: 0;
       height: rem(40px);
+      box-shadow: inset 0px -50px 26px -14px rgb(74, 61, 53);
     }
 
     h2 {
@@ -122,6 +124,7 @@
     }
 
     .btn-descolapse {
+      background-color: 74, 61, 53;
       &:after {
         @include arrow (10px, #fff, 1px, 135deg);
         transform-origin: 6px;
