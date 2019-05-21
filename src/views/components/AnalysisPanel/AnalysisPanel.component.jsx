@@ -99,7 +99,9 @@ export const AnalysisPanel: FC<P> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const { searchInput, result, noResults } = useSearch('search', countries, {
     valueKey: 'name',
-    onSelect: ({ bbox }) => setGeojson(JSON.parse(bbox)),
+    onSelect: ({ geometry }) => {
+      setGeojson(JSON.parse(geometry));
+    },
   });
   const downloadableReport = useDownloadableReport();
 

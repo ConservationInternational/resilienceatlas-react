@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import history from '../history';
 
 /**
@@ -12,7 +13,9 @@ export const setRouterParam = (param, value) => {
   } = history;
 
   const params = new URLSearchParams(search.slice(1));
-  params.set(param, value);
+  if (value) {
+    params.set(param, value);
+  } else params.delete(param);
 
   history.replace({
     pathname,

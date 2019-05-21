@@ -1,6 +1,11 @@
 import { schema } from 'normalizr';
 import decoders from './utils/decoders';
 
+import {
+  getIndexableIndicatorValue,
+  getHumanReadableIndicatorValue,
+} from './modules/predictive_models/utils';
+
 const provider = {
   cartodb: 'carto',
   raster: 'carto',
@@ -13,6 +18,7 @@ export const site_scope = new schema.Entity(
   {},
   {
     processStrategy: site => ({
+      id: site.id,
       ...site.attributes,
       pages: site.relationships.site_pages.data,
     }),
@@ -161,4 +167,56 @@ export const country = new schema.Entity(
   'countries',
   {},
   { idAttribute: 'iso' },
+);
+
+export const category = new schema.Entity(
+  'categories',
+  {},
+  {
+    processStrategy: cat => ({
+      id: cat.id,
+      ...cat.attributes,
+    }),
+  },
+);
+
+export const indicator = new schema.Entity(
+  'indicators',
+  {},
+  {
+    processStrategy: ind => ({
+      id: ind.id,
+      name: ind.attributes.name,
+      slug: ind.attributes.slug,
+      version: ind.attributes.version,
+      position: ind.attributes.position,
+      column: ind.attributes.column_name,
+      operation: ind.attributes.operation,
+      value: 1,
+
+      indexableValue: getIndexableIndicatorValue(1),
+      humanReadableValue: getHumanReadableIndicatorValue(1),
+
+      category: ind.relationships.category.data.id,
+      models: ind.relationships.models.data.map(m => m.id),
+    }),
+  },
+);
+
+export const model = new schema.Entity(
+  'models',
+  { indicators: [indicator], categories: [category] },
+  {
+    processStrategy: mod => ({
+      id: mod.id,
+      name: mod.attributes.name,
+      description: mod.attributes.description,
+      source: mod.attributes.source,
+      tableName: mod.attributes.table_name,
+      indicators:
+        mod.relationships &&
+        mod.relationships.indicators &&
+        mod.relationships.indicators.data.map(d => d.id),
+    }),
+  },
 );

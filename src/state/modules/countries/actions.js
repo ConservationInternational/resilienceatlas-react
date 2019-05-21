@@ -12,7 +12,7 @@ export const load = () =>
     LOAD,
     ({ get }) => {
       const tableName = getTableName();
-      const query = `SELECT name_engli as name, bbox as bbox, iso as iso FROM ${tableName}`;
+      const query = `SELECT name_engli as name, bbox as bbox, iso as iso, simplify_geometry as geometry FROM ${tableName}`;
 
       return get(URL, {
         baseURL: CDB_URL,

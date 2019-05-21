@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { schema } from 'normalizr';
 
 export const isProd = process.env.NODE_ENV === 'production';
 
@@ -80,7 +81,8 @@ export const requestHandlers: Handlers = { get, post, put, patch, del };
 type Callback = (requestHandlers: Handlers) => Promise<any>;
 
 type ApiMeta = {
-  schema?: any,
+  schema?: schema.Entity | schema.Array,
+  includedSchema?: schema.Entity | schema.Array | 'union',
 };
 
 /**
