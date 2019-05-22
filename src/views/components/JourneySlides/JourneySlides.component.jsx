@@ -66,7 +66,7 @@ const JourneySlides = ({
       />
 
       {journeyInfo.type !== 'embed'}
-      <p className="credits">
+      <p className={`credits ${journeyInfo.type}`}>
         <a
           target="_blank"
           rel="noopener noreferrer"
