@@ -49,18 +49,4 @@ $backgrounds: 'journey1ch1', 'journey1ch2', 'journey1ch3', 'journey2ch1',
     right: 0;
     background-color: rgba(0, 0, 0, 0.1);
   }
-
-  .credits {
-    position: absolute;
-    bottom: rem(4px);
-    right: rem(40px);
-    z-index: 10;
-    margin: 0;
-    font-size: rem(12px);
-    color: $font-color-3;
-
-    a {
-      color: $font-color-3;
-    }
-  }
 }

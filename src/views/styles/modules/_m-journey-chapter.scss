@@ -34,8 +34,10 @@
   }
 
   .credits {
-    a {
-      color: $font-color-1 !important;
+    &.chapter {
+      a {
+        color: $font-color-1 !important;
+      }
     }
   }
 
