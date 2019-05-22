@@ -1,1 +1,1 @@
-export { default } from './JourneyLanding.container';
+export { default } from './JourneyLanding.component';
