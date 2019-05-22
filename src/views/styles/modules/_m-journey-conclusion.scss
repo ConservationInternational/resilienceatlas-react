@@ -5,12 +5,6 @@
   justify-content: flex-start;
   align-items: center;
 
-  &.overview {
-    #btn-next-journey {
-      display: none !important;
-    }
-  }
-
   &.is-dark-theme {
     .content {
       color: $font-color-1;
@@ -131,10 +125,6 @@
         transform: translate(-100%, -50%) rotate(135deg);
       }
     }
-  }
-
-  #btn-next-journey {
-    display: block !important;
   }
 }
 
