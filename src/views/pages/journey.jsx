@@ -6,6 +6,7 @@ import JourneySlides from '@components/JourneySlides';
 const Journey = () => (
   <>
     <Helmet title="Journeys" />
+
     <div className="l-content">
       <JourneySlides />
     </div>
