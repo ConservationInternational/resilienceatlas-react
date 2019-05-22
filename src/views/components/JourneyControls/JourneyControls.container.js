@@ -1,16 +1,25 @@
 import { connect } from 'react-redux';
-import { loadJourneyInfo } from '@modules/journey';
+import { loadPageIndex as loadJourneys } from '@modules/journeys';
+import {
+  loadJourneyInfo,
+  setCurrentStep,
+  updateJourney,
+} from '@modules/journey';
 
 import JourneyControls from './JourneyControls.component';
 
 const mapStateToProps = state => ({
-  landingInfo: state.journey.steps,
-  id: state.journey.id,
-  step: state.journey.steps[0],
+  slidesInfo: state.journey.steps,
+  currentStep: state.journey.currentStep,
+  currentJourney: state.journey.id,
+  journeys: state.journeys.pageIndex,
 });
 
 const mapDispatchToProps = {
+  loadJourneys,
   loadJourneyInfo,
+  setCurrentStep,
+  updateJourney,
 };
 
 export default connect(

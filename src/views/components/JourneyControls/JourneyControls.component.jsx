@@ -1,36 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import cx from 'classnames';
+import { NavLink } from 'react-router-dom';
 
-const JourneyControls = ({ loadJourneyInfo, id, step }) => {
+const JourneyControls = ({
+  slidesInfo,
+  id,
+  currentJourney,
+  setCurrentStep,
+  currentStep,
+  updateJourney,
+}) => {
   useEffect(() => {
-    loadJourneyInfo();
-  }, []);
-
-  const initialStep = 0;
-  const [currentStep, setPage] = useState(initialStep);
-
+    updateJourney(currentJourney);
+  }, [currentJourney]);
   return (
-    <div className={cx('m-controls', { 'is-first': step.number === 0 })}>
+    <div className={cx('m-controls', { 'is-first': currentStep === 0 })}>
       <button
         type="button"
         id="btn-prev"
         mode="sub"
-        className={cx({ 'is-hidden': step.number === 0 })}
-        onClick={() => setPage(currentStep - 1)}
+        className={cx({ 'is-hidden': currentStep === 0 })}
+        onClick={() => setCurrentStep(currentStep - 1)}
       >
         back
       </button>
-      <a
-        href={`/journeys/${id + 1}`}
+      <NavLink
+        to={`/journeys/${id + 1}`}
         id="btn-next-journey"
-        className={cx({ 'is-hidden': step.number === 0 })}
+        className={cx({ 'is-hidden': currentStep !== slidesInfo.length - 1 })}
+        onClick={() => updateJourney(id, currentStep)}
       >
         Next journey
-      </a>
+      </NavLink>
+      {/* <a
+        href={`/journeys/${id + 1}`}
+        id="btn-next-journey"
+        className={cx({ 'is-hidden': currentStep !== slidesInfo.length - 1 })}
+      >
+        Next journey
+      </a> */}
       <button
         type="button"
         id="btn-next"
-        onClick={() => setPage(currentStep + 1)}
+        className={cx({ 'is-hidden': currentStep === slidesInfo.length - 1 })}
+        onClick={() => setCurrentStep(currentStep + 1)}
       >
         continue
       </button>
