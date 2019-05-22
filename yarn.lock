@@ -6795,8 +6795,7 @@ last-call-webpack-plugin@^3.0.0:
 
 layer-manager@^1.10.0:
   version "1.15.2"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.15.2.tgz#45f3003cd4dc60420d8ff37c035722f5fc8d6eb2"
-  integrity sha512-cmm/3CTy9stXIUI8OjOh5Fbi2PuDv+Hi3jh8v8ejnQHdn6uo40821+scHSBcJmeOA1Hf4Bz3GY6RGTqOTs0OYQ==
+  resolved "https://github.com/Vizzuality/layer-manager.git#7cd22b514d4f829f1f90d1f5f020d6ec029d4fa6"
   dependencies:
     axios "^0.18.0"
     lodash "^4.17.11"
@@ -9491,6 +9490,11 @@ react-beautiful-dnd@^11.0.0-beta.3:
     tiny-invariant "^1.0.4"
     use-memo-one "^1.1.0"
 
+react-dangerous-html@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-dangerous-html/-/react-dangerous-html-1.0.0.tgz#24e443d156a4fc5e61467179cda319145aa3a7e1"
+  integrity sha512-OMi5HF1WN7nw/djRHepn9yIMYRafAg3FlBdXgh6bdvq/hnZ/p0fMHyL77o7uM9xctEu9t1p2qMSf2yOmPNrlVw==
+
 react-dev-utils@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-8.0.0.tgz#7c5b227a45a32ea8ff7fbc318f336cf9e2c6e34c"
@@ -9569,6 +9573,13 @@ react-helmet@^5.2.0:
     prop-types "^15.5.4"
     react-fast-compare "^2.0.2"
     react-side-effect "^1.1.0"
+
+react-iframe@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.8.0.tgz#8c78f2c59b894ca5605fa7e45e61e27e57e96091"
+  integrity sha512-NYi89+rEqREwQxW9sDf+akh6/dtwWd3bOjByoVEIQ7SicOxVawRMer3pLdWjFaHXpuxTB9NqobPf/Ohj2iAKkg==
+  dependencies:
+    object-assign "^4.1.1"
 
 react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2, react-is@^16.8.6:
   version "16.8.6"
