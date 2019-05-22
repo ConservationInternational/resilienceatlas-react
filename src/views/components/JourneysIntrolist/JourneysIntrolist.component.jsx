@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import cx from 'classnames';
 import { NavLink } from 'react-router-dom';
 
-const JourneysIntrolist = ({ journeys, loadJourneys }) => {
+const JourneysIntrolist = ({ journeys, loadJourneys, updateJourney }) => {
   useEffect(() => {
     loadJourneys();
   }, []);
@@ -28,6 +28,7 @@ const JourneysIntrolist = ({ journeys, loadJourneys }) => {
               <NavLink
                 to={`/journeys/${j.id}`}
                 className="btn btn-secondary theme-bg-color"
+                onClick={() => updateJourney(j.id)}
               >
                 Learn more
               </NavLink>
