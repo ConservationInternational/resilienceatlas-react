@@ -17,5 +17,11 @@
     a {
       color: $font-color-3;
     }
+
+    &.chapter {
+      a {
+        color: $font-color-1 !important;
+      }
+    }
   }
 }

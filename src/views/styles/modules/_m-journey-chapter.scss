@@ -33,14 +33,6 @@
     margin: 0 rem(45px);
   }
 
-  .credits {
-    &.chapter {
-      a {
-        color: $font-color-1 !important;
-      }
-    }
-  }
-
   @media screen and (max-width: 768px) {
     h1 {
       font-size: rem(50px);
