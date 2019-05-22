@@ -1,13 +1,24 @@
 import api, { createApiAction, PORT } from '../../utils/api';
 
-const URL_JOURNEY = '/journeys/1';
-
 // Action constants
 export const LOAD_JOURNEY_INDEX = createApiAction(
   'journeys/LOAD_JOURNEY_INDEX',
 );
 
-export const loadJourneyInfo = () =>
+export const SET_CURRENT_STEP = 'journey/SET_CURRENT_STEP';
+export const SET_CURRENT_JOURNEY = 'journeys/SET_CURRENT_JOURNEY';
+
+export const loadJourneyInfo = id =>
   api(LOAD_JOURNEY_INDEX, ({ get }) =>
-    get(URL_JOURNEY, { baseURL: `${PORT}/api` }),
+    get(`/journeys/${id}`, { baseURL: `${PORT}/api` }),
   );
+
+export const setCurrentStep = currentStep => ({
+  type: SET_CURRENT_STEP,
+  currentStep,
+});
+
+export const updateJourney = id => ({
+  type: SET_CURRENT_JOURNEY,
+  id,
+});

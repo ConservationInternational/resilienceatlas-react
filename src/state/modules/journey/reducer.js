@@ -1,5 +1,9 @@
 import { createReducer } from '../../utils';
-import { LOAD_JOURNEY_INDEX, SET_CURRENT_STEP } from './actions';
+import {
+  LOAD_JOURNEY_INDEX,
+  SET_CURRENT_STEP,
+  SET_CURRENT_JOURNEY,
+} from './actions';
 
 const initialState = {
   currentStep: 0,
@@ -10,8 +14,12 @@ export default createReducer(initialState)({
     ...state,
     ...payload.data[0],
   }),
-  [SET_CURRENT_STEP]: (state, { payload }) => ({
+  [SET_CURRENT_STEP]: (state, { currentStep }) => ({
     ...state,
-    currentState: payload,
+    currentStep,
+  }),
+  [SET_CURRENT_JOURNEY]: (state, { id }) => ({
+    ...state,
+    id,
   }),
 });
