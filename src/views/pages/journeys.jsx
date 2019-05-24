@@ -12,6 +12,7 @@ const Journeys = () => (
         <div className="m-journey__title">
           <h1>Discover Journeys</h1>
         </div>
+
         <JourneysIntrolist />
       </div>
     </div>
