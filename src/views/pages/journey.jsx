@@ -1,16 +1,16 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import JourneySlides from '@components/JourneySlides';
+import Journey from '@components/Journey';
 
-const Journey = () => (
+const JourneyPage = () => (
   <>
     <Helmet title="Journeys" />
 
     <div className="l-content">
-      <JourneySlides />
+      <Journey />
     </div>
   </>
 );
 
-export default Journey;
+export default JourneyPage;
