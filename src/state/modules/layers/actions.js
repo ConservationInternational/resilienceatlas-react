@@ -22,9 +22,9 @@ export const load = () =>
     },
   );
 
-export const setActives = ids => ({
+export const setActives = actives => ({
   type: SET_ACTIVES,
-  ids,
+  actives,
 });
 
 export const toggle = id => ({
