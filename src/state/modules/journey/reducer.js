@@ -18,8 +18,9 @@ export default createReducer(initialState)({
     ...state,
     currentStep,
   }),
-  [SET_CURRENT_JOURNEY]: (state, { id }) => ({
+  [SET_CURRENT_JOURNEY]: (state, { currentStep, id }) => ({
     ...state,
+    currentStep,
     id,
   }),
 });
