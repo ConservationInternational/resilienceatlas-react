@@ -7,15 +7,15 @@ import { load as loadLayers } from '@modules/layers';
 import Journey from './component';
 
 const mapStateToProps = state => ({
-  currentJourney: state.journey.id,
   journeys: state.journeys.pageIndex,
+  currentJourney: state.journey.id,
 });
 
 const mapDispatchToProps = {
-  loadJourneys,
-  loadJourneyInfo,
   loadCountries,
   loadLayers,
+  loadJourneys,
+  loadJourneyInfo,
 };
 
 export default connect(

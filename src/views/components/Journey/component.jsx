@@ -6,10 +6,12 @@ import Slides from '@components/Journey/Slides';
 const Journey = ({
   currentJourney,
   loadJourneys,
-  loadJourneyInfo,
   loadCountries,
+  loadJourneyInfo,
+  loadLayers,
 }) => {
   useEffect(() => {
+    loadLayers();
     loadCountries();
     loadJourneys(currentJourney);
     loadJourneyInfo(currentJourney);

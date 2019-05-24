@@ -14,14 +14,11 @@ const Embed = ({
   currentJourney,
   countries,
   countryName,
-  loadLayer,
   setActiveLayer,
 }) => {
   useEffect(() => {
-    loadLayer();
     const mapString = mapUrl.split('?')[1];
     const mapData = qs.parse(mapString, { parameterLimit: 1 });
-
     const layerData = JSON.parse(mapData.layers);
     const layerDataIds = layerData.map(l => l.id);
     setActiveLayer(layerDataIds);
