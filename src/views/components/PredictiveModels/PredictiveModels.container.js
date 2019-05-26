@@ -2,21 +2,22 @@ import { connect } from 'react-redux';
 import {
   load as loadModels,
   select,
-  toggleIndicator,
-  updateIndicator,
+  applyIndicators,
+  resetIndicators,
   makeAll as makeAllModels,
-  makeSelected as makeSelectedModel,
+  makeActive as makeActiveModel,
 } from '@modules/predictive_models';
 
 import PredictiveModels from './PredictiveModels.component';
 
 const makeMapStateToProps = () => {
   const getAllModels = makeAllModels();
-  const getSelectedModel = makeSelectedModel();
+  const getActiveModel = makeActiveModel();
 
   const mapStateToProps = state => ({
     models: getAllModels(state),
-    model: getSelectedModel(state),
+    model: getActiveModel(state),
+    indicatorsState: state.predictive_models.indicators_state,
     selectedModel: state.predictive_models.selected,
     modelsLoading: state.predictive_models.loading,
     modelsLoaded: state.predictive_models.loaded,
@@ -28,8 +29,8 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = {
   loadModels,
   select,
-  toggleIndicator,
-  updateIndicator,
+  applyIndicators,
+  resetIndicators,
 };
 
 export default connect(

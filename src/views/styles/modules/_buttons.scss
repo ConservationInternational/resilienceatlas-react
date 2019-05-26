@@ -1,11 +1,12 @@
 .btn {
   @extend %clean-button-or-input;
+  display: inline-block;
+  padding: rem(10px) rem(50px);
+
   border-radius: 50px;
   font-weight: 700;
-  // Old sizes -> strange uncentered by vertical ?
-  // padding: rem(12px) rem(50px) rem(8px);
-  padding: rem(10px) rem(50px);
-  display: inline-block;
+  cursor: pointer;
+  transition: background 0.2s;
 
   &:hover {
     text-decoration: none;
@@ -20,6 +21,11 @@
     }
   }
 
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
   &.btn-secondary {
     color: $bg-color-1;
     background: $font-color-2;
@@ -27,6 +33,9 @@
     &:hover {
       background: darken($bg-color-2, 5%);
     }
+  }
+  &-small {
+    padding: rem(8px) rem(40px);
   }
 }
 

@@ -4,13 +4,14 @@ import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
 
+import { TABS } from '@components/Sidebar';
+
 import { setRouterParam } from '@utilities';
 import { BASEMAPS } from '@views/utils';
 
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
 import MapOffset from './MapOffset';
-import { getRouterParam } from '../../../utilities/routeParams';
 
 const MapView = ({
   // actions
@@ -21,6 +22,7 @@ const MapView = ({
   layers: { loaded: layersLoaded },
   layer_groups: { loaded: layerGroupsLoaded },
   activeLayers,
+  model_layer,
   defaultActiveGroups,
   location,
   site,
@@ -91,17 +93,21 @@ const MapView = ({
       {map => (
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
-            {activeLayers.map(l => (
-              <Layer
-                key={l.id}
-                {...l}
-                decodeParams={
-                  l.decodeParams
-                    ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
-                    : null
-                }
-              />
-            ))}
+            {query.tab === TABS.LAYERS &&
+              activeLayers.map(l => (
+                <Layer
+                  key={l.id}
+                  {...l}
+                  decodeParams={
+                    l.decodeParams
+                      ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
+                      : null
+                  }
+                />
+              ))}
+            {query.tab === TABS.MODELS && model_layer && (
+              <Layer {...model_layer} />
+            )}
           </LayerManager>
 
           <DrawingManager map={map} />

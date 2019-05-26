@@ -9,22 +9,32 @@ export const LOAD = createApiAction('models/LOAD');
 export const SELECT = 'models / SELECT';
 export const TOGGLE_INDICATOR = 'models / TOGGLE_INDICATOR';
 export const UDPATE_INDICATOR = 'models / UPDATE_INDICATOR';
+export const RESET_INDICATORS = 'models / RESET_INDICATORS';
+export const APPLY_INDICATORS = 'models / APPLY_INDICATORS';
 
 // Actions
-export const select = name => ({
+export const select = id => ({
   type: SELECT,
-  name,
+  id,
 });
 
-export const toggleIndicator = id => ({
+export const toggleIndicator = index => ({
   type: TOGGLE_INDICATOR,
-  id,
+  index,
 });
 
-export const updateIndicator = (id, indexableValue) => ({
+export const updateIndicator = (index, indexableValue) => ({
   type: UDPATE_INDICATOR,
-  id,
+  index,
   indexableValue,
+});
+
+export const applyIndicators = () => ({
+  type: APPLY_INDICATORS,
+});
+
+export const resetIndicators = () => ({
+  type: RESET_INDICATORS,
 });
 
 export const load = () => (dispatch, getState) => {

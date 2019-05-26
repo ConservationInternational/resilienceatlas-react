@@ -1,28 +1,22 @@
-import React, { useEffect, useCallback, Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
 import qs from 'qs';
-import cx from 'classnames';
 import Loader from '@shared/Loader';
 
-import { setRouterParam, getRouterParam } from '@utilities';
-import {
-  getIndexableIndicatorValueRange,
-  getValueDescriptionFromIndex,
-} from '../../../state/modules/predictive_models/utils';
+import { setRouterParam } from '@utilities';
 
-const [min, max] = getIndexableIndicatorValueRange();
-const indicatorRange = { min, max };
+import Indicator from './Indicator';
 
 const PredictiveModels = ({
   // actions
   loadModels,
   select,
-  toggleIndicator,
-  updateIndicator,
+  applyIndicators,
+  resetIndicators,
   // data
   models,
   model,
+  indicatorsState,
   modelsLoading,
-  modelsLoaded,
   selectedModel,
 }) => {
   useEffect(() => {
@@ -30,47 +24,36 @@ const PredictiveModels = ({
   }, []);
 
   useEffect(() => {
-    const { values } = getRouterParam('model', qs.parse);
-
-    if (model.name && values && values.length) {
-      values.forEach((value, index) => {
-        const indicator = model.indicators[index];
-
-        if (indicator.indexableValue !== value) {
-          updateIndicator(indicator.id, +value || null);
-        }
-      });
-    }
-  }, [modelsLoaded]);
-
-  useEffect(() => {
-    if (model.name) {
+    // detect only changes caused by user
+    if (model) {
       setRouterParam(
         'model',
-        qs.stringify({
-          name: selectedModel,
-          values: model.indicators.map(ind => ind.indexableValue),
-        }),
+        qs.stringify(
+          {
+            name: selectedModel,
+            values: model.indicators.map(ind => ind.indexableValue),
+          },
+          {
+            arrayFormat: 'comma',
+          },
+        ),
       );
     }
-  }, [model]);
+  }, [model, indicatorsState]);
 
-  const onSelect = useCallback(e => {
-    select(e.target.value);
-  }, []);
+  const hasChanged = useMemo(
+    () =>
+      model &&
+      model.indicators.some(
+        (ind, index) => ind.indexableValue !== indicatorsState[index],
+      ),
+    [model, indicatorsState],
+  );
 
-  const onToggle = useCallback(e => {
-    toggleIndicator(e.target.value);
-  }, []);
-
-  const onSliderChange = useCallback(e => {
-    const id = e.target.dataset.indicator;
-    const indexableValue = +e.target.value;
-
-    updateIndicator(id, indexableValue);
-  }, []);
-
-  const onReset = useCallback(() => {}, []);
+  const notDefault = useMemo(
+    () => model && model.indicators.some(ind => +ind.indexableValue !== 4),
+    [model],
+  );
 
   return (
     <div className="m-predictive-models">
@@ -84,106 +67,55 @@ const PredictiveModels = ({
         <select
           className="js-model-selector"
           aria-label="Select a model"
-          value={model.name || 'default'}
-          onChange={onSelect}
+          value={selectedModel || 'default'}
+          onChange={e => select(e.currentTarget.value)}
         >
           <option disabled value="default">
             Select a model
           </option>
           {models.map(({ id, name }) => (
-            <option key={id} value={name}>
+            <option key={id} value={id}>
               {name}
             </option>
           ))}
         </select>
       </div>
 
-      {!!model.name && (
+      {!!model && (
         <ul className="indicators-list">
           {model.categories.map(({ name, indicators }) => (
             <Fragment key={name}>
               <li className="category">{name}</li>
 
-              {indicators.map(
-                ({ name, value, id, indexableValue, humanReadableValue }) => {
-                  const valueExists = typeof value === 'number';
-                  const leftOffset =
-                    (indexableValue / indicatorRange.max) * 100;
-                  const handleSize = 12;
-
-                  return (
-                    <li key={id}>
-                      <div className="m-form-input--switch">
-                        <input
-                          type="checkbox"
-                          className="js-indicator-toggle"
-                          data-indicator={name}
-                          id={`indicator-${id}`}
-                          value={id}
-                          checked={valueExists}
-                          onChange={onToggle}
-                        />
-                        <label htmlFor={`indicator-${id}`} aria-label={name} />
-                        {name}
-                      </div>
-                      {valueExists && (
-                        <div
-                          className={cx('m-form-input--slider', {
-                            hidden: !valueExists,
-                          })}
-                        >
-                          <div className="slider-wrapper">
-                            <input
-                              type="range"
-                              className="js-indicator-slider"
-                              data-indicator={id}
-                              min={indicatorRange.min}
-                              max={indicatorRange.max}
-                              step="1"
-                              value={indexableValue}
-                              onChange={onSliderChange}
-                            />
-                            <span
-                              className="opacity"
-                              style={{
-                                width: `${leftOffset}%`,
-                              }}
-                            />
-                            <span
-                              className="tooltip"
-                              style={{
-                                left: `calc(${leftOffset}% - ${(leftOffset *
-                                  handleSize) /
-                                  100}px + ${handleSize / 2}px)`,
-                              }}
-                            >
-                              {getValueDescriptionFromIndex(indexableValue)}
-                            </span>
-                          </div>
-                          <div className="value">
-                            <input
-                              type="text"
-                              className="opacity-teller"
-                              value={humanReadableValue}
-                              disabled
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </li>
-                  );
-                },
-              )}
+              {indicators.map(indicator => (
+                <Indicator
+                  key={indicator.name}
+                  index={model.indicators.findIndex(
+                    ind => ind.id === indicator.id,
+                  )}
+                  {...indicator}
+                />
+              ))}
             </Fragment>
           ))}
         </ul>
       )}
 
-      <div className="actions" hidden={!model.name}>
-        <button type="button" className="btn -secondary" onClick={onReset}>
+      <div className="actions" hidden={!model}>
+        <button
+          type="button"
+          disabled={!notDefault}
+          className="btn btn-small -secondary"
+          onClick={resetIndicators}
+        >
           Reset
         </button>
-        <button type="button" className="btn -primary js-apply">
+        <button
+          type="button"
+          disabled={!hasChanged}
+          className="btn btn-small -primary"
+          onClick={applyIndicators}
+        >
           Apply
         </button>
       </div>

@@ -33,3 +33,25 @@ export const getHumanReadableIndicatorValueFromIndex = indexValue =>
 
 export const getValueDescriptionFromIndex = indexValue =>
   INDICATOR_VALUE_DESC[indexValue];
+
+// I'm not proud of necessity of this helper
+// but it helps to persist value from url more clearly
+export const buildIndicatorsFromState = (
+  state,
+  newIndicatorsState = state.indicators_state,
+) => {
+  const model = state.byId[state.selected];
+
+  return newIndicatorsState.reduce((acc, indexableValue, index) => {
+    const id = model.indicators[index];
+
+    return {
+      ...acc,
+      [id]: {
+        ...state.indicators[id],
+        indexableValue,
+        value: getRealIndicatorValueFromIndex(indexableValue),
+      },
+    };
+  }, {});
+};

@@ -102,9 +102,13 @@
   }
 
   .actions {
+    display: flex;
+    justify-content: space-around;
+
     .btn {
       color: $white;
       background: $font-color-2;
+      margin-bottom: 10px;
 
       &:hover {
         background: darken($bg-color-2, 5%);
