@@ -4,15 +4,15 @@ import React, { useEffect } from 'react';
 import Slides from '@components/Journey/Slides';
 
 const Journey = ({
+  loadCountries,
+  loadLayers,
   currentJourney,
   loadJourneys,
-  loadCountries,
   loadJourneyInfo,
-  loadLayers,
 }) => {
   useEffect(() => {
-    loadLayers();
     loadCountries();
+    loadLayers();
     loadJourneys(currentJourney);
     loadJourneyInfo(currentJourney);
   }, [currentJourney]);

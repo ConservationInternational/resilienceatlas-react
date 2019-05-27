@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Components
+import Loader from '@shared/Loader';
 import Landing from '@components/Journey/Landing';
 import Conclusion from '@components/Journey/Conclusion';
 import Embed from '@components/Journey/Embed';
@@ -8,6 +9,7 @@ import Chapter from '@components/Journey/Chapter';
 import Controls from '@components/Journey/Controls';
 
 const Slides = ({
+  loading,
   slidesInfo,
   currentStep,
   currentJourney,
@@ -18,16 +20,23 @@ const Slides = ({
 
   return (
     <div className="l-journey" id="journeyIndexView">
-      {journeyInfo.type === 'landing' && <Landing {...journeyInfo} />}
-      {journeyInfo.type === 'conclusion' && <Conclusion {...journeyInfo} />}
-      {journeyInfo.type === 'embed' && (
+      {loading && <Loader loading={loading} />}
+      {!loading && journeyInfo.type === 'landing' && (
+        <Landing {...journeyInfo} />
+      )}
+      {!loading && journeyInfo.type === 'conclusion' && (
+        <Conclusion {...journeyInfo} />
+      )}
+      {!loading && journeyInfo.type === 'embed' && (
         <Embed
           {...journeyInfo}
           currentStep={currentStep}
           currentJourney={currentJourney}
         />
       )}
-      {journeyInfo.type === 'chapter' && <Chapter {...journeyInfo} />}
+      {!loading && journeyInfo.type === 'chapter' && (
+        <Chapter {...journeyInfo} />
+      )}
       <Controls
         {...journeyInfo}
         id={currentJourney}
@@ -35,7 +44,7 @@ const Slides = ({
         currentStep={currentStep}
       />
 
-      {journeyInfo.type !== 'embed'}
+      {!loading && journeyInfo.type !== 'embed'}
       <p className={`credits ${journeyInfo.type}`}>
         <a
           target="_blank"

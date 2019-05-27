@@ -6,6 +6,7 @@ import { load as loadCountries } from '@modules/countries';
 import Slides from './component';
 
 const mapStateToProps = state => ({
+  loading: state.journey.loading,
   slidesInfo: state.journey.steps,
   currentStep: state.journey.currentStep,
   currentJourney: state.journey.id,

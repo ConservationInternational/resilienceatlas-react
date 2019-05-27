@@ -22,4 +22,5 @@ export const updateJourney = id => ({
   type: SET_CURRENT_JOURNEY,
   currentStep: 0,
   id,
+  loading: true,
 });
