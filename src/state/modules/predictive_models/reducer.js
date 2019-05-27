@@ -66,7 +66,10 @@ export default createReducer(initialState)({
 
     return {
       ...newState,
-      indicators: newIndicators,
+      indicators: {
+        ...indicators,
+        ...newIndicators,
+      },
     };
   },
 
