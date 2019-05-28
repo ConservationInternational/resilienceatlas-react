@@ -33,7 +33,7 @@ DEPENDENCIES
   capistrano-yarn
 
 RUBY VERSION
-   ruby 2.2.1p85
+   ruby 2.5.3p105
 
 BUNDLED WITH
    1.17.3
