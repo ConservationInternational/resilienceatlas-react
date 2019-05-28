@@ -60,7 +60,7 @@ export const DrawingManager: FC<P> = ({
       const layerBounds = layer.current.getBounds();
       map.invalidateSize();
 
-      map.fitBounds(layerBounds, { animate: true });
+      map.fitBounds(layerBounds, { animate: true, padding: [50, 50] });
 
       setParam('zoom', map.getZoom());
       setParam('center', qs.stringify(layerBounds.getCenter()));
