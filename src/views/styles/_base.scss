@@ -61,6 +61,10 @@ select {
   width: 100%;
 }
 
+[type='button'] {
+  cursor: pointer;
+}
+
 //Normalize gives an overflow: hidden which
 //makes some svg items seams cut in Firefox...
 svg:not(:root) {

@@ -4,7 +4,7 @@ import { Row, Column } from 'react-foundation';
 
 import MapView from '@components/Map';
 import Legend from '@components/Legend';
-import AnalysisContent from '@components/AnalysisPanel/AnalysisContent';
+import { LayerAnalysis } from '@components/AnalysisPanel/AnalysisContent';
 
 import Loader from '@shared/Loader';
 
@@ -30,7 +30,7 @@ const Report = () => (
 
           <Legend />
 
-          <AnalysisContent responsiveCharts width={670} />
+          <LayerAnalysis responsiveCharts width={670} />
 
           <a href="http://resilienceatlas.org/" className="logo">
             <span />

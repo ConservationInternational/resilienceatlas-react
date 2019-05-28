@@ -53,6 +53,7 @@
       display: flex;
       font-weight: 400;
       font-size: rem(14px);
+      color: $font-color-1;
 
       label {
         display: inline-block;
@@ -65,8 +66,16 @@
     .m-form-input--slider {
       position: relative;
 
+      .slider-wrapper {
+        &:hover {
+          .tooltip {
+            display: block;
+          }
+        }
+      }
+
       .tooltip {
-        display: block;
+        display: none;
         position: absolute;
         top: -60px;
         left: 0;
@@ -74,7 +83,7 @@
         border: 1px solid $gray-6;
         border-radius: 3px;
         background: $white;
-        box-shadow: 0 24px 56px 4px rgba(0, 0, 0, .2);
+        box-shadow: 0 24px 56px 4px rgba(0, 0, 0, 0.2);
         font-weight: 400;
         font-size: rem(14px);
         transform: translateX(-50%);
@@ -93,19 +102,23 @@
   }
 
   .actions {
+    display: flex;
+    justify-content: space-around;
+
     .btn {
       color: $white;
       background: $font-color-2;
+      margin-bottom: 10px;
 
       &:hover {
-        background: darken($bg-color-2,5%);
+        background: darken($bg-color-2, 5%);
       }
 
       &.-primary {
         background: $blue;
 
         &:hover {
-          background: darken($blue,5%);
+          background: darken($blue, 5%);
         }
       }
 
@@ -115,7 +128,7 @@
         background: transparent;
 
         &:hover {
-          background: rgba($blue, .1);
+          background: rgba($blue, 0.1);
         }
       }
     }

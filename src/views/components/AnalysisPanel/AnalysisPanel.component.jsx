@@ -1,11 +1,14 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import qs from 'qs';
 import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
 import { useDownloadableReport } from '@utilities/hooks/downloadableReport';
-import AnalysisContent from './AnalysisContent';
 import { useSearch } from '@utilities';
+import { TABS } from '../Sidebar';
+
+import { LayerAnalysis, PredictiveModelAnalysis } from './AnalysisContent';
 
 const ACCEPTED_EXTENSIONS = ['.json', '.geojson'];
 
@@ -22,10 +25,15 @@ export const AnalysisPanel: FC<P> = ({
   toggle,
   // data
   drawing,
+  location,
   countries,
   geojson,
   iso,
 }) => {
+  const sidebarTab = useMemo(
+    () => qs.parse(location.search, { ignoreQueryPrefix: true }).tab,
+    [location],
+  );
   useEffect(() => {
     loadCountries();
   }, []);
@@ -99,7 +107,9 @@ export const AnalysisPanel: FC<P> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const { searchInput, result, noResults } = useSearch('search', countries, {
     valueKey: 'name',
-    onSelect: ({ bbox }) => setGeojson(JSON.parse(bbox)),
+    onSelect: ({ geometry }) => {
+      setGeojson(JSON.parse(geometry));
+    },
   });
   const downloadableReport = useDownloadableReport();
 
@@ -223,7 +233,11 @@ export const AnalysisPanel: FC<P> = ({
               </Tabs>
             ) : (
               <>
-                <AnalysisContent />
+                {sidebarTab === TABS.MODELS ? (
+                  <PredictiveModelAnalysis />
+                ) : (
+                  <LayerAnalysis />
+                )}
                 <div className="buttons">
                   <a className="btn -primary" {...downloadableReport}>
                     Download PDF report

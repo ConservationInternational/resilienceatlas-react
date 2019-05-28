@@ -12,7 +12,7 @@ import Tabs from '@shared/Tabs';
 
 import { setRouterParam } from '@utilities';
 
-const TABS = {
+export const TABS = {
   LAYERS: 'layers',
   MODELS: 'models',
 };
@@ -30,7 +30,7 @@ const Sidebar: FC<P> = ({
   toggleOpen,
   toggleAnalysis,
 }) => {
-  const { tab = TABS.LAYERS } = qs.parse(search, {
+  const { model, tab = model ? TABS.MODELS : TABS.LAYERS } = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
 

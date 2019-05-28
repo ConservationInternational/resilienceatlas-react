@@ -6,10 +6,9 @@
   position: relative;
 
   &.is-loading {
-
-    &:after{
+    &:after {
       left: calc(50% - (30px / 3));
-      margin: -(30px/2) 0 0 -(30px/2);
+      margin: -(30px/2) 0 0 - (30px/2);
     }
   }
 
