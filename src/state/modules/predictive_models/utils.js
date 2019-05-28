@@ -41,6 +41,7 @@ export const buildIndicatorsFromState = (
   newIndicatorsState = state.indicators_state,
 ) => {
   const model = state.byId[state.selected];
+  if (!model) return {};
 
   return newIndicatorsState.reduce((acc, indexableValue, index) => {
     const id = model.indicators[index];

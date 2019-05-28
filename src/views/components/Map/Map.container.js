@@ -6,7 +6,7 @@ import {
   load as loadLayers,
   setActives,
   getGrouped,
-  getActives,
+  makeActives,
   makeDefaultActives,
 } from '@modules/layers';
 import { load as loadLayerGroups, openBatch } from '@modules/layer_groups';
@@ -18,6 +18,7 @@ const makeMapStateToProps = () => {
   const groupedLayers = getGrouped();
   const defaultActives = makeDefaultActives();
   const getModelLayer = makeModelLayer();
+  const getActives = makeActives();
 
   const mapStateToProps = state => ({
     site: state.site,

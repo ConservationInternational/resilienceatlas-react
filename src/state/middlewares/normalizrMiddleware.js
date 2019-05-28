@@ -6,11 +6,11 @@ export default store => next => action => {
   let { includedSchema } = action.meta || {};
 
   if (schema && payload && !error) {
-    const { data, included: includedData, meta } = payload;
+    const { data, included: includedData = [], meta } = payload;
     const normalized = normalize(data, schema);
     let included;
 
-    if (includedSchema && includedData) {
+    if (includedSchema) {
       if (includedSchema === 'union') {
         includedSchema = createUnion(includedData);
       }

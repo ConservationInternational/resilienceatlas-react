@@ -56,6 +56,7 @@ class LegendChart extends React.PureComponent {
                 <linearGradient id="colorX" x1="0" y1="0" x2="0" y2="1">
                   {bucket.map((color, i) => (
                     <stop
+                      key={`${color}_${i}`}
                       offset={`${(100 / bucket.length) * i}%`}
                       stopColor={color}
                       stopOpacity={1}

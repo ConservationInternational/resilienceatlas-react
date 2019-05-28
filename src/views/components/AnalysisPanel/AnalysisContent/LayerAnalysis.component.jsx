@@ -6,13 +6,13 @@ interface P {
   geojson: L.GeoJSON;
 }
 
-export const BarChartsList: FC<P> = ({
+export const LayerAnalysis: FC<P> = ({
   responsiveCharts,
   activeLayers,
-  layers: { actives, loaded },
+  loaded,
   geojson,
 }) => {
-  if (actives.length && !loaded)
+  if (activeLayers.length && !loaded)
     return <center>Waiting until layers loaded...</center>;
 
   const analyzable = activeLayers.filter(l => l.analysisSuitable);

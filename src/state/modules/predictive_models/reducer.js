@@ -50,7 +50,7 @@ export default createReducer(initialState)({
   }),
 
   [LOAD.SUCCESS]: (state, { payload, included }) => {
-    const { models } = payload.entities;
+    const { models = {} } = payload.entities;
     const { categories, indicators } = included.entities;
     const newState = {
       ...state,

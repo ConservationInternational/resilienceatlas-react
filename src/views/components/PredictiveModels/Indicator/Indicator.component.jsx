@@ -5,7 +5,6 @@ import {
   getIndexableIndicatorValueRange,
   getValueDescriptionFromIndex,
   getHumanReadableIndicatorValueFromIndex,
-  getRealIndicatorValueFromIndex,
 } from '@modules/predictive_models/utils';
 import { useInput, useDebounce } from '@utilities/hooks';
 

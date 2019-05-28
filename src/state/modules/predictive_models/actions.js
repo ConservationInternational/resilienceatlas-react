@@ -39,10 +39,10 @@ export const resetIndicators = () => ({
 
 export const load = () => (dispatch, getState) => {
   const state = getState();
-  const siteScope = state.site.id;
+  const site_scope = state.site.id;
 
   return dispatch(
-    api(LOAD, ({ get }) => get(URL_MODELS, { params: { siteScope } }), {
+    api(LOAD, ({ get }) => get(URL_MODELS, { params: { site_scope } }), {
       schema: [model],
       includedSchema: 'union',
     }),

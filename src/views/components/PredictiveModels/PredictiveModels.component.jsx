@@ -18,10 +18,13 @@ const PredictiveModels = ({
   indicatorsState,
   modelsLoading,
   selectedModel,
+  siteLoaded,
 }) => {
   useEffect(() => {
-    loadModels();
-  }, []);
+    if (siteLoaded) {
+      loadModels();
+    }
+  }, [siteLoaded]);
 
   useEffect(() => {
     // detect only changes caused by user

@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  getActives,
+  makeActives,
   reorder,
   toggle as toggleLayer,
   setOpacity,
@@ -16,6 +16,7 @@ import Legend from './Legend.component';
 
 const makeMapStateToProps = () => {
   const getPredictiveModelLayer = makePredictiveModelLayer();
+  const getActives = makeActives();
 
   const mapStateToProps = (state, { location }) => {
     const { tab } = qs.parse(location.search, { ignoreQueryPrefix: true });
