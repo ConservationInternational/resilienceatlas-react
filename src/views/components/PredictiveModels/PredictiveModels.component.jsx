@@ -1,102 +1,129 @@
-import React from 'react';
-import cx from 'classnames';
+import React, { Fragment, useEffect, useMemo } from 'react';
+import qs from 'qs';
+import Loader from '@shared/Loader';
+
+import { setRouterParam } from '@utilities';
+
+import Indicator from './Indicator';
 
 const PredictiveModels = ({
-  models = [],
-  model = { categories: [] },
-  indicatorRange = {},
-}) => (
-  <div className="m-predictive-models">
-    <p>
-      Select a combination of interventions. There are nine levels: extremely,
-      very, strongly and moderately less important, equally, and moderately,
-      strongly, very and extremely more important.
-    </p>
-    <div className="model-selector">
-      <select className="js-model-selector" aria-label="Select a model">
-        <option disabled selected={!model.name}>
-          Select a model
-        </option>
-        {models.map(({ name }) => (
-          <option value={name} selected={name === module.name}>
-            {name}
+  // actions
+  loadModels,
+  select,
+  applyIndicators,
+  resetIndicators,
+  // data
+  models,
+  model,
+  indicatorsState,
+  modelsLoading,
+  selectedModel,
+  siteLoaded,
+}) => {
+  useEffect(() => {
+    if (siteLoaded) {
+      loadModels();
+    }
+  }, [siteLoaded]);
+
+  useEffect(() => {
+    // detect only changes caused by user
+    if (model) {
+      setRouterParam(
+        'model',
+        qs.stringify(
+          {
+            name: selectedModel,
+            values: model.indicators.map(ind => ind.indexableValue),
+          },
+          {
+            arrayFormat: 'comma',
+          },
+        ),
+      );
+    }
+  }, [model, indicatorsState]);
+
+  const hasChanged = useMemo(
+    () =>
+      model &&
+      model.indicators.some(
+        (ind, index) => ind.indexableValue !== indicatorsState[index],
+      ),
+    [model, indicatorsState],
+  );
+
+  const notDefault = useMemo(
+    () => model && model.indicators.some(ind => +ind.indexableValue !== 4),
+    [model],
+  );
+
+  return (
+    <div className="m-predictive-models">
+      <Loader loading={modelsLoading} />
+      <p>
+        Select a combination of interventions. There are nine levels: extremely,
+        very, strongly and moderately less important, equally, and moderately,
+        strongly, very and extremely more important.
+      </p>
+      <div className="model-selector">
+        <select
+          className="js-model-selector"
+          aria-label="Select a model"
+          value={selectedModel || 'default'}
+          onChange={e => select(e.currentTarget.value)}
+        >
+          <option disabled value="default">
+            Select a model
           </option>
-        ))}
-      </select>
+          {models.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {!!model && (
+        <ul className="indicators-list">
+          {model.categories.map(({ name, indicators }) => (
+            <Fragment key={name}>
+              <li className="category">{name}</li>
+
+              {indicators.map(indicator => (
+                <Indicator
+                  key={indicator.name}
+                  index={model.indicators.findIndex(
+                    ind => ind.id === indicator.id,
+                  )}
+                  {...indicator}
+                />
+              ))}
+            </Fragment>
+          ))}
+        </ul>
+      )}
+
+      <div className="actions" hidden={!model}>
+        <button
+          type="button"
+          disabled={!notDefault}
+          className="btn btn-small -secondary"
+          onClick={resetIndicators}
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          disabled={!hasChanged}
+          className="btn btn-small -primary"
+          onClick={applyIndicators}
+        >
+          Apply
+        </button>
+      </div>
     </div>
-
-    {!!model.name && (
-      <ul className="indicators-list">
-        {model.categories.map(({ name, indicators }) => (
-          <>
-            <li className="category">{name}</li>
-
-            {indicators.map(
-              ({ name, value, id, indexableValue, humanReadableValue }) => {
-                const sad = typeof value === 'number';
-
-                return (
-                  <li>
-                    <div className="m-form-input--switch">
-                      <input
-                        type="checkbox"
-                        className="js-indicator-toggle"
-                        data-indicator={name}
-                        id={`indicator-${id}`}
-                        value={name}
-                        checked={sad}
-                      />
-                      <label htmlFor={`indicator-${id}`} aria-label={name} />
-                      {name}
-                    </div>
-                    <div
-                      className={cx('m-form-input--slider', { hidden: !sad })}
-                    >
-                      <div className="slider-wrapper">
-                        <input
-                          type="range"
-                          className="js-indicator-slider"
-                          data-indicator={name}
-                          min={indicatorRange.min}
-                          max={indicatorRange.max}
-                          step="1"
-                          value={indexableValue}
-                        />
-                        <span
-                          className="opacity"
-                          style={{
-                            width: (indexableValue / indicatorRange.max) * 100,
-                          }}
-                        />
-                        <span className="tooltip" hidden />
-                      </div>
-                      <div className="value">
-                        <input
-                          type="text"
-                          className="opacity-teller"
-                          value={humanReadableValue}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                  </li>
-                );
-              },
-            )}
-          </>
-        ))}
-      </ul>
-    )}
-
-    <div className="actions" hidden={!model.name}>
-      <button type="button" className="btn -secondary js-reset">
-        Reset
-      </button>
-      <button type="button" className="btn -primary js-apply">
-        Apply
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 export default PredictiveModels;

@@ -895,6 +895,34 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@carto/carto.js@^4.1.11":
+  version "4.1.11"
+  resolved "https://registry.yarnpkg.com/@carto/carto.js/-/carto.js-4.1.11.tgz#884daf8621e3293744eafba8e67fa26aff171ceb"
+  integrity sha512-cjO+wM5QAaPx49uXgRB+B7Eh5SqR8gjrWqoEuK/+M28qdoTK3kQ3uOHVWiMh8DfrBXL0UTUoTka5Y4Az2WIg8g==
+  dependencies:
+    "@carto/zera" "1.0.7"
+    backbone "1.2.3"
+    backbone-poller "^1.1.3"
+    camshaft-reference "0.34.0"
+    carto cartodb/carto#master
+    clip-path-polygon "0.1.12"
+    d3-array "1.2.1"
+    d3-format "1.2.0"
+    d3-time-format "2.1.0"
+    jquery "2.1.4"
+    mustache "1.1.0"
+    perfect-scrollbar "git://github.com/CartoDB/perfect-scrollbar.git#master"
+    postcss "5.0.19"
+    promise-polyfill "^6.1.0"
+    torque.js CartoDB/torque#master
+    underscore "1.8.3"
+    whatwg-fetch "^2.0.3"
+
+"@carto/zera@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@carto/zera/-/zera-1.0.7.tgz#2d9a2d5971058daa4449a75e006d43d61d89e0f2"
+  integrity sha512-I++EJMuybbNohLsaWMpEcs2gSbUhf0JHDgubT6b63kIB8ox5NS9LHeE39vS1DOUQNlDubLp84QDrSIt/aMpA7A==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -2073,6 +2101,28 @@ babylon@^6.18.0:
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
   integrity sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
 
+backbone-poller@^1.1.3:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/backbone-poller/-/backbone-poller-1.1.4.tgz#8f88b182820702af653e6667f320ececbcbcbec6"
+  integrity sha512-h+2XFKG0LhsB2dd5cWowV+ySyn46loPk5YL3DWdnRI34KbruI2P4ZNJh/qCl90n3rkAv1laEj4lfSUsbiWjDNQ==
+  dependencies:
+    backbone ">=0.9.*"
+    underscore "*"
+
+backbone@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/backbone/-/backbone-1.2.3.tgz#c22cfd07fc86ebbeae61d18929ed115e999d65b9"
+  integrity sha1-wiz9B/yG676uYdGJKe0RXpmdZbk=
+  dependencies:
+    underscore ">=1.7.0"
+
+backbone@>=0.9.*:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/backbone/-/backbone-1.4.0.tgz#54db4de9df7c3811c3f032f34749a4cd27f3bd12"
+  integrity sha512-RLmDrRXkVdouTg38jcgHhyQ/2zjg7a8E6sz2zxfz21Hh17xDJYUHBZimVIt5fUyS8vbfpeSmTL3gUjTEvUV3qQ==
+  dependencies:
+    underscore ">=1.8.3"
+
 bail@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/bail/-/bail-1.0.4.tgz#7181b66d508aa3055d3f6c13f0a0c720641dde9b"
@@ -2456,6 +2506,11 @@ camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
+camshaft-reference@0.34.0:
+  version "0.34.0"
+  resolved "https://registry.yarnpkg.com/camshaft-reference/-/camshaft-reference-0.34.0.tgz#61fee393650dd5b63b6dbf2131c57101f657979d"
+  integrity sha512-oz/NyTrgQBgWBDEbjC/s00XWp/O6qxjOJpNffSlNuT30BvGNsEmfWAgMThOD9SzDkuVgTJbHZGlBr4vkYt5Bew==
+
 caniuse-api@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0"
@@ -2477,6 +2532,22 @@ capture-exit@^1.2.0:
   integrity sha1-HF/MSJ/QqwDU8ax64QcuMXP7q28=
   dependencies:
     rsvp "^3.3.3"
+
+carto@cartodb/carto#master, "carto@github:cartodb/carto#master":
+  version "0.15.1-cdb5"
+  uid "85881d99dd7fcf2c4e16478b04db67108d27a50c"
+  resolved "https://codeload.github.com/cartodb/carto/tar.gz/85881d99dd7fcf2c4e16478b04db67108d27a50c"
+  dependencies:
+    mapnik-reference "~6.0.2"
+    optimist "~0.6.0"
+    underscore "1.8.3"
+
+cartocolor@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/cartocolor/-/cartocolor-4.0.0.tgz#841a3222d8b5b22718d9d545b1e5b972cb26eb36"
+  integrity sha1-hBoyIti1sicY2dVFseW5cssm6zY=
+  dependencies:
+    colorbrewer "1.0.0"
 
 case-sensitive-paths-webpack-plugin@2.2.0:
   version "2.2.0"
@@ -2619,6 +2690,13 @@ cli-width@^2.0.0:
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
+clip-path-polygon@0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/clip-path-polygon/-/clip-path-polygon-0.1.12.tgz#98afa76441ea6c12567cb10b4a0fa456badeda45"
+  integrity sha1-mK+nZEHqbBJWfLELSg+kVrre2kU=
+  dependencies:
+    jquery "2.1.4"
+
 cliui@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-3.2.0.tgz#120601537a916d29940f934da3b48d585a39213d"
@@ -2717,6 +2795,11 @@ color@^3.0.0:
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
+
+colorbrewer@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/colorbrewer/-/colorbrewer-1.0.0.tgz#4f97333b969ba7612382be4bc3394b341fb4c8a2"
+  integrity sha1-T5czO5abp2Ejgr5LwzlLNB+0yKI=
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.7"
@@ -3288,6 +3371,11 @@ d3-array@1, d3-array@^1.1.1, d3-array@^1.2.0:
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.4.tgz#635ce4d5eea759f6f605863dbcfc30edc737f71f"
   integrity sha512-KHW6M86R+FUPYGb3R5XiYjXPq7VzwxZ22buHhAEVG5ztoEcZZMLov530mmccaqA1GghZArjQV46fuc8kUqhhHw==
 
+d3-array@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.1.tgz#d1ca33de2f6ac31efadb8e050a021d7e2396d5dc"
+  integrity sha512-CyINJQ0SOUHojDdFDH4JEM0552vCR1utGyLHegJHyYH0JyCpSeTPxi4OBqHMA2jJZq4NH782LtaJWBImqI/HBw==
+
 "d3-array@^1.2.0 || 2", d3-array@^2.0.2, d3-array@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-2.0.3.tgz#9c0531eda701e416f28a030e3d4e6179ba74f19f"
@@ -3347,6 +3435,11 @@ d3-format@1, d3-format@^1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.3.2.tgz#6a96b5e31bcb98122a30863f7d92365c00603562"
   integrity sha512-Z18Dprj96ExragQ0DeGi+SYPQ7pPfRMtUXtsg/ChVIKNBCzjO8XYJvRTC1usblx52lqge56V5ect+frYTQc8WQ==
+
+d3-format@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.2.0.tgz#6b480baa886885d4651dc248a8f4ac9da16db07a"
+  integrity sha1-a0gLqohohdRlHcJIqPSsnaFtsHo=
 
 d3-geo@^1.11.3:
   version "1.11.3"
@@ -3441,6 +3534,13 @@ d3-time-format@2, d3-time-format@^2.1.3:
   dependencies:
     d3-time "1"
 
+d3-time-format@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/d3-time-format/-/d3-time-format-2.1.0.tgz#a1d9540a1dc498817d44066b121b19a4a83e3531"
+  integrity sha512-mqTsfDTylgwE3YE/VNs9oB2OGX274fO0B5j1irbgLQI+X3FPoJg25pesNxrcdZ2nBeRx/6sHDJlDyMIjWL0BGQ==
+  dependencies:
+    d3-time "1"
+
 d3-time@1, d3-time@^1.0.10, d3-time@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/d3-time/-/d3-time-1.0.11.tgz#1d831a3e25cd189eb256c17770a666368762bbce"
@@ -3455,6 +3555,11 @@ d3-voronoi@^1.1.2, d3-voronoi@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/d3-voronoi/-/d3-voronoi-1.1.4.tgz#dd3c78d7653d2bb359284ae478645d95944c8297"
   integrity sha512-dArJ32hchFsrQ8uMiTBLq256MpnZjeuBtdHpaDlYuQyjU0CVzCJl/BVW+SkszaAeH95D/8gxqAhgx0ouAWAfRg==
+
+d3@3.5.17:
+  version "3.5.17"
+  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
+  integrity sha1-vEZ0gAQ3iyGjYMn8fPUjF5B2L7g=
 
 damerau-levenshtein@^1.0.0, damerau-levenshtein@^1.0.4:
   version "1.0.4"
@@ -3948,6 +4053,11 @@ es-to-primitive@^1.2.0:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+es6-promise@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.1.2.tgz#795e25ceb47f7babb263d151afbedd92d18e6a07"
+  integrity sha1-eV4lzrR/e6uyY9FRr77dktGOagc=
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -6466,7 +6576,12 @@ joi@^11.1.1:
     isemail "3.x.x"
     topo "2.x.x"
 
-js-base64@^2.1.8:
+jquery@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.1.4.tgz#228bde698a0c61431dc2630a6a154f15890d2317"
+  integrity sha1-IoveaYoMYUMdwmMKahVPFYkNIxc=
+
+js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
   integrity sha512-M7kLczedRMYX4L8Mdh4MzyAMM9O5osx+4FcOQuTvr3A9F2D9S5JXheN0ewNbrvK2UatkTRhL5ejGmGSjNMiZuw==
@@ -7109,6 +7224,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+mapnik-reference@~6.0.2:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/mapnik-reference/-/mapnik-reference-6.0.5.tgz#d52319e1df88e5a07a811e84def2a1a423b6f05f"
+  integrity sha1-1SMZ4d+I5aB6gR6E3vKhpCO28F8=
+
 martinez-polygon-clipping@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/martinez-polygon-clipping/-/martinez-polygon-clipping-0.4.3.tgz#a3971ddf1da147104b5d0fbbf68f728bb62885c1"
@@ -7446,6 +7566,11 @@ multicast-dns@^6.0.1:
   dependencies:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
+
+mustache@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-1.1.0.tgz#0d9a554b4b3f9e248e6c2742c2579d618d2ff00f"
+  integrity sha1-DZpVS0s/niSObCdCwledYY0v8A8=
 
 mute-stream@0.0.7:
   version "0.0.7"
@@ -7922,7 +8047,7 @@ opn@^5.1.0:
   dependencies:
     is-wsl "^1.1.0"
 
-optimist@^0.6.1:
+optimist@^0.6.1, optimist@~0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   integrity sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
@@ -8240,6 +8365,10 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+"perfect-scrollbar@git://github.com/CartoDB/perfect-scrollbar.git#master":
+  version "0.6.17"
+  resolved "git://github.com/CartoDB/perfect-scrollbar.git#f2b66c76ad3718d3c704bd7e1693ea382e44e64d"
 
 performance-now@^2.1.0:
   version "2.1.0"
@@ -8935,6 +9064,11 @@ postcss-unique-selectors@^4.0.1:
     postcss "^7.0.0"
     uniqs "^2.0.0"
 
+postcss-value-parser@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
+  integrity sha1-h/OPnxj3dKSrTIojL1xc6IcqnRU=
+
 postcss-value-parser@^3.0.0, postcss-value-parser@^3.3.0, postcss-value-parser@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
@@ -8948,6 +9082,15 @@ postcss-values-parser@^2.0.0, postcss-values-parser@^2.0.1:
     flatten "^1.0.2"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
+
+postcss@5.0.19:
+  version "5.0.19"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.0.19.tgz#b6342a01dc75b8cab7e968afda96aefc67f888af"
+  integrity sha1-tjQqAdx1uMq36Wiv2pau/Gf4iK8=
+  dependencies:
+    js-base64 "^2.1.9"
+    source-map "^0.5.1"
+    supports-color "^3.1.2"
 
 postcss@^6.0.1, postcss@^6.0.23:
   version "6.0.23"
@@ -9034,6 +9177,11 @@ promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
+
+promise-polyfill@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.1.0.tgz#dfa96943ea9c121fca4de9b5868cb39d3472e057"
+  integrity sha1-36lpQ+qcEh/KTem1hoyznTRy4Fc=
 
 promise@8.0.2:
   version "8.0.2"
@@ -10437,6 +10585,11 @@ simple-git@^1.85.0:
   dependencies:
     debug "^4.0.1"
 
+simple-statistics@^0.9.0:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/simple-statistics/-/simple-statistics-0.9.2.tgz#3e35cb10308fc76963aa4ee7252e6a6ea10d28e4"
+  integrity sha1-PjXLEDCPx2ljqk7nJS5qbqENKOQ=
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
@@ -10571,7 +10724,7 @@ source-map@^0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7:
+source-map@^0.5.0, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
@@ -11179,6 +11332,15 @@ toposort@^2.0.2:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
   integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
 
+"torque.js@github:cartodb/torque#master":
+  version "3.1.1"
+  resolved "https://codeload.github.com/cartodb/torque/tar.gz/4d2540ef98018775cfcd8fee8df2c39c6fc13230"
+  dependencies:
+    carto cartodb/carto#master
+    d3 "3.5.17"
+    turbo-carto "^0.21.1"
+    turf-jenks "~1.0.1"
+
 tough-cookie@^2.3.3, tough-cookie@^2.3.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.5.0.tgz#cd9fb2a0aa1d5a12b473bd9fb96fa3dcff65ade2"
@@ -11251,6 +11413,25 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+turbo-carto@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/turbo-carto/-/turbo-carto-0.21.1.tgz#d104c16a7d0a46de01ccbda31258f66cf1cb5edc"
+  integrity sha512-MijaCzgz4cRjKMLaNxhMBq/lw+bb8cs+ZwGsHMAeJ8nTVWN7LY4b5LDBMIyxALmGiRkY8ziglmAoMU+xYnSTMA==
+  dependencies:
+    cartocolor "4.0.0"
+    colorbrewer "1.0.0"
+    debug "^3.1.0"
+    es6-promise "3.1.2"
+    postcss "5.0.19"
+    postcss-value-parser "3.3.0"
+
+turf-jenks@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/turf-jenks/-/turf-jenks-1.0.1.tgz#5c72aea13a716eff2f0023a72cfa549a00202d7f"
+  integrity sha1-XHKuoTpxbv8vACOnLPpUmgAgLX8=
+  dependencies:
+    simple-statistics "^0.9.0"
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
@@ -11296,6 +11477,16 @@ uglify-js@^3.1.4:
   dependencies:
     commander "~2.20.0"
     source-map "~0.6.1"
+
+underscore@*, underscore@>=1.7.0, underscore@>=1.8.3:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
+
+underscore@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+  integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
@@ -12244,6 +12435,11 @@ whatwg-fetch@3.0.0, whatwg-fetch@>=0.10.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
   integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
+
+whatwg-fetch@^2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
+  integrity sha512-dcQ1GWpOD/eEQ97k66aiEVpNnapVj90/+R+SXTPYGHpYBBypfKJEQjLrvMZ7YXbKm21gXd4NcuxUTjiv1YtLng==
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.3.0"

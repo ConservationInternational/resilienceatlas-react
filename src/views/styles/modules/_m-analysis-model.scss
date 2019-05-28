@@ -16,7 +16,7 @@
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .1em;
+      letter-spacing: 0.1em;
       line-height: 35px;
       border: 0;
       background: transparent;
@@ -41,7 +41,7 @@
       background: $font-color-2;
 
       &:hover {
-        background: darken($bg-color-2,5%);
+        background: darken($bg-color-2, 5%);
       }
 
       &.-primary {
@@ -49,7 +49,7 @@
         background: $blue;
 
         &:hover {
-          background: darken($blue,5%);
+          background: darken($blue, 5%);
         }
       }
 
@@ -59,7 +59,7 @@
         background: transparent;
 
         &:hover {
-          background: rgba($blue, .1);
+          background: rgba($blue, 0.1);
         }
       }
 
@@ -101,11 +101,11 @@
           height: rem(9px);
           background: $white;
           border-radius: rem(9px);
-          border: 1px solid #C0C0C0;
+          border: 1px solid #c0c0c0;
           position: absolute;
           top: rem(11px);
           left: rem(16px);
-          transition: .2s $easeInOutSine;
+          transition: 0.2s $easeInOutSine;
         }
 
         &.selected {

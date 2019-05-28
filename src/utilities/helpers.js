@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { PORT, isProd } from '../state/utils/api';
 
 /**
  * @param  {string} key key to sort on
@@ -91,4 +92,12 @@ export const formatNumber = ({
   }
 
   return 0;
+};
+
+export const getSubdomain = () => {
+  const host = isProd
+    ? PORT.replace(/(^http(s?):\/\/)|(\.com)$/g, '')
+    : `localhost:${window.location.port}`;
+
+  return window.location.host.split('.')[0].replace(host, '');
 };

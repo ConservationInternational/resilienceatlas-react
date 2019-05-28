@@ -14,14 +14,25 @@ const initialState = {
   link_url: null,
   header_color: null,
   logo_url: '',
+
+  loading: false,
+  loaded: false,
+  error: null,
 };
 
 export default createReducer(initialState)({
+  [LOAD.REQUEST]: state => ({
+    ...state,
+    error: null,
+    loading: true,
+  }),
+
   [LOAD.SUCCESS]: (state, { payload }) => {
     const data = payload.entities.site_scopes[payload.result];
 
     return {
       ...state,
+      id: data.id,
       has_analysis: data.subdomain ? data.has_analysis : true,
       name: data.name || '',
       subdomain: data.subdomain || '',
@@ -34,11 +45,16 @@ export default createReducer(initialState)({
       link_url: data.linkback_url || null,
       header_color: data.header_color || null,
       logo_url: data.logo_url || '/images/logo-ci.png',
+
+      loading: false,
+      loaded: true,
     };
   },
 
-  [LOAD.FAIL]: state => ({
+  [LOAD.FAIL]: (state, { error }) => ({
     ...initialState,
     logo_url: '/images/logo-ci.png',
+    loading: false,
+    error,
   }),
 });

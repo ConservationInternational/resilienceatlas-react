@@ -18,6 +18,7 @@
     ]
   },
   "dependencies": {
+    "@carto/carto.js": "^4.1.11",
     "axios": "^0.18.0",
     "customize-cra": "^0.2.12",
     "foundation-sites": "^6.5.3",

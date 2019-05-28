@@ -50,8 +50,9 @@ export const useWidget = (
         q,
       },
     };
-  }, [geojson]);
-  const [data, loading, loaded, error] = useAxios(query, [], parseData);
+  }, [geojson, analysisQuery, analysisBody]);
+
+  const [data, loading, loaded, error] = useAxios(query, [query], parseData);
 
   const rootWidgetProps = useCallback(
     () => ({

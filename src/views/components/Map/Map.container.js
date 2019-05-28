@@ -6,16 +6,19 @@ import {
   load as loadLayers,
   setActives,
   getGrouped,
-  getActives,
+  makeActives,
   makeDefaultActives,
 } from '@modules/layers';
 import { load as loadLayerGroups, openBatch } from '@modules/layer_groups';
+import { makeLayer as makeModelLayer } from '@modules/predictive_models';
 
 import MapView from './Map.component';
 
 const makeMapStateToProps = () => {
   const groupedLayers = getGrouped();
   const defaultActives = makeDefaultActives();
+  const getModelLayer = makeModelLayer();
+  const getActives = makeActives();
 
   const mapStateToProps = state => ({
     site: state.site,
@@ -25,6 +28,7 @@ const makeMapStateToProps = () => {
     basemap: state.map.basemap,
     layer_groups: state.layer_groups,
     activeLayers: getActives(state),
+    model_layer: getModelLayer(state),
     defaultActiveGroups: defaultActives(state),
     grouped: groupedLayers(state),
   });
