@@ -35,7 +35,12 @@ class LegendChart extends React.PureComponent {
   };
 
   render() {
-    const { limit = 100, data, bucket } = this.props;
+    const {
+      limit = 100,
+      data,
+      bucket,
+      metadata: { xLabel, yLabel },
+    } = this.props;
     const len = data.length;
     const min = data[0];
     const mid = data[Math.round(len / 2) - 1];
@@ -100,7 +105,12 @@ class LegendChart extends React.PureComponent {
                 fillOpacity={1}
                 activeDot={{ r: 3, stroke: '#8884d8' }}
               />
-              <Tooltip />
+              <Tooltip
+                formatter={value => [yLabel.replace('{{value}}', value), 'Y']}
+                labelFormatter={value =>
+                  `X : ${xLabel.replace('{{value}}', value)}`
+                }
+              />
               <ReferenceArea
                 x1={min.x}
                 x2={limit}
