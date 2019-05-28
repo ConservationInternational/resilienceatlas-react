@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   AreaChart,
@@ -19,12 +20,31 @@ class LegendChart extends React.PureComponent {
     bucket: [],
   };
 
+  static propTypes = {
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+      }),
+    ).isRequired,
+    bucket: PropTypes.arrayOf(PropTypes.string),
+    limit: PropTypes.number.isRequired,
+    metadata: PropTypes.shape({
+      xLabel: PropTypes.string.isRequired,
+      yLabel: PropTypes.string.isRequired,
+    }).isRequired,
+    changeLimit: PropTypes.func.isRequired,
+  };
+
   state = { isReady: false, activeCoordinate: null };
 
   componentDidMount() {
     // Ok, I'm not very proud of this, but it works... WHY?!!!!
     setTimeout(() => {
-      this.setState({ isReady: true });
+      this.setState((state, { limit, data }) => ({
+        isReady: true,
+        activeCoordinate: data.find(v => v.x === limit),
+      }));
     }, 100);
   }
 
@@ -122,12 +142,12 @@ class LegendChart extends React.PureComponent {
                 <Label
                   value={activeCoordinate ? activeCoordinate.y : max.y}
                   style={{ fontSize: 10 }}
-                  position="insideTop"
+                  position={limit > 20 ? 'insideTop' : 'top'}
                 />
                 <Label
                   value={limit}
                   style={{ fontSize: 10 }}
-                  position="insideRight"
+                  position={limit > 20 ? 'insideRight' : 'right'}
                 />
               </ReferenceArea>
             </AreaChart>
