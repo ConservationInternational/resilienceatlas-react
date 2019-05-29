@@ -17,15 +17,14 @@ const Controls = ({
 
   return (
     <div className={cx('m-controls', { 'is-first': currentStep === 0 })}>
-      <button
-        type="button"
+      <NavLink
+        to={`/journeys/${id}?step=${currentStep}`}
         id="btn-prev"
-        mode="sub"
         className={cx({ 'is-hidden': currentStep === 0 })}
         onClick={() => setCurrentStep(currentStep - 1)}
       >
         back
-      </button>
+      </NavLink>
       <NavLink
         to={`/journeys/${id + 1}`}
         id="btn-next-journey"
@@ -37,14 +36,14 @@ const Controls = ({
       >
         Next journey
       </NavLink>
-      <button
-        type="button"
+      <NavLink
+        to={`/journeys/${id}?step=${currentStep}`}
         id="btn-next"
-        className={cx({ 'is-hidden': currentStep === slidesInfo.length - 1 })}
+        className={cx({ 'is-hidden': currentStep !== slidesInfo.length - 1 })}
         onClick={() => setCurrentStep(currentStep + 1)}
       >
         continue
-      </button>
+      </NavLink>
     </div>
   );
 };
