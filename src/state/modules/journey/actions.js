@@ -1,4 +1,4 @@
-import api, { createApiAction, PORT } from '../../utils/api';
+import api, { createApiAction } from '../../utils/api';
 
 // Action constants
 export const LOAD_JOURNEY_INDEX = createApiAction(
@@ -9,9 +9,7 @@ export const SET_CURRENT_STEP = 'journey/SET_CURRENT_STEP';
 export const SET_CURRENT_JOURNEY = 'journeys/SET_CURRENT_JOURNEY';
 
 export const loadJourneyInfo = id =>
-  api(LOAD_JOURNEY_INDEX, ({ get }) =>
-    get(`/journeys/${id}`, { baseURL: `${PORT}/api` }),
-  );
+  api(LOAD_JOURNEY_INDEX, ({ get }) => get(`/journeys/${id}`));
 
 export const setCurrentStep = currentStep => ({
   type: SET_CURRENT_STEP,
