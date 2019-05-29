@@ -9,13 +9,14 @@ const Journey = ({
   currentJourney,
   loadJourneys,
   loadJourneyInfo,
+  loading,
 }) => {
   useEffect(() => {
     loadCountries();
     loadLayers();
     loadJourneys(currentJourney);
     loadJourneyInfo(currentJourney);
-  }, [currentJourney]);
+  }, [currentJourney, loading]);
 
   return <Slides />;
 };

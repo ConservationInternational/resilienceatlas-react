@@ -9,6 +9,7 @@ import Journey from './component';
 const mapStateToProps = state => ({
   journeys: state.journeys.pageIndex,
   currentJourney: state.journey.id,
+  loading: state.journey.loading,
 });
 
 const mapDispatchToProps = {

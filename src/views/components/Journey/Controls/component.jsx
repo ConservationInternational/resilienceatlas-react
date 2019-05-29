@@ -39,7 +39,7 @@ const Controls = ({
       <NavLink
         to={`/journeys/${id}?step=${currentStep}`}
         id="btn-next"
-        className={cx({ 'is-hidden': currentStep !== slidesInfo.length - 1 })}
+        className={cx({ 'is-hidden': currentStep === slidesInfo.length - 1 })}
         onClick={() => setCurrentStep(currentStep + 1)}
       >
         continue
