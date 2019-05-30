@@ -37,14 +37,16 @@ export const resetIndicators = () => ({
   type: RESET_INDICATORS,
 });
 
-export const load = () => (dispatch, getState) => {
-  const state = getState();
-  const site_scope = state.site.id;
+export const load = () =>
+  api(
+    LOAD,
+    ({ get }, d, getState) => {
+      const site_scope = getState().site.id;
 
-  return dispatch(
-    api(LOAD, ({ get }) => get(URL_MODELS, { params: { site_scope } }), {
+      return get(URL_MODELS, { params: { site_scope } });
+    },
+    {
       schema: [model],
       includedSchema: 'union',
-    }),
+    },
   );
-};

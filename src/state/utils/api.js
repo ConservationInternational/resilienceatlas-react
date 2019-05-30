@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { ThunkAction } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { schema } from 'normalizr';
 
 export const isProd = process.env.NODE_ENV === 'production';
@@ -78,7 +78,11 @@ export const patch: Handler = (url, config) =>
 export const del: Handler = (url, config) => makeRequest('delete', url, config);
 export const requestHandlers: Handlers = { get, post, put, patch, del };
 
-type Callback = (requestHandlers: Handlers) => Promise<any>;
+type Callback = (
+  requestHandlers: Handlers,
+  dispatch: ThunkDispatch,
+  getState: Function,
+) => Promise<any>;
 
 type ApiMeta = {
   schema?: schema.Entity | schema.Array,
@@ -97,10 +101,10 @@ export default function api(
   cb: Callback,
   meta: ApiMeta,
 ): ThunkAction {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch({ type: apiAction.REQUEST, meta });
 
-    return cb(requestHandlers)
+    return cb(requestHandlers, dispatch, getState)
       .then(({ data, status, headers }) => {
         dispatch({
           type: apiAction.SUCCESS,

@@ -6,11 +6,16 @@ import { connect } from 'react-redux';
 // Temporary
 const bare = false;
 
+const DEFAULT_TITLE = 'Resilience Atlas';
+
 const Head = ({
-  site: { color, subdomain, header_theme, header_color, logo_url },
+  site: { name, color, subdomain, header_theme, header_color, logo_url },
   page,
 }) => (
-  <Helmet defaultTitle="Resilience Atlas" titleTemplate="Resilience Atlas | %s">
+  <Helmet
+    defaultTitle={DEFAULT_TITLE}
+    titleTemplate={`${name}${name === DEFAULT_TITLE && ' | %s'}`}
+  >
     <style type="text/css">{`
       :root {
         --theme-color: ${color};

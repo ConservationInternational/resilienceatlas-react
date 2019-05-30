@@ -101,3 +101,8 @@ export const getSubdomain = () => {
 
   return window.location.host.split('.')[0].replace(host, '');
 };
+
+/**
+ * @type {String} runs once on app init.
+ */
+export const subdomain = getSubdomain();

@@ -1,3 +1,4 @@
+import { subdomain } from '@utilities/helpers';
 import api, { createApiAction } from '../../utils/api';
 import { layer, source } from '../../schema';
 
@@ -12,10 +13,14 @@ export const SET_CHART_LIMIT = 'layers / SET_CHART_LIMIT';
 export const REORDER = 'layers / REORDER';
 
 export const load = () =>
-  api(LOAD, ({ get }) => get(URL_LAYERS), {
-    schema: [layer],
-    includedSchema: [source],
-  });
+  api(
+    LOAD,
+    ({ get }) => get(URL_LAYERS, { params: { site_scope: subdomain } }),
+    {
+      schema: [layer],
+      includedSchema: [source],
+    },
+  );
 
 export const setActives = ids => ({
   type: SET_ACTIVES,

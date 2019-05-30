@@ -21,6 +21,7 @@ const makeMapStateToProps = () => {
   const getActives = makeActives();
 
   const mapStateToProps = state => ({
+    tab: state.ui.tab,
     site: state.site,
     layers: state.layers,
     drawing: state.map.drawing,
