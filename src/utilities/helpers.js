@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { PORT, isProd } from '../state/utils/api';
+import { getRouterParam } from './routeParams';
 
 /**
  * @param  {string} key key to sort on
@@ -99,5 +100,11 @@ export const getSubdomain = () => {
     ? PORT.replace(/(^http(s?):\/\/)|(\.com)$/g, '')
     : `localhost:${window.location.port}`;
 
-  return window.location.host.split('.')[0].replace(host, '');
+  let subdomain = window.location.host.split('.')[0].replace(host, '');
+
+  if (!subdomain || subdomain === 'www') {
+    subdomain = getRouterParam('site_scope');
+  }
+
+  return subdomain;
 };
