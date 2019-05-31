@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import {
-  load as loadModels,
   select,
   applyIndicators,
   resetIndicators,
@@ -21,14 +20,12 @@ const makeMapStateToProps = () => {
     selectedModel: state.predictive_models.selected,
     modelsLoading: state.predictive_models.loading,
     modelsLoaded: state.predictive_models.loaded,
-    siteLoaded: state.site.loaded,
   });
 
   return mapStateToProps;
 };
 
 const mapDispatchToProps = {
-  loadModels,
   select,
   applyIndicators,
   resetIndicators,

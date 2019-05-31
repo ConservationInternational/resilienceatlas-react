@@ -108,3 +108,8 @@ export const getSubdomain = () => {
 
   return subdomain;
 };
+
+/**
+ * @type {String} runs once on app init.
+ */
+export const subdomain = getSubdomain();
