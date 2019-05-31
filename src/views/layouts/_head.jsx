@@ -14,7 +14,7 @@ const Head = ({
 }) => (
   <Helmet
     defaultTitle={DEFAULT_TITLE}
-    titleTemplate={`${name}${name === DEFAULT_TITLE && ' | %s'}`}
+    titleTemplate={`${name}${name === DEFAULT_TITLE ? ' | %s' : ''}`}
   >
     <style type="text/css">{`
       :root {
