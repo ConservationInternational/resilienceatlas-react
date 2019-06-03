@@ -1,11 +1,13 @@
 import { createReducer } from '../../utils';
 import { SET_GEOJSON, SET_DRAWING, SET_BASEMAP } from './actions';
-import { getRouterParam } from '@utilities';
+import { getRouterParam, subdomain } from '@utilities';
 
 const initialState = {
   drawing: false,
   geojson: getRouterParam('geojson', JSON.parse),
-  basemap: getRouterParam('basemap') || 'defaultmap',
+  basemap:
+    getRouterParam('basemap') ||
+    (subdomain === 'atlas' ? 'satellite' : 'defaultmap'),
 };
 
 export default createReducer(initialState)({

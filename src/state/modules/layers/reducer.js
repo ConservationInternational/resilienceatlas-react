@@ -33,13 +33,31 @@ export default createReducer(initialState)({
     error: null,
   }),
 
-  [LOAD.SUCCESS]: (state, { payload }) => ({
-    ...state,
-    byId: merge(payload.entities.layers, state.byId),
-    all: payload.result,
-    loading: false,
-    loaded: true,
-  }),
+  [LOAD.SUCCESS]: (state, { payload }) => {
+    const {
+      entities: { layers },
+      result,
+    } = payload;
+
+    // Clear up active layers in case of changing subdomain
+    // we receiving different sets of layers
+    // TBD: maybe clear in URL as well
+    const actives = new Set(state.actives.filter(id => layers[id]));
+
+    // Toggling default active layers, received from backend
+    result.forEach(id => {
+      if (layers[id].active) actives.add(+id);
+    });
+
+    return {
+      ...state,
+      byId: merge(layers, state.byId),
+      all: payload.result,
+      actives: [...actives],
+      loading: false,
+      loaded: true,
+    };
+  },
 
   [LOAD.FAIL]: state => ({
     ...state,

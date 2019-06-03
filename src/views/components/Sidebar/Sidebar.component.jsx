@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import qs from 'qs';
 import cx from 'classnames';
@@ -24,22 +24,33 @@ interface P extends RouteComponentProps {
 }
 
 const Sidebar: FC<P> = ({
-  location: { search },
-  opened,
-  analysisOpened,
+  // Actions
+  loadModels,
   toggleOpen,
   toggleAnalysis,
+  setTab,
+  // Data
+  tab,
+  opened,
+  analysisOpened,
+  models,
+  modelsLoaded,
+  siteLoaded,
 }) => {
-  const { model, tab = model ? TABS.MODELS : TABS.LAYERS } = qs.parse(search, {
-    ignoreQueryPrefix: true,
-  });
+  useEffect(() => {
+    if (siteLoaded) {
+      loadModels();
+    }
+  }, [siteLoaded]);
+
+  useEffect(() => {
+    setRouterParam('tab', tab);
+  }, [tab]);
 
   const switchTab = useCallback(
-    e => {
-      const newTab = e.target.dataset.section;
-
+    ({ tab: newTab }) => {
       if (tab !== newTab) {
-        setRouterParam('tab', newTab);
+        setTab(newTab);
       }
     },
     [tab],
@@ -56,36 +67,36 @@ const Sidebar: FC<P> = ({
         <AnalysisPanel toggle={toggleAnalysis} />
 
         <div className="m-sidebar" id="sidebarView">
-          <ul
-            id="sidebarTabs"
-            className="tabs tabs-secondary-content"
-            role="tablist"
-            data-tab
+          <Tabs
+            activeTab={tab}
+            defaultTab={TABS.LAYERS}
+            onTabSwitch={switchTab}
+            contentClassName="tabs-content content"
+            menuClassName="tabs tabs-secondary-content"
+            hideDisabledTitles
+            renderTabTitle={({ name, title, active, onTabSwitch }) => (
+              <li className={cx('tab-title', { active })}>
+                <LinkButton data-section={name} onClick={onTabSwitch}>
+                  {title}
+                </LinkButton>
+              </li>
+            )}
           >
-            <li className={cx('tab-title', { active: tab === 'layers' })}>
-              <LinkButton data-section={TABS.LAYERS} onClick={switchTab}>
-                Layers
-              </LinkButton>
-            </li>
-            <li className={cx('tab-title', { active: tab === 'models' })}>
-              <LinkButton data-section={TABS.MODELS} onClick={switchTab}>
-                Predictive models
-              </LinkButton>
-            </li>
-          </ul>
-
-          <Tabs className="tabs-content content" activeTab={tab}>
             <Tabs.Pane
               id="layersListView"
               className="m-layers-list content"
+              title="Layers"
               name={TABS.LAYERS}
             >
               <LayersList />
             </Tabs.Pane>
+
             <Tabs.Pane
               id="modelContent"
               className="m-model-content content"
+              title="Predictive models"
               name={TABS.MODELS}
+              disabled={!modelsLoaded || !models.length}
             >
               <PredictiveModels />
             </Tabs.Pane>

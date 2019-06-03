@@ -25,6 +25,7 @@ const MapView = ({
   model_layer,
   defaultActiveGroups,
   location,
+  tab,
   site,
   page,
   options,
@@ -93,7 +94,7 @@ const MapView = ({
       {map => (
         <>
           <LayerManager map={map} plugin={PluginLeaflet}>
-            {query.tab === TABS.LAYERS &&
+            {tab === TABS.LAYERS &&
               activeLayers.map(l => (
                 <Layer
                   key={l.id}
@@ -105,9 +106,7 @@ const MapView = ({
                   }
                 />
               ))}
-            {query.tab === TABS.MODELS && model_layer && (
-              <Layer {...model_layer} />
-            )}
+            {tab === TABS.MODELS && model_layer && <Layer {...model_layer} />}
           </LayerManager>
 
           <DrawingManager map={map} />

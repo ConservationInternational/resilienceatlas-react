@@ -22,29 +22,78 @@ Pane.defaultProps = {
   activeTab: '',
 };
 
-const Tabs = ({ children, activeTab, renderActiveOnly, ...props }) => (
-  <div {...props}>
-    {React.Children.map(children, Tab => {
-      const key = Tab.props.name;
+const Tabs = ({
+  children,
+  menuClassName,
+  contentClassName,
+  renderTabTitle,
+  activeTab,
+  renderActiveOnly,
+  onTabSwitch,
+  hideDisabledTitles,
+  defaultTab,
+  ...props
+}) => (
+  <>
+    {!!renderTabTitle && (
+      <ul className={menuClassName} role="tablist" data-tab>
+        {React.Children.map(children, Tab => {
+          if (!Tab) return null;
+          const { name, title, disabled } = Tab.props;
+          if (hideDisabledTitles && disabled) return null;
 
-      if (!renderActiveOnly || key === activeTab) {
-        return React.cloneElement(Tab, { key, activeTab });
-      }
+          return renderTabTitle({
+            name,
+            active: activeTab === name,
+            onTabSwitch: onTabSwitch.bind(null, { tab: name }),
+            title,
+            disabled,
+          });
+        })}
+      </ul>
+    )}
 
-      return null;
-    })}
-  </div>
+    <div {...props} className={contentClassName}>
+      {React.Children.map(children, Tab => {
+        if (!Tab) return null;
+        const key = Tab.props.name;
+        const isActive = key === activeTab;
+
+        if (!renderActiveOnly || isActive) {
+          if (hideDisabledTitles && Tab.props.disabled) {
+            onTabSwitch({ tab: defaultTab });
+            return null;
+          }
+          return React.cloneElement(Tab, { key, activeTab });
+        }
+
+        return null;
+      })}
+    </div>
+  </>
 );
 
 Tabs.propTypes = {
   activeTab: PropTypes.string.isRequired,
+  defaultTab: PropTypes.string,
   renderActiveOnly: PropTypes.bool,
+  hideDisabledTitles: PropTypes.bool,
   children: CustomTypes.componentType(Pane).isRequired,
+  onTabSwitch: PropTypes.func,
+  menuClassName: PropTypes.string,
+  contentClassName: PropTypes.string,
+  renderTabTitle: PropTypes.func,
 };
 
 Tabs.defaultProps = {
   // children: null,
   renderActiveOnly: false,
+  hideDisabledTitles: false,
+  onTabSwitch: () => {},
+  renderTabTitle: null,
+  menuClassName: '',
+  contentClassName: '',
+  defaultTab: '',
 };
 
 Tabs.Pane = Pane;
