@@ -52,11 +52,13 @@
     "recharts": "^1.5.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
+    "redux-form": "^8.2.3",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "slick-carousel": "^1.8.1",
     "vizzuality-components": "^1.1.1",
-    "wri-json-api-serializer": "^1.0.1"
+    "wri-json-api-serializer": "^1.0.1",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@types/leaflet": "^1.4.4",
