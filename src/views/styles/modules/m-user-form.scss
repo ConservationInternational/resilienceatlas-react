@@ -50,6 +50,10 @@
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: bold;
+
+    em {
+      font-weight: 500;
+    }
   }
 
   a {
@@ -100,5 +104,10 @@
     width: auto;
     padding: 10px 25px;
     margin-bottom: 25px;
+    transition: 0.2s;
+
+    &:disabled {
+      opacity: 0.4;
+    }
   }
 }

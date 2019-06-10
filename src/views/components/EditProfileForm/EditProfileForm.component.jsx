@@ -4,10 +4,9 @@ import { InjectedFormProps, Form, Field } from 'redux-form';
 
 import FormInput from '@shared/inputs/FormInput';
 import Loader from '@shared/Loader';
+import { IEditProfileForm } from '@modules/user';
 
-import { ILoginForm } from '@modules/user';
-
-const LoginForm: FC<InjectedFormProps<ILoginForm>> = ({
+const EditProfileForm: FC<InjectedFormProps<IEditProfileForm>> = ({
   handleSubmit,
   submitting,
 }) => (
@@ -19,12 +18,17 @@ const LoginForm: FC<InjectedFormProps<ILoginForm>> = ({
       label="Email"
       autoFocus
     />
+
+    <Field component={FormInput} name="first_name" label="First name" />
+
+    <Field component={FormInput} name="last_name" label="Last name" />
+
+    <Field component={FormInput} name="organization" label="Organization" />
+
     <Field
       component={FormInput}
-      type="password"
-      name="password"
-      label="Password"
-      autoComplete="off"
+      name="organization_role"
+      label="Organization role"
     />
 
     <Loader loading={submitting} />
@@ -34,11 +38,11 @@ const LoginForm: FC<InjectedFormProps<ILoginForm>> = ({
         className={cx('btn-submit', { 'is-loading': submitting })}
         type="submit"
         name="commit"
-        value="Log in"
+        value="Update"
         disabled={submitting}
       />
     </div>
   </Form>
 );
 
-export default LoginForm;
+export default EditProfileForm;

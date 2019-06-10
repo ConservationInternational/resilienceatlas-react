@@ -4,9 +4,10 @@ import { InjectedFormProps, Form, Field } from 'redux-form';
 
 import FormInput from '@shared/inputs/FormInput';
 import Loader from '@shared/Loader';
-import { ISignupForm } from '@modules/user';
+import { IProfileSettingsForm } from '@modules/user';
 
-const LoginForm: FC<InjectedFormProps<ISignupForm>> = ({
+const ProfileSettingsForm: FC<InjectedFormProps<IProfileSettingsForm>> = ({
+  user,
   handleSubmit,
   submitting,
 }) => (
@@ -19,13 +20,17 @@ const LoginForm: FC<InjectedFormProps<ISignupForm>> = ({
       autoFocus
     />
 
+    {!!user.unconfirmed && (
+      <div>Currently waiting confirmation for: {user.email}</div>
+    )}
+
     <Field
       component={FormInput}
       type="password"
       name="password"
       label={
         <span>
-          Password<em>(8 characters minimum)</em>
+          Password<em>(leave blank if you don&apos;t want to change it)</em>
         </span>
       }
       autoComplete="off"
@@ -39,16 +44,16 @@ const LoginForm: FC<InjectedFormProps<ISignupForm>> = ({
       autoComplete="off"
     />
 
-    <Field component={FormInput} name="first_name" label="First name" />
-
-    <Field component={FormInput} name="last_name" label="Last name" />
-
-    <Field component={FormInput} name="organization" label="Organization" />
-
     <Field
       component={FormInput}
-      name="organization_role"
-      label="Organization role"
+      type="password"
+      name="current_password"
+      label={
+        <span>
+          Current password
+          <em>(we need your current password to confirm your changes)</em>
+        </span>
+      }
     />
 
     <Loader loading={submitting} />
@@ -58,10 +63,11 @@ const LoginForm: FC<InjectedFormProps<ISignupForm>> = ({
         className={cx('btn-submit', { 'is-loading': submitting })}
         type="submit"
         name="commit"
-        value="Sign up"
+        value="Update"
+        disabled={submitting}
       />
     </div>
   </Form>
 );
 
-export default LoginForm;
+export default ProfileSettingsForm;

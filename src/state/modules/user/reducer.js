@@ -1,10 +1,25 @@
 import { createReducer } from '../../utils';
-import { LOGIN } from './actions';
+import { LOGIN, SIGNUP, EDIT_PROFILE, LOGOUT } from './actions';
 
 const initialState = {
-  /* reducer shape here */
+  ...JSON.parse(localStorage.getItem('resilience_user')),
 };
 
 export default createReducer(initialState)({
-  [LOGIN]: (state, action) => state,
+  [LOGIN]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+
+  [SIGNUP]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+
+  [EDIT_PROFILE]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+
+  [LOGOUT]: () => ({}),
 });

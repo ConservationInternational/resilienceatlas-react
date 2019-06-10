@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 
+// LOGIN FORM //
 export interface ILoginForm {
   email: string;
   password: string;
@@ -15,6 +16,7 @@ export const LoginSchema = Yup.object().shape({
     .required('Password is requred'),
 });
 
+// SIGNUP FORM //
 export interface ISignupForm {
   email: string;
   password: string;
@@ -39,6 +41,26 @@ export const SignupSchema = Yup.object().shape({
     [Yup.ref('password'), null],
     'Passwords must match',
   ),
+
+  first_name: Yup.string(),
+  last_name: Yup.string(),
+  organization: Yup.string(),
+  organization_role: Yup.string(),
+});
+
+// EDIT PROFILE FORM //
+export interface IEditProfileForm {
+  email: string;
+  first_name: string;
+  last_name: string;
+  organization: string;
+  organization_role: string;
+}
+
+export const EditProfileSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Email is required'),
 
   first_name: Yup.string(),
   last_name: Yup.string(),

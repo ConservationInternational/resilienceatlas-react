@@ -1,7 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
 import { load as loadMenuItems, makeMenuTree } from '@modules/map_menu_entries';
+import { logout } from '@modules/user';
 
 import { sortBy } from '@utilities';
 
@@ -69,7 +71,7 @@ const Header = ({
               </li>
 
               <li>
-                <NavLink to="/logout" activeClassName="is-current">
+                <NavLink to="#" onClick={logout}>
                   Logout
                 </NavLink>
               </li>
@@ -113,7 +115,7 @@ const makeMapStateToProps = () => {
   const getMenuItems = makeMenuTree();
 
   const mapStateToProps = state => ({
-    isAuthorized: state.user.logged,
+    isAuthorized: state.user.email,
     site: state.site,
     menuItems: getMenuItems(state),
   });
@@ -123,5 +125,5 @@ const makeMapStateToProps = () => {
 
 export default connect(
   makeMapStateToProps,
-  { loadMenuItems },
+  { loadMenuItems, logout },
 )(Header);
