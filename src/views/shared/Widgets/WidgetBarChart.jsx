@@ -104,17 +104,19 @@ export const WidgetBarChart: FC<P> = ({
       {meta_short && (
         <div className="meta-short">
           {meta_short}
-          <button
-            type="button"
-            className="btn-analysis-info"
-            data-info={metadata}
-            data-name={name}
-            onClick={() => InfoWindow.show(name, metadata)}
-          >
-            <svg className="icon icon-info">
-              <use xlinkHref="#icon-info" />
-            </svg>
-          </button>
+          {metadata && (
+            <button
+              type="button"
+              className="btn-analysis-info"
+              data-info={metadata}
+              data-name={name}
+              onClick={() => InfoWindow.show(name, metadata)}
+            >
+              <svg className="icon icon-info">
+                <use xlinkHref="#icon-info" />
+              </svg>
+            </button>
+          )}
         </div>
       )}
     </div>

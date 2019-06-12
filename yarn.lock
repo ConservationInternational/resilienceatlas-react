@@ -2540,9 +2540,8 @@ capture-exit@^1.2.0:
   dependencies:
     rsvp "^3.3.3"
 
-carto@cartodb/carto#master, "carto@github:cartodb/carto#master":
+carto@cartodb/carto#master:
   version "0.15.1-cdb5"
-  uid "85881d99dd7fcf2c4e16478b04db67108d27a50c"
   resolved "https://codeload.github.com/cartodb/carto/tar.gz/85881d99dd7fcf2c4e16478b04db67108d27a50c"
   dependencies:
     mapnik-reference "~6.0.2"
@@ -11350,9 +11349,9 @@ toposort@^2.0.2:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
   integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
 
-"torque.js@github:cartodb/torque#master":
+torque.js@CartoDB/torque#master:
   version "3.1.1"
-  resolved "https://codeload.github.com/cartodb/torque/tar.gz/4d2540ef98018775cfcd8fee8df2c39c6fc13230"
+  resolved "https://codeload.github.com/CartoDB/torque/tar.gz/4d2540ef98018775cfcd8fee8df2c39c6fc13230"
   dependencies:
     carto cartodb/carto#master
     d3 "3.5.17"
