@@ -100,6 +100,8 @@ export const getSubdomain = () => {
     ? PORT.replace(/(^http(s?):\/\/)|(\.com)$/g, '')
     : `localhost:${window.location.port}`;
 
+  if (window.location.host === '52.7.28.202') return false;
+
   let subdomain = window.location.host.split('.')[0].replace(host, '');
 
   if (!subdomain || subdomain === 'www') {
