@@ -115,3 +115,21 @@ export const getSubdomain = () => {
  * @type {String} runs once on app init.
  */
 export const subdomain = getSubdomain();
+
+export function getNestedChildren(arr, ancestry) {
+  const out = [];
+
+  arr.forEach(item => {
+    // eslint-disable-next-line eqeqeq
+    if (item.ancestry == ancestry) {
+      const children = getNestedChildren(arr, item.id);
+
+      if (children.length) {
+        item.children = children;
+      }
+      out.push(item);
+    }
+  });
+
+  return out;
+}

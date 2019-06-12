@@ -1,17 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { load as loadSites, makeAllSites } from '@modules/sites';
+import { load as loadMenuItems, makeMenuTree } from '@modules/map_menu_entries';
+
+import { sortBy } from '@utilities';
+
+const byPosition = sortBy('position');
 
 const Header = ({
-  loadSites,
+  loadMenuItems,
   isAuthorized,
   site: { link_text, link_url },
-  sites,
+  menuItems,
 }) => {
   useEffect(() => {
-    loadSites();
+    loadMenuItems();
   }, []);
+
+  const renderMenuItem = useCallback(
+    ({ id, label, link, children }) => (
+      <li key={id}>
+        {link ? <a href={link}>{label}</a> : label}
+
+        {!!(children && children.length) && (
+          <ul>{children.sort(byPosition).map(renderMenuItem)}</ul>
+        )}
+      </li>
+    ),
+    [],
+  );
 
   return (
     <header className="l-header--fullscreen">
@@ -34,14 +51,7 @@ const Header = ({
               Map
             </NavLink>
 
-            {/* <ul>
-            <li>
-              Lol
-              <ul>
-                <li>Lul</li>
-              </ul>
-            </li>
-          </ul> */}
+            <ul>{menuItems.sort(byPosition).map(renderMenuItem)}</ul>
           </li>
 
           <li>
@@ -100,12 +110,12 @@ const Header = ({
 };
 
 const makeMapStateToProps = () => {
-  const allSites = makeAllSites();
+  const getMenuItems = makeMenuTree();
 
   const mapStateToProps = state => ({
     isAuthorized: state.user.logged,
     site: state.site,
-    sites: allSites(state),
+    menuItems: getMenuItems(state),
   });
 
   return mapStateToProps;
@@ -113,5 +123,5 @@ const makeMapStateToProps = () => {
 
 export default connect(
   makeMapStateToProps,
-  { loadSites },
+  { loadMenuItems },
 )(Header);
