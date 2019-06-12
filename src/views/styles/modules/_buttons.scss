@@ -34,8 +34,32 @@
       background: darken($bg-color-2, 5%);
     }
   }
+
   &-small {
     padding: rem(8px) rem(40px);
+  }
+
+  &.btn-next,
+  &.btn-back {
+    padding: rem(10px) rem(20px);
+    font-size: 1rem;
+    font-weight: 300;
+    box-shadow: 0 1px 3px 0 rgba($bg-color-5, 0.3);
+    color: $gray;
+    background: $bg-color-1;
+
+    &:hover {
+      background: darken($bg-color-2, 5%);
+    }
+
+    &.btn-next &:after {
+      content: '>';
+      padding-left: 10px;
+    }
+    &.btn-back &:before {
+      content: '<';
+      padding-left: 10px;
+    }
   }
 }
 
@@ -107,7 +131,6 @@
 }
 
 #btn-next-journey {
-  display: none;
   line-height: 1.5em;
   padding: rem(12px) rem(40px) rem(8px) rem(20px);
 }

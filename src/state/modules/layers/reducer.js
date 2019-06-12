@@ -65,21 +65,9 @@ export default createReducer(initialState)({
     error: true,
   }),
 
-  [SET_ACTIVES]: (state, { ids }) => ({
+  [SET_ACTIVES]: (state, { actives }) => ({
     ...state,
-    byId: {
-      ...state.byId,
-      ...ids.reduce(
-        (acc, id) => ({
-          ...acc,
-          [id]: {
-            ...state.byId[id],
-            active: true,
-          },
-        }),
-        {},
-      ),
-    },
+    actives,
   }),
 
   [TOGGLE]: (state, { id }) => {

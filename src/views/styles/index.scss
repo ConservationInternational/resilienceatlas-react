@@ -21,7 +21,7 @@
 
 // Importing layouts and modules
 @import 'layouts/l-header', 'layouts/l-footer', 'layouts/l-main',
-  'layouts/l-content', 'layouts/l-journey-index', 'layouts/l-sidebar',
+  'layouts/l-content', 'layouts/l-journey-intro', 'layouts/l-journey-index', 'layouts/l-sidebar',
   'layouts/l-journey';
 
 @import 'modules/_buttons', 'modules/_foundation-tabs',
@@ -32,7 +32,7 @@
   'modules/_m-discover', 'modules/_m-explore', 'modules/_m-forms',
   'modules/_m-home-about', 'modules/_m-infowindow', 'modules/_m-journey-chapter',
   'modules/_m-journey-conclusion', 'modules/_m-journey-embed',
-  'modules/_m-journey-grid', 'modules/_m-journey-landing',
+  'modules/_m-journey-grid', 'modules/_m-journey-intro', 'modules/_m-journey-landing',
   'modules/_m-journey-pagination', 'modules/_m-journey-text',
   'modules/_m-journey', 'modules/_m-layers-list', 'modules/_m-legend',
   'modules/_m-loader', 'modules/_m-map', 'modules/_m-predictive-models',
