@@ -220,3 +220,14 @@ export const model = new schema.Entity(
     }),
   },
 );
+
+export const map_menu_entry = new schema.Entity(
+  'map_menu_entries',
+  {},
+  {
+    processStrategy: entry => ({
+      id: entry.id,
+      ...entry.attributes,
+    }),
+  },
+);
