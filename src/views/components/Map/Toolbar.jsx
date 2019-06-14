@@ -1,7 +1,8 @@
 import React from 'react';
-import { PORT } from '../../../state/utils/api';
 
-const downloadURL = `${PORT}/webshot?filename=export-map-${new Date().getTime()}.pdf&url=${
+const downloadURL = `${
+  process.env.REACT_APP_API_PROD
+}/webshot?filename=export-map-${new Date().getTime()}.pdf&url=${
   window.location.href
 }`;
 

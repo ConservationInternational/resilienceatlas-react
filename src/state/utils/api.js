@@ -4,10 +4,7 @@ import { schema } from 'normalizr';
 
 export const isProd = process.env.NODE_ENV === 'production';
 
-export const PORT =
-  isProd || process.env.API_PROD === true
-    ? process.env.REACT_APP_API_PROD
-    : process.env.REACT_APP_API_HOST;
+export const PORT = process.env.REACT_APP_API_HOST;
 
 const defaultConfig = {
   baseURL: `${PORT}/api`,
