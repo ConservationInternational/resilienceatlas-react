@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useContext } from 'react';
 import qs from 'qs';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
@@ -8,6 +8,8 @@ import { TABS } from '@components/Sidebar';
 
 import { setRouterParam } from '@utilities';
 import { BASEMAPS } from '@views/utils';
+
+import { LayerManagerContext } from '@contexts/layerManagerCtx';
 
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
@@ -36,6 +38,8 @@ const MapView = ({
     ignoreQueryPrefix: true,
     parseArrays: true,
   });
+
+  const layerManagerRef = useContext(LayerManagerContext);
 
   useEffect(() => {
     loadLayers();
@@ -93,7 +97,7 @@ const MapView = ({
     >
       {map => (
         <>
-          <LayerManager map={map} plugin={PluginLeaflet}>
+          <LayerManager map={map} plugin={PluginLeaflet} ref={layerManagerRef}>
             {tab === TABS.LAYERS &&
               activeLayers.map(l => (
                 <Layer

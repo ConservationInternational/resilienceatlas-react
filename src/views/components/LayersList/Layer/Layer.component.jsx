@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import cx from 'classnames';
 
 import InfoWindow from '@components/InfoWindow';
+import { LayerManagerContext } from '@contexts/layerManagerCtx';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 
 const validateOpacity = value => {
@@ -24,6 +25,7 @@ const Layer = ({
   dashboard_order,
   withDashboardOrder,
 }) => {
+  const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
   const slider = useInput('opacity_slider', opacity_text);
   const opacityInput = useUpdaterInput(id, opacity_text, v => {
@@ -45,6 +47,10 @@ const Layer = ({
   const showInfo = useCallback((e: MouseEvent) => {
     const { name, info } = e.currentTarget.dataset;
     InfoWindow.show(name, JSON.parse(info));
+  }, []);
+
+  const fitMapToLayer = useCallback(() => {
+    layerManagerRef.current.fitMapToLayer(id);
   }, []);
 
   return (
@@ -69,7 +75,12 @@ const Layer = ({
 
       <div className="panel-item-title">{name}</div>
 
-      <button type="button" className="btn-locate icon-container" data-id={id}>
+      <button
+        type="button"
+        className="btn-locate icon-container"
+        data-id={id}
+        onClick={fitMapToLayer}
+      >
         <svg className="icon icon-zoom-pan">
           <use xlinkHref="#icon-zoom-pan" />
         </svg>

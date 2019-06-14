@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import qs from 'qs';
 import cx from 'classnames';
 
 import AnalysisPanel from '@components/AnalysisPanel';

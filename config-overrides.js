@@ -9,6 +9,7 @@ module.exports = {
       '@modules': path.resolve(__dirname, 'src/state/modules/'),
       '@views': path.resolve(__dirname, 'src/views/'),
       '@components': path.resolve(__dirname, 'src/views/components/'),
+      '@contexts': path.resolve(__dirname, 'src/views/contexts/'),
       '@shared': path.resolve(__dirname, 'src/views/shared'),
       '@utilities': path.resolve(__dirname, 'src/utilities/'),
     };

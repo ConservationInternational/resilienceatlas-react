@@ -8,7 +8,14 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": ["@views", "@components", "@modules", "@utilities", "@shared"]
+        "ignore": [
+          "@views",
+          "@components",
+          "@contexts",
+          "@modules",
+          "@utilities",
+          "@shared"
+        ]
       }
     ]
   }
