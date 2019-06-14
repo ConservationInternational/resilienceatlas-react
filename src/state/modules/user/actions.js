@@ -1,9 +1,9 @@
 import { SubmissionError } from 'redux-form';
-import { post } from '../../utils/api';
+import { post, PORT } from '../../utils/api';
 import { ILoginForm, ISignupForm, IEditProfileForm } from './utils';
 
-const URL_LOGIN = '';
-const URL_SIGNUP = '';
+const URL_LOGIN = '/users/authenticate';
+const URL_SIGNUP = '/users/register';
 
 // Action constants
 export const LOGIN = 'user / LOGIN';
@@ -35,35 +35,11 @@ export const userLoggedOut = () => ({
 //    post(URL_LOGIN, { data: values })
 
 // Actions
-export const login = (values: ILoginForm) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (values.password === 'password') {
-        resolve({
-          email: values.email,
-        });
-      } else {
-        reject(
-          new SubmissionError({
-            password: 'Wrong password',
-          }),
-        );
-      }
-    }, Math.random() * 2000);
-  });
+export const login = ({ email, password }: ILoginForm) =>
+  post(URL_LOGIN, { data: { user: { email, password } }, baseURL: PORT });
 
-export const signup = (values: ISignupForm) =>
-  new Promise(resolve => {
-    setTimeout(
-      () =>
-        resolve({
-          email: values.email,
-          first_name: values.first_name,
-          last_name: values.last_name,
-        }),
-      Math.random() * 2000,
-    );
-  });
+export const signup = ({ email, password }: ISignupForm) =>
+  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT });
 
 export const editProfile = (values: IEditProfileForm) =>
   new Promise(resolve => {
