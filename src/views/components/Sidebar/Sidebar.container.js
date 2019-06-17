@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
   analysisOpened: state.ui.analysisPanel,
   models: state.predictive_models.all,
   modelsLoaded: state.predictive_models.loaded,
-  siteLoaded: state.site.loaded,
+  site: state.site,
 });
 
 const mapDispatchToProps = {

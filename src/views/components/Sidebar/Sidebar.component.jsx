@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import qs from 'qs';
 import cx from 'classnames';
 
 import AnalysisPanel from '@components/AnalysisPanel';
@@ -35,13 +34,13 @@ const Sidebar: FC<P> = ({
   analysisOpened,
   models,
   modelsLoaded,
-  siteLoaded,
+  site,
 }) => {
   useEffect(() => {
-    if (siteLoaded) {
+    if (site.loaded) {
       loadModels();
     }
-  }, [siteLoaded]);
+  }, [site.loaded]);
 
   useEffect(() => {
     setRouterParam('tab', tab);
@@ -64,7 +63,7 @@ const Sidebar: FC<P> = ({
       })}
     >
       <div className="l-sidebar-content">
-        <AnalysisPanel toggle={toggleAnalysis} />
+        {site.has_analysis && <AnalysisPanel toggle={toggleAnalysis} />}
 
         <div className="m-sidebar" id="sidebarView">
           <Tabs
@@ -132,14 +131,16 @@ const Sidebar: FC<P> = ({
           onClick={toggleOpen}
           aria-label="Toggle sidebar"
         />
-        <button
-          className="btn-analysis-panel-expand"
-          type="button"
-          onClick={toggleAnalysis}
-          aria-label="Expand analysis panel"
-        >
-          Analysis
-        </button>
+        {site.has_analysis && (
+          <button
+            className="btn-analysis-panel-expand"
+            type="button"
+            onClick={toggleAnalysis}
+            aria-label="Expand analysis panel"
+          >
+            Analysis
+          </button>
+        )}
       </div>
     </div>
   );

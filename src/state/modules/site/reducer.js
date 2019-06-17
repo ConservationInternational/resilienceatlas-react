@@ -3,7 +3,8 @@ import { createReducer } from '../../utils';
 import { LOAD } from './actions';
 
 const initialState = {
-  has_analysis: true,
+  has_analysis: false,
+  predictive_model: false,
   name: '',
   subdomain,
   color: '#0089cc',
@@ -11,8 +12,8 @@ const initialState = {
   lat: NaN,
   lng: NaN,
   zoom_level: NaN,
-  link_text: null,
-  link_url: null,
+  linkback_text: null,
+  linkback_url: null,
   header_color: null,
   logo_url: '',
 
@@ -33,18 +34,7 @@ export default createReducer(initialState)({
 
     return {
       ...state,
-      id: data.id,
-      has_analysis: data.subdomain ? data.has_analysis : true,
-      name: data.name || '',
-      subdomain: data.subdomain || '',
-      color: data.color || '#0089cc',
-      header_theme: data.header_theme || '',
-      lat: data.latitude || NaN,
-      lng: data.longitude || NaN,
-      zoom_level: data.zoom_level || NaN,
-      link_text: data.linkback_text || null,
-      link_url: data.linkback_url || null,
-      header_color: data.header_color || null,
+      ...data,
       logo_url: data.logo_url || '/images/logo-ci.png',
 
       loading: false,
