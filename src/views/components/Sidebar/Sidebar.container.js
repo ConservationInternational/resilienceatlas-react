@@ -5,7 +5,6 @@ import {
   toggleAnalysis,
   setTab,
 } from '@modules/ui';
-import { load as loadModels } from '@modules/predictive_models';
 
 import Sidebar from './Sidebar.component';
 
@@ -23,7 +22,6 @@ const mapDispatchToProps = {
   toggleOpen,
   toggleAnalysis,
   setTab,
-  loadModels,
 };
 
 export default connect(
