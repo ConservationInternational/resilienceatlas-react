@@ -21,6 +21,8 @@
     "@carto/carto.js": "^4.1.11",
     "axios": "^0.18.0",
     "customize-cra": "^0.2.12",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "foundation-sites": "^6.5.3",
     "layer-manager": "https://github.com/alexmalinin/layer-manager.git#feature/fit-map-to-layer",
     "leaflet": "^1.4.0",
