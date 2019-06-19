@@ -4,6 +4,7 @@ import MapView from '@components/Map';
 import Sidebar from '@components/Sidebar';
 import Legend from '@components/Legend';
 import InfoWindow from '@components/InfoWindow';
+import ShareModal from '@components/ShareModal';
 
 import { LayerManagerProvider } from '@contexts/layerManagerCtx';
 
@@ -31,6 +32,8 @@ const MapPage = () => (
       <Legend />
 
       <InfoWindow />
+
+      <ShareModal />
     </div>
   </LayerManagerProvider>
 );

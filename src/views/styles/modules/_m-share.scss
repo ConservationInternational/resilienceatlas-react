@@ -1,15 +1,13 @@
 .m-share {
-
   .btn-close-modal {
-    color: #D8D8D8;
+    color: #d8d8d8;
   }
 
   .modal-wrapper {
-
     .modal-container {
+      @extend %clear-scroll-bars;
 
       .modal-content {
-
         .share-nav {
           width: 100%;
           height: rem(95px);
@@ -18,33 +16,38 @@
         }
 
         .link-box {
+          display: flex;
           width: 100%;
           margin: 0 auto;
           text-align: left;
           position: relative;
-        }
 
-        .url {
-          width: 80%;
-          padding: rem(16px) rem(10px);
-          font-size: 12px;
+          .url {
+            padding: rem(16px) rem(10px);
+            font-size: 12px;
+            flex: 1 0 80%;
 
-          @include ellipsis(100%);
-        }
+            border: 1px solid rgba(0, 0, 0, 0.2);
 
-        .btn-copy {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 21%;
-          height: rem(50px);
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          padding: rem(17px);
-          background: $bg-color-1;
-          line-height: 18px;
-          text-transform: uppercase;
-          text-align: center;
-          cursor: pointer;
+            @include ellipsis(100%);
+
+            & + .btn-copy {
+              border-left-width: 0;
+            }
+          }
+
+          .btn-copy {
+            flex: 0 0 20%;
+            padding: rem(16px);
+
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            background: $bg-color-1;
+
+            line-height: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+          }
         }
 
         .social-links {
@@ -62,7 +65,7 @@
             height: rem(36px);
             border-radius: rem(36px);
             background: $bg-color-3;
-            border: 1px solid rgba(0,0,0, .2);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             margin-right: rem(24px);
 
             a {
@@ -124,7 +127,7 @@
 
     .tab-title {
       margin-right: rem(3px);
-      border: 1px solid rgba(0,0,0, .2);
+      border: 1px solid rgba(0, 0, 0, 0.2);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
       &.active {
@@ -148,7 +151,7 @@
   .tabs-content {
     float: left;
     background: $white;
-    border-top: 1px solid rgba(0,0,0, .2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
     padding: 10px 0;
 
     .content {

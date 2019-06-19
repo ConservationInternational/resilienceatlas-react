@@ -1,4 +1,5 @@
 import React from 'react';
+import ShareModal from '../ShareModal/ShareModal.component';
 
 const downloadURL = `${
   process.env.REACT_APP_API_PROD
@@ -29,7 +30,7 @@ const Toolbar = () => (
         </div>
       </li>
       <li>
-        <button type="button" className="btn-share">
+        <button type="button" className="btn-share" onClick={ShareModal.show}>
           <svg className="icon">
             <use
               xmlnsXlink="http://www.w3.org/1999/xlink"
