@@ -5,10 +5,12 @@ import Sidebar from '@components/Sidebar';
 import Legend from '@components/Legend';
 import InfoWindow from '@components/InfoWindow';
 
+import { LayerManagerProvider } from '@contexts/layerManagerCtx';
+
 import Loader from '@shared/Loader';
 
 const MapPage = () => (
-  <>
+  <LayerManagerProvider>
     <Helmet title="Map" />
 
     <Sidebar />
@@ -30,7 +32,7 @@ const MapPage = () => (
 
       <InfoWindow />
     </div>
-  </>
+  </LayerManagerProvider>
 );
 
 export default MapPage;

@@ -6819,9 +6819,9 @@ layer-manager@^1.10.0:
     supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
-"layer-manager@https://github.com/Vizzuality/layer-manager.git#resilience-0.1.0":
+"layer-manager@https://github.com/alexmalinin/layer-manager.git#feature/fit-map-to-layer":
   version "1.0.1-resilience"
-  resolved "https://github.com/Vizzuality/layer-manager.git#3cae671af6696dde881a04ac1211b0b5239849ef"
+  resolved "https://github.com/alexmalinin/layer-manager.git#715cc42b8868b574d24db3acb21cd37558f3512b"
   dependencies:
     axios "^0.18.0"
     lodash "^4.17.11"
