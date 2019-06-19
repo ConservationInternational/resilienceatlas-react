@@ -8,6 +8,7 @@ import Indicator from './Indicator';
 
 const PredictiveModels = ({
   // actions
+  loadModels,
   select,
   applyIndicators,
   resetIndicators,
@@ -18,6 +19,10 @@ const PredictiveModels = ({
   modelsLoading,
   selectedModel,
 }) => {
+  useEffect(() => {
+    loadModels();
+  }, []);
+
   useEffect(() => {
     // detect only changes caused by user
     if (model) {

@@ -24,7 +24,6 @@ interface P extends RouteComponentProps {
 
 const Sidebar: FC<P> = ({
   // Actions
-  loadModels,
   toggleOpen,
   toggleAnalysis,
   setTab,
@@ -34,14 +33,8 @@ const Sidebar: FC<P> = ({
   analysisOpened,
   models,
   modelsLoaded,
-  siteLoaded,
+  site,
 }) => {
-  useEffect(() => {
-    if (siteLoaded) {
-      loadModels();
-    }
-  }, [siteLoaded]);
-
   useEffect(() => {
     setRouterParam('tab', tab);
   }, [tab]);
@@ -63,7 +56,7 @@ const Sidebar: FC<P> = ({
       })}
     >
       <div className="l-sidebar-content">
-        <AnalysisPanel toggle={toggleAnalysis} />
+        {site.has_analysis && <AnalysisPanel toggle={toggleAnalysis} />}
 
         <div className="m-sidebar" id="sidebarView">
           <Tabs
@@ -72,7 +65,6 @@ const Sidebar: FC<P> = ({
             onTabSwitch={switchTab}
             contentClassName="tabs-content content"
             menuClassName="tabs tabs-secondary-content"
-            hideDisabledTitles
             renderTabTitle={({ name, title, active, onTabSwitch }) => (
               <li className={cx('tab-title', { active })}>
                 <LinkButton data-section={name} onClick={onTabSwitch}>
@@ -90,15 +82,16 @@ const Sidebar: FC<P> = ({
               <LayersList />
             </Tabs.Pane>
 
-            <Tabs.Pane
-              id="modelContent"
-              className="m-model-content content"
-              title="Predictive models"
-              name={TABS.MODELS}
-              disabled={!modelsLoaded || !models.length}
-            >
-              <PredictiveModels />
-            </Tabs.Pane>
+            {site.predictive_model && (
+              <Tabs.Pane
+                id="modelContent"
+                className="m-model-content content"
+                title="Predictive models"
+                name={TABS.MODELS}
+              >
+                <PredictiveModels />
+              </Tabs.Pane>
+            )}
           </Tabs>
 
           <div className="sidebar-logo">
@@ -131,14 +124,16 @@ const Sidebar: FC<P> = ({
           onClick={toggleOpen}
           aria-label="Toggle sidebar"
         />
-        <button
-          className="btn-analysis-panel-expand"
-          type="button"
-          onClick={toggleAnalysis}
-          aria-label="Expand analysis panel"
-        >
-          Analysis
-        </button>
+        {site.has_analysis && (
+          <button
+            className="btn-analysis-panel-expand"
+            type="button"
+            onClick={toggleAnalysis}
+            aria-label="Expand analysis panel"
+          >
+            Analysis
+          </button>
+        )}
       </div>
     </div>
   );

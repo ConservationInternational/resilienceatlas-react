@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import {
+  load as loadModels,
   select,
   applyIndicators,
   resetIndicators,
@@ -26,6 +27,7 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = {
+  loadModels,
   select,
   applyIndicators,
   resetIndicators,

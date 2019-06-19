@@ -10,7 +10,7 @@ const byPosition = sortBy('position');
 const Header = ({
   loadMenuItems,
   isAuthorized,
-  site: { link_text, link_url },
+  site: { linkback_text, linkback_url },
   menuItems,
 }) => {
   useEffect(() => {
@@ -94,12 +94,12 @@ const Header = ({
         <ul className="nav-area -vital-sign">
           <li>
             <a
-              href={link_url || 'http://vitalsigns.org/'}
+              href={linkback_url || 'http://vitalsigns.org/'}
               target="_blank"
               rel="noopener noreferrer"
               className="theme-color link-back"
             >
-              {link_text || 'Go back to vital signs'}
+              {linkback_text || 'Go back to vital signs'}
             </a>
           </li>
         </ul>

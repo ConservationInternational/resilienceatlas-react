@@ -6,13 +6,13 @@ interface P {
 
 export const MapOffset: FC<P> = ({ map, sidebarOpened, analysisOpened }) => {
   useEffect(() => {
-    const sidebarWidth = document.querySelector('.l-sidebar--fullscreen')
-      .clientWidth;
-    const analysisWidth = document.querySelector('.analysis-panel').clientWidth;
+    const sidebarPanel = document.querySelector('.l-sidebar--fullscreen');
+    const analysisPanel = document.querySelector('.analysis-panel');
     const center = map.getCenter();
     const zoom = map.getZoom();
     const offset =
-      (sidebarOpened ? sidebarWidth : 0) + (analysisOpened ? analysisWidth : 0);
+      (sidebarPanel && sidebarOpened ? sidebarPanel.clientWidth : 0) +
+      (analysisPanel && analysisOpened ? analysisPanel.clientWidth : 0);
 
     map.setActiveArea({
       position: 'absolute',

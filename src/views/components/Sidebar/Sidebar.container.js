@@ -5,7 +5,6 @@ import {
   toggleAnalysis,
   setTab,
 } from '@modules/ui';
-import { load as loadModels } from '@modules/predictive_models';
 
 import Sidebar from './Sidebar.component';
 
@@ -16,14 +15,13 @@ const mapStateToProps = state => ({
   analysisOpened: state.ui.analysisPanel,
   models: state.predictive_models.all,
   modelsLoaded: state.predictive_models.loaded,
-  siteLoaded: state.site.loaded,
+  site: state.site,
 });
 
 const mapDispatchToProps = {
   toggleOpen,
   toggleAnalysis,
   setTab,
-  loadModels,
 };
 
 export default connect(
