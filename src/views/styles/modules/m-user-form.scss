@@ -110,4 +110,13 @@
       opacity: 0.4;
     }
   }
+
+  &__error {
+    color: $red;
+    padding-bottom: rem(8px);
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
 }

@@ -10,6 +10,7 @@ import { ILoginForm } from '@modules/user';
 const LoginForm: FC<InjectedFormProps<ILoginForm>> = ({
   handleSubmit,
   submitting,
+  error,
 }) => (
   <Form onSubmit={handleSubmit}>
     <Field
@@ -28,6 +29,10 @@ const LoginForm: FC<InjectedFormProps<ILoginForm>> = ({
     />
 
     <Loader loading={submitting} />
+
+    {error && error.user_authentication && (
+      <div className="m-user-form__error">{error.user_authentication}</div>
+    )}
 
     <div className="actions">
       <input

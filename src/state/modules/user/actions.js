@@ -36,10 +36,25 @@ export const userLoggedOut = () => ({
 
 // Actions
 export const login = ({ email, password }: ILoginForm) =>
-  post(URL_LOGIN, { data: { user: { email, password } }, baseURL: PORT });
+  post(URL_LOGIN, { data: { user: { email, password } }, baseURL: PORT }).catch(
+    response => {
+      if (response.data && response.data.error) {
+        throw new SubmissionError({ _error: response.data.error });
+      }
+      return response;
+    },
+  );
 
 export const signup = ({ email, password }: ISignupForm) =>
-  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT });
+  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT }).then(
+    response => {
+      if (response.data && response.data.status === 'created') {
+        return response;
+      }
+
+      throw new SubmissionError(response.data);
+    },
+  );
 
 export const editProfile = (values: IEditProfileForm) =>
   new Promise(resolve => {
