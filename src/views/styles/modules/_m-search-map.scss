@@ -13,25 +13,32 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 
     .search-content {
-
       .focus & {
         padding: rem(10px) rem(7px);
       }
     }
 
     .search-suggestions {
-      padding: rem(10px);
+      padding: rem(10px) 0;
       max-height: rem(208px);
       overflow-y: scroll;
       @extend %clear-scroll-bars;
 
       ul {
         box-shadow: none;
+
+        li.search-area {
+          padding: 0 rem(10px);
+
+          &.selected {
+            background: $gray-light;
+          }
+        }
       }
     }
 
     .name {
-      height: rem(25px);
+      line-height: rem(25px);
 
       span {
         font-weight: 500;

@@ -8,6 +8,7 @@ interface P {
   map: L.Map;
   drawing: Boolean;
   geojson: L.GeoJSON;
+  bounds: L.GeoJSON;
 }
 
 export const DrawingManager: FC<P> = ({
@@ -16,6 +17,7 @@ export const DrawingManager: FC<P> = ({
   map,
   drawing,
   geojson,
+  bounds,
 }) => {
   const { setParam, removeParam } = useRouterParams();
   const layer = useRef(null);
@@ -69,6 +71,19 @@ export const DrawingManager: FC<P> = ({
       removeParam('geojson');
     }
   }, [geojson]);
+
+  useEffect(() => {
+    if (bounds) {
+      const mapBounds = L.geoJSON(bounds).getBounds();
+
+      map.invalidateSize();
+
+      map.fitBounds(mapBounds, { animate: true, padding: [50, 50] });
+
+      setParam('zoom', map.getZoom());
+      setParam('center', qs.stringify(mapBounds.getCenter()));
+    }
+  }, [bounds]);
 
   return null;
 };
