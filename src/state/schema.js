@@ -1,5 +1,5 @@
 import { schema } from 'normalizr';
-import decoders from './utils/decoders';
+import { birds } from './utils/decoders';
 
 import {
   getIndexableIndicatorValue,
@@ -80,7 +80,7 @@ export const layer = new schema.Entity(
         },
         gee: {
           ...layerConfig,
-          decodeFunction: decoders[layerConfig.decoder],
+          decodeFunction: birds,
           canvas: true,
         },
       };
