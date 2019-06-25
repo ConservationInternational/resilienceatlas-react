@@ -12,7 +12,6 @@ interface WidgetOptions {
 /**
  * @param  {WidgetOptions} options
  * @param  {String} query
- * @param  {Function} parseData
  */
 export const useWidget = (
   { slug, geojson }: WidgetOptions,
@@ -20,7 +19,6 @@ export const useWidget = (
     analysisQuery,
     analysisBody,
   }: { analysisQuery: string, analysisBody: string },
-  parseData: Function,
 ) => {
   const query = useMemo((): AxiosRequestConfig => {
     if (analysisBody) {
@@ -52,7 +50,7 @@ export const useWidget = (
     };
   }, [geojson, analysisQuery, analysisBody]);
 
-  const [data, loading, loaded, error] = useAxios(query, [query], parseData);
+  const [data, loading, loaded] = useAxios(query, [query]);
 
   const rootWidgetProps = useCallback(
     () => ({
@@ -65,7 +63,7 @@ export const useWidget = (
     [loading],
   );
 
-  const noData = !data || !data.length;
+  const noData = !data || !data.rows || !data.rows.length;
 
   return {
     rootWidgetProps,

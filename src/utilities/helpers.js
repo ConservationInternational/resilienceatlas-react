@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import { PORT, isProd } from '../state/utils/api';
 import { getRouterParam } from './routeParams';
+import history from '../history';
 
 /**
  * @param  {string} key key to sort on
@@ -133,3 +134,36 @@ export function getNestedChildren(arr, ancestry) {
 
   return out;
 }
+
+export const download = (
+  content,
+  fileName,
+  mimeType = 'application/octet-stream',
+) => {
+  const link = document.createElement('a');
+
+  if (navigator.msSaveBlob) {
+    // IE10
+    navigator.msSaveBlob(
+      new Blob([content], {
+        type: mimeType,
+      }),
+      fileName,
+    );
+  } else if (URL && 'download' in link) {
+    // html5 a[download]
+    link.href = URL.createObjectURL(
+      new Blob([content], {
+        type: mimeType,
+      }),
+    );
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    history.push(
+      `data:application/octet-stream,${encodeURIComponent(content)}`,
+    ); // only this mime type is supported
+  }
+};

@@ -13,6 +13,7 @@ import InfoWindow from '@components/InfoWindow';
 
 import { useWidget, formatNumber } from '@utilities';
 import { CustomTooltip } from './CustomTooltip';
+import DownloadCsv from './DownloadCsv';
 
 const tickOptions = { fill: '#999', fontSize: 14 };
 
@@ -35,11 +36,9 @@ export const WidgetBarChart: FC<P> = ({
   metadata,
   geojson,
 }) => {
-  const parseData = useCallback(({ rows }) => rows, []);
   const { rootWidgetProps, loaded, data, noData } = useWidget(
     { slug, geojson },
     { analysisQuery, analysisBody },
-    parseData,
   );
 
   return (
@@ -55,7 +54,7 @@ export const WidgetBarChart: FC<P> = ({
             width={responsive ? 670 : 400}
             height={responsive ? 300 : 240}
           >
-            <BarChart data={data} margin={{ top: 40, bottom: 50 }}>
+            <BarChart data={data.rows} margin={{ top: 40, bottom: 50 }}>
               <CartesianGrid vertical={false} strokeDasharray="2 2" />
               <XAxis
                 dataKey="min"
@@ -104,12 +103,14 @@ export const WidgetBarChart: FC<P> = ({
       {meta_short && (
         <div className="meta-short">
           {meta_short}
+          {!noData && <DownloadCsv data={data} name={slug} />}
           {metadata && (
             <button
               type="button"
-              className="btn-analysis-info"
+              className="btn-analysis btn-analysis__info"
               data-info={metadata}
               data-name={name}
+              title="View detailed info"
               onClick={() => InfoWindow.show(name, metadata)}
             >
               <svg className="icon icon-info">
