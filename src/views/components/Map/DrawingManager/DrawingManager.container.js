@@ -7,6 +7,7 @@ import { DrawingManager } from './DrawingManager.component';
 const mapStateToProps = state => ({
   drawing: state.map.drawing,
   geojson: state.map.geojson,
+  bounds: state.map.bounds,
 });
 
 const mapDispatchToProps = {

@@ -105,7 +105,6 @@ export const useSearch = (
 
   useEffect(() => {
     if (selectedIndex > result.length) {
-      console.log(selectedIndex, result.length);
       setSelectedIndex(result.length);
     }
   }, [result.length]);
