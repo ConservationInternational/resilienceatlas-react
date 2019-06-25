@@ -105,10 +105,12 @@
     padding-top: 2px;
   }
 
-  .btn-analysis-info {
+  .btn-analysis {
     @extend %clean-button-or-input;
-    width: 24px;
+    display: inline-block;
+    width: 18px;
     height: 18px;
+    margin-left: 4px;
     padding: 0;
     vertical-align: middle;
   }
