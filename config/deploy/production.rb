@@ -5,5 +5,6 @@ set :ssh_options, {
   auth_methods: %w(publickey)
 }
 
+set :rvm_custom_path, '/home/ubuntu/.rvm'
 set :node_env, 'production'
-set :branch, 'staging'
+set :branch, 'master'
