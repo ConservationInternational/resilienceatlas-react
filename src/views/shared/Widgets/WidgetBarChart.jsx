@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -14,6 +14,7 @@ import InfoWindow from '@components/InfoWindow';
 import { useWidget, formatNumber } from '@utilities';
 import { CustomTooltip } from './CustomTooltip';
 import DownloadCsv from './DownloadCsv';
+import DownloadImage from './DownloadImage';
 
 const tickOptions = { fill: '#999', fontSize: 14 };
 
@@ -103,7 +104,13 @@ export const WidgetBarChart: FC<P> = ({
       {meta_short && (
         <div className="meta-short">
           {meta_short}
+
           {!noData && <DownloadCsv data={data} name={slug} />}
+
+          {analysisBody && (
+            <DownloadImage analysisBody={analysisBody} geojson={geojson} />
+          )}
+
           {metadata && (
             <button
               type="button"

@@ -97,7 +97,7 @@ class LegendChart extends React.PureComponent {
                 fontSize={10}
               >
                 <Label
-                  value="Proportion of study area protected"
+                  value="Proportion of area protected"
                   offset={-200}
                   position="insideTop"
                   fontSize={9}
