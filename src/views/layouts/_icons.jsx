@@ -177,6 +177,11 @@ const Icons = () => (
           <title>minus</title>
           <path d="M5.5 17.909h20.894v-3.818h-20.894z" />
         </symbol>
+
+        <symbol id="icon-crop" viewBox="0 0 22 22">
+          <title>crop</title>
+          <path d="M17,15 L19,15 L19,7 C19,5.9 18.1,5 17,5 L9,5 L9,7 L17,7 L17,15 Z M7,17 L7,1 L5,1 L5,5 L1,5 L1,7 L5,7 L5,17 C5,18.1 5.9,19 7,19 L17,19 L17,23 L19,23 L19,19 L23,19 L23,17 L7,17 Z" />
+        </symbol>
       </defs>
     </svg>
   </>
