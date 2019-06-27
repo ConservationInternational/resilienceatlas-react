@@ -118,4 +118,15 @@
   .widget-bar-chart {
     height: 220px;
   }
+
+  &__stats {
+    font-size: rem(13px);
+    color: $gray-70;
+
+    .stats-item {
+      &__label {
+        font-weight: 500;
+      }
+    }
+  }
 }
