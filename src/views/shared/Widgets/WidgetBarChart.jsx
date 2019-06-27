@@ -43,11 +43,7 @@ export const WidgetBarChart: FC<P> = ({
     { analysisQuery, analysisBody },
   );
 
-  const units = useMemo(() => {
-    const { min } = JSON.parse(legend);
-
-    return min.replace(/[0-9\s]/gi, '');
-  }, [legend]);
+  const { unit } = useMemo(() => JSON.parse(legend), [legend]);
 
   return (
     <div {...rootWidgetProps()}>
@@ -93,15 +89,14 @@ export const WidgetBarChart: FC<P> = ({
                       value,
                       formatFrom: 1e3,
                       maximumFractionDigits: 0,
-                      units,
                     })
                   }
-                  unit={units}
+                  unit={unit}
                   tick={{ ...tickOptions }}
                   padding={{ right: 20 }}
                 />
 
-                <Tooltip content={<CustomTooltip units={units} />} />
+                <Tooltip content={<CustomTooltip unit={unit} />} />
                 <Bar
                   barSize={responsive ? 18 : 12}
                   dataKey="count"
@@ -115,17 +110,17 @@ export const WidgetBarChart: FC<P> = ({
                 <li className="stats-item">
                   <span className="stats-item__label">Max: </span>
                   {formatNumber({ value: data.stats.max })}
-                  {units}
+                  {unit}
                 </li>
                 <li className="stats-item">
                   <span className="stats-item__label">Min: </span>
                   {formatNumber({ value: data.stats.min })}
-                  {units}
+                  {unit}
                 </li>
                 <li className="stats-item">
                   <span className="stats-item__label">Std. deviation: </span>
                   {formatNumber({ value: data.stats.stdev })}
-                  {units}
+                  {unit}
                 </li>
               </ul>
             )}
