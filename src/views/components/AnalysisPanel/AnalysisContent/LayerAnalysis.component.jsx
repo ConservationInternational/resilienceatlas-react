@@ -37,6 +37,7 @@ export const LayerAnalysis: FC<P> = ({
           analysisBody={l.analysisBody}
           name={l.name}
           meta_short={l.name}
+          legend={l.legend}
           metadata={JSON.parse(l.info || 'null')}
           geojson={geojson}
         />

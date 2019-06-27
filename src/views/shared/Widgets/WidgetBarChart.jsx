@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -35,12 +35,19 @@ export const WidgetBarChart: FC<P> = ({
   analysisBody,
   meta_short,
   metadata,
+  legend,
   geojson,
 }) => {
   const { rootWidgetProps, loaded, data, noData } = useWidget(
     { slug, geojson },
     { analysisQuery, analysisBody },
   );
+
+  const units = useMemo(() => {
+    const { min } = JSON.parse(legend);
+
+    return min.replace(/[0-9\s]/gi, '');
+  }, [legend]);
 
   return (
     <div {...rootWidgetProps()}>
@@ -51,82 +58,109 @@ export const WidgetBarChart: FC<P> = ({
             <h3>NO DATA AVAILABLE</h3>
           </div>
         ) : (
-          <ResponsiveContainer
-            width={responsive ? 670 : 400}
-            height={responsive ? 300 : 240}
-          >
-            <BarChart data={data.rows} margin={{ top: 40, bottom: 50 }}>
-              <CartesianGrid vertical={false} strokeDasharray="2 2" />
-              <XAxis
-                dataKey="min"
-                interval={0}
-                tick={{
-                  ...tickOptions,
-                  angle: -90,
-                  dx: -6,
-                }}
-                tickFormatter={value =>
-                  formatNumber({
-                    value,
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1,
-                  })
-                }
-                textAnchor="end"
-                tickLine={false}
-              />
-              <YAxis
-                allowDataOverflow
-                axisLine={false}
-                tickLine={false}
-                tickCount={10}
-                tickFormatter={value =>
-                  formatNumber({
-                    value,
-                    formatFrom: 1e3,
-                    maximumFractionDigits: 0,
-                  })
-                }
-                tick={{ ...tickOptions }}
-                padding={{ right: 20 }}
-              />
-
-              <Tooltip content={CustomTooltip} />
-              <Bar
-                barSize={responsive ? 18 : 12}
-                dataKey="count"
-                fill="#0089CC"
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        ))}
-
-      {meta_short && (
-        <div className="meta-short">
-          {meta_short}
-
-          {!noData && <DownloadCsv data={data} name={slug} />}
-
-          {analysisBody && (
-            <DownloadImage analysisBody={analysisBody} geojson={geojson} />
-          )}
-
-          {metadata && (
-            <button
-              type="button"
-              className="btn-analysis btn-analysis__info"
-              data-info={metadata}
-              data-name={name}
-              title="View detailed info"
-              onClick={() => InfoWindow.show(name, metadata)}
+          <>
+            <ResponsiveContainer
+              width={responsive ? 670 : 400}
+              height={responsive ? 300 : 240}
             >
-              <svg className="icon icon-info">
-                <use xlinkHref="#icon-info" />
-              </svg>
-            </button>
-          )}
-        </div>
-      )}
+              <BarChart data={data.rows} margin={{ top: 40, bottom: 50 }}>
+                <CartesianGrid vertical={false} strokeDasharray="2 2" />
+                <XAxis
+                  dataKey="min"
+                  interval={0}
+                  tick={{
+                    ...tickOptions,
+                    angle: -90,
+                    dx: -6,
+                  }}
+                  tickFormatter={value =>
+                    formatNumber({
+                      value,
+                      minimumFractionDigits: 1,
+                      maximumFractionDigits: 1,
+                    })
+                  }
+                  textAnchor="end"
+                  tickLine={false}
+                />
+                <YAxis
+                  allowDataOverflow
+                  axisLine={false}
+                  tickLine={false}
+                  tickCount={10}
+                  tickFormatter={value =>
+                    formatNumber({
+                      value,
+                      formatFrom: 1e3,
+                      maximumFractionDigits: 0,
+                      units,
+                    })
+                  }
+                  unit={units}
+                  tick={{ ...tickOptions }}
+                  padding={{ right: 20 }}
+                />
+
+                <Tooltip content={<CustomTooltip units={units} />} />
+                <Bar
+                  barSize={responsive ? 18 : 12}
+                  dataKey="count"
+                  fill="#0089CC"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+
+            {data.stats && (
+              <ul className="m-widget__stats">
+                <li className="stats-item">
+                  <span className="stats-item__label">Max: </span>
+                  {formatNumber({ value: data.stats.max })}
+                  {units}
+                </li>
+                <li className="stats-item">
+                  <span className="stats-item__label">Min: </span>
+                  {formatNumber({ value: data.stats.min })}
+                  {units}
+                </li>
+                <li className="stats-item">
+                  <span className="stats-item__label">Std. deviation: </span>
+                  {formatNumber({ value: data.stats.stdev })}
+                  {units}
+                </li>
+              </ul>
+            )}
+
+            {meta_short && (
+              <div className="meta-short">
+                {meta_short}
+
+                {!noData && <DownloadCsv data={data} name={slug} />}
+
+                {analysisBody && (
+                  <DownloadImage
+                    analysisBody={analysisBody}
+                    geojson={geojson}
+                  />
+                )}
+
+                {metadata && (
+                  <button
+                    type="button"
+                    className="btn-analysis btn-analysis__info"
+                    data-info={metadata}
+                    data-name={name}
+                    title="View detailed info"
+                    onClick={() => InfoWindow.show(name, metadata)}
+                  >
+                    <svg className="icon icon-info">
+                      <use xlinkHref="#icon-info" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            )}
+          </>
+        ))}
     </div>
   );
 };
