@@ -69,7 +69,7 @@ const MapView = ({
     if (query.center) {
       const decodeCenter = decodeURIComponent(query.center);
       if (decodeCenter && decodeCenter[0] === '{') {
-        return qs.parse(decodeCenter.slice(1, -1));
+        return JSON.parse(decodeCenter);
       }
       const center = qs.parse(query.center);
       return center;
