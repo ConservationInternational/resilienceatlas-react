@@ -1,4 +1,3 @@
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { getGrouped } from '@modules/layers';
@@ -17,4 +16,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(connect(mapStateToProps))(LayerList);
+export default connect(mapStateToProps)(LayerList);
