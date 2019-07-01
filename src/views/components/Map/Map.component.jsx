@@ -66,11 +66,21 @@ const MapView = ({
   }, [activeLayers]);
 
   const getCenter = useCallback(() => {
+    if (query.center) {
+      const decodeCenter = decodeURIComponent(query.center);
+      if (decodeCenter && decodeCenter[0] === '{') {
+        return qs.parse(decodeCenter.slice(1, -1));
+      }
+      const center = qs.parse(query.center);
+      return center;
+    }
+
     if (site.lat) {
       return { lat: site.lat, lng: site.lng };
     }
+
     return { lat: 3.86, lng: 47.28 };
-  }, [site && site.lat]);
+  }, [site.lat]);
 
   return (
     <Maps
@@ -81,7 +91,7 @@ const MapView = ({
       mapOptions={{
         ...options.map,
         zoom: query.zoom || 5,
-        center: query.center ? qs.parse(query.center) : getCenter(),
+        center: getCenter(),
         scrollWheelZoom: !embed,
         drawControl: true,
       }}
