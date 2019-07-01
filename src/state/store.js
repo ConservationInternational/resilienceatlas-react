@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import * as reducers from './modules';
 import normalizrMiddleware from './middlewares/normalizrMiddleware';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 const composeEnhancer = composeWithDevTools({});
 

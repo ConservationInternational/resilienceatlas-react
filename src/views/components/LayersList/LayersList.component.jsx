@@ -29,7 +29,7 @@ let Subgroup = ({ toggleActive, id, name, active, layers }) => (
       />
     </div>
 
-    {(active && layers) && (
+    {active && layers && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(layer => (
           <Layer key={layer.id} {...layer} />
@@ -56,7 +56,7 @@ let Category = ({ toggleActive, id, name, active, layers, subcategory }) => (
       />
     </div>
 
-    {(active && layers) && (
+    {active && layers && (
       <ul
         className={cx('m-layers-list-panel', {
           'is-active': !!active,
@@ -89,7 +89,7 @@ let Subcategory = ({ toggleActive, id, name, active, layers, subgroup }) => (
       />
     </div>
 
-    {(active && layers) && (
+    {active && layers && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(layer => (
           <Layer key={layer.id} {...layer} withDashboardOrder />
@@ -112,7 +112,7 @@ let Group = ({ toggleActive, id, slug, name, active, layers, categories }) => (
     >
       <div className="header-title theme-color">{name}</div>
     </div>
-    {(active && layers) && (
+    {active && layers && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(({ dashboard_order, ...layer }) => (
           <Layer key={layer.id} {...layer} withDashboardOrder />
