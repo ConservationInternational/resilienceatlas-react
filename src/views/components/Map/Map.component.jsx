@@ -6,10 +6,10 @@ import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
 
 import { TABS } from '@components/Sidebar';
 
-import { setRouterParam } from '@utilities';
 import { BASEMAPS } from '@views/utils';
 
 import { LayerManagerContext } from '@contexts/layerManagerCtx';
+import { setRouterParam } from '@utilities';
 
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
@@ -75,12 +75,12 @@ const MapView = ({
       return center;
     }
 
-    if (site.lat) {
-      return { lat: site.lat, lng: site.lng };
+    if (site.latitude) {
+      return { lat: site.latitude, lng: site.longitude };
     }
 
     return { lat: 3.86, lng: 47.28 };
-  }, [site.lat]);
+  }, [site.latitude]);
 
   return (
     <Maps
@@ -90,7 +90,7 @@ const MapView = ({
       }}
       mapOptions={{
         ...options.map,
-        zoom: query.zoom || 5,
+        zoom: query.zoom || site.zoom_level || 5,
         center: getCenter(),
         scrollWheelZoom: !embed,
         drawControl: true,
@@ -98,7 +98,14 @@ const MapView = ({
       events={{
         click: () => {},
         zoomend: (e, map) => {
-          setRouterParam('zoom', map.getZoom());
+          const mapZoom = map.getZoom();
+
+          if (mapZoom !== (+site.zoom_level || 5)) {
+            setRouterParam('zoom', map.getZoom());
+          } else {
+            // clear param if it's default
+            setRouterParam('zoom');
+          }
         },
         dragend: (e, map) => {
           setRouterParam('center', qs.stringify(map.getCenter()));

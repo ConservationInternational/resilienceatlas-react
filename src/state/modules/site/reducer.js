@@ -1,4 +1,3 @@
-import { subdomain } from '@utilities/helpers';
 import { createReducer } from '../../utils';
 import { LOAD } from './actions';
 
@@ -6,11 +5,11 @@ const initialState = {
   has_analysis: false,
   predictive_model: false,
   name: '',
-  subdomain,
+  subdomain: '',
   color: '#0089cc',
   header_theme: '',
-  lat: NaN,
-  lng: NaN,
+  latitude: NaN,
+  longitude: NaN,
   zoom_level: NaN,
   linkback_text: null,
   linkback_url: null,

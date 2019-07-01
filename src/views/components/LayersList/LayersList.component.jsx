@@ -3,8 +3,8 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import Loader from '@shared/Loader';
 
-import { clickable } from '@utilities';
 import { toggle as toggleGroup } from '@modules/layer_groups';
+import { clickable } from '@utilities';
 
 import Layer from './Layer';
 import Basemaps from './Basemaps';
