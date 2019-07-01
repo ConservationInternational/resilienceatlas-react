@@ -29,7 +29,7 @@ let Subgroup = ({ toggleActive, id, name, active, layers }) => (
       />
     </div>
 
-    {active && (
+    {(active && layers) && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(layer => (
           <Layer key={layer.id} {...layer} />
