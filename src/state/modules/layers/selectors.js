@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
+import { denormalize } from 'normalizr';
 import { sortBy } from '@utilities';
 
-import { denormalize } from 'normalizr';
 import {
   getById as getGroupsById,
   getGroups,
@@ -80,7 +80,7 @@ export const getGrouped = () => {
       g_defaultActive,
     ) => {
       const isActive = getActiveFromDefaults(g_defaultActive);
-      if (!groups.length || !g_categories.length) {
+      if (!groups.length && !g_categories.length) {
         console.info('There aren`t groups setted.');
         return groups;
       }
