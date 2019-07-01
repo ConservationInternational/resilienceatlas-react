@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { load as loadMenuItems, makeMenuTree } from '@modules/map_menu_entries';
-import { logout } from '@modules/user';
+import { logout, getUserLoggedIn } from '@modules/user';
 
 import { sortBy } from '@utilities';
 
@@ -11,12 +11,14 @@ const byPosition = sortBy('position');
 
 const Header = ({
   loadMenuItems,
-  isAuthorized,
+  logout,
+  loggedIn,
   site: { linkback_text, linkback_url },
   menuItems,
+  menuItemsLoaded,
 }) => {
   useEffect(() => {
-    loadMenuItems();
+    if (!menuItemsLoaded) loadMenuItems();
   }, []);
 
   const renderMenuItem = useCallback(
@@ -62,7 +64,7 @@ const Header = ({
             </NavLink>
           </li>
 
-          {isAuthorized ? (
+          {loggedIn ? (
             <>
               <li>
                 <NavLink to="/me" activeClassName="is-current">
@@ -115,9 +117,10 @@ const makeMapStateToProps = () => {
   const getMenuItems = makeMenuTree();
 
   const mapStateToProps = state => ({
-    isAuthorized: state.user.email,
+    loggedIn: getUserLoggedIn(state),
     site: state.site,
     menuItems: getMenuItems(state),
+    menuItemsLoaded: state.map_menu_entries.loaded,
   });
 
   return mapStateToProps;

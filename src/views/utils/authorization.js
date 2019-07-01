@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { getUserLoggedIn } from '@modules/user';
+
 export const SHARED = 'SHARED';
 export const LOGGED = 'LOGGED';
 export const UNLOGGED = 'UNLOGGED';
@@ -16,7 +18,7 @@ export default auth => Wrapped => {
   };
 
   return connect(state => ({
-    logged: state.user.email ? LOGGED : UNLOGGED,
+    logged: getUserLoggedIn(state) ? LOGGED : UNLOGGED,
     site: state.site,
   }))(authorized);
 };

@@ -42,8 +42,8 @@ const MapView = ({
   const layerManagerRef = useContext(LayerManagerContext);
 
   useEffect(() => {
-    loadLayers();
-    loadLayerGroups();
+    if (!layersLoaded) loadLayers();
+    if (!layerGroupsLoaded) loadLayerGroups();
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,8 @@
 import { SubmissionError } from 'redux-form';
-import { post, PORT } from '../../utils/api';
+
+import { AUTH_TOKEN } from '@utilities/constants';
+
+import { PORT, post, setAuthToken } from '../../utils/api';
 import { ILoginForm, ISignupForm, IEditProfileForm } from './utils';
 
 const URL_LOGIN = '/users/authenticate';
@@ -12,9 +15,9 @@ export const EDIT_PROFILE = 'user / EDIT_PROFILE';
 export const LOGOUT = 'user / LOGOUT';
 
 // Action creators
-export const userLoggedIn = payload => ({
+export const userLoggedIn = auth_token => ({
   type: LOGIN,
-  payload,
+  auth_token,
 });
 
 export const userSignedUp = payload => ({
@@ -31,32 +34,31 @@ export const userLoggedOut = () => ({
   type: LOGOUT,
 });
 
-// export const login = (values: ILoginForm) =>
-//    post(URL_LOGIN, { data: values })
-
 // Actions
-export const login = ({ email, password }: ILoginForm) =>
-  post(URL_LOGIN, { data: { user: { email, password } }, baseURL: PORT }).catch(
-    response => {
-      if (response.data && response.data.error) {
-        throw new SubmissionError({ _error: response.data.error });
+export const signin = ({ email, password }: ILoginForm) =>
+  post(URL_LOGIN, { data: { email, password }, baseURL: PORT })
+    .then(response => response.data)
+    .then(data => {
+      if (data.error || !data.auth_token) {
+        throw new SubmissionError({ _error: data.error });
       }
-      return response;
-    },
-  );
+
+      return data.auth_token;
+    });
 
 export const signup = ({ email, password }: ISignupForm) =>
-  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT }).then(
-    response => {
-      if (response.data && response.data.status === 'created') {
-        return response;
+  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT })
+    .then(response => response.data)
+    .then(data => {
+      if (data.status !== 'created') {
+        throw new SubmissionError(data);
       }
 
-      throw new SubmissionError(response.data);
-    },
-  );
+      return data;
+    });
 
 export const editProfile = (values: IEditProfileForm) =>
+  // MOCK
   new Promise(resolve => {
     setTimeout(
       () =>
@@ -67,8 +69,16 @@ export const editProfile = (values: IEditProfileForm) =>
     );
   });
 
+export const login = auth_token => dispatch => {
+  localStorage.setItem(AUTH_TOKEN, auth_token);
+
+  setAuthToken(auth_token);
+
+  dispatch(userLoggedIn(auth_token));
+};
+
 export const logout = () => dispatch => {
-  localStorage.removeItem('resilience_user');
+  localStorage.removeItem(AUTH_TOKEN);
 
   dispatch(userLoggedOut());
 };

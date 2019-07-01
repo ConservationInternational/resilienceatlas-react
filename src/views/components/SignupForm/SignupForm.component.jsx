@@ -59,6 +59,7 @@ const LoginForm: FC<InjectedFormProps<ISignupForm>> = ({
         type="submit"
         name="commit"
         value="Sign up"
+        disabled={submitting}
       />
     </div>
   </Form>

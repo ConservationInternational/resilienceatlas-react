@@ -1,4 +1,7 @@
 import { schema } from 'normalizr';
+
+import { generateDownloadUrl } from '@utilities/helpers';
+
 import { birds } from './utils/decoders';
 
 import {
@@ -107,6 +110,7 @@ export const layer = new schema.Entity(
         info: l.attributes.info,
         dashboard_order: l.attributes.dashboard_order,
         download: l.attributes.download || null,
+        download_url: l.attributes.download ? generateDownloadUrl(l) : null,
         dataset_shortname: l.attributes.dataset_shortname || null,
         dataset_source_url: l.attributes.dataset_source_url || null,
         attributions: source ? parseInt(source.id, 10) : null,

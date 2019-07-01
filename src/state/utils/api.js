@@ -2,6 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { schema } from 'normalizr';
 
+import { merge } from '@utilities/helpers';
+
 export const isProd = process.env.NODE_ENV === 'production';
 
 export const PORT = process.env.REACT_APP_API_HOST;
@@ -16,8 +18,12 @@ const defaultConfig = {
 
 let axiosInstance = axios.create(defaultConfig);
 
-export const updateApi = config => {
-  axiosInstance = axios.create({ ...defaultConfig, ...config });
+export const updateApi = (config: AxiosRequestConfig) => {
+  axiosInstance = axios.create(merge(defaultConfig, config));
+};
+
+export const setAuthToken = (auth_token: string) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${auth_token}`;
 };
 
 type ApiAction = {

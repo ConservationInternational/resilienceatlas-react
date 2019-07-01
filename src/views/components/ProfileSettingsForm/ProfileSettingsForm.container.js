@@ -27,7 +27,6 @@ const withForm = reduxForm({
   onSubmit: editProfile,
   onSubmitSuccess: (result, dispatch) => {
     dispatch(userProfileEdited(result));
-    localStorage.setItem('resilience_user', JSON.stringify(result));
   },
 });
 

@@ -21,3 +21,5 @@ export const INDICATOR_VALUE_DESC = [
   'Very',
   'Extremely',
 ];
+
+export const AUTH_TOKEN = 'resilience_token';

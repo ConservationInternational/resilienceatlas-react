@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { denormalize } from 'normalizr';
-import { sortBy } from '@utilities';
+
+import { sortBy } from '@utilities/helpers';
 
 import {
   getById as getGroupsById,

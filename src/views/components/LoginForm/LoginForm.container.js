@@ -1,17 +1,32 @@
+import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 
-import { LoginSchema, login, userLoggedIn } from '@modules/user';
+import { LoginSchema, signin, login } from '@modules/user';
 
 import { asyncValidate } from '@views/utils/asyncValidate';
 
 import LoginForm from './LoginForm.component';
 
-export default reduxForm({
+const withForm = reduxForm({
   form: 'LoginForm',
   asyncValidate: asyncValidate(LoginSchema),
-  onSubmit: login,
-  onSubmitSuccess: (result, dispatch) => {
-    dispatch(userLoggedIn(result));
-    localStorage.setItem('resilience_user', JSON.stringify(result));
+  onSubmit: signin,
+  onSubmitSuccess: (auth_token, dispatch, props) => {
+    const {
+      history,
+      location: { state: { from, ...state } = {} },
+    } = props;
+
+    dispatch(login(auth_token));
+
+    if (from) {
+      history.push(from, state);
+    }
   },
-})(LoginForm);
+});
+
+export default compose(
+  withRouter,
+  withForm,
+)(LoginForm);

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { AUTH_TOKEN } from '@utilities/constants';
 
 // LOGIN FORM //
 export interface ILoginForm {
@@ -67,3 +68,7 @@ export const EditProfileSchema = Yup.object().shape({
   organization: Yup.string(),
   organization_role: Yup.string(),
 });
+
+// Utils
+
+export const getToken = () => localStorage.getItem(AUTH_TOKEN);
