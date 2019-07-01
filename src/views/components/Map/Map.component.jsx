@@ -70,7 +70,7 @@ const MapView = ({
       return { lat: site.lat, lng: site.lng };
     }
     return { lat: 3.86, lng: 47.28 };
-  }, [site.lat]);
+  }, [site && site.lat]);
 
   return (
     <Maps
