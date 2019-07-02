@@ -6824,9 +6824,9 @@ layer-manager@^1.10.0:
     supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
-"layer-manager@https://github.com/alexmalinin/layer-manager.git#feature/fit-map-to-layer":
+"layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git":
   version "1.0.1-resilience"
-  resolved "https://github.com/alexmalinin/layer-manager.git#715cc42b8868b574d24db3acb21cd37558f3512b"
+  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#7849ccb7db8c2c5a739183c2b8d86e9eece3e5cc"
   dependencies:
     axios "^0.18.0"
     lodash "^4.17.11"
