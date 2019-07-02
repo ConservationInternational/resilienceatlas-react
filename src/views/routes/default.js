@@ -11,6 +11,10 @@ import Slide from '../components/Journey/Slides';
 import MapPage from '../pages/map';
 import Report from '../pages/report';
 import Journey from '../pages/journey';
+import Login from '../pages/login';
+import Signup from '../pages/signup';
+import Me from '../pages/me';
+import ProfileSettings from '../pages/profile-settings';
 
 import NotFound from '../pages/notfound';
 
@@ -26,6 +30,10 @@ const Layout = {
   Slide: fullscreenLayout(Slide),
   Map: fullscreenLayout(MapPage),
   Report: reportLayout(Report),
+  Login: mainLayout(Login),
+  Signup: mainLayout(Signup),
+  Me: mainLayout(Me),
+  ProfileSettings: mainLayout(ProfileSettings),
 };
 
 const Auth = {
@@ -36,6 +44,10 @@ const Auth = {
   Slide: shared(Layout.Slide),
   Map: shared(Layout.Map),
   Report: shared(Layout.Report),
+  Login: unlogged(Layout.Login),
+  Signup: unlogged(Layout.Signup),
+  Me: logged(Layout.Me),
+  ProfileSettings: logged(Layout.ProfileSettings),
 };
 
 const DefaultRoutes = () => (
@@ -47,6 +59,12 @@ const DefaultRoutes = () => (
     <Route exact path="/report" component={Auth.Report} />
     <Route exact path="/journeys/:id" component={Auth.Journey} />
     <Route exact path="/journeys/:id/:step" component={Auth.Slide} />
+
+    <Route exact path="/login" component={Auth.Login} />
+    <Route exact path="/register" component={Auth.Signup} />
+
+    <Route exact path="/me" component={Auth.Me} />
+    <Route exact path="/profile-settings" component={Auth.ProfileSettings} />
 
     <Route component={NotFound} />
   </Switch>

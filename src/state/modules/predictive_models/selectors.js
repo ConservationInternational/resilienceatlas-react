@@ -103,9 +103,7 @@ export const makeLayer = () => {
         line-color: #FFFFB2;
       }`;
 
-      const sql = `select * from getModel('${
-        activeModel.tableName
-      }', '[${columns}]')`;
+      const sql = `select * from getModel('${activeModel.tableName}', '[${columns}]')`;
 
       return {
         id: -1,

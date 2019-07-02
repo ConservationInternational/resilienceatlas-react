@@ -10,7 +10,7 @@ import cx from 'classnames';
 const Basemaps = ({ basemap, setBasemap }) => {
   const [opened, toggleOpened] = useToggle(false);
 
-  useRouterValue('basemap', basemap);
+  useRouterValue('basemap', basemap, { onlyOnChange: true });
 
   const { getTogglerProps } = useTogglerButton(basemap, setBasemap);
 

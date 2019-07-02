@@ -24,6 +24,7 @@ export const AnalysisPanel: FC<P> = ({
   setGeojson,
   toggle,
   // data
+  countriesLoaded,
   drawing,
   location,
   countries,
@@ -35,7 +36,7 @@ export const AnalysisPanel: FC<P> = ({
     [location],
   );
   useEffect(() => {
-    loadCountries();
+    if (!countriesLoaded) loadCountries();
   }, []);
 
   const [tab, setTab] = useState(geojson && !iso ? 'shape' : 'region');

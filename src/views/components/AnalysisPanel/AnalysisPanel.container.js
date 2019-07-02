@@ -12,6 +12,7 @@ const mapStateToProps = state => {
 
   return {
     countries: getCountries(state),
+    countriesLoaded: state.countries.loaded,
     drawing: state.map.drawing,
     geojson: state.map.geojson,
   };
