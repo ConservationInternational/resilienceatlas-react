@@ -1,3 +1,4 @@
+export { reducer as form } from 'redux-form';
 export { default as ui } from './ui';
 export { default as site } from './site';
 export { default as map_menu_entries } from './map_menu_entries';

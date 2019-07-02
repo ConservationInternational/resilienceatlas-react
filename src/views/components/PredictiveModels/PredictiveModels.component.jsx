@@ -17,10 +17,11 @@ const PredictiveModels = ({
   model,
   indicatorsState,
   modelsLoading,
+  modelsLoaded,
   selectedModel,
 }) => {
   useEffect(() => {
-    loadModels();
+    if (!modelsLoaded) loadModels();
   }, []);
 
   useEffect(() => {

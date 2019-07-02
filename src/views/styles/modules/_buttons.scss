@@ -143,6 +143,7 @@
 }
 
 .btn-download {
+  @extend %clean-button-or-input;
   float: right;
   margin-left: rem(6px);
 }

@@ -4,6 +4,7 @@ import cx from 'classnames';
 import InfoWindow from '@components/InfoWindow';
 import { LayerManagerContext } from '@contexts/layerManagerCtx';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
+import DownloadWindow from '../../DownloadWindow/DownloadWindow.component';
 
 const validateOpacity = value => {
   if (Number.isNaN(value)) return 1;
@@ -43,11 +44,6 @@ const Layer = ({
     300,
     [slider.value],
   );
-
-  const showInfo = useCallback((e: MouseEvent) => {
-    const { name, info } = e.currentTarget.dataset;
-    InfoWindow.show(name, JSON.parse(info));
-  }, []);
 
   const fitMapToLayer = useCallback(() => {
     layerManagerRef.current.fitMapToLayer(id);
@@ -130,7 +126,9 @@ const Layer = ({
           className="btn-info icon-container"
           data-info={info}
           data-name={name}
-          onClick={showInfo}
+          onClick={() => {
+            InfoWindow.show(name, JSON.parse(info));
+          }}
         >
           <svg className="icon icon-info">
             <use xlinkHref="#icon-info" />
@@ -139,16 +137,19 @@ const Layer = ({
       )}
 
       {!!download && (
-        <a
-          href={download_url}
+        <button
+          type="button"
           data-name={name}
           className="btn-download icon-container"
           attr="download"
+          onClick={() => {
+            DownloadWindow.show(download_url);
+          }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>
             <use xlinkHref="#icon-downloads" />
           </svg>
-        </a>
+        </button>
       )}
       <div className="panel-item-slider">
         <div className="m-form-input--slider">
