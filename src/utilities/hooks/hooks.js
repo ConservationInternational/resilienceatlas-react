@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import cx from 'classnames';
 import { setRouterParam } from '../routeParams';
+import { usePrevious } from './usePrevious';
 
 export const useToggle = (initial = false) => {
   const [toggled, setToggle] = useState(initial);
@@ -63,9 +64,17 @@ export const useDebounce = (effect, delay, deps) => {
   }, deps);
 };
 
-export const useRouterValue = (name, value) => {
+export const useRouterValue = (
+  name: string,
+  value: any,
+  { onlyOnChange = false }: { onlyOnChange?: Boolean } = {},
+) => {
+  const prevValue = usePrevious(value, { initial: true });
+
   useEffect(() => {
-    setRouterParam(name, value);
+    if (!onlyOnChange || prevValue !== value) {
+      setRouterParam(name, value);
+    }
   }, [value]);
 };
 

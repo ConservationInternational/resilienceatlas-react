@@ -17,6 +17,13 @@ import 'leaflet-active-area';
 import 'leaflet.pm/dist/leaflet.pm.css';
 
 import { load as loadSite } from './state/modules/site';
+import { getToken, login } from './state/modules/user';
+
+const userToken = getToken();
+
+if (userToken) {
+  store.dispatch(login(userToken));
+}
 
 store.dispatch(loadSite());
 

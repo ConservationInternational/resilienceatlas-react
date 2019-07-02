@@ -101,3 +101,9 @@ img {
 .brand-area a {
   background-image: var(--logo-url);
 }
+
+// Buttons
+[type='button'],
+[type='submit'] {
+  cursor: pointer;
+}

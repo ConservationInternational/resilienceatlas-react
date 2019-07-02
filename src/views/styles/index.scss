@@ -2,7 +2,7 @@
 @import 'variables';
 
 // Importing dependencies and helpers
-@import '~normalize.css';
+@import '~normalize.css/normalize.css';
 
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
@@ -40,7 +40,8 @@
   'modules/_m-search-map', 'modules/_m-search', 'modules/_m-section-nav',
   'modules/_m-share', 'modules/_m-sidebar', 'modules/_m-slider',
   'modules/_m-static-page', 'modules/_m-toolbar', 'modules/_m-welcome',
-  'modules/_m-widget', 'modules/_m-widgets-list', 'modules/_modal';
+  'modules/_m-widget', 'modules/_m-widgets-list', 'modules/_modal',
+  'modules/m-user-form';
 
 // Global states
 @import 'state';
