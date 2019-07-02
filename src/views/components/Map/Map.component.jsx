@@ -80,7 +80,7 @@ const MapView = ({
     }
 
     return { lat: 3.86, lng: 47.28 };
-  }, [site.latitude]);
+  }, [site.latitude, query.center]);
 
   return (
     <Maps
@@ -106,6 +106,10 @@ const MapView = ({
             // clear param if it's default
             setRouterParam('zoom');
           }
+
+          // Update map center in url, because it basically changed
+          // after 'pinches' and zoom in/out from mousewheel.
+          setRouterParam('center', qs.stringify(map.getCenter()));
         },
         dragend: (e, map) => {
           setRouterParam('center', qs.stringify(map.getCenter()));
