@@ -1,13 +1,36 @@
 import { createReducer } from '../../utils';
-import { LOAD_PAGE_INDEX } from './actions';
+import { LOAD } from './actions';
 
 const initialState = {
-  pageIndex: [],
+  byId: {
+    /* [journeyId]: { journey } */
+  },
+  all: [
+    /* journeyId */
+  ],
+  loading: false,
+  loaded: false,
+  error: null,
 };
 
 export default createReducer(initialState)({
-  [LOAD_PAGE_INDEX.SUCCESS]: (state, { payload }) => ({
+  [LOAD.REQUEST]: state => ({
     ...state,
-    pageIndex: payload,
+    loading: true,
+    error: null,
+  }),
+
+  [LOAD.SUCCESS]: (state, { payload }) => ({
+    ...state,
+    byId: payload.entities.journeys,
+    all: payload.result,
+    loding: false,
+    loaded: true,
+  }),
+
+  [LOAD.FAIL]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
   }),
 });

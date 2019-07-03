@@ -11,7 +11,6 @@ const Embed = ({
   maskSql,
   aside,
   currentStep,
-  currentJourney,
   countries,
   countryName,
   setActiveLayer,
@@ -23,9 +22,10 @@ const Embed = ({
     const layerDataIds = layerData.map(l => l.id);
     setActiveLayer(layerDataIds);
   }, []);
-  const countryInfo = Object.values(countries).find(
-    c => c.name.toLowerCase() === countryName.toLowerCase(),
-  );
+  const countryInfo =
+    Object.values(countries).find(
+      c => c.name.toLowerCase() === countryName.toLowerCase(),
+    ) || {};
 
   return (
     <div className={`m-journey--embed--light ${theme}`}>
@@ -40,7 +40,6 @@ const Embed = ({
           target="_blank"
           rel="noopener noreferrer"
           data-step={currentStep}
-          data-journey={currentJourney}
           className="btn-check-it"
         >
           View on map
