@@ -1,35 +1,32 @@
 import { createReducer } from '../../utils';
-import {
-  LOAD_JOURNEY_INDEX,
-  SET_CURRENT_STEP,
-  SET_CURRENT_JOURNEY,
-} from './actions';
+import { LOAD_ONE as LOAD_JOURNEY } from '../journeys/actions';
 
 const initialState = {
-  currentStep: 0,
-  loading: true,
+  data: {},
+  current: null, // journeyID
+  loading: false,
+  loaded: null, // journeyID
   error: null,
 };
 
 export default createReducer(initialState)({
-  [LOAD_JOURNEY_INDEX.SUCCESS]: (state, { payload }) => ({
+  [LOAD_JOURNEY.REQUEST]: (state, { meta: { id } }) => ({
     ...state,
-    ...payload.data[0],
+    current: id,
+    loading: true,
+    error: null,
+  }),
+
+  [LOAD_JOURNEY.SUCCESS]: (state, { payload, meta: { id } }) => ({
+    ...state,
+    data: payload.data[0],
+    loding: false,
+    loaded: id,
+  }),
+
+  [LOAD_JOURNEY.FAIL]: (state, { error }) => ({
+    ...state,
     loading: false,
-  }),
-  [LOAD_JOURNEY_INDEX.FAIL]: state => ({
-    ...state,
-    loading: false,
-    error: true,
-  }),
-  [SET_CURRENT_STEP]: (state, { currentStep }) => ({
-    ...state,
-    currentStep,
-  }),
-  [SET_CURRENT_JOURNEY]: (state, { currentStep, id, loading }) => ({
-    ...state,
-    currentStep,
-    id,
-    loading,
+    error,
   }),
 });
