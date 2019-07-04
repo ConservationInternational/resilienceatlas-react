@@ -1,19 +1,27 @@
 import { connect } from 'react-redux';
-import { loadPageIndex as loadJourneys } from '@modules/journeys';
-import { updateJourney } from '@modules/journey';
+import {
+  load as loadJourneys,
+  makeAll as makeAllJourneys,
+} from '@modules/journeys';
 
 import JourneysIntrolist from './JourneysIntrolist.component';
 
-const mapStateToProps = state => ({
-  journeys: state.journeys.pageIndex,
-});
+const makeMapStateToProps = () => {
+  const getAllJourneys = makeAllJourneys();
+
+  const mapStateToProps = state => ({
+    journeys: getAllJourneys(state),
+    journeysLoaded: state.journeys.loaded,
+  });
+
+  return mapStateToProps;
+};
 
 const mapDispatchToProps = {
   loadJourneys,
-  updateJourney,
 };
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps,
 )(JourneysIntrolist);
