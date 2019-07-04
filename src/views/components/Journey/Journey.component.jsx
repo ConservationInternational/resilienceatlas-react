@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback } from 'react';
+import React, { FC, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 // Components

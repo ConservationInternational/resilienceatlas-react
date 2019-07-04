@@ -2,12 +2,18 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import auth, { SHARED, LOGGED, UNLOGGED } from '../utils/authorization';
-import { mainLayout, fullscreenLayout, reportLayout } from '../layouts';
+import {
+  mainLayout,
+  fullscreenLayout,
+  reportLayout,
+  embedLayout,
+} from '../layouts';
 
 import Welcome from '../pages/welcome';
 import About from '../pages/about';
 import Journeys from '../pages/journeys';
 import MapPage from '../pages/map';
+import EmbedMap from '../pages/embed/map';
 import Report from '../pages/report';
 import Journey from '../pages/journey';
 import Login from '../pages/login';
@@ -27,6 +33,7 @@ const Layout = {
   Journeys: mainLayout(Journeys),
   Journey: fullscreenLayout(Journey),
   Map: fullscreenLayout(MapPage),
+  EmbedMap: embedLayout(EmbedMap),
   Report: reportLayout(Report),
   Login: mainLayout(Login),
   Signup: mainLayout(Signup),
@@ -40,6 +47,7 @@ const Auth = {
   Journeys: shared(Layout.Journeys),
   Journey: shared(Layout.Journey),
   Map: shared(Layout.Map),
+  EmbedMap: shared(Layout.EmbedMap),
   Report: shared(Layout.Report),
   Login: unlogged(Layout.Login),
   Signup: unlogged(Layout.Signup),
@@ -59,6 +67,8 @@ const DefaultRoutes = () => (
     <Redirect exact from="/journeys/:id/step" to="/journeys/:id/step/1" />
 
     <Route exact path="/journeys/:id/step/:step" component={Auth.Journey} />
+
+    <Route exact path="/embed/map" component={Auth.EmbedMap} />
 
     <Route exact path="/login" component={Auth.Login} />
     <Route exact path="/register" component={Auth.Signup} />
