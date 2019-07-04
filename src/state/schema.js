@@ -235,3 +235,5 @@ export const map_menu_entry = new schema.Entity(
     }),
   },
 );
+
+export const journey = new schema.Entity('journeys');
