@@ -25,7 +25,7 @@ const DownloadImage = ({ analysisBody, geojson }) => {
     <a
       type="button"
       className="btn-analysis btn-analysis-download"
-      title="Download in csv format"
+      title="Download cropped image"
       href={url.download_url}
     >
       <svg className="icon icon-crop">
