@@ -1,10 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
-import { load as loadMenuItems, makeMenuTree } from '@modules/map_menu_entries';
-import { logout, getUserLoggedIn } from '@modules/user';
-
 import { sortBy } from '@utilities';
 
 const byPosition = sortBy('position');
@@ -113,20 +108,4 @@ const Header = ({
   );
 };
 
-const makeMapStateToProps = () => {
-  const getMenuItems = makeMenuTree();
-
-  const mapStateToProps = state => ({
-    loggedIn: getUserLoggedIn(state),
-    site: state.site,
-    menuItems: getMenuItems(state),
-    menuItemsLoaded: state.map_menu_entries.loaded,
-  });
-
-  return mapStateToProps;
-};
-
-export default connect(
-  makeMapStateToProps,
-  { loadMenuItems, logout },
-)(Header);
+export default Header;
