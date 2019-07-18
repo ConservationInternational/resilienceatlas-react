@@ -237,3 +237,5 @@ export const map_menu_entry = new schema.Entity(
 );
 
 export const journey = new schema.Entity('journeys');
+
+export const user = new schema.Entity('users');

@@ -1,17 +1,23 @@
+import jwtDecode from 'jwt-decode';
 import { SubmissionError } from 'redux-form';
 
 import { AUTH_TOKEN } from '@utilities/constants';
 
-import { PORT, post, setAuthToken } from '../../utils/api';
+import api, {
+  PORT,
+  post,
+  setAuthToken,
+  createApiAction,
+} from '../../utils/api';
 import { ILoginForm, ISignupForm, IEditProfileForm } from './utils';
 
-const URL_LOGIN = '/users/authenticate';
-const URL_SIGNUP = '/users/register';
+const URL_USERS = '/users';
 
 // Action constants
 export const LOGIN = 'user / LOGIN';
 export const SIGNUP = 'user / SIGNUP';
-export const EDIT_PROFILE = 'user / EDIT_PROFILE';
+export const LOAD_PROFILE = createApiAction('user/LOAD_PROFILE');
+export const EDIT_PROFILE = createApiAction('user/EDIT_PROFILE');
 export const LOGOUT = 'user / LOGOUT';
 
 // Action creators
@@ -36,7 +42,10 @@ export const userLoggedOut = () => ({
 
 // Actions
 export const signin = ({ email, password }: ILoginForm) =>
-  post(URL_LOGIN, { data: { email, password }, baseURL: PORT })
+  post(`${URL_USERS}/authenticate`, {
+    data: { email, password },
+    baseURL: PORT,
+  })
     .then(response => response.data)
     .then(data => {
       if (data.error || !data.auth_token) {
@@ -47,7 +56,10 @@ export const signin = ({ email, password }: ILoginForm) =>
     });
 
 export const signup = ({ email, password }: ISignupForm) =>
-  post(URL_SIGNUP, { data: { user: { email, password } }, baseURL: PORT })
+  post(`${URL_USERS}/register`, {
+    data: { user: { email, password } },
+    baseURL: PORT,
+  })
     .then(response => response.data)
     .then(data => {
       if (data.status !== 'created') {
@@ -56,6 +68,9 @@ export const signup = ({ email, password }: ISignupForm) =>
 
       return data;
     });
+
+export const loadProfile = () =>
+  api(LOAD_PROFILE, ({ get }) => get(`${URL_USERS}/me`, { baseURL: PORT }));
 
 export const editProfile = (values: IEditProfileForm) =>
   // MOCK
@@ -75,6 +90,7 @@ export const login = auth_token => dispatch => {
   setAuthToken(auth_token);
 
   dispatch(userLoggedIn(auth_token));
+  dispatch(loadProfile());
 };
 
 export const logout = () => dispatch => {
