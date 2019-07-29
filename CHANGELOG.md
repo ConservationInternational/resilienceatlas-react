@@ -3,3 +3,7 @@
 ### Added
 
 - Added sum value to the chart stats.
+
+### Fixed
+
+- Countries list didn't load when user is logged.

@@ -2,7 +2,7 @@ import { SubmissionError } from 'redux-form';
 
 import { AUTH_TOKEN } from '@utilities/constants';
 
-import { PORT, post, setAuthToken } from '../../utils/api';
+import { PORT, post } from '../../utils/api';
 import { ILoginForm, ISignupForm, IEditProfileForm } from './utils';
 
 const URL_LOGIN = '/users/authenticate';
@@ -71,8 +71,6 @@ export const editProfile = (values: IEditProfileForm) =>
 
 export const login = auth_token => dispatch => {
   localStorage.setItem(AUTH_TOKEN, auth_token);
-
-  setAuthToken(auth_token);
 
   dispatch(userLoggedIn(auth_token));
 };
