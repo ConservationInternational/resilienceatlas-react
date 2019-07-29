@@ -3,6 +3,7 @@
 ### Added
 
 - Added sum value to the chart stats.
+- Added support for Google Analytics depending on site.
 
 ### Fixed
 
