@@ -122,6 +122,11 @@ export const WidgetBarChart: FC<P> = ({
                   {formatNumber({ value: data.stats.stdev })}
                   {unit}
                 </li>
+                <li className="stats-item">
+                  <span className="stats-item__label">Sum: </span>
+                  {formatNumber({ value: data.stats.sum })}
+                  {unit}
+                </li>
               </ul>
             )}
 
