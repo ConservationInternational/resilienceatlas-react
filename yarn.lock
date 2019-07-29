@@ -6841,16 +6841,6 @@ layer-manager@^1.10.0:
     supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
-"layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git":
-  version "1.0.1-resilience"
-  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#7849ccb7db8c2c5a739183c2b8d86e9eece3e5cc"
-  dependencies:
-    axios "^0.18.0"
-    lodash "^4.17.11"
-    prop-types "^15.6.2"
-    supercluster "^4.1.1"
-    wri-json-api-serializer "^1.0.1"
-
 lazy-cache@^0.2.3:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
@@ -9606,6 +9596,11 @@ react-foundation@^0.9.6:
     fbjs "^0.8.16"
     prop-types "^15.5.10"
 
+react-ga@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.6.0.tgz#c3fe830ead2ad25117e1d33280d9698de9b28496"
+  integrity sha512-GWHBWZDFjDGMkIk1LzroIn0mNTygKw3adXuqvGvheFZvlbpqMPbHsQsTdQBIxRRdXGQM/Zq+dQLRPKbwIHMTaw==
+
 react-helmet@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.1.tgz#16a7192fdd09951f8e0fe22ffccbf9bb3e591ffa"
@@ -10219,6 +10214,16 @@ reselect@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
   integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
+
+"resilience-layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git":
+  version "1.0.1-resilience"
+  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#7849ccb7db8c2c5a739183c2b8d86e9eece3e5cc"
+  dependencies:
+    axios "^0.18.0"
+    lodash "^4.17.11"
+    prop-types "^15.6.2"
+    supercluster "^4.1.1"
+    wri-json-api-serializer "^1.0.1"
 
 resize-observer-polyfill@^1.5.0:
   version "1.5.1"
