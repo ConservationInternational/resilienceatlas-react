@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useContext } from 'react';
 import qs from 'qs';
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
-import { LayerManager, Layer } from 'layer-manager/dist/components';
-import { PluginLeaflet } from 'layer-manager/dist/layer-manager';
+import { LayerManager, Layer } from 'resilience-layer-manager/dist/components';
+import { PluginLeaflet } from 'resilience-layer-manager/dist/layer-manager';
 
 import { TABS } from '@components/Sidebar';
 
