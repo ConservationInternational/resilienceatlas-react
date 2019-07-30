@@ -22,10 +22,6 @@ export const updateApi = (config: AxiosRequestConfig) => {
   axiosInstance = axios.create(merge(defaultConfig, config));
 };
 
-export const setAuthToken = (auth_token: string) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${auth_token}`;
-};
-
 type ApiAction = {
   REQUEST: String,
   SUCCESS: String,
