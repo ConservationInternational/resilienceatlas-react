@@ -2,6 +2,7 @@ export const SET_DRAWING = 'map / SET_DRAWING';
 export const SET_GEOJSON = 'map / SET_GEOJSON';
 export const SET_BASEMAP = 'map / SET_BASEMAP';
 export const SET_BOUNDS = 'map / SET_BOUNDS';
+export const SET_ISO = 'map / SET_ISO';
 
 export const setDrawing = payload => ({
   type: SET_DRAWING,
@@ -20,6 +21,11 @@ export const setBasemap = payload => ({
 
 export const setBounds = payload => ({
   type: SET_BOUNDS,
+  payload,
+});
+
+export const setISO = payload => ({
+  type: SET_ISO,
   payload,
 });
 

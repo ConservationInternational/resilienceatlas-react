@@ -4,12 +4,13 @@ import { TOGGLE_SIDEBAR, TOGGLE_ANALYSIS_PANEL, SET_TAB } from './actions';
 import { getRouterParam } from '@utilities';
 
 const geojson = getRouterParam('geojson');
+const iso = getRouterParam('iso');
 const persistedTab = getRouterParam('tab');
 const model = getRouterParam('model');
 
 const initialState = {
   sidebar: true,
-  analysisPanel: !!geojson,
+  analysisPanel: !!(geojson || iso),
   tab: persistedTab || (model ? TABS.MODEL : TABS.LAYERS),
 };
 
