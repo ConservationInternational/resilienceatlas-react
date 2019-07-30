@@ -96,7 +96,7 @@ const MapView = ({
         drawControl: true,
       }}
       events={{
-        click: () => {},
+        click: e => {},
         zoomend: (e, map) => {
           const mapZoom = map.getZoom();
 
