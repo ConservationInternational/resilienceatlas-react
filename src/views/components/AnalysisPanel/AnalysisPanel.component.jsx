@@ -61,6 +61,7 @@ export const AnalysisPanel: FC<P> = ({
 
   const resetAnalytics = useCallback(() => {
     setGeojson(null);
+    setISO(null);
   }, []);
 
   const onDrop = useCallback(([file]) => {
