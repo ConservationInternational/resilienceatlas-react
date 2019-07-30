@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
 import { useDownloadableReport } from '@utilities/hooks/downloadableReport';
-import { useSearch } from '@utilities';
+import { useSearch, useRouterParams } from '@utilities';
 import { TABS } from '../Sidebar';
 
 import { LayerAnalysis, PredictiveModelAnalysis } from './AnalysisContent';
@@ -22,6 +22,7 @@ export const AnalysisPanel: FC<P> = ({
   loadCountries,
   setDrawing,
   setGeojson,
+  setISO,
   toggle,
   // data
   countriesLoaded,
@@ -31,6 +32,8 @@ export const AnalysisPanel: FC<P> = ({
   geojson,
   iso,
 }) => {
+  const { setParam, removeParam } = useRouterParams();
+
   const sidebarTab = useMemo(
     () => qs.parse(location.search, { ignoreQueryPrefix: true }).tab,
     [location],
@@ -108,9 +111,7 @@ export const AnalysisPanel: FC<P> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const { searchInput, result, noResults } = useSearch('search', countries, {
     valueKey: 'name',
-    onSelect: ({ geometry }) => {
-      setGeojson(JSON.parse(geometry));
-    },
+    onSelect: ({ iso }) => setISO(iso),
   });
   const downloadableReport = useDownloadableReport();
 
@@ -147,7 +148,7 @@ export const AnalysisPanel: FC<P> = ({
               </button>
             </div>
 
-            {!geojson ? (
+            {!(geojson || iso) ? (
               <Tabs activeTab={tab} renderActiveOnly>
                 <Tabs.Pane name="region">
                   <p>Select a country or region from the list below.</p>

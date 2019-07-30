@@ -26,8 +26,7 @@ export const useWidget = (
 
       return {
         method: 'post',
-        url: `/${analysisQuery}`,
-        baseURL: 'https://cors-anywhere.herokuapp.com',
+        url: analysisQuery,
         data: {
           assetId,
           geometry: L.geoJSON(geojson).toGeoJSON(),

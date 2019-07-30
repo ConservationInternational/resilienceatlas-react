@@ -11,6 +11,8 @@ export const LayerAnalysis: FC<P> = ({
   activeLayers,
   loaded,
   geojson,
+  iso,
+  countries,
 }) => {
   if (activeLayers.length && !loaded)
     return <center>Waiting until layers loaded...</center>;
@@ -24,6 +26,8 @@ export const LayerAnalysis: FC<P> = ({
   if (!analyzable.length) {
     return <center>None of the active layers can be analyzed.</center>;
   }
+
+  const geometry = iso ? JSON.parse(countries[iso].geometry) : geojson;
 
   return (
     <div className="analysis-content">
@@ -39,7 +43,7 @@ export const LayerAnalysis: FC<P> = ({
           meta_short={l.name}
           legend={l.legend}
           metadata={JSON.parse(l.info || 'null')}
-          geojson={geojson}
+          geojson={geometry}
         />
       ))}
 
