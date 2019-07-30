@@ -25,6 +25,8 @@ const Layer = ({
   download_url,
   dashboard_order,
   withDashboardOrder,
+  type,
+  group,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -136,7 +138,7 @@ const Layer = ({
         </button>
       )}
 
-      {!!download && (
+      {!!download && type !== 'gee' && group !== 1077 && (
         <button
           type="button"
           data-name={name}
