@@ -10216,8 +10216,8 @@ reselect@^4.0.0:
   integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 "resilience-layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git":
-  version "1.0.1-resilience"
-  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#7849ccb7db8c2c5a739183c2b8d86e9eece3e5cc"
+  version "1.0.2"
+  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#187a3a7299eaf55a30d78eb6f4105864ba11a06d"
   dependencies:
     axios "^0.18.0"
     lodash "^4.17.11"
