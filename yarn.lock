@@ -3016,6 +3016,11 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+corslite@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/corslite/-/corslite-0.0.7.tgz#8e451db5320a7556de1ef78d9bd3566343077721"
+  integrity sha1-jkUdtTIKdVbeHveNm9NWY0MHdyE=
+
 cosmiconfig@^5.0.0, cosmiconfig@^5.0.5, cosmiconfig@^5.0.7, cosmiconfig@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.2.1.tgz#040f726809c591e77a17c0a3626ca45b4f168b1a"
@@ -6869,6 +6874,13 @@ leaflet-active-area@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/leaflet-active-area/-/leaflet-active-area-1.1.0.tgz#d940e8ea85a3d3c7b5963471b4a268b6d29214ea"
   integrity sha512-pCqlC0IELUe+eWJXl9HD1lZM6BPNWW4KQ2Vfn9h0dCj1Y13QAL0S3xJz11hdXy9ErcPI0dRx7fZ/HXASnuDfVg==
+
+leaflet-utfgrid@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/leaflet-utfgrid/-/leaflet-utfgrid-0.3.0.tgz#6b87bede198e8050a988972185285633023406d9"
+  integrity sha1-a4e+3hmOgFCpiJchhShWMwI0Btk=
+  dependencies:
+    corslite "0.0.7"
 
 leaflet.pm@^2.0.3:
   version "2.1.0"
