@@ -138,7 +138,7 @@ const Layer = ({
         </button>
       )}
 
-      {!!download && type !== 'gee' && slug !== 'forest-carbon-stock' && (
+      {!!download && type !== 'gee' && !/forest-carbon-stock/.test(slug) && (
         <button
           type="button"
           data-name={name}
