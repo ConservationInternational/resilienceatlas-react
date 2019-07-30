@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icons as VizzualityIcons } from 'vizzuality-components';
 
 const Icons = () => (
   <>
