@@ -151,7 +151,7 @@ $side-bar-width: 360px;
 
       header {
         position: relative;
-        padding: 0 rem(50px) 0 0;
+        padding: 0;
 
         .side-bar & {
           margin-bottom: 0;
@@ -172,8 +172,7 @@ $side-bar-width: 360px;
           }
         }
 
-        .draggable-icon,
-        .btn-visibility {
+        .draggable-icon {
           @extend %clean-button-or-input;
           position: absolute;
           padding: 0;
@@ -199,21 +198,21 @@ $side-bar-width: 360px;
           }
         }
 
-        .btn-visibility {
-          right: 0;
-          top: 3px;
-          cursor: pointer;
+        // .btn-visibility {
+        //   right: 0;
+        //   top: 3px;
+        //   cursor: pointer;
 
-          svg {
-            width: 15px;
-            height: 15px;
-            fill: $bg-color-4;
+        //   svg {
+        //     width: 15px;
+        //     height: 15px;
+        //     fill: $bg-color-4;
 
-            &.is-active {
-              display: none;
-            }
-          }
-        }
+        //     &.is-active {
+        //       display: none;
+        //     }
+        //   }
+        // }
       }
     }
 
