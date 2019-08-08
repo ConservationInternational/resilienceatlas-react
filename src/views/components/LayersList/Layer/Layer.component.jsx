@@ -25,6 +25,8 @@ const Layer = ({
   download_url,
   dashboard_order,
   withDashboardOrder,
+  type,
+  slug,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -136,7 +138,7 @@ const Layer = ({
         </button>
       )}
 
-      {!!download && (
+      {!!download && type !== 'gee' && !/forest-carbon-stock/.test(slug) && (
         <button
           type="button"
           data-name={name}

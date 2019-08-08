@@ -9,3 +9,4 @@
 
 - Countries list didn't load when user is logged.
 - Fit bounds button didn't work.
+- Removed download button for SPARC layers and GEE layers.

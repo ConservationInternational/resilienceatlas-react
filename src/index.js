@@ -14,6 +14,7 @@ import './views/styles/index.scss';
 import 'leaflet';
 import 'leaflet.pm';
 import 'leaflet-active-area';
+import 'leaflet-utfgrid/L.UTFGrid-min';
 
 import 'leaflet.pm/dist/leaflet.pm.css';
 
