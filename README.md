@@ -48,7 +48,7 @@ As the deploy task takes a lot of memory we have to run the compilation separate
 
 ```
 	cd ~/resilience-react/current
-	npm run --max_old_space_size=2048 build
+	npm run --max_old_space_size=4000 build
 ```
 
 ## Contributing
