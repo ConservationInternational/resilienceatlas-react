@@ -145,7 +145,7 @@ const Layer = ({
           className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
           onClick={() => {
-            DownloadWindow.show(download_url);
+            DownloadWindow.show(download_url, type);
           }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>

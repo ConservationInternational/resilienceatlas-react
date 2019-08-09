@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import cx from 'classnames';
 import { Link, RouteComponentProps } from 'react-router-dom';
 
@@ -17,9 +18,9 @@ interface S {
 }
 
 export default class DownloadWindow extends Component<P, S> {
-  static show(url) {
+  static show(url, type) {
     if (DownloadWindow.__instance) {
-      DownloadWindow.__instance.__show(url);
+      DownloadWindow.__instance.__show(url, type);
     } else {
       throw new Error(
         'There are no any instance of DownloadWindow. You likely forgot to add it to your layout.',
@@ -42,8 +43,8 @@ export default class DownloadWindow extends Component<P, S> {
     url: '',
   };
 
-  __show = url => {
-    this.setState({ open: true, url });
+  __show = (url, type) => {
+    this.setState({ open: true, url, type });
   };
 
   __hide = () => {
@@ -87,20 +88,24 @@ export default class DownloadWindow extends Component<P, S> {
           I have read and accepted the Conservation International terms of use
         </label>
         <a
-          href={url}
-          className={cx(
-            'btn',
-            'btn-secondary',
-            'theme-bg-color',
-            'btn-download-infowindow',
-            { '-disabled': !terms_accepted },
-          )}
+          className="theme-color"
+          href="http://www.conservation.org/pages/terms.aspx"
         >
-          Download data
+          terms of use.
         </a>
-      </>
-    );
-  };
+      </p>
+      <input
+        type="checkbox"
+        id="terms-and-conditions"
+        onChange={this.acceptTerms}
+      />
+      <label htmlFor="terms-and-conditions">
+        I have read and accepted the Conservation International terms of use
+      </label>
+
+      {this.renderDownloadButton()}
+    </>
+  );
 
   renderContent = () => {
     const { terms_accepted, url } = this.state;
@@ -113,18 +118,7 @@ export default class DownloadWindow extends Component<P, S> {
       <>
         <p>Click to continue with download</p>
 
-        <a
-          href={url}
-          className={cx(
-            'btn',
-            'btn-secondary',
-            'theme-bg-color',
-            'btn-download-infowindow',
-            { '-disabled': !terms_accepted },
-          )}
-        >
-          Download data
-        </a>
+        {this.renderDownloadButton()}
       </>
     );
   };
