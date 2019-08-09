@@ -42,6 +42,12 @@ You need ruby version 2.2.1, then you have to install gems using `bundle install
     cap staging deploy
 ```
 
+As the deploy task takes a lot of memory we have to run the compilation separately, go to the `current` folder and run the next command:
+
+```
+	npm run --max-old-memory-size=1024 build
+```
+
 ## Contributing
 
 1. Fork it!

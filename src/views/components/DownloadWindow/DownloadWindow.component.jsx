@@ -64,32 +64,6 @@ export default class DownloadWindow extends Component<P, S> {
     );
   };
 
-  renderPleaseLogin = () => {
-    const {
-      location: { pathname, search },
-    } = this.props;
-    const { url } = this.state;
-
-    return (
-      <>
-        <p>Before downloading, please login.</p>
-        <Link
-          to={{
-            pathname: '/login',
-            state: {
-              from: pathname,
-              search,
-              downloadLayerUrl: url,
-            },
-          }}
-          className="btn btn-secondary theme-bg-color btn-download-infowindow"
-        >
-          Log in
-        </Link>
-      </>
-    );
-  };
-
   renderTerms = () => {
     const { url, terms_accepted } = this.state;
 
@@ -129,12 +103,7 @@ export default class DownloadWindow extends Component<P, S> {
   };
 
   renderContent = () => {
-    const { userLoggedIn } = this.props;
     const { terms_accepted, url } = this.state;
-
-    if (!userLoggedIn) {
-      return this.renderPleaseLogin();
-    }
 
     if (!terms_accepted) {
       return this.renderTerms();
