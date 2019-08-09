@@ -36,16 +36,19 @@ and then you can use your prodiction build locally:
 
 ## Deploy (Capistrano)
 
-You need ruby version 2.2.1, then you have to install gems using `bundle install`. To deploy to staging you have to run:
+You need ruby 2.5.3, then you have to install gems using `bundle install`. To deploy to staging you have to run:
 
 ```
-    cap staging deploy
+	gem install bundler -v 1.17.3
+	bundle install
+    bundle exec cap staging deploy
 ```
 
 As the deploy task takes a lot of memory we have to run the compilation separately, go to the `current` folder and run the next command:
 
 ```
-	npm run --max-old-memory-size=1024 build
+	cd ~/resilience-react/current
+	npm run --max_old_space_size=2048 build
 ```
 
 ## Contributing
