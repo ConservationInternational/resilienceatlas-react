@@ -18,15 +18,12 @@ const CartoDBLayer = ({ map, onCreate, layer }: { map: L.Map }) => {
   useEffect(() => {
     setLoading(true);
 
-    console.log(layer);
-
     const source = new carto.source.SQL(layer.sql);
     const style = new carto.style.CartoCSS(layer.cartocss);
 
     const cartolayer = new carto.layer.Layer(source, style);
 
     client.addLayers([cartolayer]);
-    console.log(cartolayer, client.getLeafletLayer());
 
     client.getLeafletLayer().addTo(map);
 

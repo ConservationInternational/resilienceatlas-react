@@ -75,7 +75,7 @@ const Layer = ({
 
       <button
         type="button"
-        className="btn-locate icon-container"
+        className="btn-locate icon-container panel-trasparecy-switcher"
         data-id={id}
         onClick={fitMapToLayer}
       >
@@ -125,7 +125,7 @@ const Layer = ({
       {!!info && (
         <button
           type="button"
-          className="btn-info icon-container"
+          className="btn-info icon-container panel-trasparecy-switcher"
           data-info={info}
           data-name={name}
           onClick={() => {
@@ -142,7 +142,7 @@ const Layer = ({
         <button
           type="button"
           data-name={name}
-          className="btn-download icon-container"
+          className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
           onClick={() => {
             DownloadWindow.show(download_url);

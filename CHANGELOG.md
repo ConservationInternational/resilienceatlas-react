@@ -1,3 +1,20 @@
+## [2019-08-09]
+
+### Added
+
+- Added ability to track number and type of downloads from layers or analysis cropped download tool.
+- Added info button to show source in legend.
+
+### Changed
+
+- Removed download button in the map.
+- Removed account requirement to download layer.
+
+### Fixed
+
+- Download crop button wasn't work due to CORS.
+
+
 ## [2019-07-29]
 
 ### Added

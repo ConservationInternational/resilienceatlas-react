@@ -135,35 +135,65 @@
   padding: rem(12px) rem(40px) rem(8px) rem(20px);
 }
 
-.btn-info {
-  @extend %clean-button-or-input;
+.actions {
+  display: flex;
   float: right;
-  width: 22px;
-  height: 22px;
 }
 
-.btn-download {
+.btn-action,
+.btn-info,
+.btn-download,
+.btn-visibility,
+.btn-remove {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-left: 5px;
+
+  svg,
+  .icon {
+    width: 12px;
+    height: 12px;
+    fill: $bg-color-4;
+
+    &.is-active {
+      display: none;
+    }
+  }
+}
+
+.btn-info {
   @extend %clean-button-or-input;
-  float: right;
-  margin-left: rem(6px);
+  // float: right;
+  // width: 22px;
+  // height: 22px;
+}
+
+.btn-visibility {
+  @extend %clean-button-or-input;
+  // float: right;
+  .icon, svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .btn-remove {
   @extend %clean-button-or-input;
-  position: absolute;
-  right: 15px;
-  top: 3px;
+  // position: absolute;
+  // right: 15px;
+  // top: 3px;
   cursor: pointer;
 
   .is-journeys-page & {
     display: none;
   }
 
-  svg {
-    width: 12px;
-    height: 12px;
-    fill: #979797;
-  }
+  // svg {
+  //   width: 12px;
+  //   height: 12px;
+  //   fill: #979797;
+  // }
 }
 
 .btn-download-infowindow {
