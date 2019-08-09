@@ -82,6 +82,8 @@ const MapView = ({
     return { lat: 3.86, lng: 47.28 };
   }, [site.latitude, query.center]);
 
+  console.log(activeLayers);
+
   return (
     <Maps
       customClass="m-map"
