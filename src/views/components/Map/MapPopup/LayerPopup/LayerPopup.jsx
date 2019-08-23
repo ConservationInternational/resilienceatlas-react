@@ -9,7 +9,7 @@ const LayerPopup = ({
 }) => {
   const [state, dispatch] = useReducer((state, action) => {}, {
     interaction: {},
-    loading: true,
+    loading: false,
   });
 
   const formatValue = useCallback((item, data) => {
@@ -77,7 +77,7 @@ const LayerPopup = ({
                     key={outputItem.property || outputItem.column}
                   >
                     <td className="dt">
-                      {outputItem.property || outputItem.column}:
+                      {outputItem.property || outputItem.column}
                     </td>
                     <td className="dd">{formatValue(outputItem, value)}</td>
                   </tr>
@@ -95,17 +95,14 @@ const LayerPopup = ({
               <Spinner isLoading className="-tiny -inline -pink-color" />
             </div>
           )} */}
-
-        {/* {!state.loading &&
+        {/* 
+        {!state.loading &&
           (!interaction.data && !interactionState.data) &&
           interactionConfig.config &&
           interactionConfig.config.url &&
-          'No data available'}
-
-        {!interaction.data &&
-          !interactionState.data &&
-          (!interactionConfig.config || !interactionConfig.config.url) &&
           'No data available'} */}
+
+        {!interaction.data && !interactionState.data && 'No data available'}
       </div>
     </div>
   );
