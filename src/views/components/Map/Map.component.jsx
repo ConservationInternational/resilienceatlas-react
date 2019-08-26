@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useContext, useRef } from 'react';
 import qs from 'qs';
+import omit from 'lodash/omit';
+
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'resilience-layer-manager/dist/components';
 import { PluginLeaflet } from 'resilience-layer-manager/dist/layer-manager';
@@ -127,7 +129,7 @@ const MapView = ({
             {tab === TABS.LAYERS &&
               activeLayers.map(l => (
                 <Layer
-                  {...l}
+                  {...omit(l, 'interactivity')}
                   key={l.id}
                   // Interaction
                   {...(!!l.interactionConfig &&
@@ -135,7 +137,9 @@ const MapView = ({
                     !!l.interactionConfig.length && {
                       interactivity:
                         l.provider === 'carto' || l.provider === 'cartodb'
-                          ? JSON.parse(l.interactionConfig).map(o => o.column)
+                          ? JSON.parse(l.interactionConfig)
+                              .map(o => o.column)
+                              .join(',')
                           : true,
                       events: {
                         click: e => {
