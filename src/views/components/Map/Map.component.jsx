@@ -130,6 +130,7 @@ const MapView = ({
               activeLayers.map(l => (
                 <Layer
                   {...omit(l, 'interactivity')}
+                  slug={l.slug || l.id}
                   key={l.id}
                   // Interaction
                   {...(!!l.interactionConfig &&
@@ -159,7 +160,9 @@ const MapView = ({
                   }
                 />
               ))}
-            {tab === TABS.MODELS && model_layer && <Layer {...model_layer} />}
+            {tab === TABS.MODELS && model_layer && (
+              <Layer key="model_layer" {...model_layer} />
+            )}
           </LayerManager>
 
           <MapPopup map={map} />
