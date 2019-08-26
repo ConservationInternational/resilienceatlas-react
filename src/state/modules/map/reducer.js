@@ -1,11 +1,5 @@
 import { createReducer } from '../../utils';
-import {
-  SET_GEOJSON,
-  SET_DRAWING,
-  SET_BASEMAP,
-  SET_BOUNDS,
-  SET_ISO,
-} from './actions';
+import * as t from './actions';
 import { getRouterParam, subdomain } from '@utilities';
 
 const initialState = {
@@ -16,30 +10,58 @@ const initialState = {
   basemap:
     getRouterParam('basemap') ||
     (subdomain === 'atlas' ? 'satellite' : 'defaultmap'),
+  layerGroupsInteraction: {},
+  layerGroupsInteractionSelected: null,
+  layerGroupsInteractionLatLng: null,
 };
 
 export default createReducer(initialState)({
-  [SET_DRAWING]: (state, { payload }) => ({
+  [t.SET_DRAWING]: (state, { payload }) => ({
     ...state,
     drawing: payload,
   }),
 
-  [SET_GEOJSON]: (state, { payload }) => ({
+  [t.SET_GEOJSON]: (state, { payload }) => ({
     ...state,
     geojson: payload,
   }),
 
-  [SET_BASEMAP]: (state, { payload }) => ({
+  [t.SET_BASEMAP]: (state, { payload }) => ({
     ...state,
     basemap: payload,
   }),
 
-  [SET_BOUNDS]: (state, { payload }) => ({
+  [t.SET_BOUNDS]: (state, { payload }) => ({
     ...state,
     bounds: payload,
   }),
-  [SET_ISO]: (state, { payload }) => ({
+
+  [t.SET_ISO]: (state, { payload }) => ({
     ...state,
     iso: payload,
+  }),
+
+  [t.SET_MAP_LAYER_GROUPS_INTERACTION]: (state, { layer }) => ({
+    ...state,
+    layerGroupsInteraction: {
+      ...state.layerGroupsInteraction,
+      [layer.id]: layer,
+    },
+  }),
+
+  [t.SET_MAP_LAYER_GROUPS_INTERACTION_LATLNG]: (
+    state,
+    { layerGroupsInteractionLatLng },
+  ) => ({
+    ...state,
+    layerGroupsInteractionLatLng,
+  }),
+
+  [t.SET_MAP_LAYER_GROUPS_INTERACTION_SELECTED]: (
+    state,
+    { layerGroupsInteractionSelected },
+  ) => ({
+    ...state,
+    layerGroupsInteractionSelected,
   }),
 });
