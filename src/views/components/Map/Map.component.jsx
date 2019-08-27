@@ -139,7 +139,7 @@ const MapView = ({
                       interactivity:
                         l.provider === 'carto' || l.provider === 'cartodb'
                           ? JSON.parse(l.interactionConfig)
-                              .map(o => o.column)
+                              .output.map(o => o.column)
                               .join(',')
                           : true,
                       events: {

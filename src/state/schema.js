@@ -1,6 +1,6 @@
 import { schema } from 'normalizr';
 
-import { generateDownloadUrl } from '@utilities/helpers';
+import { generateDownloadUrl } from '@utilities/generateDownloadUrl';
 
 import { birds } from './utils/decoders';
 

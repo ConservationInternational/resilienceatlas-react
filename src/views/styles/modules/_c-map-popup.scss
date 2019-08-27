@@ -28,6 +28,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+    @include spinner(20px, 3px, $bg-color-2);
+    &:after {
+      left: rem(56px);
+      top: 50%;
+    }
   }
 
   .popup-table {

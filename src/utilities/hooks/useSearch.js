@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import { clickable } from '../helpers';
 import { useInput } from './hooks';
-import { clickable } from '@utilities';
 
 interface ExtraOptions {
   valueKey: String;
