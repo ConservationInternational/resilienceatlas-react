@@ -1,16 +1,49 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
+import axios from 'axios';
 import moment from 'moment';
 import numeral from 'numeral';
+import { replace } from 'resilience-layer-manager';
+
+import createReducer from '@state/utils/createReducer';
+import { createApiAction } from '@state/utils/api';
+import { removeHtmlTags } from '@utilities/helpers';
+
+const FETCH = createApiAction('FETCH');
+
+const initialState = {
+  interaction: {},
+  loading: false,
+};
+
+const layerDataReducer = createReducer(initialState)({
+  [FETCH.REQUEST]: state => ({
+    ...state,
+    interaction: {},
+    loading: true,
+  }),
+
+  [FETCH.SUCCESS]: (state, action) => ({
+    ...state,
+    loading: false,
+    interaction: {
+      ...state.interaction,
+      [action.payload.id]: action.payload,
+    },
+  }),
+
+  [FETCH.FAIL]: state => ({
+    ...state,
+    loading: false,
+  }),
+});
 
 const LayerPopup = ({
   onChangeInteractiveLayer,
+  latlng,
   data: { layers, layersInteraction, layersInteractionSelected },
   popup,
 }) => {
-  const [state, dispatch] = useReducer((state, action) => {}, {
-    interaction: {},
-    loading: false,
-  });
+  const [state, dispatch] = useReducer(layerDataReducer, initialState);
 
   const formatValue = useCallback((item, data) => {
     if (item.type === 'date' && item.format && data) {
@@ -19,17 +52,12 @@ const LayerPopup = ({
       data = numeral(data).format(item.format);
     }
 
-    function removeHtmlTags(str) {
-      if (!str || !str.toString) return str;
-      return str.toString().replace(/<\/?[a-z]+>/gi, '');
-    }
-
     return `${item.prefix || ''}${removeHtmlTags(data) || '-'}${item.suffix ||
       ''}`;
   }, []);
 
   const layer = layersInteractionSelected
-    ? layers.find(l => l.id === layersInteractionSelected)
+    ? layers.find(l => l.id === +layersInteractionSelected)
     : layers[0];
 
   if (!layer) {
@@ -37,11 +65,38 @@ const LayerPopup = ({
     return null;
   }
   // Get interactionConfig
-  const { interactionConfig: output } = layer;
+  const {
+    interactionConfig: { output, config },
+  } = layer;
 
   // Get data from props or state
   const interaction = layersInteraction[layer.id] || {};
   const interactionState = state.interaction[layer.id] || {};
+
+  useEffect(() => {
+    if (latlng && config && config.url) {
+      dispatch({ type: FETCH.REQUEST });
+
+      axios
+        .get(replace(config.url, latlng), {})
+        .then(({ data }) => {
+          dispatch({
+            type: FETCH.SUCCESS,
+            payload: {
+              ...layer,
+              data: data && data.rows && data.rows[0],
+            },
+          });
+        })
+        .catch(() => {
+          dispatch({ type: FETCH.FAIL });
+        });
+    }
+
+    return () => {
+      popup.remove();
+    };
+  }, []);
 
   return (
     <div className="c-map-popup">
@@ -87,22 +142,21 @@ const LayerPopup = ({
           </table>
         )}
 
-        {/* {state.loading &&
+        {state.loading &&
           (!interaction.data || !interactionState.data) &&
-          interactionConfig.config &&
-          interactionConfig.config.url && (
-            <div className="popup-loader">
-              <Spinner isLoading className="-tiny -inline -pink-color" />
-            </div>
-          )} */}
-        {/* 
+          config &&
+          config.url && <div className="popup-loader">Loading</div>}
+
         {!state.loading &&
           (!interaction.data && !interactionState.data) &&
-          interactionConfig.config &&
-          interactionConfig.config.url &&
-          'No data available'} */}
+          config &&
+          config.url &&
+          'No data available'}
 
-        {!interaction.data && !interactionState.data && 'No data available'}
+        {!interaction.data &&
+          !interactionState.data &&
+          (!config || !config.url) &&
+          'No data available'}
       </div>
     </div>
   );

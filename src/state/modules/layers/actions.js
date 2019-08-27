@@ -1,4 +1,4 @@
-import { subdomain } from '@utilities/helpers';
+import { subdomain } from '@utilities/getSubdomain';
 import api, { createApiAction } from '../../utils/api';
 import { layer, source } from '../../schema';
 

@@ -1,6 +1,7 @@
+import { subdomain } from '@utilities/getSubdomain';
 import { createReducer } from '../../utils';
 import * as t from './actions';
-import { getRouterParam, subdomain } from '@utilities';
+import { getRouterParam } from '@utilities';
 
 const initialState = {
   drawing: false,
