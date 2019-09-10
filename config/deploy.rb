@@ -50,6 +50,7 @@ set :rvm_custom_path, '/usr/share/rvm'
 set :yarn_flags, '--silent --no-progress'
 # set :yarn_roles, :all                                     # default
 # set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=4096' }
+set :yarn_env_variables, { 'REACT_APP_GENERATE_SOURCEMAP': 'false' }
 
 # Passenger
 set :passenger_restart_with_touch, true
