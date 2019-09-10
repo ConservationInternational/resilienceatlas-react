@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired --max_old_space_size=1024 build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint --debug src/",
