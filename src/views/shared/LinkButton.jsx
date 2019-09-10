@@ -1,11 +1,6 @@
 import React from 'react';
 
-const LinkButton = ({
-  onClick,
-  link = 'javascript:void(0)',
-  children,
-  ...props
-}) => (
+const LinkButton = ({ onClick, link = '#', children, ...props }) => (
   <a
     href={link}
     tabIndex="0"

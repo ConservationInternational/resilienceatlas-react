@@ -7,3 +7,4 @@ set :ssh_options, {
 
 set :node_env, 'production'
 set :branch, 'staging'
+set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=2048' }

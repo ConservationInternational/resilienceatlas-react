@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-import { setDrawing, setGeojson } from '@modules/map';
+import { setDrawing, setGeojson, setISO } from '@modules/map';
 import { load as loadCountries, makeCountries } from '@modules/countries';
 
 import { AnalysisPanel } from './AnalysisPanel.component';
@@ -15,6 +15,7 @@ const mapStateToProps = state => {
     countriesLoaded: state.countries.loaded,
     drawing: state.map.drawing,
     geojson: state.map.geojson,
+    iso: state.map.iso,
   };
 };
 
@@ -22,6 +23,7 @@ const mapDispatchToProps = {
   loadCountries,
   setDrawing,
   setGeojson,
+  setISO,
 };
 
 const withConnect = connect(

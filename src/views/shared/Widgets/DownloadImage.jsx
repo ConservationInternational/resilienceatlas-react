@@ -9,8 +9,7 @@ const DownloadImage = ({ analysisBody, geojson }) => {
     return {
       method: 'post',
       url:
-        '/https://us-central1-gef-ld-toolbox.cloudfunctions.net/download_image',
-      baseURL: 'https://cors-anywhere.herokuapp.com',
+        'https://us-central1-gef-ld-toolbox.cloudfunctions.net/download_image',
       data: {
         assetId,
         geometry: L.geoJSON(geojson).toGeoJSON(),
@@ -25,7 +24,7 @@ const DownloadImage = ({ analysisBody, geojson }) => {
     <a
       type="button"
       className="btn-analysis btn-analysis-download"
-      title="Download in csv format"
+      title="Download cropped image"
       href={url.download_url}
     >
       <svg className="icon icon-crop">

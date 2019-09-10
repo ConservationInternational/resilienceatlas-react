@@ -11,6 +11,10 @@ import {
 } from '@modules/layers';
 import { load as loadLayerGroups, openBatch } from '@modules/layer_groups';
 import { makeLayer as makeModelLayer } from '@modules/predictive_models';
+import {
+  setMapLayerGroupsInteraction,
+  setMapLayerGroupsInteractionLatLng,
+} from '@modules/map';
 
 import MapView from './Map.component';
 
@@ -42,6 +46,8 @@ const mapDispatchToProps = {
   loadLayerGroups,
   setActives,
   openBatch,
+  setMapLayerGroupsInteraction,
+  setMapLayerGroupsInteractionLatLng,
 };
 
 export default compose(

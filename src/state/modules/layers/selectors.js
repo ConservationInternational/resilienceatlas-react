@@ -145,3 +145,18 @@ export const getLayerActive = id =>
     getActiveIds,
     ids => new Set(ids).has(id),
   );
+
+export const getInteractionLayers = () => {
+  const getActive = makeActives();
+
+  return createSelector(
+    [getActive],
+    layers =>
+      layers
+        .filter(l => l.interactionConfig && l.interactionConfig.length)
+        .map(l => ({
+          ...l,
+          interactionConfig: JSON.parse(l.interactionConfig),
+        })),
+  );
+};

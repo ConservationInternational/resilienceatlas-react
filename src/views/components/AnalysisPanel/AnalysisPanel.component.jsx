@@ -22,6 +22,7 @@ export const AnalysisPanel: FC<P> = ({
   loadCountries,
   setDrawing,
   setGeojson,
+  setISO,
   toggle,
   // data
   countriesLoaded,
@@ -58,6 +59,7 @@ export const AnalysisPanel: FC<P> = ({
 
   const resetAnalytics = useCallback(() => {
     setGeojson(null);
+    setISO(null);
   }, []);
 
   const onDrop = useCallback(([file]) => {
@@ -108,9 +110,7 @@ export const AnalysisPanel: FC<P> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const { searchInput, result, noResults } = useSearch('search', countries, {
     valueKey: 'name',
-    onSelect: ({ geometry }) => {
-      setGeojson(JSON.parse(geometry));
-    },
+    onSelect: ({ iso }) => setISO(iso),
   });
   const downloadableReport = useDownloadableReport();
 
@@ -147,7 +147,7 @@ export const AnalysisPanel: FC<P> = ({
               </button>
             </div>
 
-            {!geojson ? (
+            {!(geojson || iso) ? (
               <Tabs activeTab={tab} renderActiveOnly>
                 <Tabs.Pane name="region">
                   <p>Select a country or region from the list below.</p>

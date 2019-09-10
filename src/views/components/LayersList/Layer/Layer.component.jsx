@@ -25,6 +25,8 @@ const Layer = ({
   download_url,
   dashboard_order,
   withDashboardOrder,
+  type,
+  slug,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -73,7 +75,7 @@ const Layer = ({
 
       <button
         type="button"
-        className="btn-locate icon-container"
+        className="btn-locate icon-container panel-trasparecy-switcher"
         data-id={id}
         onClick={fitMapToLayer}
       >
@@ -123,7 +125,7 @@ const Layer = ({
       {!!info && (
         <button
           type="button"
-          className="btn-info icon-container"
+          className="btn-info icon-container panel-trasparecy-switcher"
           data-info={info}
           data-name={name}
           onClick={() => {
@@ -136,11 +138,11 @@ const Layer = ({
         </button>
       )}
 
-      {!!download && (
+      {!!download && type !== 'gee' && !/forest-carbon-stock/.test(slug) && (
         <button
           type="button"
           data-name={name}
-          className="btn-download icon-container"
+          className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
           onClick={() => {
             DownloadWindow.show(download_url);

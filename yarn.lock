@@ -3016,6 +3016,11 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+corslite@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/corslite/-/corslite-0.0.7.tgz#8e451db5320a7556de1ef78d9bd3566343077721"
+  integrity sha1-jkUdtTIKdVbeHveNm9NWY0MHdyE=
+
 cosmiconfig@^5.0.0, cosmiconfig@^5.0.5, cosmiconfig@^5.0.7, cosmiconfig@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.2.1.tgz#040f726809c591e77a17c0a3626ca45b4f168b1a"
@@ -4109,6 +4114,11 @@ eslint-config-react-app@^3.0.8:
   dependencies:
     confusing-browser-globals "^1.0.6"
 
+eslint-import-resolver-alias@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-alias/-/eslint-import-resolver-alias-1.1.2.tgz#297062890e31e4d6651eb5eba9534e1f6e68fc97"
+  integrity sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==
+
 eslint-import-resolver-node@^0.3.1, eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.2.tgz#58f15fb839b8d0576ca980413476aab2472db66a"
@@ -4164,10 +4174,10 @@ eslint-plugin-import@2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
-eslint-plugin-import@^2.3.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.18.0.tgz#7a5ba8d32622fb35eb9c8db195c2090bd18a3678"
-  integrity sha512-PZpAEC4gj/6DEMMoU2Df01C5c50r7zdGIN52Yfi7CvvWaYssG7Jt5R9nFG5gmqodxNOz9vQS87xk6Izdtpdrig==
+eslint-plugin-import@^2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.18.2.tgz#02f1180b90b077b33d447a17a2326ceb400aceb6"
+  integrity sha512-5ohpsHAiUBRNaBWAF08izwUGlbrJoJJ+W9/TBwsGoR1MnlgfwMIKrFeSjWbt6moabiXW9xNvtFz+97KHRfI4HQ==
   dependencies:
     array-includes "^3.0.3"
     contains-path "^0.1.0"
@@ -4176,8 +4186,8 @@ eslint-plugin-import@^2.3.0:
     eslint-import-resolver-node "^0.3.2"
     eslint-module-utils "^2.4.0"
     has "^1.0.3"
-    lodash "^4.17.11"
     minimatch "^3.0.4"
+    object.values "^1.1.0"
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
@@ -6841,16 +6851,6 @@ layer-manager@^1.10.0:
     supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
-"layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git":
-  version "1.0.1-resilience"
-  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#7849ccb7db8c2c5a739183c2b8d86e9eece3e5cc"
-  dependencies:
-    axios "^0.18.0"
-    lodash "^4.17.11"
-    prop-types "^15.6.2"
-    supercluster "^4.1.1"
-    wri-json-api-serializer "^1.0.1"
-
 lazy-cache@^0.2.3:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
@@ -6879,6 +6879,13 @@ leaflet-active-area@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/leaflet-active-area/-/leaflet-active-area-1.1.0.tgz#d940e8ea85a3d3c7b5963471b4a268b6d29214ea"
   integrity sha512-pCqlC0IELUe+eWJXl9HD1lZM6BPNWW4KQ2Vfn9h0dCj1Y13QAL0S3xJz11hdXy9ErcPI0dRx7fZ/HXASnuDfVg==
+
+leaflet-utfgrid@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/leaflet-utfgrid/-/leaflet-utfgrid-0.3.0.tgz#6b87bede198e8050a988972185285633023406d9"
+  integrity sha1-a4e+3hmOgFCpiJchhShWMwI0Btk=
+  dependencies:
+    corslite "0.0.7"
 
 leaflet.pm@^2.0.3:
   version "2.1.0"
@@ -7545,7 +7552,7 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
-moment@^2.22.2:
+moment@^2.22.2, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -7920,6 +7927,11 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+
+numeral@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
+  integrity sha1-StCAk21EPCVhrtnyGX7//iX05QY=
 
 nwsapi@^2.0.7:
   version "2.1.4"
@@ -9606,6 +9618,11 @@ react-foundation@^0.9.6:
     fbjs "^0.8.16"
     prop-types "^15.5.10"
 
+react-ga@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.6.0.tgz#c3fe830ead2ad25117e1d33280d9698de9b28496"
+  integrity sha512-GWHBWZDFjDGMkIk1LzroIn0mNTygKw3adXuqvGvheFZvlbpqMPbHsQsTdQBIxRRdXGQM/Zq+dQLRPKbwIHMTaw==
+
 react-helmet@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.1.tgz#16a7192fdd09951f8e0fe22ffccbf9bb3e591ffa"
@@ -10219,6 +10236,16 @@ reselect@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
   integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
+
+"resilience-layer-manager@https://github.com/ConservationInternational/resilienceatlas-layermanager.git#00f23a16ad0f7ecd578b5885318d3a88f99ad768":
+  version "1.0.3"
+  resolved "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#00f23a16ad0f7ecd578b5885318d3a88f99ad768"
+  dependencies:
+    axios "^0.18.0"
+    lodash "^4.17.11"
+    prop-types "^15.6.2"
+    supercluster "^4.1.1"
+    wri-json-api-serializer "^1.0.1"
 
 resize-observer-polyfill@^1.5.0:
   version "1.5.1"
