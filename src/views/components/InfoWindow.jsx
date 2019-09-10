@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import DangerousHTML from 'react-dangerous-html';
 import { clickable } from '@utilities';
 
 export default class InfoWindow extends Component {
@@ -60,7 +61,7 @@ export default class InfoWindow extends Component {
 
             <h4>Source</h4>
             <div className="source">
-              {source}
+              <DangerousHTML html={source} />
 
               {link && (
                 <a
