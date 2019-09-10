@@ -49,7 +49,7 @@ set :rvm_custom_path, '/usr/share/rvm'
 # set :yarn_target_path, -> { release_path.join('subdir') } # default not set
 set :yarn_flags, '--silent --no-progress'
 # set :yarn_roles, :all                                     # default
-set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=4096' }
+# set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=4096' }
 
 # Passenger
 set :passenger_restart_with_touch, true
