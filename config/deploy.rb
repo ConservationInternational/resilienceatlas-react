@@ -65,5 +65,5 @@ namespace :deploy do
     end
   end
 
-  # after :updated, :build_app
+  after :updated, :build_app
 end
