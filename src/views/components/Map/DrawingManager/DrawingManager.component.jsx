@@ -96,10 +96,9 @@ export const DrawingManager: FC<P> = ({
     }
 
     if (iso && countries[iso]) {
-      const currentCountry = countries[iso];
-      const geojson = JSON.parse(countries[iso].geometry);
+      const geojson_country = JSON.parse(countries[iso].geometry);
 
-      layer.current = L.geoJSON(geojson);
+      layer.current = L.geoJSON_country(geojson_country);
       layer.current.setZIndex(2000);
       layer.current.addTo(map);
 

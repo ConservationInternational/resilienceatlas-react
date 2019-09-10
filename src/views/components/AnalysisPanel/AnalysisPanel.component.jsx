@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 
 import Tabs from '@shared/Tabs';
 import { useDownloadableReport } from '@utilities/hooks/downloadableReport';
-import { useSearch, useRouterParams } from '@utilities';
+import { useSearch } from '@utilities';
 import { TABS } from '../Sidebar';
 
 import { LayerAnalysis, PredictiveModelAnalysis } from './AnalysisContent';
@@ -32,8 +32,6 @@ export const AnalysisPanel: FC<P> = ({
   geojson,
   iso,
 }) => {
-  const { setParam, removeParam } = useRouterParams();
-
   const sidebarTab = useMemo(
     () => qs.parse(location.search, { ignoreQueryPrefix: true }).tab,
     [location],

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useContext, useRef } from 'react';
+import React, { useCallback, useEffect, useContext } from 'react';
 import qs from 'qs';
 import omit from 'lodash/omit';
 
