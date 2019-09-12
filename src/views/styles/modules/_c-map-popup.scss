@@ -9,7 +9,7 @@
       margin: 0;
       border: none;
       border-radius: 0;
-      padding: 10px;
+      padding: 5px;
       box-shadow: none;
       outline: none;
       height: 46px;
@@ -18,7 +18,7 @@
   }
 
   .popup-content {
-    padding: 20px;
+    padding: 5px;
     max-height: 290px;
 
     overflow-y: auto;
@@ -38,7 +38,7 @@
   }
 
   .popup-table {
-    width: inherit;
+    width: 100%;
 
     .dt {
       padding: 2px;

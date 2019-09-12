@@ -24,6 +24,8 @@ export const useWidget = (
     if (analysisBody) {
       const { assetId } = JSON.parse(analysisBody);
 
+      console.log(analysisQuery);
+
       return {
         method: 'post',
         url: analysisQuery,
