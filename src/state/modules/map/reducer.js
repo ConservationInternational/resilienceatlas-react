@@ -5,7 +5,7 @@ import { getRouterParam } from '@utilities';
 
 const initialState = {
   drawing: false,
-  geojson: getRouterParam('geojson', JSON.parse),
+  // geojson: getRouterParam('geojson', JSON.parse),
   bounds: null,
   iso: getRouterParam('iso'),
   basemap:

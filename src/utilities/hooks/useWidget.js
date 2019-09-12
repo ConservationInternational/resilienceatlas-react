@@ -21,10 +21,9 @@ export const useWidget = (
   }: { analysisQuery: string, analysisBody: string },
 ) => {
   const query = useMemo((): AxiosRequestConfig => {
+    console.log(geojson);
     if (analysisBody) {
       const { assetId } = JSON.parse(analysisBody);
-
-      console.log(analysisQuery);
 
       return {
         method: 'post',

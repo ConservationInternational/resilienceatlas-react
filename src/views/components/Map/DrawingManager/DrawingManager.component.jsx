@@ -69,7 +69,7 @@ export const DrawingManager: FC<P> = ({
 
       setParam('zoom', map.getZoom());
       setParam('center', qs.stringify(layerBounds.getCenter()));
-      setParam('geojson', JSON.stringify(geojson));
+      // setParam('geojson', JSON.stringify(geojson));
     } else {
       removeParam('geojson');
     }
