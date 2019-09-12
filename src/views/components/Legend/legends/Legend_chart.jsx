@@ -18,6 +18,7 @@ import { setChartLimit } from '@modules/layers';
 class LegendChart extends React.PureComponent {
   static defaultProps = {
     bucket: [],
+    limit: 100,
   };
 
   static propTypes = {
@@ -28,7 +29,7 @@ class LegendChart extends React.PureComponent {
       }),
     ).isRequired,
     bucket: PropTypes.arrayOf(PropTypes.string),
-    limit: PropTypes.number.isRequired,
+    limit: PropTypes.number,
     metadata: PropTypes.shape({
       xLabel: PropTypes.string.isRequired,
       yLabel: PropTypes.string.isRequired,

@@ -1,6 +1,4 @@
 import L from 'leaflet';
-import { PORT, isProd } from '../state/utils/api';
-import { getRouterParam } from './routeParams';
 import history from '../history';
 
 /**
@@ -96,27 +94,6 @@ export const formatNumber = ({
   return 0;
 };
 
-export const getSubdomain = () => {
-  const host = isProd
-    ? PORT.replace(/(^http(s?):\/\/)|(\.com)$/g, '')
-    : `localhost:${window.location.port}`;
-
-  if (window.location.host === '52.7.28.202') return false;
-
-  let subdomain = window.location.host.split('.')[0].replace(host, '');
-
-  if (!subdomain || subdomain === 'www') {
-    subdomain = getRouterParam('site_scope');
-  }
-
-  return subdomain;
-};
-
-/**
- * @type {String} runs once on app init.
- */
-export const subdomain = getSubdomain();
-
 export function getNestedChildren(arr, ancestry) {
   const out = [];
 
@@ -168,13 +145,7 @@ export const download = (
   }
 };
 
-/**
- * Used only from schema.js, receives unprocessed layer to generate download url
- * @param  {object} layer unnormalized layer data
- */
-export const generateDownloadUrl = layer =>
-  `${PORT}/api/layers/${
-    layer.id
-  }/downloads?file_format=kml&with_format=true&download_path=https://cdb-cdn.resilienceatlas.org/user/ra/api/v2/sql?filename=${
-    layer.attributes.slug
-  }&q=${encodeURIComponent(layer.attributes.query)}`;
+export const removeHtmlTags = str => {
+  if (!str || !str.toString) return str;
+  return str.toString().replace(/<\/?[a-z]+>/gi, '');
+};
