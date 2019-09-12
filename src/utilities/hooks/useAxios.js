@@ -60,7 +60,9 @@ export const useAxios = (
           data: parseData ? parseData(data) : data,
         }),
       )
-      .catch(error => dispatch({ type: FETCH.FAIL, error }));
+      .catch(
+        error => console.log(error) || dispatch({ type: FETCH.FAIL, error }),
+      );
 
     return () => {
       if (state.loading) {

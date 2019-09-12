@@ -4,19 +4,23 @@
     "L": "readonly"
   },
   "rules": {
-    "arrow-body-style": ["error", "as-needed"],
-    "import/no-unresolved": [
-      "error",
-      {
-        "ignore": [
-          "@views",
-          "@components",
-          "@contexts",
-          "@modules",
-          "@utilities",
-          "@shared"
-        ]
+    "arrow-body-style": ["error", "as-needed"]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@modules", "./src/state/modules/"],
+          ["@views", "./src/views/"],
+          ["@state", "./src/state/"],
+          ["@components", "./src/views/components/"],
+          ["@contexts", "./src/views/contexts/"],
+          ["@shared", "./src/views/shared"],
+          ["@utilities", "./src/utilities/"]
+        ],
+        "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
       }
-    ]
-  }
+    }
+  },
+  "plugins": ["import"]
 }

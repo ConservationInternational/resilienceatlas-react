@@ -28,11 +28,15 @@
     font-weight: 400;
     font-size: 18px;
     margin-top: 0;
+
+    > a {
+      text-decoration: underline;
+    }
   }
 
   a {
     font-weight: 400;
-    color: $font-color-2;
+    color: $font-color-1;
   }
 
   .source {
@@ -43,6 +47,10 @@
     p {
       font-style: italic;
       font-size: 14px;
+    }
+
+    > a {
+      text-decoration: underline;
     }
   }
 

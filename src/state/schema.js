@@ -1,6 +1,6 @@
 import { schema } from 'normalizr';
 
-import { generateDownloadUrl } from '@utilities/helpers';
+import { generateDownloadUrl } from '@utilities/generateDownloadUrl';
 
 import { birds } from './utils/decoders';
 
@@ -130,6 +130,7 @@ export const layer = new schema.Entity(
             ? config.gee.decodeFunction
             : null,
         params: l.attributes.layer_provider === 'gee' ? config.gee.params : {},
+        interactionConfig: l.attributes.interaction_config,
       };
     },
   },

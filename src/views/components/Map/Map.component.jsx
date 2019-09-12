@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useContext } from 'react';
 import qs from 'qs';
+import omit from 'lodash/omit';
+
 import { Map as Maps, MapControls, ZoomControl } from 'vizzuality-components';
 import { LayerManager, Layer } from 'resilience-layer-manager/dist/components';
 import { PluginLeaflet } from 'resilience-layer-manager/dist/layer-manager';
@@ -14,12 +16,18 @@ import { setRouterParam } from '@utilities';
 import Toolbar from './Toolbar';
 import DrawingManager from './DrawingManager';
 import MapOffset from './MapOffset';
+import MapPopup from './MapPopup';
 
 const MapView = ({
   // actions
   loadLayers,
   loadLayerGroups,
   openBatch,
+  // interaction
+  setMapLayerGroupsInteraction,
+  setMapLayerGroupsInteractionLatLng,
+  layerGroupsInteraction,
+  layerGroupsInteractionSelected,
   // data
   layers: { loaded: layersLoaded },
   layer_groups: { loaded: layerGroupsLoaded },
@@ -96,7 +104,6 @@ const MapView = ({
         drawControl: true,
       }}
       events={{
-        click: e => {},
         zoomend: (e, map) => {
           const mapZoom = map.getZoom();
 
@@ -122,8 +129,30 @@ const MapView = ({
             {tab === TABS.LAYERS &&
               activeLayers.map(l => (
                 <Layer
+                  {...omit(l, 'interactivity')}
+                  slug={l.slug || l.id}
                   key={l.id}
-                  {...l}
+                  // Interaction
+                  {...(!!l.interactionConfig &&
+                    !!l.interactionConfig &&
+                    !!l.interactionConfig.length && {
+                      interactivity:
+                        l.provider === 'carto' || l.provider === 'cartodb'
+                          ? JSON.parse(l.interactionConfig)
+                              .output.map(o => o.column)
+                              .join(',')
+                          : true,
+                      events: {
+                        click: e => {
+                          setMapLayerGroupsInteraction({
+                            ...e,
+                            ...l,
+                          });
+
+                          setMapLayerGroupsInteractionLatLng(e.latlng);
+                        },
+                      },
+                    })}
                   decodeParams={
                     l.decodeParams
                       ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
@@ -131,8 +160,12 @@ const MapView = ({
                   }
                 />
               ))}
-            {tab === TABS.MODELS && model_layer && <Layer {...model_layer} />}
+            {tab === TABS.MODELS && model_layer && (
+              <Layer key="model_layer" {...model_layer} />
+            )}
           </LayerManager>
+
+          <MapPopup map={map} />
 
           <DrawingManager map={map} />
 
