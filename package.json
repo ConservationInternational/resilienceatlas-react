@@ -59,7 +59,7 @@
     "redux-form": "^8.2.3",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "resilience-layer-manager": "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#00f23a16ad0f7ecd578b5885318d3a88f99ad768",
+    "resilience-layer-manager": "https://github.com/ConservationInternational/resilienceatlas-layermanager.git#1.0.4",
     "slick-carousel": "^1.8.1",
     "source-map-explorer": "^2.0.1",
     "vizzuality-components": "^1.1.1",
