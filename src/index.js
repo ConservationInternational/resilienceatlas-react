@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import ReactGA from 'react-ga';
 
 import App from './views/routes';
 import store from './state/store';
@@ -13,6 +14,7 @@ import './views/styles/index.scss';
 import 'leaflet';
 import 'leaflet.pm';
 import 'leaflet-active-area';
+import 'leaflet-utfgrid/L.UTFGrid-min';
 
 import 'leaflet.pm/dist/leaflet.pm.css';
 
@@ -25,7 +27,12 @@ if (userToken) {
   store.dispatch(login(userToken));
 }
 
-store.dispatch(loadSite());
+store.dispatch(loadSite()).then(() => {
+  const currentState = store.getState();
+  const analyticsCode = currentState.site.analytics_code;
+
+  if (analyticsCode) ReactGA.initialize(analyticsCode);
+});
 
 ReactDOM.render(
   <Provider store={store}>

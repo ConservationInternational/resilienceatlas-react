@@ -45,16 +45,12 @@ set :keep_releases, 2
 set :rvm_ruby_version, '2.2.1'
 set :rvm_custom_path, '/usr/share/rvm'
 
-# PM2
-# set :pm2_app_command, 'ecosystem.config.js'
-# set :pm2_app_name, 'resilienceatlasreact'
-# set :pm2_start_params, '--env production'
-
 # Yarn
 # set :yarn_target_path, -> { release_path.join('subdir') } # default not set
 set :yarn_flags, '--silent --no-progress'
 # set :yarn_roles, :all                                     # default
-set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=2048' }
+# set :yarn_env_variables, { 'NODE_OPTIONS': '--max-old-space-size=4096' }
+set :yarn_env_variables, { 'REACT_APP_GENERATE_SOURCEMAP': 'false' }
 
 # Passenger
 set :passenger_restart_with_touch, true
@@ -65,22 +61,10 @@ namespace :deploy do
   task :build_app do
     on roles(:app) do
       within release_path do
-        # execute :npm, 'run build', '-- --max-old-space-size=2048'
         execute :yarn, 'build'
       end
     end
   end
 
-  # desc 'Restart application'
-  # task :restart do
-  #   on roles(:app) do
-  #     within release_path do
-  #       invoke 'pm2:delete'
-  #       invoke 'pm2:start'
-  #     end
-  #   end
-  # end
-
-  after :updated, :build_app
-  # after :publishing, :restart
+  # before "symlink:release", :build_app
 end

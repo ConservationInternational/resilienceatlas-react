@@ -1,9 +1,7 @@
 import React from 'react';
-import { Icons as VizzualityIcons } from 'vizzuality-components';
 
 const Icons = () => (
   <>
-    {/* <VizzualityIcons /> */}
     <svg
       style={{ position: 'absolute', height: 0, width: 0 }}
       width="0"

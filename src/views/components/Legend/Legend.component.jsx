@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import cx from 'classnames';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Loader from '@shared/Loader';
+import InfoWindow from '@components/InfoWindow';
 
 import { sortBy, useToggle, clickable } from '@utilities';
 import LegendItem from './LegendItem';
@@ -52,6 +53,7 @@ const Legend = ({
                       notAvailableByZoom,
                       opacity,
                       legend,
+                      info,
                     } = layer;
                     const layerVisible = opacity > 0;
 
@@ -84,12 +86,14 @@ const Legend = ({
                                 <div className="actions">
                                   <button
                                     type="button"
-                                    className="btn-remove"
-                                    {...clickable(() => toggleLayer(id))}
+                                    className="btn-info"
+                                    {...clickable(() => {
+                                      InfoWindow.show(name, JSON.parse(info));
+                                    })}
                                     data-layer-id={id}
                                   >
                                     <svg className="icon">
-                                      <use xlinkHref="#icon-remove" />
+                                      <use xlinkHref="#icon-info" />
                                     </svg>
                                   </button>
 
@@ -110,6 +114,17 @@ const Legend = ({
                                           layerVisible ? 'on' : 'off'
                                         }`}
                                       />
+                                    </svg>
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    className="btn-remove"
+                                    {...clickable(() => toggleLayer(id))}
+                                    data-layer-id={id}
+                                  >
+                                    <svg className="icon">
+                                      <use xlinkHref="#icon-remove" />
                                     </svg>
                                   </button>
                                 </div>

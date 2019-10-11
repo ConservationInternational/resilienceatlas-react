@@ -1,6 +1,5 @@
 import React from 'react';
 import ShareModal from '../../ShareModal/ShareModal.component';
-import ExportToPdf from './ExportToPdf';
 import SearchArea from './SearchArea';
 
 const Toolbar = () => (
@@ -24,9 +23,6 @@ const Toolbar = () => (
             />
           </svg>
         </button>
-      </li>
-      <li className="m-toolbar__item">
-        <ExportToPdf />
       </li>
     </ul>
   </div>
