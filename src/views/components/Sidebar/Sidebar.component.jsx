@@ -5,6 +5,7 @@ import cx from 'classnames';
 import AnalysisPanel from '@components/AnalysisPanel';
 import LayersList from '@components/LayersList';
 import PredictiveModels from '@components/PredictiveModels';
+import LogoAttribution from '@components/LogoAttribution';
 
 import LinkButton from '@shared/LinkButton';
 import Tabs from '@shared/Tabs';
@@ -134,6 +135,7 @@ const Sidebar: FC<P> = ({
             Analysis
           </button>
         )}
+        <LogoAttribution />
       </div>
     </div>
   );
