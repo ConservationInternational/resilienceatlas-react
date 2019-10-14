@@ -144,11 +144,34 @@
 .btn-info,
 .btn-download,
 .btn-visibility,
-.btn-remove {
+.btn-remove,
+.btn-opacity,
+.btn-locate {
   display: flex;
   align-items: center;
   padding: 0;
   margin-left: 5px;
+  opacity: 0.8;
+
+  &:disabled,
+  &:disabled:hover {
+    opacity: 0.5;
+    cursor: default;
+
+    svg,
+    .icon {
+      fill: $bg-color-4;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+
+    svg,
+    .icon {
+      fill: $font-color-1;
+    }
+  }
 
   svg,
   .icon {
@@ -175,6 +198,20 @@
   .icon, svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+// opacity
+.btn-opacity {
+  .icon,
+  &.panel-trasparecy-switcher .icon-settings {
+    fill: none;
+    stroke: $bg-color-4;
+    stroke-width: 63px;
+  }
+
+  &:hover .icon {
+    stroke: $font-color-1;
   }
 }
 
