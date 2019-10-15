@@ -158,10 +158,10 @@
       transform: translate(-50%, -50%);
     }
 
-    > .icon-downloads {
-      height: 13px;
-      width: 13px;
-    }
+    // > .icon-downloads {
+    //   height: 13px;
+    //   width: 13px;
+    // }
   }
 
   .panel-item-switch {
@@ -218,11 +218,11 @@
   @extend %clean-button-or-input;
   float: right;
 
-  .icon-zoom-pan {
-    width: 13px;
-    height: 13px;
-    margin-top: rem(1px);
-  }
+  // .icon-zoom-pan {
+  //   width: 13px;
+  //   height: 13px;
+  //   margin-top: rem(1px);
+  // }
 }
 
 .m-form-input--slider {

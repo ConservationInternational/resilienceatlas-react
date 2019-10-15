@@ -78,6 +78,7 @@ const Layer = ({
         className="btn-locate icon-container panel-trasparecy-switcher"
         data-id={id}
         onClick={fitMapToLayer}
+        disabled={!isActive}
       >
         <svg className="icon icon-zoom-pan">
           <use xlinkHref="#icon-zoom-pan" />
@@ -86,39 +87,11 @@ const Layer = ({
 
       <button
         type="button"
-        className="panel-trasparecy-switcher icon-container"
+        className="btn-opacity icon-container panel-trasparecy-switcher"
         onClick={toggleOpen}
       >
-        <svg
-          className="icon icon-settings"
-          opacitylevel={opacity_text}
-          width="9px"
-          height="14px"
-          viewBox="0 0 9 14"
-          version="1.1"
-        >
-          <g
-            id="Map"
-            stroke="none"
-            strokeWidth="1"
-            fill="none"
-            fillRule="evenodd"
-            // sketch:type="MSPage"
-          >
-            <g
-              id="Map_UI-amendments"
-              // sketch:type="MSArtboardGroup"
-              transform="translate(-321.000000, -325.000000)"
-              stroke="#C0C0C0"
-              fill="#FFFFFF"
-            >
-              <path
-                d="M325.5,339 C327.985281,339 330,336.985281 330,334.5 C330,332.014719 327.428571,330.090909 325.5,325 C323.571429,330.090909 321,332.014719 321,334.5 C321,336.985281 323.014719,339 325.5,339 Z"
-                id="opacity"
-                // sketch:type="MSShapeGroup"
-              />
-            </g>
-          </g>
+        <svg className="icon icon-settings">
+          <use xlinkHref="#icon-settings" />
         </svg>
       </button>
 
