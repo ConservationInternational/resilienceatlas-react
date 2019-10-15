@@ -22,9 +22,7 @@ const MapPage: FC<RouteComponentProps> = ({ location: { state } }) => {
   return (
     <LayerManagerProvider>
       <Helmet title="Map" />
-
       <Sidebar />
-
       <div className="l-content--fullscreen">
         <MapView
           options={{
@@ -35,11 +33,8 @@ const MapPage: FC<RouteComponentProps> = ({ location: { state } }) => {
             },
           }}
         />
-
         <Loader />
-
         <Legend />
-
         <InfoWindow />
         <DownloadWindow />
         <ShareModal />

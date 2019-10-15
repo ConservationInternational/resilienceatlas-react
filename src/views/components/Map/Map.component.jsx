@@ -41,6 +41,7 @@ const MapView = ({
   options,
   basemap,
   embed,
+  drawing,
 }) => {
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -102,6 +103,7 @@ const MapView = ({
         center: getCenter(),
         scrollWheelZoom: !embed,
         drawControl: true,
+        minZoom: 3,
       }}
       events={{
         zoomend: (e, map) => {
@@ -144,12 +146,14 @@ const MapView = ({
                           : true,
                       events: {
                         click: e => {
-                          setMapLayerGroupsInteraction({
-                            ...e,
-                            ...l,
-                          });
+                          if (!drawing) {
+                            setMapLayerGroupsInteraction({
+                              ...e,
+                              ...l,
+                            });
 
-                          setMapLayerGroupsInteractionLatLng(e.latlng);
+                            setMapLayerGroupsInteractionLatLng(e.latlng);
+                          }
                         },
                       },
                     })}
