@@ -1,1 +1,1 @@
-export { default } from './LogoAttribution.component';
+export { default } from './LogoAttribution.container';
