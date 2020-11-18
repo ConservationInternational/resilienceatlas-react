@@ -29,7 +29,7 @@ To compile production build, run:
 
     yarn build
 
-and then you can use your prodiction build locally:
+and then you can use your production build locally:
 
     npm i -g serve
     serve -s build
