@@ -10,7 +10,7 @@ This is the web app powering
 - npm 6.9.0+
 - yarn 1.13.0+ (you can use npm instead)
 
-
+## Start here if your machine already has Requirements Installed, If you need help with installation, scroll to bottom
 Install project dependencies:
 
     yarn
@@ -86,11 +86,20 @@ In this section we will be installing the dependencies from the Requirements Sec
 	- apt sudo install nodejs
 	- curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 	-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-	
-3) clone resilience-react repo to this machine	
+
+3) Clone resilience-react repo to this machine using
+  git clone https://github.com/ConservationInternational/resilienceatlas-react.git
 
 ### On Your Local Machine (Windows 10)
- (In progress)
+
+I recommend installing [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and using git Bash for installation. Although Using whatever command line tool you're most comfortable in will probably work as well.
+
+1) Install [Ruby](ruby-lang.org/en/documentation/installation)
+2) Install [node](nodejs.org/en/download)
+3) Install [yarn](classic.yarnpkg.com/en/docs/install/#windows-stable)
+4) git clone https://github.com/ConservationInternational/resilienceatlas-react.git
+
+
 ## Contributing
 
 1. Fork it!
