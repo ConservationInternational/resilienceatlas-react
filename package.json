@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@carto/carto.js": "^4.1.11",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "customize-cra": "^0.2.12",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
