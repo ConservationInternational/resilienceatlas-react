@@ -56,14 +56,11 @@ const PredictiveModels = ({
     [model],
   );
 
+  // const text = "Select a combination of interventions. There are nine levels: extremely, very, strongly and moderately less important, equally, and moderately, strongly, very and extremely more important."
+
   return (
     <div className="m-predictive-models">
       <Loader loading={modelsLoading} />
-      <p>
-        Select a combination of interventions. There are nine levels: extremely,
-        very, strongly and moderately less important, equally, and moderately,
-        strongly, very and extremely more important.
-      </p>
       <div className="model-selector">
         <select
           className="js-model-selector"
