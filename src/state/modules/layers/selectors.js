@@ -31,33 +31,28 @@ export const getPublished = createSelector(
 );
 
 export const makeActives = () =>
-  createSelector(
-    [getActiveIds, getById, getLoaded],
-    (ids, layers, loaded) =>
-      loaded ? denormalize(ids, [layer], { layers }) : [],
+  createSelector([getActiveIds, getById, getLoaded], (ids, layers, loaded) =>
+    loaded ? denormalize(ids, [layer], { layers }) : [],
   );
 
 export const makeDefaultActives = () => {
   const getActives = makeActives();
 
-  return createSelector(
-    [getActives, getGroupsById],
-    (activeLayers, byId) => {
-      const result = new Set();
-      const collectIds = (id, entities) => {
-        result.add(id);
+  return createSelector([getActives, getGroupsById], (activeLayers, byId) => {
+    const result = new Set();
+    const collectIds = (id, entities) => {
+      result.add(id);
 
-        const { father } = entities[id] || {};
-        if (father) collectIds(father, entities);
-      };
+      const { father } = entities[id] || {};
+      if (father) collectIds(father, entities);
+    };
 
-      if (activeLayers.length > 0) {
-        activeLayers.map(l => collectIds(l.group, byId));
-      }
+    if (activeLayers.length > 0) {
+      activeLayers.map(l => collectIds(l.group, byId));
+    }
 
-      return [...result];
-    },
-  );
+    return [...result];
+  });
 };
 
 export const getGrouped = () => {
@@ -141,22 +136,17 @@ export const getGrouped = () => {
 };
 
 export const getLayerActive = id =>
-  createSelector(
-    getActiveIds,
-    ids => new Set(ids).has(id),
-  );
+  createSelector(getActiveIds, ids => new Set(ids).has(id));
 
 export const getInteractionLayers = () => {
   const getActive = makeActives();
 
-  return createSelector(
-    [getActive],
-    layers =>
-      layers
-        .filter(l => l.interactionConfig && l.interactionConfig.length)
-        .map(l => ({
-          ...l,
-          interactionConfig: JSON.parse(l.interactionConfig),
-        })),
+  return createSelector([getActive], layers =>
+    layers
+      .filter(l => l.interactionConfig && l.interactionConfig.length)
+      .map(l => ({
+        ...l,
+        interactionConfig: JSON.parse(l.interactionConfig),
+      })),
   );
 };

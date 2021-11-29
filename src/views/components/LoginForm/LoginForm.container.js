@@ -26,7 +26,4 @@ const withForm = reduxForm({
   },
 });
 
-export default compose(
-  withRouter,
-  withForm,
-)(LoginForm);
+export default compose(withRouter, withForm)(LoginForm);

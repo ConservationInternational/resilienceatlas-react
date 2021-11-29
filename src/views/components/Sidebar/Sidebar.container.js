@@ -24,7 +24,4 @@ const mapDispatchToProps = {
   setTab,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

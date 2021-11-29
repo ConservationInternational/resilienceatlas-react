@@ -9,17 +9,12 @@ export const getById = state => state.map_menu_entries.byId;
 export const getAll = state => state.map_menu_entries.all;
 
 export const makeAllEntries = () =>
-  createSelector(
-    [getAll, getById],
-    (all, map_menu_entries) =>
-      denormalize(all, [map_menu_entry], { map_menu_entries }),
+  createSelector([getAll, getById], (all, map_menu_entries) =>
+    denormalize(all, [map_menu_entry], { map_menu_entries }),
   );
 
 export const makeMenuTree = () => {
   const getAllEntries = makeAllEntries();
 
-  return createSelector(
-    [getAllEntries],
-    entries => getNestedChildren(entries),
-  );
+  return createSelector([getAllEntries], entries => getNestedChildren(entries));
 };

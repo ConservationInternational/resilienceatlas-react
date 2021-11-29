@@ -27,12 +27,6 @@ const mapDispatchToProps = {
   loadJourney,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withRouter,
-  withConnect,
-)(Journey);
+export default compose(withRouter, withConnect)(Journey);

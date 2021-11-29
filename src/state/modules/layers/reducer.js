@@ -1,3 +1,4 @@
+import { merge } from '@utilities';
 import { createReducer } from '../../utils';
 import {
   LOAD,
@@ -8,7 +9,6 @@ import {
   SET_CHART_LIMIT,
 } from './actions';
 import { getPersistedLayers } from './utils';
-import { merge } from '@utilities';
 
 const persistedLayers = getPersistedLayers();
 
@@ -76,9 +76,12 @@ export default createReducer(initialState)({
     if (actives.has(id)) actives.delete(id);
     else actives.add(id);
 
+    const desc_order = actives.toJSON().reverse();
+    const sorted_actives = new Set(desc_order);
+
     return {
       ...state,
-      actives: [...actives],
+      actives: [...sorted_actives],
     };
   },
 

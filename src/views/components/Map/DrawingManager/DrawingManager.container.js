@@ -18,7 +18,4 @@ const mapDispatchToProps = {
   setISO,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DrawingManager);
+export default connect(mapStateToProps, mapDispatchToProps)(DrawingManager);

@@ -48,26 +48,23 @@ export const makeActive = () => {
 export const makeLayer = () => {
   const getActive = makeActive();
 
-  return createSelector(
-    [getActive],
-    activeModel => {
-      if (!activeModel) return null;
-      const columns = activeModel.indicators
-        .filter(
-          indicator =>
-            indicator.value !== null && indicator.value !== undefined,
-        )
-        .map(ind => {
-          const weight = ind.value % 1 === 0 ? ind.value : ind.value.toFixed(3);
+  return createSelector([getActive], activeModel => {
+    if (!activeModel) return null;
+    const columns = activeModel.indicators
+      .filter(
+        indicator => indicator.value !== null && indicator.value !== undefined,
+      )
+      .map(ind => {
+        const weight = ind.value % 1 === 0 ? ind.value : ind.value.toFixed(3);
 
-          return `{ 
+        return `{ 
             "column_name": "${ind.column}", 
             "weight": ${weight}, 
             "operation": "${ind.operation || '+'}" 
           }`;
-        });
+      });
 
-      const cartocss = `#intensification_reduce{
+    const cartocss = `#intensification_reduce{
         polygon-fill: #A53ED5;
         polygon-opacity: 1;
         line-color: #A53ED5;
@@ -103,66 +100,65 @@ export const makeLayer = () => {
         line-color: #FFFFB2;
       }`;
 
-      const sql = `select * from getModel('${activeModel.tableName}', '[${columns}]')`;
+    const sql = `select * from getModel('${activeModel.tableName}', '[${columns}]')`;
 
-      return {
-        id: -1,
-        slug: 'predictive-model-layer',
-        name: activeModel.name,
-        type: 'cartodb',
-        description: `{
+    return {
+      id: -1,
+      slug: 'predictive-model-layer',
+      name: activeModel.name,
+      type: 'cartodb',
+      description: `{
           "description": "${activeModel.description || ''}", 
           "source": "${activeModel.source || ''}"
         }`,
-        cartocss,
-        interactivity: '',
-        sql,
-        color: '',
-        opacity: 1,
-        no_opacity: false,
-        order: 1,
-        maxZoom: 25,
-        minZoom: 0,
-        legend: `{
+      cartocss,
+      interactivity: '',
+      sql,
+      color: '',
+      opacity: 1,
+      no_opacity: false,
+      order: 1,
+      maxZoom: 25,
+      minZoom: 0,
+      legend: `{
             "type": "choropleth",\r\n
             "min":"0",\r\n
             "mid": "0.5",\r\n
             "max":"1",\r\n
             "bucket":["#FFFFB2","#FED976","#FEB24C","#FD8D3C"," #FC4E2A","#E31A1C","#B10026"]
           }`,
-        group: -1,
-        active: true,
-        published: true,
-        info: `{
+      group: -1,
+      active: true,
+      published: true,
+      info: `{
           "description":"${activeModel.description || ''}", 
           "source":"${activeModel.source || ''}"
         }`,
-        dashboard_order: null,
-        download: false,
-        dataset_shortname: null,
-        dataset_source_url: null,
-        attributions: false,
-        // for layer-manager
-        provider: 'cartodb',
-        layerProvider: 'cartodb',
-        layerConfig: {
-          account: 'cdb',
-          body: {
-            layers: [
-              {
-                type: 'mapnik',
-                options: {
-                  cartocss,
-                  sql,
-                  cartocss_version: '2.1.0',
-                },
+      dashboard_order: null,
+      download: false,
+      dataset_shortname: null,
+      dataset_source_url: null,
+      attributions: false,
+      // for layer-manager
+      provider: 'cartodb',
+      layerProvider: 'cartodb',
+      layerConfig: {
+        account: 'cdb',
+        body: {
+          layers: [
+            {
+              type: 'mapnik',
+              options: {
+                cartocss,
+                sql,
+                cartocss_version: '2.1.0',
               },
-            ],
-            minzoom: 0,
-            maxzoom: 25,
-          },
+            },
+          ],
+          minzoom: 0,
+          maxzoom: 25,
         },
-      };
-    },
-  );
+      },
+    };
+  });
 };

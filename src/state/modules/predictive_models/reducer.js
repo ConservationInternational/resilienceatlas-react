@@ -1,5 +1,6 @@
 import qs from 'qs';
 import { Array } from 'core-js';
+import { getRouterParam } from '@utilities';
 import { createReducer } from '../../utils';
 import {
   LOAD,
@@ -9,7 +10,6 @@ import {
   APPLY_INDICATORS,
   RESET_INDICATORS,
 } from './actions';
-import { getRouterParam } from '@utilities';
 import {
   getIndexableIndicatorValueRange,
   buildIndicatorsFromState,

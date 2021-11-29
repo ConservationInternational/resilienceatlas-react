@@ -30,7 +30,4 @@ const withForm = reduxForm({
   },
 });
 
-export default compose(
-  withConnect,
-  withForm,
-)(ProfileSettingsForm);
+export default compose(withConnect, withForm)(ProfileSettingsForm);
