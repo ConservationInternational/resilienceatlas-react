@@ -8,6 +8,7 @@ import {
   getGrouped,
   makeActives,
   makeDefaultActives,
+  setOpacity,
 } from '@modules/layers';
 import { load as loadLayerGroups, openBatch } from '@modules/layer_groups';
 import { makeLayer as makeModelLayer } from '@modules/predictive_models';
@@ -48,12 +49,10 @@ const mapDispatchToProps = {
   openBatch,
   setMapLayerGroupsInteraction,
   setMapLayerGroupsInteractionLatLng,
+  setOpacity,
 };
 
 export default compose(
   withRouter,
-  connect(
-    makeMapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(makeMapStateToProps, mapDispatchToProps),
 )(MapView);

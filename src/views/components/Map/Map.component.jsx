@@ -62,7 +62,7 @@ const MapView = ({
   }, [layersLoaded, layerGroupsLoaded]);
 
   useEffect(() => {
-    const hash = activeLayers.map(({ id, opacity, chartLimit }, order) => ({
+    const hash = activeLayers.map(({ id, opacity, chartLimit, order }) => ({
       id,
       opacity,
       order,

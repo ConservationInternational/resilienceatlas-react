@@ -7,7 +7,7 @@ import InfoWindow from '@components/InfoWindow';
 import { sortBy, useToggle, clickable } from '@utilities';
 import LegendItem from './LegendItem';
 
-const byOrder = sortBy('order', 'DESC');
+const byOrder = sortBy('order');
 
 const Legend = ({
   activeLayers,
