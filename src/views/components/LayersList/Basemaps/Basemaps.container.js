@@ -11,7 +11,4 @@ const mapDispatchToProps = {
   setBasemap,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Basemaps);
+export default connect(mapStateToProps, mapDispatchToProps)(Basemaps);

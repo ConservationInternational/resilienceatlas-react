@@ -7,7 +7,6 @@ export const getAll = state => state.countries.all;
 export const getByISO = state => state.countries.byISO;
 
 export const makeCountries = () =>
-  createSelector(
-    [getAll, getByISO],
-    (all, countries) => denormalize(all, [country], { countries }),
+  createSelector([getAll, getByISO], (all, countries) =>
+    denormalize(all, [country], { countries }),
   );

@@ -22,7 +22,4 @@ const mapDispatchToProps = {
   setMapLayerGroupsInteractionSelected,
 };
 
-export default connect(
-  makeMapStateToProps,
-  mapDispatchToProps,
-)(MapPopup);
+export default connect(makeMapStateToProps, mapDispatchToProps)(MapPopup);

@@ -9,13 +9,11 @@ export const getById = state => state.journeys.byId;
 export const getJourneysLength = state => state.journeys.all.length;
 
 export const makeAll = () =>
-  createSelector(
-    [getAll, getById],
-    (all, journeys) => denormalize(all, [journey], { journeys }),
+  createSelector([getAll, getById], (all, journeys) =>
+    denormalize(all, [journey], { journeys }),
   );
 
 export const makeOne = () =>
-  createSelector(
-    [(s, id) => id, getById],
-    (journeys, id) => denormalize(id, journey, { journeys }),
+  createSelector([(s, id) => id, getById], (journeys, id) =>
+    denormalize(id, journey, { journeys }),
   );

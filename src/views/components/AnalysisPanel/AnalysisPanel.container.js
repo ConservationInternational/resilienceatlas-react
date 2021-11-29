@@ -26,12 +26,6 @@ const mapDispatchToProps = {
   setISO,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withRouter,
-  withConnect,
-)(AnalysisPanel);
+export default compose(withRouter, withConnect)(AnalysisPanel);
