@@ -127,9 +127,13 @@ const MapView = ({
     >
       {map => (
         <>
-          <LayerManager map={map} plugin={PluginLeaflet} ref={layerManagerRef}>
-            {tab === TABS.LAYERS &&
-              activeLayers.map(l => (
+          {tab === TABS.LAYERS &&
+            activeLayers.map((l, index) => (
+              <LayerManager
+                map={map}
+                plugin={PluginLeaflet}
+                ref={layerManagerRef}
+              >
                 <Layer
                   {...omit(l, 'interactivity')}
                   slug={l.slug || l.id}
@@ -162,12 +166,18 @@ const MapView = ({
                       ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
                       : null
                   }
-                />
-              ))}
-            {tab === TABS.MODELS && model_layer && (
+                ></Layer>
+              </LayerManager>
+            ))}
+          {tab === TABS.MODELS && model_layer && (
+            <LayerManager
+              map={map}
+              plugin={PluginLeaflet}
+              ref={layerManagerRef}
+            >
               <Layer key="model_layer" {...model_layer} />
-            )}
-          </LayerManager>
+            </LayerManager>
+          )}
 
           <MapPopup map={map} />
 
