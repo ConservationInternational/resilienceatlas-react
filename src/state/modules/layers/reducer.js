@@ -72,12 +72,16 @@ export default createReducer(initialState)({
 
   [TOGGLE]: (state, { id }) => {
     const actives = new Set(state.actives);
+    let sorted_actives = new Set(); // sort by latest active layer on top
 
-    if (actives.has(id)) actives.delete(id);
-    else actives.add(id);
-
-    const desc_order = actives.toJSON().reverse();
-    const sorted_actives = new Set(desc_order);
+    if (actives.has(id)) {
+      actives.delete(id);
+      sorted_actives = new Set(actives.toJSON());
+    } else {
+      const actives_list = actives.toJSON();
+      actives_list.unshift(id);
+      sorted_actives = new Set(actives_list);
+    }
 
     return {
       ...state,

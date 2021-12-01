@@ -133,6 +133,7 @@ const MapView = ({
                 map={map}
                 plugin={PluginLeaflet}
                 ref={layerManagerRef}
+                key={l.id}
               >
                 <Layer
                   {...omit(l, 'interactivity')}
@@ -174,6 +175,7 @@ const MapView = ({
               map={map}
               plugin={PluginLeaflet}
               ref={layerManagerRef}
+              key="model_layer"
             >
               <Layer key="model_layer" {...model_layer} />
             </LayerManager>
