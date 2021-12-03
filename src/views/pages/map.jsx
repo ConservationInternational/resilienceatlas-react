@@ -6,6 +6,7 @@ import MapView from '@components/Map';
 import Sidebar from '@components/Sidebar';
 import Legend from '@components/Legend';
 import InfoWindow from '@components/InfoWindow';
+import LoginRequiredWindow from '@components/LoginRequiredWindow';
 import DownloadWindow from '@components/DownloadWindow';
 import ShareModal from '@components/ShareModal';
 
@@ -37,6 +38,7 @@ const MapPage: FC<RouteComponentProps> = ({ location: { state } }) => {
         <Legend />
         <InfoWindow />
         <DownloadWindow />
+        <LoginRequiredWindow />
         <ShareModal />
       </div>
     </LayerManagerProvider>

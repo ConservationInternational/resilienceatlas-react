@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import cx from 'classnames';
 
 import InfoWindow from '@components/InfoWindow';
+import LoginRequiredWindow from '@components/LoginRequiredWindow';
 import { LayerManagerContext } from '@contexts/layerManagerCtx';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 import DownloadWindow from '../../DownloadWindow/DownloadWindow.component';
@@ -126,7 +127,7 @@ const Layer = ({
           onClick={event => {
             user.auth_token
               ? DownloadWindow.show(download_url)
-              : event.preventDefault();
+              : LoginRequiredWindow.show();
           }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>
