@@ -27,6 +27,7 @@ const Layer = ({
   withDashboardOrder,
   type,
   slug,
+  user,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -117,8 +118,15 @@ const Layer = ({
           data-name={name}
           className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
-          onClick={() => {
-            DownloadWindow.show(download_url);
+          title={
+            user.auth_token
+              ? 'Layers'
+              : 'Please login to enable download feature.'
+          }
+          onClick={event => {
+            user.auth_token
+              ? DownloadWindow.show(download_url)
+              : event.preventDefault();
           }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>

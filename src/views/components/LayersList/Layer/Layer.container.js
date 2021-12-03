@@ -11,6 +11,7 @@ const mapStateToProps = (state, { id }) => {
 
   return {
     isActive: isActive(state),
+    user: state.user,
   };
 };
 
