@@ -29,6 +29,7 @@ const Layer = ({
   type,
   slug,
   user,
+  LayerGroupName,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -125,9 +126,12 @@ const Layer = ({
               : 'Please login to enable download feature.'
           }
           onClick={event => {
-            user.auth_token
-              ? DownloadWindow.show(download_url)
-              : LoginRequiredWindow.show();
+            if(user.auth_token){
+              DownloadWindow.show(download_url, name + ' - Layer', LayerGroupName);
+            }
+            else{
+              LoginRequiredWindow.show();
+            }
           }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>

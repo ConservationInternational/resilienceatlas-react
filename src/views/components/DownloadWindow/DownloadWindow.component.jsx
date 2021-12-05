@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import { RouteComponentProps } from 'react-router-dom';
+import ReactGA from 'react-ga'
 
 import { clickable } from '@utilities';
 
@@ -17,9 +18,9 @@ interface S {
 }
 
 export default class DownloadWindow extends Component<P, S> {
-  static show(url) {
+  static show(url, category_name, label) {
     if (DownloadWindow.__instance) {
-      DownloadWindow.__instance.__show(url);
+      DownloadWindow.__instance.__show(url, category_name, label);
     } else {
       throw new Error(
         'There are no any instance of DownloadWindow. You likely forgot to add it to your layout.',
@@ -42,8 +43,8 @@ export default class DownloadWindow extends Component<P, S> {
     url: '',
   };
 
-  __show = url => {
-    this.setState({ open: true, url });
+  __show = (url, category_name, label ) => {
+    this.setState({ open: true, url, category_name, label  });
   };
 
   __hide = () => {
@@ -103,7 +104,7 @@ export default class DownloadWindow extends Component<P, S> {
   };
 
   renderContent = () => {
-    const { terms_accepted, url } = this.state;
+    const { terms_accepted, url, category_name, label } = this.state;
 
     if (!terms_accepted) {
       return this.renderTerms();
@@ -122,6 +123,9 @@ export default class DownloadWindow extends Component<P, S> {
             'btn-download-infowindow',
             { '-disabled': !terms_accepted },
           )}
+          onClick={event => {
+            ReactGA.event({ category: category_name, action: 'download', label });
+          }}
         >
           Download data
         </a>
