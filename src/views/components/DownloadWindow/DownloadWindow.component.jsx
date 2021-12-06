@@ -43,7 +43,7 @@ export default class DownloadWindow extends Component<P, S> {
     url: '',
   };
 
-  __show = (url, category_name, label ) => {
+  __show = (url, category_name, label) => {
     this.setState({ open: true, url, category_name, label  });
   };
 
@@ -124,7 +124,7 @@ export default class DownloadWindow extends Component<P, S> {
             { '-disabled': !terms_accepted },
           )}
           onClick={event => {
-            ReactGA.event({ category: category_name, action: 'download', label });
+            ReactGA.event({ category: category_name, action: 'download', label: label });
           }}
         >
           Download data
