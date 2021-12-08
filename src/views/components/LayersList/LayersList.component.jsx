@@ -63,7 +63,7 @@ let Category = ({ toggleActive, id, name, active, layers, subcategory }) => (
         })}
       >
         {layers.map(layer => (
-          <Layer key={layer.id} {...layer} />
+          <Layer key={layer.id} LayerGroupName={name} {...layer} />
         ))}
 
         {subcategory.map(subcat => (

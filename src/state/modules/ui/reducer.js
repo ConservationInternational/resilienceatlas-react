@@ -1,7 +1,7 @@
 import { TABS } from '@components/Sidebar';
+import { getRouterParam } from '@utilities';
 import { createReducer } from '../../utils';
 import { TOGGLE_SIDEBAR, TOGGLE_ANALYSIS_PANEL, SET_TAB } from './actions';
-import { getRouterParam } from '@utilities';
 
 const geojson = getRouterParam('geojson');
 const iso = getRouterParam('iso');

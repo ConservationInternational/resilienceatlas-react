@@ -1,3 +1,4 @@
+import { merge } from '@utilities';
 import { createReducer } from '../../utils';
 import {
   LOAD,
@@ -8,7 +9,6 @@ import {
   SET_CHART_LIMIT,
 } from './actions';
 import { getPersistedLayers } from './utils';
-import { merge } from '@utilities';
 
 const persistedLayers = getPersistedLayers();
 
@@ -72,13 +72,20 @@ export default createReducer(initialState)({
 
   [TOGGLE]: (state, { id }) => {
     const actives = new Set(state.actives);
+    let sorted_actives = new Set(); // sort by latest active layer on top
 
-    if (actives.has(id)) actives.delete(id);
-    else actives.add(id);
+    if (actives.has(id)) {
+      actives.delete(id);
+      sorted_actives = new Set(actives.toJSON());
+    } else {
+      const actives_list = actives.toJSON();
+      actives_list.unshift(id);
+      sorted_actives = new Set(actives_list);
+    }
 
     return {
       ...state,
-      actives: [...actives],
+      actives: [...sorted_actives],
     };
   },
 

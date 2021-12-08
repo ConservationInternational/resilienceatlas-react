@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import cx from 'classnames';
 
 import InfoWindow from '@components/InfoWindow';
+import LoginRequiredWindow from '@components/LoginRequiredWindow';
 import { LayerManagerContext } from '@contexts/layerManagerCtx';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 import DownloadWindow from '../../DownloadWindow/DownloadWindow.component';
@@ -27,6 +28,8 @@ const Layer = ({
   withDashboardOrder,
   type,
   slug,
+  user,
+  LayerGroupName,
 }) => {
   const layerManagerRef = useContext(LayerManagerContext);
   const [isOpen, toggleOpen] = useToggle(false);
@@ -117,8 +120,18 @@ const Layer = ({
           data-name={name}
           className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
-          onClick={() => {
-            DownloadWindow.show(download_url);
+          title={
+            user.auth_token
+              ? 'Layers'
+              : 'Please login to enable download feature.'
+          }
+          onClick={event => {
+            if(user.auth_token){
+              DownloadWindow.show(download_url, name + ' - Layer', LayerGroupName);
+            }
+            else{
+              LoginRequiredWindow.show();
+            }
           }}
         >
           <svg className="icon icon-downloads" opacitylevel={opacity_text}>

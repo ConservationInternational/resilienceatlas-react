@@ -25,7 +25,4 @@ const mapDispatchToProps = {
   setActiveLayer,
 };
 
-export default connect(
-  makeMapStateToProps,
-  mapDispatchToProps,
-)(JourneyEmbed);
+export default connect(makeMapStateToProps, mapDispatchToProps)(JourneyEmbed);

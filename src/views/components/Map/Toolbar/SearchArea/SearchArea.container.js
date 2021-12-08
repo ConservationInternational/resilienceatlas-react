@@ -19,7 +19,4 @@ const mapDispatchToProps = {
   fitBounds,
 };
 
-export default connect(
-  makeMapStateToProps,
-  mapDispatchToProps,
-)(SearchArea);
+export default connect(makeMapStateToProps, mapDispatchToProps)(SearchArea);

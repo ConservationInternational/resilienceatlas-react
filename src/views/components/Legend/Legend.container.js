@@ -42,12 +42,6 @@ const mapDispatchToProps = {
   setOpacity,
 };
 
-const withConnect = connect(
-  makeMapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(makeMapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withRouter,
-  withConnect,
-)(Legend);
+export default compose(withRouter, withConnect)(Legend);

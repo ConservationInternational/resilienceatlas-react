@@ -13,28 +13,23 @@ export const getPublished = createSelector(
   // .filter(lg => lg.published),
 );
 
-export const getGroups = createSelector(
-  getPublished,
-  published => published.filter(lg => !lg.father),
+export const getGroups = createSelector(getPublished, published =>
+  published.filter(lg => !lg.father),
 );
 
-export const getCategories = createSelector(
-  getPublished,
-  published => published.filter(lg => !!lg.father),
+export const getCategories = createSelector(getPublished, published =>
+  published.filter(lg => !!lg.father),
 );
 
-export const getSubCategories = createSelector(
-  getPublished,
-  published => published.filter(lg => lg.group_type === 'subcategory'),
+export const getSubCategories = createSelector(getPublished, published =>
+  published.filter(lg => lg.group_type === 'subcategory'),
 );
 
-export const getSubGroups = createSelector(
-  getPublished,
-  published => published.filter(lg => lg.group_type === 'subgroup'),
+export const getSubGroups = createSelector(getPublished, published =>
+  published.filter(lg => lg.group_type === 'subgroup'),
 );
 
 export const getCategoriesByGroup = groupId =>
-  createSelector(
-    getPublished,
-    published => published.filter(lg => groupId === lg.father),
+  createSelector(getPublished, published =>
+    published.filter(lg => groupId === lg.father),
   );

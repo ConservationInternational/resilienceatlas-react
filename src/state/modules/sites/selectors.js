@@ -7,7 +7,6 @@ export const getById = state => state.sites.byId;
 export const getAll = state => state.sites.all;
 
 export const makeAllSites = () =>
-  createSelector(
-    [getAll, getById],
-    (all, site_scopes) => denormalize(all, [site_scope], { site_scopes }),
+  createSelector([getAll, getById], (all, site_scopes) =>
+    denormalize(all, [site_scope], { site_scopes }),
   );

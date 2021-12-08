@@ -62,7 +62,7 @@ const MapView = ({
   }, [layersLoaded, layerGroupsLoaded]);
 
   useEffect(() => {
-    const hash = activeLayers.map(({ id, opacity, chartLimit }, order) => ({
+    const hash = activeLayers.map(({ id, opacity, chartLimit, order }) => ({
       id,
       opacity,
       order,
@@ -127,9 +127,14 @@ const MapView = ({
     >
       {map => (
         <>
-          <LayerManager map={map} plugin={PluginLeaflet} ref={layerManagerRef}>
-            {tab === TABS.LAYERS &&
-              activeLayers.map(l => (
+          {tab === TABS.LAYERS &&
+            activeLayers.map((l, index) => (
+              <LayerManager
+                map={map}
+                plugin={PluginLeaflet}
+                ref={layerManagerRef}
+                key={l.id}
+              >
                 <Layer
                   {...omit(l, 'interactivity')}
                   slug={l.slug || l.id}
@@ -162,12 +167,19 @@ const MapView = ({
                       ? { ...l.decodeParams, chartLimit: l.chartLimit || 100 }
                       : null
                   }
-                />
-              ))}
-            {tab === TABS.MODELS && model_layer && (
+                ></Layer>
+              </LayerManager>
+            ))}
+          {tab === TABS.MODELS && model_layer && (
+            <LayerManager
+              map={map}
+              plugin={PluginLeaflet}
+              ref={layerManagerRef}
+              key="model_layer"
+            >
               <Layer key="model_layer" {...model_layer} />
-            )}
-          </LayerManager>
+            </LayerManager>
+          )}
 
           <MapPopup map={map} />
 
