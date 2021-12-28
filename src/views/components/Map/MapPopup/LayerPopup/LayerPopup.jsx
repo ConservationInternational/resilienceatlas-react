@@ -134,7 +134,7 @@ const LayerPopup = ({
                     <td className="dt">
                       {outputItem.property || outputItem.column}
                     </td>
-                    <td className="dd">{formatValue(outputItem, value)}</td>
+                    <td className="dd">{ outputItem.column == 'image' ? <img src={value} width={outputItem.image_width ? outputItem.image_width : "100"}></img> : formatValue(outputItem, value)}</td>
                   </tr>
                 );
               })}
