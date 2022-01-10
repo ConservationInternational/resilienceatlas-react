@@ -43,7 +43,7 @@ export const WidgetBarChart: FC<P> = ({
     { analysisQuery, analysisBody },
   );
 
-  const { unit } = useMemo(() => JSON.parse(legend), [legend]);
+  const { unit, bar_color } = useMemo(() => JSON.parse(legend), [legend]);
 
   return (
     <div {...rootWidgetProps()}>
@@ -100,7 +100,7 @@ export const WidgetBarChart: FC<P> = ({
                 <Bar
                   barSize={responsive ? 18 : 12}
                   dataKey="count"
-                  fill="#0089CC"
+                  fill={bar_color ? bar_color : "#0089CC"}
                 />
               </BarChart>
             </ResponsiveContainer>
