@@ -92,7 +92,7 @@ let Subcategory = ({ toggleActive, id, name, active, layers, subgroup }) => (
     {active && layers && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(layer => (
-          <Layer key={layer.id} {...layer} withDashboardOrder />
+          <Layer key={layer.id} {...layer} />
         ))}
         {subgroup.map(s_group => (
           <Subgroup key={s_group.id} {...s_group} />
@@ -115,7 +115,7 @@ let Group = ({ toggleActive, id, slug, name, active, layers, categories }) => (
     {active && layers && (
       <ul className={cx('m-layers-list-panel', { 'is-active': !!active })}>
         {layers.map(({ dashboard_order, ...layer }) => (
-          <Layer key={layer.id} {...layer} withDashboardOrder />
+          <Layer key={layer.id} {...layer} />
         ))}
 
         {categories.map(cat => (

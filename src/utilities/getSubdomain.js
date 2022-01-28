@@ -16,4 +16,5 @@ export const getSubdomain = () => {
 /**
  * @type {String} runs once on app init.
  */
-export const subdomain = getSubdomain();
+//export const subdomain = 'irrecoverable'; //getSubdomain();
+export const subdomain = 'VS Indicators'; //getSubdomain();

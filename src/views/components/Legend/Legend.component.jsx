@@ -7,8 +7,6 @@ import InfoWindow from '@components/InfoWindow';
 import { sortBy, useToggle, clickable } from '@utilities';
 import LegendItem from './LegendItem';
 
-const byOrder = sortBy('order', 'DESC');
-
 const Legend = ({
   activeLayers,
   reorder,
@@ -46,7 +44,7 @@ const Legend = ({
                   ref={innerRef}
                   className="m-legend__list"
                 >
-                  {activeLayers.sort(byOrder).map((layer, index) => {
+                  {activeLayers.map((layer, index) => {
                     const {
                       id,
                       name,
