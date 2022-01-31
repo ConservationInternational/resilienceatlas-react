@@ -105,7 +105,7 @@ export const layer = new schema.Entity(
         minZoom: l.attributes.zoom_min || 0,
         legend: l.attributes.legend,
         group: group ? parseInt(group.id, 10) : null,
-        active: l.attributes.active,
+        active: l.relationships.agrupation.data.active,
         published: l.attributes.published,
         info: l.attributes.info,
         dashboard_order: l.attributes.dashboard_order,
