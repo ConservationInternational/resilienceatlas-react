@@ -109,22 +109,22 @@ export const WidgetBarChart: FC<P> = ({
               <ul className="m-widget__stats">
                 <li className="stats-item">
                   <span className="stats-item__label">Max: </span>
-                  {formatNumber({ value: data.stats.max })}
+                  {formatNumber({ value: data.stats.max })}&nbsp;
                   {unit}
                 </li>
                 <li className="stats-item">
                   <span className="stats-item__label">Min: </span>
-                  {formatNumber({ value: data.stats.min })}
+                  {formatNumber({ value: data.stats.min })}&nbsp;
                   {unit}
                 </li>
                 <li className="stats-item">
                   <span className="stats-item__label">Std. deviation: </span>
-                  {formatNumber({ value: data.stats.stdev })}
+                  {formatNumber({ value: data.stats.stdev })}&nbsp;
                   {unit}
                 </li>
                 <li className="stats-item">
                   <span className="stats-item__label">Sum: </span>
-                  {formatNumber({ value: data.stats.sum })}
+                  {formatNumber({ value: data.stats.sum })}&nbsp;
                   {unit}
                 </li>
               </ul>
