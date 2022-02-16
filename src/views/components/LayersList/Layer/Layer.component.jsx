@@ -6,6 +6,7 @@ import LoginRequiredWindow from '@components/LoginRequiredWindow';
 import { LayerManagerContext } from '@contexts/layerManagerCtx';
 import { useToggle, useInput, useUpdaterInput, useDebounce } from '@utilities';
 import DownloadWindow from '../../DownloadWindow/DownloadWindow.component';
+import { subdomain } from '@utilities/getSubdomain';
 
 const validateOpacity = value => {
   if (Number.isNaN(value)) return 1;
@@ -49,6 +50,8 @@ const Layer = ({
     300,
     [slider.value],
   );
+
+  var readyToDownload = (user.auth_token || subdomain);  
 
   const fitMapToLayer = useCallback(() => {
     layerManagerRef.current.fitMapToLayer(id);
@@ -121,12 +124,12 @@ const Layer = ({
           className="btn-download icon-container panel-trasparecy-switcher"
           attr="download"
           title={
-            user.auth_token
+            readyToDownload
               ? 'Layers'
               : 'Please login to enable download feature.'
           }
           onClick={event => {
-            if(user.auth_token){
+            if(readyToDownload){
               DownloadWindow.show(download_url, name + ' - Layer', LayerGroupName);
             }
             else{
