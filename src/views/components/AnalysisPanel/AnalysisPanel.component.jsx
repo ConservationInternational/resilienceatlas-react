@@ -251,6 +251,9 @@ export const AnalysisPanel: FC<P> = ({
                     Reset the analysis
                   </button>
                 </div>
+                <div>
+                  <iframe src='https://sparc-apps.shinyapps.io/irrecoverable_carbon_biodiversity_app_internal/' width="100%" height="400px"/>
+                </div>
               </>
             )}
           </div>
