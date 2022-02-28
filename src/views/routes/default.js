@@ -20,6 +20,7 @@ import Login from '../pages/login';
 import Signup from '../pages/signup';
 import Me from '../pages/me';
 import ProfileSettings from '../pages/profile-settings';
+import ShinnyApp from '../pages/shinny-app';
 
 import NotFound from '../pages/notfound';
 
@@ -39,6 +40,7 @@ const Layout = {
   Signup: mainLayout(Signup),
   Me: mainLayout(Me),
   ProfileSettings: mainLayout(ProfileSettings),
+  ShinnyApp: mainLayout(ShinnyApp),
 };
 
 const Auth = {
@@ -53,6 +55,7 @@ const Auth = {
   Signup: unlogged(Layout.Signup),
   Me: logged(Layout.Me),
   ProfileSettings: logged(Layout.ProfileSettings),
+  ShinnyApp: shared(Layout.ShinnyApp),
 };
 
 const DefaultRoutes = () => (
@@ -75,6 +78,7 @@ const DefaultRoutes = () => (
 
     <Route exact path="/me" component={Auth.Me} />
     <Route exact path="/profile-settings" component={Auth.ProfileSettings} />
+    <Route exact path="/shinny-app" component={Auth.ShinnyApp} />
 
     <Route component={NotFound} />
   </Switch>

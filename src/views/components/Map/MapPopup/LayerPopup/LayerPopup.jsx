@@ -50,6 +50,8 @@ const LayerPopup = ({
       data = moment(data).format(item.format);
     } else if (item.type === 'number' && item.format && data) {
       data = numeral(data).format(item.format);
+    } else if (item.type === 'link' && data) {
+      return <a href={data} target='_blank'> {data} </a>;
     }
 
     return `${item.prefix || ''}${removeHtmlTags(data) || '-'}${item.suffix ||

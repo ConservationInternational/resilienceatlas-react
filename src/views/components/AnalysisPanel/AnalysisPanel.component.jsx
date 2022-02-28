@@ -249,7 +249,10 @@ export const AnalysisPanel: FC<P> = ({
                     onClick={resetAnalytics}
                   >
                     Reset the analysis
-                  </button>
+                  </button><br/>
+                  <a className="btn -primary" href="/shinny-app" target="_blank">
+                    Go to Shinny App
+                  </a>
                 </div>
               </>
             )}
