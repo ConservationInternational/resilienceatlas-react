@@ -250,7 +250,7 @@ export const AnalysisPanel: FC<P> = ({
                   >
                     Reset the analysis
                   </button><br/>
-                  <a className="btn -primary" href="/shinny-app" target="_blank">
+                  <a className="btn -primary" href="https://www.resilienceatlas.org/shinny-app" target="_blank">
                     Go to Shinny App
                   </a>
                 </div>
