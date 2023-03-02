@@ -1,8 +1,9 @@
 # Resilience Atlas web app
 
+This repository **IS NO LONGER MAINTAINED**. The resilience web app has been moved and it's maintained in the link: [https://github.com/ConservationInternational/resilienceatlas/tree/develop/frontend](https://github.com/ConservationInternational/resilienceatlas/tree/develop/frontend).
+
 This is the web app powering
 [resilienceatlas.org](http://www.resilienceatlas.org)
-
 
 ## Requirements:
 
